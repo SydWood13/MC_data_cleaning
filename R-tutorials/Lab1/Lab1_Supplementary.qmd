@@ -1,0 +1,584 @@
+---
+title: "Lab1"
+author: "Sydney"
+date: "04/2/2024"
+format: 
+  revealjs:
+    incremental: true
+    code-tools: true
+    code-copy: true
+    code-line-numbers: true
+    code-link: true
+    preview-links: true
+    slide-number: true
+    self-contained: true
+    fig-height: 4
+    fig-width: 6
+    fig-align: center
+    margin-left: "0"
+    margin-right: "0"
+    width: 1400
+    footer: "Adapted from Jane He"
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+```
+
+# Introduction to R and RStudio
+
+## R vs. RStudio
+
+-   R is the programming language
+
+    -   You don't need to open up R
+
+-   RStudio is a graphic user interface (GUI) for R
+
+    -   We will do all the coding in RStudio
+
+## RStudio Layout {.smaller}
+
+-   **Top left** window: **R Script Editor**
+
+    -   Where we will code the most of time
+
+-   **Bottom left** window: **R** **Console**
+
+    -   Where the output of codes will usually show up
+
+-   **Top right** window: **R Environment**
+
+    -   Where imported datasets, stored objects, and etc. will be kept
+
+-   **Bottom right** window: Tabs for other features
+
+    -   Files, where you can navigate files and folders located on your computer
+
+    -   **Plots**, where you can view and export created graphs
+
+    -   Packages, where you can view, download, and access avalibale R packages
+
+    -   **Help**, where you can read documentations for R functions and packages
+
+    -   Viewer and Presentation, where you can preview complied files
+
+        -   We won't necessarily be using this tab for this course
+
+## R Console vs. R Scripts {.smaller}
+
+We will f**ocus on using R Scripts** for this course.
+
+However, there are advantages to both:
+
+### R Console {.fragment}
+
+-   R Console is useful for quick and interactive exploration
+
+-   It is convenient for simple operations, calculations, or small code snippets
+
+### R Scripts {.fragment}
+
+-   R Scripts are commanded when we need to do extensive and structured coding
+
+-   We can create and save new R Scripts and return to them at any time
+
+    -   Just like saving word documents
+
+-   It is easier for us to share, collaborate, and reproduce analyses with R Scripts
+
+-   Outputs from R Scripts, other than graphs, will show up on R Console
+
+# Fundamentals of R
+
+## Code Annotation
+
+::: {style="font-size:80%"}
+Writing comments to annotate and document your codes is always a good practice.
+
+-   Your annotations will help yourself keeping a track record of the coding and decision-making process
+
+-   Also benefit others who need to access your scripts and reproduce analyses
+:::
+
+::: fragment
+We can use the pound sign (#) for annotation.
+:::
+
+-   ::: {style="font-size:75%"}
+    Note that your annotations won't be executed as they are not recognized as codes by R.
+    :::
+
+::: fragment
+```{r}
+#| output-location: fragment
+
+# Example to demostrate annotation
+1+1 
+```
+:::
+
+::: {style="font-size:5%"}
+\
+:::
+
+#### Bonus Tip: Comment out {.fragment style="font-size:70%"}
+
+<div>
+
+::: {.fragment style="font-size:70%"}
+We can use the same pound sign (#) to comment out lines of code. Again, these lines of code won't be executed.
+:::
+
+</div>
+
+::: {.fragment style="font-size:70%"}
+```{r}
+# Example to demostrate commenting out
+# 1+1 
+```
+:::
+
+## Mathematical Operations
+
+::: {style="font-size:80%"}
+R is a powerful and handy calculator. Some common mathematical operators are:
+:::
+
+::: {style="font-size:70%"}
+-   '+' : addition
+
+-   '-' : subtraction
+
+-   '/' : division
+
+-   '\*' : multiplication
+
+-   '\^' : exponent
+
+-   'sqrt()' : square root
+
+-   'exp()' : exponential function
+:::
+
+::: {.fragment style="font-size:80%"}
+Note that basic operation orders still matter!
+:::
+
+::: {.fragment style="font-size:90%"}
+```{r}
+#| output-location: fragment
+
+# Examples to demostrate mathematical operators
+(1+1)*2 # (1+1) is calculated first, then followed by *2 
+```
+:::
+
+::: {.fragment style="font-size:90%"}
+```{r}
+#| output-location: fragment
+
+sqrt((1+1)*2) # (1+1) is calculated first, then followed by *2, then took square root
+```
+:::
+
+## R Objects
+
+::: {style="font-size:80%"}
+R is an "object-oriented" programming language.
+
+An "object" in R is something that is stored in the **R environment**. It can be many possible things, including numbers, characters, plots, and more.
+:::
+
+::: {.fragment style="font-size:80%"}
+More intuitively, we can understand objects as anything that we assign values to. Stored objects will come in handy to use when having extensive codes.
+:::
+
+::: {.fragment style="font-size:80%"}
+To create an object, we can use the "=" or "\<-" signs; they are equivalent.
+:::
+
+::: {.fragment style="font-size:90%"}
+```{r}
+#| output-location: fragment
+
+# Examples of storing objects 
+a = 0 # assign a numeric value to object named a
+a # print out object a 
+```
+:::
+
+::: {.fragment style="font-size:90%"}
+```{r}
+#| output-location: fragment
+
+b <- sqrt((1+1)*2) # assign math operations to object name b
+b # print out object b
+```
+:::
+
+## R Objects {.smaller}
+
+-   We can easily grab and use stored objects rather than coding the same lines repeatedly.
+
+    -   ::: {style="font-size:70%"}
+        Note that if an object does't show up in the R Environment, then it hasn't been stored.
+        :::
+
+        ::: fragment
+        ```{r}
+        #| output-location: fragment
+
+        # Example of use stored objects
+        c <- a*b # assign math operation by garbbing object a and b to object c
+        c # print out object c
+        ```
+        :::
+
+-   Always assign a meaningful name to the objects
+
+    -   ::: {style="font-size:70%"}
+        Choose self-explanatory names that describe the purpose or content of the object
+        :::
+
+        ::: fragment
+        ```{r, eval=FALSE}
+        product_ab <- a*b # this is a better object name than c, it describes the assigned math operation
+        ```
+        :::
+
+    -   ::: {style="font-size:70%"}
+        Be consistent in your naming conventions. For example, I use the underscore in `product_ab` ; I will stick with underscore if I want to create a new object to calculate the square root of ab: `sqrt_ab` .
+        :::
+
+    -   ::: {style="font-size:70%"}
+        Avoid using names that are reserved in R, such as `mean`, `sum`, etc.
+        :::
+
+    -   ::: {style="font-size:70%"}
+        Avoid using existing object names unless intended to do so. Values re-assigned to existing object will overwrite previous values stored.
+        :::
+
+        ::: fragment
+        ```{r}
+        # Example of reassign exisiting object
+        c <- 5 # reassign a number to object c to overwrite previous stored value
+        c # print out object c, now c no longer returns 0
+        ```
+        :::
+
+## Vectors {.smaller}
+
+Vector is the fundamental data structure in R.
+
+A vector is a collection of things (e.g. numbers, text, etc.) where the elements are all of the same type.
+
+::: fragment
+We can use `c()` to combines values or objects into a vector
+:::
+
+::: fragment
+```{r}
+#| output-location: fragment
+
+# Examples of creating vector containing values
+c(1:5) # use interger sequencing with ":" instead of manually type out 1 through 5
+```
+:::
+
+::: fragment
+```{r}
+#| output-location: fragment
+
+c(a, b, c) # Examples of creating vector containing objects
+```
+:::
+
+::: fragment
+Remember that we can also save the vectors as objects
+:::
+
+::: fragment
+```{r}
+#| output-location: fragment
+
+vec_example1 <- c(a, b, c) # Store the vector as an object
+vec_example1 # print out the vector object 
+```
+:::
+
+## Data Types {.smaller}
+
+::: {style="font-size:75%"}
+Data types are used to classify different types of data in R. The `class()` function will tell us the data type of an object.
+:::
+
+::: fragment
+```{r}
+#| output-location: fragment
+
+# Find the type of object
+class(vec_example1)
+```
+:::
+
+::: {.fragment style="font-size:70%"}
+We can also create other types of vectors and stored them as objects.
+:::
+
+<div>
+
+::: fragment
+```{r}
+#| output-location: fragment
+
+# Example of creating character vector 
+vec_example2 <- c("hello", 'class') # single and double quotation marks are interchangable
+vec_example2 # print out character vector object 
+```
+:::
+
+::: fragment
+```{r}
+#| output-location: fragment
+
+# Find the type of object
+class(vec_example2) 
+```
+:::
+
+</div>
+
+<div>
+
+::: fragment
+```{r}
+#| output-location: fragment
+
+# Example of creating logical vector
+vec_example3 <- vec_example1 >= 0 # evaluate each value in vec_example1 and see if it is greater than 0  
+vec_example1 # let's refresher on what values vec_example1 looks like
+vec_example3 # print out character vector object 
+```
+:::
+
+::: fragment
+```{r}
+#| output-location: fragment
+
+# Find the type of object
+class(vec_example3)
+```
+:::
+
+</div>
+
+## Data Types {.smaller}
+
+A vector always consists of values that have the same data types. But, what happen if we force a mixture of numeric and character values into a vector?
+
+::: fragment
+```{r}
+#| output-location: fragment
+
+# Example of creating vector with mixed data types 
+vec_example4 <- c(vec_example1, vec_example2) # combine previous stored objects
+vec_example4 # print out mixed vector object 
+```
+:::
+
+::: fragment
+```{r}
+#| output-location: fragment
+
+# Find the type of object
+class(vec_example4)
+```
+:::
+
+::: fragment
+Note here that the numeric values from the `vec_example1` object is now being forced into characters.
+:::
+
+::: fragment
+What if we want to keep the `vec_example1` object as numeric values? We can use the `list()` function instead.
+:::
+
+::: fragment
+```{r}
+#| output-location: fragment
+
+# Example of creating a list with mixed data types 
+vec_example5 <- list(vec_example1, vec_example2) # combine previous stored objects
+vec_example5 # print out mixed vector object 
+```
+:::
+
+::: fragment
+```{r}
+# Find the type of object
+class(vec_example5) # it is now a list instead of character
+```
+:::
+
+## Functions {.smaller}
+
+::: fragment
+Functions are commands consistent of pre-written bits of code that get sent to R to perform operations.
+:::
+
+::: fragment
+They all have the same basic structure: `function(arguments)` and follow three sequential steps:
+:::
+
+1.  take in **input(s)** as argument(s)
+
+2.  **process** the input(s)
+
+3.  **return** a new object
+
+::: fragment
+Let's find out the sum of `vec_example1`. Instead of manually adding up the values, we can use the `sum()` function. But how do we use it?
+
+If we are not familiar with a function, we can use `?` or `help()` to figure out the arguments we need to pass down to `sum()`. Documentations will show up on the **Help** tab.
+:::
+
+::: fragment
+```{r, eval=FALSE}
+# Figure out the arguments we need to pass down
+?sum()
+help(sum)
+```
+:::
+
+::: {style="font-size:10%"}
+:::
+
+::: fragment
+```{r}
+#| output-location: fragment
+
+# Call the function
+sum(vec_example1)
+```
+:::
+
+## Functions {.smaller}
+
+#### Bonus Tip: Argument Names {.fragment}
+
+::: {.fragment style="font-size:60%"}
+Argument names are the names of the **inputs** that the function can take in.
+:::
+
+::: {.fragment style="font-size:60%"}
+For example, the `sum()` function can take in two arguments: `…` and `na.rm`. Sometimes the arguments already have a default value specified. That means:
+
+-   <div>
+
+    We don't have to specify this argument when calling functions
+
+    </div>
+
+-   <div>
+
+    We can still change the default input to what we want
+
+    </div>
+
+    -   <div>
+
+        Our specified input will pass down to the function instead of the default input
+
+        </div>
+:::
+
+::: {.fragment style="font-size:70%"}
+When there are more than one argument and we want to change the default input of an argument, it is a good habit to include argument names so that R can properly pass down the arguments.
+:::
+
+::: {.fragment style="font-size:80%"}
+```{r}
+#| output-location: fragment
+
+# na.rm argument tells R if it should remove missing value from vector
+# it is by default FALSE, so R won't remove missing value
+sum(vec_example1)
+```
+:::
+
+::: {.fragment style="font-size:70%"}
+we won't run into any error using the default when the vector has no missing value.
+:::
+
+::: {.fragment style="font-size:80%"}
+```{r}
+#| output-location: fragment
+
+# in the case when we do have missing value in the vector
+vec_example6 <- c(vec_example1, NA)
+sum(vec_example6) # if we keep the default value for na.rm argument  
+```
+:::
+
+::: {.fragment style="font-size:70%"}
+The function doesn't return meaningful result because it can't add up missing value. We need to let R know to ignore the missing value in the vector.
+:::
+
+::: {.fragment style="font-size:80%"}
+```{r}
+# specify na.rm argument from default FALSE to TRUE
+sum(vec_example6, na.rm = TRUE) # now it is doing calculation correctly
+```
+:::
+
+## Logical operators
+
+::: {style="font-size:70%"}
+Earlier we talked about logical operators. Here are some common logical operators in R:
+
+-   \< : less than
+
+-   \<= : less than or equal to
+
+-   \> : greater than
+
+-   \>= : greater than or equal to
+
+-   == : exactly equal to
+
+-   != : not equal to
+
+-   !x : not x
+
+-   x \| y : x OR y
+
+-   x & y : x AND y
+
+::: fragment
+Recall that we created a logical vector that contained TRUE and FALSE elements. It is useful to know that R regards TRUE as 1 and FALSE as 0.
+:::
+:::
+
+## Base R vs. R Packages {.smaller}
+
+-   When we install R, we automatically installed the ["Base R"](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html) set of functions
+
+    -   For example, `class()`, `list()`, and `sum()` are all functions from Base R
+
+-   Base R doesn't always include the functions we need, so we need to install other packages that include functions we need
+
+-   An R package (or "library") is a collection of (related) functions developed by the R community
+
+    -   All packages are free!
+
+-   We can install packages using **`install.packages()`** function and access packages with **`library()`** function
+
+    -   For example, to install and access the "psych" package
+
+        ```{r, eval=FALSE}
+        install.packages("psych") # install the 'psych' package 
+        # typically, once we install the package once, we can comment this line out
+        library(psych) # tells R to add the psych package to the library so we can access its function
+        ```

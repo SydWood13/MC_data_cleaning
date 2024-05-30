@@ -1,0 +1,423 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+```{r setup, include=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+setwd("E:/Courses/PSC103A")
+
+
+```
+# Learning Module 2  
+# Module Objectives  
+1. Setting up a directory for course files
+2. Setting a working directory in R
+3. Importing a data file into R   
+4. Creating graphs using R 
+
+# Setting up a directory for course files  
+
+Keep your course files organized by setting up a directory. For example, I set up a directory called 'PSC103A', and because I work with many courses, I created this directory within another directory that I called 'Courses'. I set up this directory on an external hard drive. The path to my directory is "E:/Courses/PSC103A"
+
+(note: I'm using an external hard drive that's denoted by "E" but "C" is a common drive name for PCs.)
+
+# Take a break and answer Question 1 in Learning Module Quiz 2
+
+Go to the Canvas module where you found this learning module and download the two data files that are posted there:
+
+lab2data.txt   
+lab2data.csv
+
+Move these two files to the directory where you'll store your course files. 
+
+Note: When I download a file, it is automatically saved to a 'Downloads' directory on my PC. I access the 'Downloads' directory and move the file to the directory where I store my course files. 
+
+# Setting a working directory in R  
+
+It's convenient to set what's called a **working directory** when using R.  Setting a working directory will tell R where to find files. To set a working directory, you can use the **setwd()** function:
+
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+
+setwd("E:/Courses/PSC103A")
+
+```
+
+Notice that the slashes are slanted forward: E:**/**Courses**/**PSC103
+
+Check that the working directory has been set by typing the following on a new line in your R script file:
+
+```{r}
+
+getwd()
+
+```
+If setting the working directory was a success, R will report the path to the directory you set up in the previous steps.
+
+# Take a break and answer Question 2 in Learning Module Quiz 2
+
+# Importing a data file into R 
+
+Now you're ready to import the data files into R.
+
+Data files can follow a variety of formats, and R is capable of reading many different formats. When importing a data file into R, it's important to match the R function that's used to import the data file to the format of the data file.  
+
+In this learning module, you'll learn how to import two popular data file formats: **.txt** and **.csv**    
+
+# Import a .txt file
+
+We'll use the **read.table** function to import a .txt data file. This function will return what's called a **data frame**. A data frame is a table organized by rows and columns and contains data.
+
+First, let's look at the **lab2data.txt** file before we import the file into R. 
+
+Using a text editor, such as Notepad, we can view the data file:
+
+```{r, echo=FALSE}
+
+knitr::include_graphics("Screenshot lab2datafile viewed in Notepad.PNG")
+
+```
+
+Notice that the first line of the data file includes the variable names: **"biosex" "height_in" "weight_lbs" "age_yr" "ed_cmplt"**
+
+When a data file includes the variables names in the first row, then the file includes what's called a **header**. When importing the data file, we will need to indicate that the file includes a header.  
+
+Also notice that the variable names are separated by **blank spaces**.
+
+Following the first line of the file are the data records.  A record is a row of data. Notice that the values are separated by blank spaces. For example, the 2nd row of the file (this is the first data record) is
+
+"MALE" 72.2 146.4 20 "College2YR"
+
+Notice:    
+1. The values are separated by blank spaces.    
+2. Values for character variables have double quotes around the value (for example, "MALE").
+
+Now we'll import the data file using the **read.table()** function. 
+
+On a new line in your R script, type the following:
+
+```{r}
+
+bmiDataTXT <- read.table('lab2data.txt', header=T, stringsAsFactors =T)
+
+```
+That step created a data frame called 'bmiDataTXT'.   
+
+Using the **read.table()** function, we indicated that the data file included a header (**header=T**).  We didn't need to indicate that the data values were separated by blank spaces because this is the default setting for the **read.table()** function. 
+
+We also indicated that the character variables were to be read in as **factors** (stringsAsFactors =T).
+
+Notice that we did not include the path of the directory where the data file is stored because we set the working directory.  If we had not set a working directory, we would have needed to include the full path.  This is what that would look like (using the path I set up for my computer):
+
+```{r}
+
+bmiDataTXT <- read.table('E:/Courses/PSC103A/lab2data.txt', header=T, stringsAsFactors =T)
+
+```
+
+Let's take a look at the data file by using the **head()** function:
+
+```{r}
+
+head(bmiDataTXT)
+
+```
+
+By using the **head()** function, we can view the first 6 data records (The header appears at the top and is not included in the count of 6).
+
+If you'd like to see a particular number of data records, specify this in the **head()** function.  For example, to see the first 10 data records, type the following:
+
+```{r}
+
+head(bmiDataTXT, 10)
+
+```
+
+# Take a break and answer Question 3 in Learning Module Quiz 2
+
+
+# Import a .csv file
+
+We will use the **read.csv** function to import the second data file. This function will return a **data frame**. A data frame is a table organized by rows and columns and contains data. A .csv file is a **comma delimited file**.  Let's first look at the data file using a text editor, such as Notepad:
+
+```{r, echo=FALSE}
+
+knitr::include_graphics("Screenshot lab2datafile_csv viewed in Notepad.PNG")
+
+```
+
+The first line of the file includes the variable names: **"biosex","height_in","weight_lbs","age_yr","ed_cmplt"**
+
+We'll need to indicate that the data file includes a header.  
+
+The variable names are separated by **commas** (This is unlike the .txt file where variable names were separated by blank spaces).
+
+Following the first line of the file are the data records.  The values are separated by **commas**. For example, the 2nd row of the file (this is the first data record) is   
+
+"MALE",72.2,146.4,20,"College2YR"
+
+Now we'll import the data file using the **read.csv()** function. 
+On a new line in your R script, type the following:
+
+```{r}
+
+bmiDataCSV <- read.csv('lab2data.csv', header=T, stringsAsFactors =T)
+
+```
+
+Using the **read.csv()** function, we needed to indicate that the data file included a header (header=T).  By using the **read.csv()** function, R will take into account that the data values are separated by commas. 
+
+As before when working with the .txt file, we did not need to include the path of the directory where the data file is stored because we set a working directory.  If we had not set a working directory, we would have needed to include the full path.  This is what that would look like (for the path I set up on my computer):
+
+```{r}
+
+bmiDataCSV <- read.csv('E:/Courses/PSC103A/lab2data.csv', header=T, stringsAsFactors =T)
+
+```
+
+Let's take a look at the data file.  Use the **head()** function:
+
+```{r}
+
+head(bmiDataCSV)
+
+```
+
+Note: We could have used the **read.table()** to import the comma delimited file by indicating that commas are used to separate the values. Recall that we used the **read.table()** to import the .txt file and that the default setting of this function is to have blank spaces between values. To import a .csv file using the **read.table()** function we just need to indicate that values are separated by commas (**sep=","**), such as:
+
+```{r}
+
+bmiDataCSV2 <- read.table('lab2data.csv', header=T, sep=",", stringsAsFactors =T)
+
+```
+
+Let's take a look at the first 6 data records:
+
+```{r}
+head(bmiDataCSV2)
+```
+
+Now let's work with one of the data frames (they all include the same information).  To see the list of variables and their type, use the **str()** function. Type the following in a new line in your R script:
+
+```{r}
+str(bmiDataCSV)
+
+```
+The data frame includes 232 observations and 5 variables:
+
+- biosex: biological sex of the subject
+- height_in: height of the subject in inches
+- weight_lbs: weight of the subject in pounds
+- age_yr: age of the subject in years
+- ed_cmplt: highest education completed by the subject
+
+Although the **str()** function does not actually give us the detailed information about the variables (I typed in that information above), the function does tell us the type of variables that are in the data frame. We can also check the class of each variable using the **class()** function. To check the class of 'biosex', type the following into a new line in your R script:
+
+```{r}
+
+class(bmiDataCSV$biosex)
+
+```
+The variable 'biosex' is a factor.
+
+Notice that in the script above we included the name of the data frame ("bmiDataCSV") followed by "$biosex" (notice $ comes before the name of the variable). This directs R to find the data frame and the particular variable that is included in the data frame.
+
+Now repeat the step above for the other variables.
+
+# Take a break and answer Question 4 in Learning Module Quiz 2
+
+The variable 'biosex' was read in by R as a **factor**.  To see the values for each level of the factor, use the **str()** function:
+
+```{r}
+
+str(bmiDataCSV$biosex)
+
+```
+We see that the values of "MALE" and "FEMALE" are read in as numeric values, 1 and 2.
+
+Repeat this for the education variable, **ed_cmplt**. What values are used to represent the different education categories?
+
+````{r}
+
+str(bmiDataCSV$ed_cmplt)
+
+````
+The education variable is read by R as a 'factor' and the levels are represented by the numeric values 1, 2, 3, 4 and 5.
+
+We see that the education variable has 5 levels but they don't all show up in what's printed above.  Let's use the **table()** function to get a better look:
+
+```{r}
+table(bmiDataCSV$ed_cmplt)
+```
+That's better.  Now we can see the 5 levels and their names. The **table()** function also gives us the frequency of observations for each level of the variable. For example, there are 55 individuals with an MA degree.  
+
+# Creating graphs using R
+
+**Bar Charts**
+
+Bar charts are appropriate for categorical data.  We'll use the **barplot()** function to create a bar chart for the education variable.  A bar chart requires the frequencies for each category, so we need to create a new object that includes the frequencies of each education category. We can use the **table()** function to produce the frequencies:
+
+```{r}
+educ_freq = table(bmiDataCSV$ed_cmplt)
+educ_freq
+
+```
+
+In the step above we created an object called **educ_freq** that is a table of the frequencies for each level of the education variable. Now we'll construct a bar chart for the education variable using this frequency table:
+
+```{r}
+
+barplot(educ_freq,
+        main = "Education", # 'main' allows us to add a title for the graph
+        ylab = "Frequency", # 'ylab' allows us to label the y axis
+        names.arg = c("2-yr college", "4-yr college", "high school", "MA", "PhD"), # 'names.arg' allows us to label the categories 
+        col = c(7,8,3,2,4) # 'col' allows us to change the colors of the bars (try other numbers for different colors!)
+        )
+
+```
+
+
+**Bar Charts using Relative Frequencies**
+
+Let's create a bar chart using **relative frequencies**. 
+
+Create a new object that includes the **relative frequencies** of each education category:
+
+```{r}
+educ_relfreq = educ_freq / length(bmiDataCSV$ed_cmplt) # here we're dividing the frequencies by the total number of observations
+educ_relfreq
+
+
+```
+
+The R function **length()** calculates the number of rows for the variable 'ed_cmplt'. We need this 'total' to calculate the relative frequency of each category.
+
+Construct a bar chart for the education variable using the relative frequencies:
+
+```{r}
+
+barplot(educ_relfreq,
+        main = "Education", # 'main' title for the graph
+        ylab = "Relative Frequency", # 'ylab' label the y axis
+        names.arg = c("2-yr college", "4-yr college", "high school", "MA", "PhD"), # 'names.arg' label the categories
+        col = c(2,4,6,7,9) # 'col' change the bar colors
+        )
+
+```
+
+**Comparative Bar Charts**
+
+Comparative bar charts are appropriate for comparing groups with regard to a categorical variable.  We'll use the **barplot()** function again. 
+
+Let's plot the categories of 'ed_cmplt' according to the categories of 'biosex'.
+
+We need to use **relative frequencies** when comparing groups that differ in sample size. So, we'll first calculate the relative frequencies of the education categories separately for categories of 'biosex'.
+
+```{r}
+
+biosex_educ <- table(bmiDataCSV$biosex,bmiDataCSV$ed_cmplt) # produces a frequency table for all combinations of education and biological sex
+biosex_educ
+
+female_total  = sum(biosex_educ[1,]) # count the number of females in the frequency table (females are in row 1 of this table)
+female_total
+male_total    = sum(biosex_educ[2,]) # count the number of males in the frequency table (males are in row 2 of this table)
+male_total
+biosex_educ[1,] = biosex_educ[1,]/female_total   # divide the female count of each education category by the total female count
+biosex_educ[2,] = biosex_educ[2,]/male_total     # divide the male count of each education category by the total male count
+biosex_educ  # this is our  table of relative frequencies
+
+barplot(biosex_educ, 
+        col = c("blue", "yellow"), # col allows us to change the colors of the bars
+        beside = TRUE, # this allows the bars to appear side-by-side
+        main = "Comparative Bar Chart of Education Level by Biological Sex", # graph title
+        ylab = "Relative Frequency", # y axis label
+        legend.text = c("female", "male")) 
+
+```
+
+
+# Take a break and answer Question 5 in Learning Module Quiz 2
+
+**Segmented Bar Charts**
+
+Segmented bar charts are appropriate for a categorical variable where we'd like to display the relative frequencies.  We'll use the **barplot()** function.
+
+Let's create a segmented bar chart for 'ed_cmplt' by 'biosex' using the relative frequencies we calculated in the previous step, **biosex_educ**. This function requires that we first transpose the rows of relative frequencies so that they become the columns. In other words, we need to transpose the row vectors to column vectors. 
+
+```{r}
+
+t_biosex_educ <- t(biosex_educ) # t() is a function to transpose matrices 
+t_biosex_educ
+
+barplot(t_biosex_educ , 
+  main = "Segmented Bar Chart of Education Level", # graph title
+   col = c("blue", "yellow", "red", "green", "black"), # col allows us to change the colors of the bars      
+  legend.text = rownames(t_biosex_educ),
+  ) 
+
+```
+
+# Take a break and answer Question 6 in Learning Module Quiz 2
+
+**Dotplots**
+
+Dotplots are for numeric data when the sample size is small. They can be made using the **stripchart()** function.
+
+Create a dotplot for **'age_yr'** by using the following code:
+
+```{r}
+
+stripchart(bmiDataCSV$age_yr, 
+           main = "Age (in years)", 
+           method = "stack", # results in stacking the dots
+           col = 3, # col controls the color
+           at = 0, # numeric vector giving the locations where the charts should be drawn
+           pch = 19)  # pch controls the shape, 19 is a solid dot
+  
+```
+
+**Stem-and-Leaf Plots**
+
+Stem-and-leaf plots are for numeric data when the sample size is small. They can be made using the **stem()** function.
+
+Create a stem-and-leaf plot for **'age_yr'** by using the following code:
+
+```{r}
+
+stem(bmiDataCSV$age_yr)  
+  
+```
+
+# Take a break and answer Question 7 in Learning Module Quiz 2
+
+**Histograms**
+
+Histograms are for numeric data. They can be made using the **hist()** function.
+
+Create a histogram for **'age_yr'** by using the following code:
+
+```{r}
+
+hist(bmiDataCSV$age_yr,
+     main = "Histogram",
+     col = 4,
+     xlab = "Age (in years)")  
+  
+```
+
+Notice that the frequencies are plotted. Let's make another histogram, this time using the densities (freq = F):  
+
+```{r}
+
+hist(bmiDataCSV$age_yr,
+     main = "Histogram", # title of graph
+     col = 4, # controls the color of the display
+     xlab = "Age (in years)", # x axis label
+     freq = F)  # set to "F" to plot the density
+  
+```
+
+# Take a break and answer Question 8 in Learning Module Quiz 2

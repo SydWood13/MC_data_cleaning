@@ -1,0 +1,487 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#setwd("E:/Courses/PSC103A")
+
+```
+
+# Learning Module 1
+
+# Module Objectives
+
+1.  Introduction to the lab
+2.  Introduction to the R computing environment (R script, R console, R environment, R files/plots/packages/help)\
+3.  Beginning coding (object-oriented computing, data types, functions)\
+4.  Introduction to the lab paper\
+5.  APA formatting for the lab paper
+
+# Introduction to the lab
+
+Starting in the 2nd week of the quarter, you'll need to complete a self-paced learning module (ungraded) **before** you attend your lab session.
+
+Learning modules include embedded quizzes (ungraded) to help test your understanding of the modules.
+
+## Attending lab
+
+Lab meetings are designed for class discussion of the content covered in the learning modules.
+
+## Lab assignment (graded)
+
+Graded lab assignments are to be uploaded by the deadline posted in Canvas. These assignments count as your lab assignment grade.
+
+Late lab assignments are accepted with a 50% penalty for the first 24-hours after the due date. For example, an assignment uploaded one minute past the due date is considered late. After 24 hours, late lab assignments are worth zero points.
+
+## Take a break from the learning module and answer quiz question #1:
+
+In Canvas, click on **Learning Module Quiz 1** and answer question 1.
+
+## Introduction to the R computing environment
+
+R and RStudio are accessible in multiple ways:
+
+1.  The computers in the lab classroom have R and RStudio installed.
+2.  Access R and Rstudio online via <https://posit.cloud/>
+3.  Campus computer lab
+
+There are many labs on campus where you can access R and RStudio.
+
+When labs are open for in-person visits: this calendar will show you the dates and times of computer lab availability: <https://computerrooms.ucdavis.edu/available/>
+
+When labs are closed, you can access some virtually: <https://virtuallab.ucdavis.edu/>
+
+4.  Download/install both programs onto your own computer
+
+You may download and install R and RStudio (both programs are necessary) onto your own computer.
+
+**Though we will use RStudio, you need to download and install R first to properly download and install RStudio.**
+
+**The URL for downloading R and RStudio**
+
+<https://posit.co/downloads/>
+
+**Once you install the program, you no longer need the installation file (go ahead and delete that file; it's large and there's no need to store it on your computer)**
+
+After downloading and installing both R and RStudio, open RStudio. A window should open that looks like this:
+
+```{r, echo=FALSE}
+
+
+#knitr::include_graphics("Screenshot RStudio.PNG")
+
+```
+
+# RStudio
+
+The RStudio window has 4 sub-windows.
+
+**top left**: The R Script
+
+**bottom left**: The R Console
+
+**top right**: The R Environment
+
+**bottom right**: Tabs for files, any plots you create, packages you download, and R's help function
+
+# Only type code in the R Script window
+
+The R Script is the window where you'll type your code. Although technically OK to type into the R console, it's best to type into the R Script window so that it's easy to edit the code.
+
+# Create a new R Script by clicking File -\> New File -\> R Script.
+
+**Beginning coding**
+
+Now, copy and paste the following code into the new R Script you just created:
+
+```{r, eval=FALSE}
+  
+  1045+2399
+  
+```
+
+To run this code (to see the result of 1045+2399), highlight 1045+2399 and click the Run button towards the top right of the R Script.
+
+**HINT** Google the keyboard shortcut for PC or Mac so that you don't need to click the Run button every time.
+
+Once you've run the code, you'll see the result in the R Console (the window below the R Script).
+
+```{r,echo=FALSE}
+  
+  1045+2399
+  
+```
+
+## Take a break from the learning module and answer quiz question #2:
+
+In Canvas, click on **Learning Module Quiz 1** and answer question 2.
+
+# Annotating your code
+
+It's very helpful to annotate your code. This means that you'll include comments about the code but the comments themselves are not part of the code to run. In fact, if you include comments as part of your code, R will produce an error message.
+
+You can add comments to your code by typing the pound sign (\#) before the comment. For example, copy and paste the following code into the R Script you've been using (on the line under 1045+2399):
+
+```{r,eval=FALSE}
+# R is a powerful calculator! If I want to know the answer to 5*25 I can run the following line of code
+
+  5*25
+  
+  
+```
+
+Notice that the comment shows up in green and the code shows up in blue. Now delete the pound sign, run the comment, and notice how an error is generated in the R Console.
+
+**Good to know** Here are some common mathematical operations in R:
+
+'+' : addition\
+'-' : subtraction\
+'/' : division\
+'\*' : multiplication\
+'\^' : exponent\
+'sqrt()' : square root\
+'exp()' : exponential function
+
+Copy and paste the following code into the R Script you've been using:
+
+```{r,eval=FALSE}
+  
+9-2
+
+exp(-1)
+
+sqrt(255)
+
+300/4
+
+4^2
+
+```
+
+## Take a break from the learning module and answer quiz question #3:
+
+In Canvas, click on **Learning Module Quiz 1** and answer question 3.
+
+# Vectors
+
+A vector is a collection of things (e.g. numbers, text, etc.) where the elements are all of the same type.
+
+c() is the function that combines elements into a vector.
+
+Let's combine the following elements into a vector: 21, 30, 24, 35, 26, 37, 25, 29, 25, 28, 22, 45, 23, 25, 28, 19, 23, 27, 35, 34, 37, 39
+
+To do this, copy and paste the following code into the R Script you've been using:
+
+```{r,eval=FALSE}
+  
+  c(21, 30, 24, 35, 26, 37, 25, 29, 25, 28, 22, 45, 23, 25, 28, 19, 23, 27, 35, 34, 37, 39)
+
+```
+
+Run this code and you'll see that all elements in the vector appear in the R Console.
+
+# Storing a vector as an "object"
+
+We can save this vector in what's called an **object**. This will come in handy when we want to use the vector in future operations.
+
+An "object" in R is something that is stored in the R environment (top right sub window). An object can be many possible things. For now, just think of an object as a vector (or data). We'll talk about other types of objects later.
+
+To store our vector in an object, copy and paste the following code into the R Script you've been using:
+
+```{r}
+  
+  age = c(21, 30, 24, 35, 26, 37, 25, 29, 25, 28, 22, 45, 23, 25, 28, 19, 23, 27, 35, 34, 37, 39)
+
+# or
+
+age <- c(21, 30, 24, 35, 26, 37, 25, 29, 25, 28, 22, 45, 23, 25, 28, 19, 23, 27, 35, 34, 37, 39)
+
+# = and <- are equivalent
+
+```
+
+Notice how age is now stored in the R environment window.
+
+What happens if you type **age** into your R Script window and run it? Copy and paste the following code into the R Script you've been using to find out:
+
+```{r,eval=FALSE}
+
+  age
+
+```
+
+The vector is printed in the R Console.
+
+Now let's look at some of the properties of the **age** vector. The class() function will tell us the data type of an object. Copy and paste the following code into the R Script:
+
+```{r,eval=FALSE}
+
+  class(age)
+  
+```
+
+This vector is numeric. That makes sense because all of the elements are numbers.
+
+We can create other types of vectors. Copy and paste the following code into the R Script to create a **character** vector:
+
+```{r,eval=FALSE}
+
+colors <- c('blue','yellow','red','green','green','red','blue','blue','yellow','yellow','green',
+              'yellow','green','green','green','yellow','red','green','red','green','blue','yellow') 
+              
+colors
+
+class(colors)
+
+```
+
+Note: In most instances, single '' and double "" quotes are interchangeable in R.
+
+We can also create **logical** vectors. The following code uses a logical operator to create a vector (called 'old') with elements that indicate which values of age are \>25 and which are not:
+
+```{r,eval=FALSE}
+old <- age > 25
+old 
+class(old)
+
+```
+
+We can also create a vector that is a mixture of character and numeric values.
+
+```{r,eval=FALSE}
+mixed <- c(1:5, "puppy", "kitty") 
+mixed
+class(mixed)
+
+```
+
+**Good to know** Rather than type 1, 2, 3, 4, 5, simply typed 1:5. That is, to get an integer sequence in R, just use a colon between the lowest and highest values.
+
+Notice that even though there are character and numeric values, the vector was stored as a character vector.
+
+Let's see what happens when we force this **mixed** vector to be numeric using the following code:
+
+```{r,eval=FALSE}
+
+test  = as.numeric(mixed)
+test
+class(test)
+```
+
+Notice the error message in the R Console warning you that the character elements (puppy and kitty) were replaced by "NA", the placeholder that R uses to indicate missing values.
+
+**Good to know** In fewer lines of code, we can force this mixed vector to be numeric using the following code:
+
+```{r,eval=FALSE}
+class(as.numeric(mixed))
+```
+
+That is, you can use multiple functions (here we used class() and as.numeric()) in the same line of code. Just attend carefully to the order of operations.
+
+## Take a break from the learning module and answer quiz question #4:
+
+In Canvas, click on **Learning Module Quiz 1** and answer question 4.
+
+The previous two chunks of code showed us that we can include **only one type of data** in a **vector**. Above, we wanted to combine a numeric vector and a character vector. To do this, we need to use a *list*. Let's see how to do this using our age and color vectors:
+
+```{r,eval=FALSE}
+age 
+colors
+```
+
+Let's create a **list** out of these numeric and character vectors:
+
+```{r,eval=FALSE}
+newlist <- list(age, colors)
+newlist
+class(newlist)
+```
+
+# Functions
+
+Functions are commands sent to R to perform an operation. They all have the same basic structure: function(arguments).
+
+An argument is the information that is passed to the function so that R knows what you want it to do.
+
+Using the sum() function, let's look at how we can view a function's arguments:
+
+```{r,eval=FALSE}
+help(sum)
+# or 
+?sum
+
+```
+
+Notice that both options pull up information about the function in the bottom right sub window. This information is called the **R documentation**. Take a look at the documentation where you'll see the arguments that the function will take.
+
+Now let's use the **sum** function to sum the elements of the age vector:
+
+```{r,eval=FALSE}
+  sum(age)
+```
+
+For functions with many arguments, you may specify the arguments by name. For example, the t.test() function has several arguments:
+
+```{r,eval=FALSE}
+
+?t.test
+
+```
+
+Take a look at the documentation to find the **arguments** of the function. If you scroll down to the bottom of a function's R documentation, you'll often see examples of how to use the function. This can be helpful, but as a general rule, these examples can be complicated. Many of us regularly rely on **Google** to find solutions, especially when learning to code.
+
+**Troubleshooting code**
+
+Everyone eventually encounters a problem with their code. Below are common ways to troubleshoot your code:
+
+1.  Have you forgotten a comma?
+
+2.  Did you forget to close a bracket?
+
+3.  R is case sensitive, did you capitalize a letter that should be lowercase?
+
+4.  Did you write a line of code and forget to run it? (Check your R Environment window to make sure the data or value you create actually exists)
+
+5.  Are you calling an object by the name you originally specified?
+
+If you run through the checklist and still need some help, here are some tips for issues that others have encountered in the past:
+
+6.  If you enlarged the plot window and you can't get it to go back, click on the little magnifying glass in the Plots sub window.
+
+7.  Your code may not be running from the R Script to the R Console because the number of opening and closing brackets don't match. That is, R is expected more code to follow. When this happens, you'll see plus signs in the R Console that are prompting you to add more code. Just press the Escape key on your keyboard. Now you'll see the usual \> sign in the R Console rather than the + sign.
+
+8.  At some point you will probably get the following error message: "Error: unexpected symbol in 'line-of-code'". Usually this means you left out (or included an extra) comma, bracket, or other punctuation sign somewhere.
+
+## Take a break from the learning module and answer quiz question #5:
+
+In Canvas, click on **Learning Module Quiz 1** and answer question 5.
+
+Earlier we talked about logical operators. Here are some common logical operators in R:
+
+\< : less than\
+\<= : less than or equal to\
+\> : greater than\
+\>= : greater than or equal to\
+== : exactly equal to\
+!= : not equal to\
+!x : not x\
+x \| y : x OR y\
+x & y : x AND y
+
+Recall that we created a logical vector that contained TRUE and FALSE elements. It is useful to know that R regards TRUE as 1 and FALSE as 0. This fact can come in handy. For example, let's say we want to know how many people are 25 years old:
+
+```{r}
+sum(age == 25)
+```
+
+What if we want to know how many people are older than 25?
+
+```{r}
+  sum(age > 25)
+```
+
+## Now take time to answer quiz question #6:
+
+In Canvas, click on **Learning Module Quiz 1** and answer question 6.
+
+# Installing R packages
+
+Packages are pre-made functions.
+
+**Good to know** Base R doesn't always include the functions we need, so we need to install other packages that include functions we need.
+
+```{r, echo=FALSE,eval = FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+install.packages("psych") # we can install packages using this function. Here, we install the 'psych' package
+
+```
+
+Once a package is installed, you won't need to re-install it. You do, however, need to **load** it every time your restart R and want to use its functions.
+
+```{r}
+library(psych) # The library function tells R to add the psych package to the library so we can access its function
+```
+
+# Introducing the final lab paper
+
+1.  Final Lab Paper Rubric: This rubric is used to grade your papers.
+
+2.  Final Paper Prompt: This file outlines the major components to be included in your paper. Use the rubric and prompt to draft your paper. This will help you align your thoughts and analysis in a structured manner.
+
+# You'll carry out an independent samples t-test for your final paper. This test requires that you select two variables:
+
+**The first variable is a categorical variable with two levels**. Each level of this binary variable indicates group membership. Importantly, the two groups must be independent.
+
+Independent groups essentially means that the members of one group are not linked in a meaningful way to the members of the other group.
+
+For example, let's say we plan to compare data for participants of an experiment and that our experiment involves a treatment condition and a control condition. In the study, we plan to randomly assign each participant to one of the two groups. Because of random assignment, members of the two groups won't be connected in any meaningful way.
+
+**The second variable is a continuous variable**
+
+Using an independent samples t-test, you'll compare the two groups with respect to a continuous outcome variable.
+
+For example, let's say we choose a measure of well-being for the continuous variable. We can then use an independent samples t test to compare mean well-being between the two groups.
+
+## Take a break from the learning module and answer quiz question #7:
+
+In Canvas, click on **Learning Module Quiz 1** and answer question 7.
+
+# APA format for the final paper
+
+The final paper is required to follow the APA format. You can access the URL below (also given in prompt) to get the APA format 7th edition (the only formatting edition that will be accepted for this paper).
+
+*Citations and references*
+
+Citations and references are important parts of the paper. Your paper is expected to include in-text citations and the corresponding references listed in the reference section. All should be in APA format.
+
+**Good to know** A shortcut to the APA style reference is using **Google Scholar**:
+
+-   Go to Google Scholar and search for a paper
+
+```{r,echo=FALSE}
+
+#knitr::include_graphics("Screenshot blozis shelley.PNG")
+
+```
+
+**Click on the quotes that appear below the reference.**
+
+```{r,echo=FALSE}
+
+#knitr::include_graphics("Screenshot blozis shelley psychometrika.PNG")
+
+```
+
+From there you'll see different formats for the reference. Copy and paste the **APA style** to your paper.
+
+```{r,echo=FALSE}
+
+#knitr::include_graphics("Screenshot blozis shelley psychometrika APA.PNG")
+
+```
+
+# Some formating tips
+
+1.  When writing about descriptive statistics and making comparisons:
+
+On average, the sample contained people who drove under the speed limit (*M* = 63.00, *SD* = 5.43). Notice that *M* and *SD* are italicized.
+
+There was a significant effect of the treatment condition on speed, *t*(38) = 5.98, *p* = .02.
+
+OR
+
+There was a significant effect of age on voting preference, *t*(38) = 5.98, *p* \< .05.
+
+Notice that both *t* and *p* are italicized.
+
+*Remember that M, SD, t, and p are italicized*
+
+2.  There is no zero before the *p* value (use *p* = .02, **not** *p* = 0.02)
+
+## Now answer the final quiz questions:
+
+In Canvas, click on **Learning Module Quiz 1** and complete the quiz.

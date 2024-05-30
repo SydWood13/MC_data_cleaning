@@ -1,0 +1,961 @@
+---
+title: "Lab4"
+author: "Jane He and Monica Orme"
+date: last-modified
+format: 
+  html:
+    toc: true
+    toc-float: true
+    df-print: tibble
+    code-copy: true
+    code-line-numbers: true
+    code-link: true
+    preview-links: true
+    self-contained: true
+    fig-height: 4
+    fig-width: 6
+    fig-align: center
+    html-math-method: mathml
+    output-file: Lab4_Supplementary_Page.html
+    format-links: true
+  revealjs: 
+    incremental: true
+    code-tools: true
+    code-copy: true
+    code-line-numbers: true
+    code-link: true
+    preview-links: true
+    slide-level: 4
+    slide-number: true
+    self-contained: true
+    fig-height: 4
+    fig-width: 6
+    fig-align: center
+    margin-left: "0"
+    margin-right: "0"
+    width: 1400
+    footer: "PSC103A WQ24"
+    output-file: Lab4_Supplementary_Slides.html
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+```
+
+# Goals for Today
+
+-   Clarifying Questions from Lab 3
+-   R Skills Recap
+-   Subset Data Frame
+-   Common Error Messages
+-   Course Project Overview
+-   Practice with Course Dataset
+
+<!-- Section for reading in files - not visible to students -->
+
+<!--# Comment out the other person's path when rendering the qmd -->
+
+```{r, include=FALSE}
+# A01 path 
+#bmi_data_csv <- read.csv(file = "/Users/jane/Documents/GitHub/PSC103A/Data/Example/lab2data.csv", header = TRUE,  stringsAsFactors = TRUE)
+
+# A02 path
+bmi_data_csv <- read.csv(file = "C:\\Users\\Monica\\OneDrive\\st - PSC 103A\\Discussions-Labs\\Data\\lab2data.csv", header = TRUE,stringsAsFactors = TRUE)
+```
+
+<!-- created a vector for MIDUS3 subset to replace the long variable list -->
+
+```{r allowedVariables, eval=TRUE, echo=FALSE}
+allowed_var <- c("M2ID",
+                 "SAMPLMAJ",
+                 "C1PRAGE",
+                 "C1PRSEX",
+                 "C1PA1",
+                 "C1PA2",
+                 "C1PA3",
+                 "C1PA39",
+                 "C1PA59",
+                 "C1PDEPAF",
+                 "C1PANHED",
+                 "C1PDEPRE",
+                 "C1PANXIE",
+                 "C1PPANIC",
+                 "C1PPARTN",
+                 "C1PB32A",
+                 "C1PD1",
+                 "C1PF1",
+                 "C1PF12A",
+                 "C1SSATIS2",
+                 "C1SHLOCS",
+                 "C1SAMPLI",
+                 "C1SA15",
+                 "C1SNEGAF",
+                 "C1SNEGPA",
+                 "C1SPOSAF",
+                 "C1SPOSPA",
+                 "C1SBADL2",
+                 "C1SIADL",
+                 "C1SINTAG",
+                 "C1SWSTHI",
+                 "C1SBMI",
+                 "C1SPWBA1",
+                 "C1SPWBE1",
+                 "C1SPWBG1",
+                 "C1SPWBR1",
+                 "C1SPWBU1",
+                 "C1SPWBS1",
+                 "C1SPWBA2",
+                 "C1SPWBE2",
+                 "C1SPWBG2",
+                 "C1SPWBR2",
+                 "C1SPWBU2",
+                 "C1SPWBS2",
+                 "C1SMPQWB",
+                 "C1SMPQSP",
+                 "C1SMPQAC",
+                 "C1SMPQSC",
+                 "C1SMPQSR",
+                 "C1SMPQAG",
+                 "C1SMPQAL",
+                 "C1SMPQCN",
+                 "C1SMPQTR",
+                 "C1SMPQHA",
+                 "C1SOPTIM",
+                 "C1SPESSI",
+                 "C1SREINT",
+                 "C1SACTIV",
+                 "C1SPLAN",
+                 "C1SVENT",
+                 "C1SDENIA",
+                 "C1SDISEN",
+                 "C1SPRCOP",
+                 "C1SEMCOP",
+                 "C1SSWBSI",
+                 "C1SSWBAO",
+                 "C1SSWBSC",
+                 "C1SSWBSA",
+                 "C1SSYMP",
+                 "C1SMNDFU",
+                 "C1SLFEDI",
+                 "C1SP3",
+                 "C1SP4A",
+                 "C1SP4B",
+                 "C1SP4C",
+                 "C1SP4D",
+                 "C1SP4E",
+                 "C1SP4F",
+                 "C1SP4G",
+                 "C1SP4H",
+                 "C1SP4I",
+                 "C1SP4J",
+                 "C1SP4K",
+                 "C1SP4L",
+                 "C1SQ1",
+                 "C1SQ4",
+                 "C1PA25BS")
+```
+
+<!-- switch TRUE/FALSE for eval only. all other options can remain. -->
+
+```{r, eval=F, echo=F,include=F}
+load("/Users/jane/Documents/GitHub/PSC103A/Data/MIDUS3/36346-0001-Data.rda")
+midus3_raw <- da36346.0001
+midus3_subset <- da36346.0001[, allowed_var] 
+midus3_clean <- midus3_subset[midus3_subset$SAMPLMAJ %in% c("(01) MAIN RDD", "(04) CITY OVERSAMPLE" ), ]  
+psc103Adata <- midus3_clean
+```
+
+```{r, eval=T, echo=F,include=F}
+setwd("C:\\Users\\Monica\\OneDrive\\st - PSC 103A\\Discussions-Labs\\Data\\ICPSR_36346\\DS0001")
+load(file='36346-0001-Data.rda')
+tempdata <- da36346.0001[, allowed_var] 
+psc103Adata <- tempdata[tempdata$SAMPLMAJ %in% c("(01) MAIN RDD", "(04) CITY OVERSAMPLE" ), ]  
+```
+
+<!--# Lab Material Starts -->
+
+# R Skills Recap
+
+Let's recap on some concepts and functions covered in the previous weeks 👀
+
+## Finding Information from Datasets {.smaller}
+
+Before we analyze data, it is important that we first have a good understanding of its properties. Some questions that we should ask ourselves to better understand the properties of a particular dataset before conducting any data analysis include:
+
+::: columns
+::: {.column width="50%"}
+-   What is the sample size (*n*)?
+
+<!-- -->
+
+-   What are the data types of the datasets' variables?
+
+    -   For categorical variables, how many categories does each variable have?
+
+-   Are there any missing values?
+:::
+
+::: {.column width="50%"}
+-   What are the descriptive statistics of the variables?
+
+    -   For categorical variables:
+
+        -   what are the relative frequencies of the categorical variables?
+
+    -   For numeric variables:
+
+        -   What is the center?
+
+        -   What is the spread (variability)?
+:::
+:::
+
+::: fragment
+Let's review together how we can answer these questions using R code!
+:::
+
+### Sample Size and Data Types {.smaller}
+
+-   **Sample size** (*n*) refers to the number of individuals or objects in the sample
+
+-   **Data types** refer to a type of value that a variable has
+
+    -   **Categorical variables in R** should be stored as [**factor**]{.underline} **values** in your dataframe
+
+    -   **Numerical variables in R** should be stored as [**numeric**]{.underline} **or [integer]{.underline} values** in your dataframe
+
+-   **Dataframes** refer to objects in R that we save as a result of importing a dataset using either `read.csv()` for csv files or `read.table()` for text files
+
+    -   Each row corresponds to an observation and each column corresponds to a variable
+
+-   In R, we can find the sample size and data types of each variable from a dataset in a few ways:
+
+    1.  Input the dataframe into the `str()` function
+
+        -   Find the sample size from the number of observations that are listed in the first row from the output
+        -   The data types in R are shown next to each variable
+
+    2.  Input the dataframe into the `describe()` function from the `Hmisc` package
+
+        -   Find the sample size as the number of observations that are listed in the line below the dataframe name
+
+#### Example 1: n and Data Types {.smaller}
+
+Method 1: Using the `str()` function
+
+::: columns
+::: {.column width="45%"}
+-   Method 1:
+
+    ```{r}
+    # Check the sample size
+    # and data types
+    # using str()
+
+    str(bmi_data_csv)
+    ```
+:::
+
+::: columns
+::: {.column width="5%"}
+<!-- empty space -->
+:::
+:::
+
+::: {.column width="45%"}
+-   The sample size is n = 232
+
+    -   This can be found in the first line of the output ” ‘data.frame’: 232 obs. of 5 variables ”
+
+-   The `biosex` variable is a variable with 2 levels "FEMALE" and "MALE"
+
+    -   This can be found in the second line of the output ” Factor w/ 2 levels “FEMALE”,“MALE” ”
+
+    -   The other data types can be checked similarly in the remaining lines of the output
+:::
+:::
+
+#### Example 2: n and Data Types {.smaller}
+
+::: columns
+::: {.column width="60%"}
+-   Method 2: Using the `describe()` function
+
+    ```{r}
+    # Check the sample size and data types using Hmisc::describe()  
+    library(Hmisc)
+    # use :: to avoid package conflict if psych package is also loaded
+    Hmisc::describe(bmi_data_csv)
+    ```
+:::
+
+::: {.column width="40%"}
+-   n = 232 can be found in the line below the dataframe name in " 5 Variables 232 Observations "
+
+-   The `biosex` variable is a factor with 2 levels "FEMALE" and "MALE"
+
+    -   This can be found in the second section of the output
+
+    -   Note that the count under "distinct" is small and frequencies of each category are provided, which the Hmisc package only provides for factor variables
+
+-   The other data types can be checked similarly in the remaining lines of the output.
+:::
+:::
+
+### Checking for Missing Values {.smaller}
+
+In psychological studies, some participants might drop out or skip answering certain questions. This leads to some values being missing in a dataset.
+
+-   It is important that we **check for missing values early** on to have a **more accurate understanding of our data** and to **ensure** that the **descriptive statistics are correctly calculated**
+
+-   Options for checking missing values in R:
+
+    1.  Input the dataframe into the `summary()` function
+
+        -   Look for "`NA`'s" in each variable
+        -   There will be count displayed next to "NA: " for the variables that contain missing values
+
+    2.  Input the dataframe into the `describe()` function from the `Hmisc` package
+
+        -   In the output, check the column that says "missing"
+
+#### Example 1: Check NA {.smaller}
+
+-   Method 1: Using the `summary()` function from base R
+
+    ```{r}
+    # Check the missing values using summary()
+    summary(bmi_data_csv)
+    ```
+
+\n
+
+-   The variables `height_in`, `weight_lbs`, and `age_yr` all contain missing values
+    -   Note that the counts that are displayed next to "NA's" for each variable that contains missing values
+-   In contrast, the variables `biosex` and `ed_cmplt` do not contain any missing values
+    -   There are no "NA's" displayed
+
+#### Example 2: Check NA {.smaller}
+
+::: columns
+::: {.column width="60%"}
+-   Method 2:
+
+    ```{r}
+    # Check the missing values using Hmisc::describe()  
+    library(Hmisc)
+    # use :: to avoid package conflict if psych package is also loaded
+    Hmisc::describe(bmi_data_csv)
+    ```
+:::
+
+::: {.column width="40%"}
+-   The variables `height_in`, `weight_lbs`, and `age_yr` all contain missing values
+
+    -   Note that the counts displayed under the "missing" section for these variables are greater than 0
+
+-   In contrast, the variables `biosex` and `ed_cmplt` do not contain any missing values
+
+    -   Counts displayed under the "missing" section are exactly 0
+
+    <!-- The n being displayed for them are also equal to the sample size of data frame -->
+:::
+:::
+
+### Descriptive Statistics: Categorical Variables {style="font-size: 90%"}
+
+The relative frequency is a common descriptive statistic for categorical variables
+
+-   These can be created in R using the `table()` function to produce the frequencies then dividing the frequencies by the total number of observations
+
+-   If there are missing values, we need to adjust the denominator to account for the number of missing values in the variable that we are calculating the relative frequency of
+
+-   We can adjust the relative frequency calculation for missing values as:
+
+    -   **Relative Frequency =** $\frac{\textbf{frequency}}{\textbf{n - (# of missing observations in the variable)}}$
+
+        ::: nonincremental
+        -   where n refers to # of observations in the dataset
+        :::
+
+#### Example: Categorical Variables {.smaller}
+
+-   An example in R:
+
+    ```{r}
+    #| output-location: fragment
+
+    # calculate frequencies to create a frequency table
+    smokers_freq = table(psc103Adata$C1PA39) 
+
+    # count the number of missing values in variable C1PA39
+    count_miss_smoker = sum(is.na(psc103Adata$C1PA39)) 
+
+    # adjust denominator for the number of missing values
+    complete_smokers= (length(psc103Adata$C1PA39) - count_miss_smoker)
+
+    # Find relative frequencies after accounting for the number of missing values
+    smokers_relfreq = smokers_freq/complete_smokers
+    smokers_relfreq
+    ```
+
+<!-- -->
+
+-   The function `sum(is.na())` will count the number of missing values for a variable
+
+-   The function `length()` counts the total number of rows in the dataframe, regardless of missingness. 
+
+### Descriptive Statistics for Numeric Variables {.smaller}
+
+Descriptive statistics for datasets can be readily calculated using functions from Base R.
+
+::: columns
+::: {.column width="55%"}
+-   Central Measures
+
+    -   Mean - `mean()`
+
+    -   Median - `median()`
+
+    -   Trimmed Mean - `mean(..., trim = ...)`
+
+    -   Specify the % of data to trim in the `trim` argument
+
+        -   E.g. the `trim` argument for a 10% trimmed mean is `trim = 0.1`
+:::
+
+::: {.column width="5%"}
+<!-- empty space -->
+:::
+
+::: {.column width="40%"}
+-   Variability Measures
+
+    -   Variance - `var()`
+
+    -   Standard Deviation - `sd()`
+
+    -   Range - `range()`
+
+    -   Interquartile Range - `IQR()`
+:::
+:::
+
+-   Datasets may contain missing values. Again, check if they are in your dataset using the `summary()` function from Base R or the `describe()` function from the `Hmisc` package.
+
+-   If missing values exist within a variable, remove the missing values before calculating each descriptive statistic using the option **`na.rm=TRUE`**. (Recall that R denotes missing values as `NA`).
+
+#### Example: Numeric Variables {.smaller}
+
+::: columns
+::: {.column width="40%"}
+-   Central Measures
+
+    -   Example:
+
+        ```{r}
+        # measures of central tendency 
+        mean_height <- mean(bmi_data_csv$height_in, 
+        na.rm=TRUE)   
+        median_height <- median(bmi_data_csv$height_in, 
+        na.rm=TRUE)  
+        trimm_mean_height <- mean(bmi_data_csv$height_in, 
+                                  trim = .10, na.rm = TRUE)
+
+        # displaying central measures 
+        mean_height 
+        median_height 
+        trimm_mean_height
+        ```
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="40%"}
+-   Variability Measures
+
+    -   Example:
+
+        ```{r}
+        # measures of variability 
+        range_age <- range(bmi_data_csv$age_yr, na.rm = TRUE) 
+        variance_age <- var(bmi_data_csv$age_yr, na.rm = TRUE) 
+        sd_age <- sd(bmi_data_csv$age_yr, na.rm = TRUE) 
+        iqr_age <- IQR(bmi_data_csv$age_yr, na.rm = TRUE)
+
+        # displaying variability measures 
+        range_age
+        variance_age 
+        sd_age 
+        iqr_age
+        ```
+:::
+:::
+
+## Bonus Tip: Rounding Calculations in R
+
+When reporting descriptive statistics in reports and papers, we often only need the first few decimal places (e.g. 2 decimal places).
+
+-   We can round our descriptive statistics to a certain number of decimal places using the `round()` function from base R
+
+    -   Here is an example:
+
+        ```{r}
+        # round relative frequencies to 2 decimal places
+        # specify the "digits" argument to get desired decimal places 
+        round(smokers_relfreq, digits = 2)
+        ```
+
+# Subsetting Data
+
+When analyzing data, some of the questions of interest may be focused on a smaller portion of your data. We can extract a smaller portion of data by subsetting in R.
+
+### Subsetting Dataframes {.smaller}
+
+Recall that dataframes consist of rows (stores each observation/participant) and columns (stores each variable).\
+An operator that can be used to subset data is the `[]` operator.\
+For a data frame named `df` the general format to subset is `df[rows, columms]`
+
+::: columns
+::: {.column width="45%"}
+-   For the `rows` parameter, pass either:
+
+    -   the row names of the selected rows
+
+    -   the index/indices as a single value or a vector of values
+
+        -   **Indexing in R starts at 1**
+
+            -   E.g. subset the first row: `df[1,]`
+
+    -   a logical statement that, when evaluated, reduces to the row indices
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+-   For the `columms` parameter, pass either:
+
+    -   the column index/indices of the selected columns as a vector of values or logical operators
+
+        -   **Indexing in R starts at 1**
+
+            -   E.g. subset the first 3 columns: `df[,1:3]`
+
+    -   a vector of variable names that reduces to the column indices
+:::
+:::
+
+-   If subsetting is done by only rows or only columns, then leave the other value blank
+
+    -   For example, to subset the `df` data frame only by rows, the general form reduces to `df[rows,]`. Similarly, to subset only by columns, `df[,cols]`
+
+### Steps to Subset Dataframes in R: {.smaller}
+
+1.  Based on the question of interest, determine the relevant variables in R and which of those values are applicable
+2.  Subset the dataframe using the `[]` operator and `which()` command with logical operators. Then, **store it as a new object**
+    -   Refresh: Some logical operators in R include: \<,\<=, \>, \>=, ==, !=. Go back to learning module 1 and/or the Lab 1 supplementary materials from the announcement to review these.
+
+<!-- -->
+
+3.  Check that the dataframe was subset correctly using the `summary()` command
+
+### Example: Subsetting Dataframes {.smaller}
+
+-   Example: Create a new dataframe of [males]{.underline} that are [older than 25]{.underline} years old. Generate descriptive statistics for the weight of the participants in that group.
+
+    -   Check the variables of interest
+
+        ```{r}
+        # review the dataset's
+        # properties
+        str(bmi_data_csv)
+        ```
+
+        -   We can subset the data based on the `biosex` and `age_yr` variables.
+
+### Example: Subsetting Dataframes (continued) {.smaller}
+
+::: columns
+::: {.column width="45%"}
+-   Subset the data into a dataframe object that contains [males]{.underline} that are [older than 25]{.underline} years old.
+
+    ```{r, eval=T}
+    # subset the data by rows with logical operataors 
+    MALE_older <- bmi_data_csv[which(bmi_data_csv$biosex=='MALE'
+                                     & bmi_data_csv$age_yr > 25),]
+    # note the position of the comma
+                                 
+    # check the subsetting
+    summary(MALE_older)
+    ```
+:::
+
+::: {.column width="5%"}
+<!--  -->
+:::
+
+::: {.column width="45%"}
+-   When creating the `MALE_older` dataframe we told R, to **only keep** participants that are both male and older than 25 years old.
+
+-   The `which()` command extracts the row indices that satisfy the logical condition(s) that are specified inside of the function
+
+-   The logical conditions here are `bmi_data_csv$biosex=='MALE' & bmi_data_csv$age_yr > 25`
+
+-   Include the comma "`,`" before the ending bracket to subset the participants that satisfy the criteria
+
+    -   Recall that in most dataframes, the participants' information is stored in the rows.
+:::
+:::
+
+### Example: Subsetting Dataframes (continued) {.smaller}
+
+-   Generate the descriptive statistics for weight on the subsetted dataframe
+
+    ```{r}
+    # obtain descriptives for weight of >25 year old males
+    summary(MALE_older$weight_lb)
+    ```
+
+# Common Errors Messages
+
+Everyone eventually encounters a problem with their code. Let's look at some common errors that you may encounter in your R code.
+
+## Error 1
+
+-   The console telling you that R cannot find your function, object, or package
+
+    -   Possible [reasons]{.underline}:
+
+        -   Typos in function, object, or package names
+
+        -   Lines for the function, object, or package weren't run
+
+    -   [Solution:]{.underline} make sure that you correctly spell all your functions, variables, datasets, objects and packages. Note that R is case sensitive too.
+
+## Error 2
+
+-   Your code will either not run or give you a different than expected result if you do not specify or incorrectly specify an argument in the function
+
+    -   Possible [reasons]{.underline}:
+
+        -   Missing or misspelled arguments in R functions
+
+        -   Package conflicts (see Lab 3 Supplementary)
+
+-   [Solution:]{.underline} try taking a look at the documentation (type and run in `?function_name` in your R script) and verify that you have written down the argument names correctly and/or that you’re referencing objects created in the same way that they were originally spelled.
+
+## Error 3
+
+-   The console telling you that R cannot build connection to file(s)
+
+    -   Possible [reasons]{.underline}:
+
+        -   Working directory wasn't set up
+
+        -   Files are saved outside of working directory
+
+        -   Typos in the file path
+
+        -   Slashes in the file path aren't recognized
+
+            -   More often with Windows system (see Lab 1 Supplementary)
+
+-   [Solution:]{.underline} make sure that you correctly set the working directory with everything spelled right. Also, always keep your files organized so that you know where to find them.
+
+<!--points to discuss.. inputting argument names correctly, referring to objects correctly (use the same capitalization and spelling)-->
+
+# Course Project
+
+It is time to start thinking about your course project 🤔
+
+## Purpose
+
+You will be writing an APA style paper to apply skills learned in this course.
+
+-   Hypothesis:
+
+    -   Generate a hypothesis based on the 2 variables chose from course dataset
+
+        -   1 continuous variable and 1 **two-level** categorical variable
+
+-   Analysis:
+
+    -   Carry out an independent samples t-test to test your hypothesis
+
+-   Graph:
+
+    -   Create a graphical display of the chosen continuous variable\
+        that compares the two groups in the chosen categorical variable
+
+## Grading
+
+Final lab paper will consist of 15% of your final grade.
+
+There are 2 parts in this paper that come with 2 different deadlines:
+
+::: columns
+::: {.column width="50%"}
+-   [Part 1](https://canvas.ucdavis.edu/courses/873222/assignments/1159196):
+
+    -   Worth 5% of grade
+
+    -   Due on Feb 26 by 10:00am
+:::
+
+::: {.column width="50%"}
+-   [Part 2](https://canvas.ucdavis.edu/courses/873222/assignments/1159197):
+
+    -   Worth 10% of grade
+
+    -   Due on Mar 15 by 11:59pm
+:::
+:::
+
+-   We accept late submissions with a penalty
+
+    -   The penalty is 25% of total points possible per day late
+
+-   Note that any revision made to Part 1 after submission will not be regraded in Part 2
+
+## Resources {.smaller}
+
+All the information needed to get started with the project are up on Canvas under module: **Course Paper - Resources**.
+
+::: columns
+::: {.column width="50%"}
+-   Dataset:
+
+    -   [Midlife in the United States (MIDUS 3)](https://canvas.ucdavis.edu/courses/873222/pages/information-about-the-midlife-in-the-united-states-midus-3?module_item_id=1759768): information about the project, recruitment, and data collection
+
+        -   [Navigate ICPSR Website](https://canvas.ucdavis.edu/courses/873222/pages/1-introduction-to-icpsr-and-where-youll-locate-and-download-a-data-set-for-the-course-paper?module_item_id=1759762): where MIDUS 3 is hosted
+
+        <!--# use sign in with email to create account with edu email... the SSO portal is so slow and somehow not able to open -->
+
+        -   [Access and download dataset](https://canvas.ucdavis.edu/courses/873222/pages/2-steps-to-access-and-download-the-dataset-for-the-course-paper?module_item_id=1759763): how to find MIDUS 3
+
+            -   You need an ICPSR account to download the dataset. **Create a new account using your @ucdavis.edu email** and do not use the SSO portal.
+
+        -   [Access and download codebook](https://canvas.ucdavis.edu/courses/873222/pages/3-steps-to-access-and-download-the-codebook-for-the-course-data-set?module_item_id=1759764): how to understand variables in MIDUS 3
+:::
+
+::: {.column width="50%"}
+-   Writing guide: [elements](https://canvas.ucdavis.edu/courses/873222/pages/guide-to-writing-the-course-paper?module_item_id=1759765) of the paper
+
+    -   **Make sure to read very carefully**
+
+<!--# copy and open the link and show them the guide, talk a bit about each elements and page number, ect. -->
+
+-   [Rubric](https://canvas.ucdavis.edu/courses/873222/pages/how-well-grade-the-course-paper-rubric?module_item_id=1759766): Part 1 and Part 2
+
+-   Format: APA 7th edition
+
+    -   [Structure, in-text citations, and references](https://owl.purdue.edu/owl/research_and_citation/apa_style/apa_formatting_and_style_guide/apa_sample_paper.html)
+
+    -   [Tables and figures](https://canvas.ucdavis.edu/courses/873222/pages/tables-and-figures-placing-them-in-your-paper?module_item_id=1759769): tips on placing figures in paper
+
+    -   [MIDUS 3](https://canvas.ucdavis.edu/courses/873222/pages/citation-for-the-midus-3-apa-formatted?module_item_id=1759771): always cite the open dataset being used
+:::
+:::
+
+# Lab Activity
+
+Now let's try to start preparing the course dataset ✨
+
+## Course Dataset
+
+You will be using the **MIDUS 3** dataset for the course project.
+
+If you have not yet downloaded the dataset and codebook from ICPSR website, take advantage of this lab time to get started!
+
+Instructions are available on Canvas under module: Course Paper - Resources.
+
+::: fragment
+You should have the following files ready in the working directory:
+:::
+
+-   Dataset: `36346-0001-Data.rda`
+
+    -   .rda is the format for a R data file
+
+-   Codebook: `36346-0001-Codebook-aggregate_data.pdf`
+
+## Activity 1
+
+Once you have the files ready, following the steps and scripts provided in **Learning Module 4** to:
+
+1.  Import the MIDUS 3 dataset into R
+
+2.  Subset the dataset to only include approved variables
+
+3.  Clean the dataset to create independent samples
+
+::: fragment
+At the end of subsetting and cleaning, you should have a total of **1732 observations of 87 variables** for the dataset prepared to start the course project.
+:::
+
+::: fragment
+💡 **Hint**: Check out the "2. Import the course data set" section from Learning Module 4 for guidance with importing data in R.
+:::
+
+## Activity 1 (Solution)
+
+<!--# live code during lab, swap echo value when posting announcement -->
+
+::: columns
+::: {.column width="50%"}
+```{r, eval=F,echo=T}
+# Set working directory
+setwd("C:\\Users\\Monica\\PSC 103A\\Data")
+
+# load the file
+load(file='36346-0001-Data.rda')
+
+# This code has been provided in Learning Module 4
+# Let's find it then apply the code
+tempdata <- da36346.0001[, c("M2ID",
+                             "SAMPLMAJ",
+                             "C1PRAGE",
+                             "C1PRSEX",
+                             "C1PA1",
+                             "C1PA2",
+                             "C1PA3",
+                             "C1PA39",
+                             "C1PA59",
+                             "C1PDEPAF",
+                             "C1PANHED",
+                             "C1PDEPRE",
+                             "C1PANXIE",
+                             "C1PPANIC",
+                             "C1PPARTN",
+                             "C1PB32A",
+                             "C1PD1",
+                             "C1PF1",
+                             "C1PF12A",
+                             "C1SSATIS2",
+                             "C1SHLOCS",
+                             "C1SAMPLI",
+                             "C1SA15",
+                             "C1SNEGAF",
+                             "C1SNEGPA",
+                             "C1SPOSAF",
+                             "C1SPOSPA",
+                             "C1SBADL2",
+                             "C1SIADL",
+                             "C1SINTAG",
+                             "C1SWSTHI",
+                             "C1SBMI",
+                             "C1SPWBA1",
+                             "C1SPWBE1",
+                             "C1SPWBG1",
+                             "C1SPWBR1",
+                             "C1SPWBU1",
+                             "C1SPWBS1",
+                             "C1SPWBA2",
+                             "C1SPWBE2",
+                             "C1SPWBG2",
+                             "C1SPWBR2",
+                             "C1SPWBU2",
+                             "C1SPWBS2",
+                             "C1SMPQWB",
+                             "C1SMPQSP",
+                             "C1SMPQAC",
+                             "C1SMPQSC",
+                             "C1SMPQSR",
+                             "C1SMPQAG",
+                             "C1SMPQAL",
+                             "C1SMPQCN",
+                             "C1SMPQTR",
+                             "C1SMPQHA",
+                             "C1SOPTIM",
+                             "C1SPESSI",
+                             "C1SREINT",
+                             "C1SACTIV",
+                             "C1SPLAN",
+                             "C1SVENT",
+                             "C1SDENIA",
+                             "C1SDISEN",
+                             "C1SPRCOP",
+                             "C1SEMCOP",
+                             "C1SSWBSI",
+                             "C1SSWBAO",
+                             "C1SSWBSC",
+                             "C1SSWBSA",
+                             "C1SSYMP",
+                             "C1SMNDFU",
+                             "C1SLFEDI",
+                             "C1SP3",
+                             "C1SP4A",
+                             "C1SP4B",
+                             "C1SP4C",
+                             "C1SP4D",
+                             "C1SP4E",
+                             "C1SP4F",
+                             "C1SP4G",
+                             "C1SP4H",
+                             "C1SP4I",
+                             "C1SP4J",
+                             "C1SP4K",
+                             "C1SP4L",
+                             "C1SQ1",
+                             "C1SQ4",
+                             "C1PA25BS"
+)] 
+
+```
+:::
+
+::: {.column width="50%"}
+```{r,echo=T,eval=F}
+psc103Adata <- tempdata[tempdata$SAMPLMAJ %in% c("(01) MAIN RDD", "(04) CITY OVERSAMPLE" ), ]  
+
+# check that the dataframe
+# was created correctly
+str(psc103Adata)
+```
+:::
+:::
+
+## Activity 2 {.smaller}
+
+Go to the MIDUS 3 codebook and look for variable `C1PA25BS`. Take a moment to read about the variable and try your best to understand it. You don't need to import the codebook into R.
+
+After you know more about the variable:
+
+1.  Describe `C1PA25BS` using functions from Base R
+
+2.  Summarize `C1PA25BS` using a graphical display with proper axis labels
+
+    -   General audience should be able to understand your graph without having to go through the codebook
+
+3.  Ask yourself the question: is `C1PA25BS` normally distributed?
+
+::: fragment
+💡 **Hint**: What is the variable measuring? Are there any missing observations in this variable? What is the variable type?
+:::
+
+::: {.fragment style="font-size:80%"}
+```{r, eval=FALSE, echo=TRUE}
+# Looking for SOLUTION? 
+
+## Think about the hints! Revisit previous slides if need to :)
+## Try it out yourself!
+```
+:::
+
+## Activity 3 {.smaller}
+
+Hopefully by now, you have the course dataset ready to go and are more familiar with how to use the dataset and navigate the codebook.
+
+Spend rest of the lab time to start thinking about your hypothesis and look into the relevant variables for the course project.
+
+-   Aagin, you can choose 1 continuous variable and 1 **two-level** categorical variable from the 87 available variables in the dataset.
+
+-   However, please note, you should avoid choosing the following 2 variables: `M2ID` and `SAMPLMAJ`.
+
+    -   They are used to identify participants and subset independent samples for the project.
+
+    -   There isn't much value in them conducting analysis required for the course project.

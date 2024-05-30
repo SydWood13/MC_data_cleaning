@@ -1,0 +1,644 @@
+"gender","education","age","ACT"
+"Female","Some College",19,24
+"Female","Some College",23,35
+"Female","Some College",20,21
+"Male","Undergraduate Degree",27,26
+"Male","Finished High School",33,31
+"Male","Graduate Degree",26,28
+"Female","Graduate Degree",30,36
+"Male","Some College",19,22
+"Female","Undergraduate Degree",23,22
+"Female","Graduate Degree",40,35
+"Male","Some College",23,32
+"Female","Undergraduate Degree",34,29
+"Male","Undergraduate Degree",32,21
+"Female","Undergraduate Degree",41,35
+"Female","Some College",20,27
+"Female","Undergraduate Degree",24,27
+"Female","Some College",19,33
+"Female","Undergraduate Degree",24,32
+"Male","Undergraduate Degree",35,28
+"Female","Undergraduate Degree",46,32
+"Female","Finished High School",55,28
+"Female","Undergraduate Degree",25,30
+"Male","Undergraduate Degree",50,30
+"Male","Undergraduate Degree",35,31
+"Male","Some College",21,30
+"Female","Finished High School",34,30
+"Female","Undergraduate Degree",37,21
+"Female","Graduate Degree",27,28
+"Female","Graduate Degree",29,33
+"Male","Some College",23,24
+"Male","Some College",22,27
+"Male","Undergraduate Degree",23,31
+"Male","Undergraduate Degree",54,33
+"Female","Some College",20,29
+"Male","Finished High School",41,28
+"Female","Graduate Degree",52,24
+"Female","Some College",18,27
+"Male","Graduate Degree",35,31
+"Male","Undergraduate Degree",27,28
+"Female","Undergraduate Degree",23,29
+"Female","Graduate Degree",39,30
+"Female","Graduate Degree",30,36
+"Male","Graduate Degree",53,36
+"Female","Some College",17,26
+"Male","Undergraduate Degree",27,33
+"Male","Undergraduate Degree",30,27
+"Female","Undergraduate Degree",34,23
+"Female","Graduate Degree",27,33
+"Male","Undergraduate Degree",35,35
+"Female","Undergraduate Degree",24,28
+"Female","Undergraduate Degree",23,28
+"Female","Graduate Degree",27,33
+"Female","Undergraduate Degree",23,34
+"Male","Undergraduate Degree",28,26
+"Female","Undergraduate Degree",24,36
+"Female","Some College",20,28
+"Female","Graduate Degree",32,18
+"Female","Some College",19,34
+"Male","Graduate Degree",48,34
+"Male","Graduate Degree",43,32
+"Female","Some College",33,36
+"Male","Undergraduate Degree",35,34
+"Female","Undergraduate Degree",31,31
+"Female","Undergraduate Degree",23,29
+"Female","Undergraduate Degree",29,29
+"Female","Some College",21,24
+"Male","Finished High School",19,26
+"Male","Some College",19,29
+"Female","Graduate Degree",27,28
+"Male","Undergraduate Degree",40,32
+"Female","Graduate Degree",35,32
+"Female","Undergraduate Degree",24,27
+"Female","Some College",30,28
+"Female","Some College",17,32
+"Female","Finished High School",27,15
+"Female","Graduate Degree",40,21
+"Male","Undergraduate Degree",36,26
+"Male","Graduate Degree",30,25
+"Male","Graduate Degree",25,31
+"Female","Graduate Degree",29,26
+"Female","Graduate Degree",38,28
+"Female","Graduate Degree",32,33
+"Female","Graduate Degree",47,24
+"Female","Some College",19,32
+"Male","Undergraduate Degree",23,31
+"Female","Some College",38,30
+"Male","Undergraduate Degree",23,32
+"Male","Some College",19,36
+"Female","Undergraduate Degree",21,32
+"Male","Undergraduate Degree",23,30
+"Female","Undergraduate Degree",29,27
+"Female","Graduate Degree",24,35
+"Male","Graduate Degree",31,29
+"Male","Undergraduate Degree",53,33
+"Female","Some College",20,30
+"Female","Undergraduate Degree",24,32
+"Female","Graduate Degree",50,26
+"Male","Undergraduate Degree",23,36
+"Female","Undergraduate Degree",23,36
+"Male","Graduate Degree",23,27
+"Female","Graduate Degree",22,26
+"Male","Undergraduate Degree",23,29
+"Female","Graduate Degree",65,23
+"Female","Some College",20,23
+"Male","Undergraduate Degree",26,29
+"Male","Graduate Degree",39,32
+"Female","Graduate Degree",26,32
+"Male","Some College",21,30
+"Male","Undergraduate Degree",33,28
+"Female","Undergraduate Degree",25,23
+"Female","Undergraduate Degree",22,36
+"Female","Graduate Degree",26,26
+"Female","Undergraduate Degree",33,36
+"Female","Some College",21,34
+"Female","Undergraduate Degree",23,23
+"Female","Some College",19,28
+"Male","Some College",23,23
+"Female","Some College",19,28
+"Male","Graduate Degree",37,32
+"Female","Some College",21,16
+"Male","Graduate Degree",34,29
+"Female","Graduate Degree",30,29
+"Female","Some College",19,29
+"Female","Some College",19,32
+"Female","Some College",20,26
+"Female","Graduate Degree",28,23
+"Male","Some High School",45,35
+"Female","Undergraduate Degree",28,28
+"Female","Undergraduate Degree",25,25
+"Female","Graduate Degree",57,23
+"Female","Graduate Degree",62,36
+"Female","Undergraduate Degree",34,30
+"Female","Undergraduate Degree",36,30
+"Female","Undergraduate Degree",24,33
+"Female","Graduate Degree",61,31
+"Male","Some College",21,28
+"Female","Undergraduate Degree",30,35
+"Female","Some College",22,32
+"Female","Some College",20,26
+"Female","Some College",22,34
+"Female","Some College",22,34
+"Female","Graduate Degree",43,32
+"Female","Graduate Degree",26,24
+"Male","Graduate Degree",36,32
+"Male","Finished High School",22,23
+"Female","Graduate Degree",58,26
+"Female","Some High School",18,19
+"Female","Undergraduate Degree",23,23
+"Female","Graduate Degree",27,31
+"Female","Undergraduate Degree",27,28
+"Male","Undergraduate Degree",28,32
+"Female","Undergraduate Degree",35,25
+"Male","Graduate Degree",22,26
+"Female","Some College",18,31
+"Female","Graduate Degree",27,34
+"Male","Graduate Degree",33,31
+"Female","Some High School",17,30
+"Male","Graduate Degree",40,36
+"Female","Graduate Degree",57,32
+"Male","Graduate Degree",43,33
+"Female","Some College",19,29
+"Female","Graduate Degree",40,25
+"Female","Undergraduate Degree",37,30
+"Female","Graduate Degree",38,34
+"Male","Finished High School",26,32
+"Male","Finished High School",26,29
+"Male","Some College",20,25
+"Female","Graduate Degree",40,32
+"Male","Undergraduate Degree",23,33
+"Male","Undergraduate Degree",38,35
+"Male","Some College",21,24
+"Male","Undergraduate Degree",33,23
+"Female","Undergraduate Degree",22,35
+"Female","Some High School",17,27
+"Male","Graduate Degree",42,28
+"Female","Some College",20,27
+"Male","Graduate Degree",57,28
+"Female","Graduate Degree",33,32
+"Female","Some College",22,34
+"Female","Graduate Degree",58,27
+"Male","Some College",20,31
+"Female","Some College",22,17
+"Female","Some College",24,25
+"Female","Undergraduate Degree",25,36
+"Male","Some College",24,29
+"Female","Finished High School",55,30
+"Female","Some College",19,29
+"Female","Graduate Degree",24,28
+"Female","Undergraduate Degree",26,28
+"Female","Undergraduate Degree",37,30
+"Male","Graduate Degree",44,30
+"Female","Graduate Degree",35,31
+"Male","Undergraduate Degree",25,29
+"Female","Undergraduate Degree",30,28
+"Female","Some College",23,26
+"Female","Undergraduate Degree",26,24
+"Female","Finished High School",26,36
+"Male","Some High School",18,32
+"Male","Some High School",18,23
+"Male","Some High School",17,34
+"Male","Graduate Degree",37,28
+"Male","Some High School",18,19
+"Female","Graduate Degree",30,31
+"Female","Some College",23,21
+"Female","Some College",20,19
+"Male","Undergraduate Degree",36,22
+"Male","Undergraduate Degree",50,30
+"Female","Some College",18,18
+"Male","Some College",21,36
+"Female","Some High School",21,24
+"Female","Some College",20,28
+"Female","Undergraduate Degree",32,23
+"Female","Graduate Degree",24,22
+"Male","Some College",30,23
+"Female","Some College",19,25
+"Male","Undergraduate Degree",28,25
+"Female","Some College",21,24
+"Male","Finished High School",21,30
+"Female","Undergraduate Degree",22,30
+"Female","Graduate Degree",35,24
+"Female","Some College",22,22
+"Male","Some College",21,22
+"Female","Some College",22,27
+"Male","Undergraduate Degree",28,27
+"Female","Some High School",19,35
+"Male","Undergraduate Degree",28,16
+"Female","Graduate Degree",22,25
+"Female","Some College",19,23
+"Female","Some College",18,32
+"Male","Some College",18,25
+"Female","Some College",23,35
+"Female","Some College",21,28
+"Female","Some College",20,24
+"Female","Some College",28,27
+"Female","Some College",22,30
+"Female","Some College",19,34
+"Male","Some College",30,35
+"Male","Some High School",18,33
+"Female","Some High School",18,19
+"Female","Graduate Degree",30,25
+"Female","Finished High School",43,35
+"Female","Some College",23,26
+"Female","Some College",20,24
+"Female","Undergraduate Degree",50,20
+"Female","Undergraduate Degree",40,30
+"Male","Undergraduate Degree",26,32
+"Male","Some College",26,30
+"Female","Graduate Degree",31,28
+"Female","Some College",20,23
+"Female","Some College",31,36
+"Male","Finished High School",55,25
+"Female","Some College",19,29
+"Female","Some College",19,20
+"Female","Some College",25,32
+"Female","Some College",30,24
+"Female","Finished High School",19,30
+"Male","Some High School",18,33
+"Female","Some College",22,21
+"Female","Some College",23,20
+"Male","Finished High School",25,32
+"Male","Finished High School",22,30
+"Male","Some College",20,31
+"Male","Some College",20,25
+"Male","Some High School",18,18
+"Female","Some High School",18,25
+"Female","Some College",21,26
+"Female","Undergraduate Degree",25,29
+"Male","Undergraduate Degree",26,33
+"Male","Some College",20,31
+"Male","Undergraduate Degree",34,25
+"Female","Undergraduate Degree",22,27
+"Female","Some College",20,36
+"Female","Undergraduate Degree",24,32
+"Female","Graduate Degree",35,32
+"Female","Finished High School",34,26
+"Female","Undergraduate Degree",24,23
+"Female","Graduate Degree",36,34
+"Male","Undergraduate Degree",27,27
+"Female","Some College",21,30
+"Female","Undergraduate Degree",45,30
+"Male","Undergraduate Degree",57,28
+"Female","Some College",19,25
+"Male","Some College",19,20
+"Female","Finished High School",26,26
+"Female","Some College",18,33
+"Female","Graduate Degree",25,23
+"Female","Some College",20,33
+"Male","Graduate Degree",36,25
+"Female","Some College",19,27
+"Male","Graduate Degree",37,26
+"Male","Undergraduate Degree",30,21
+"Female","Finished High School",24,28
+"Female","Graduate Degree",40,29
+"Female","Graduate Degree",27,32
+"Female","Undergraduate Degree",41,30
+"Female","Some High School",17,18
+"Female","Some College",19,32
+"Male","Some College",21,32
+"Female","Some High School",18,27
+"Male","Some College",19,17
+"Female","Undergraduate Degree",24,28
+"Female","Some College",18,21
+"Female","Some College",20,30
+"Female","Undergraduate Degree",44,25
+"Female","Some College",20,32
+"Male","Graduate Degree",26,32
+"Female","Some College",18,16
+"Female","Some College",25,27
+"Female","Some High School",18,27
+"Female","Some College",21,20
+"Male","Finished High School",19,31
+"Male","Graduate Degree",44,30
+"Male","Undergraduate Degree",34,19
+"Female","Graduate Degree",37,24
+"Female","Some College",21,27
+"Male","Graduate Degree",39,35
+"Female","Some College",19,27
+"Female","Some College",22,32
+"Female","Some High School",37,26
+"Female","Some College",19,25
+"Female","Some College",18,29
+"Female","Graduate Degree",44,36
+"Male","Undergraduate Degree",52,25
+"Female","Some College",21,22
+"Female","Some College",20,27
+"Female","Some College",20,23
+"Male","Some College",18,34
+"Female","Graduate Degree",28,31
+"Female","Some College",20,31
+"Female","Finished High School",25,26
+"Female","Finished High School",57,35
+"Male","Some College",29,33
+"Female","Some College",21,29
+"Female","Undergraduate Degree",26,28
+"Female","Some College",20,27
+"Female","Some College",23,27
+"Female","Graduate Degree",24,31
+"Female","Some College",19,31
+"Female","Some College",19,32
+"Female","Some College",20,22
+"Female","Some High School",17,35
+"Female","Some College",19,25
+"Male","Some College",20,25
+"Female","Some College",18,23
+"Female","Some College",22,26
+"Female","Some College",20,27
+"Female","Some College",20,27
+"Female","Some College",20,34
+"Male","Graduate Degree",24,30
+"Female","Some College",21,32
+"Female","Graduate Degree",38,26
+"Male","Some College",20,25
+"Female","Graduate Degree",28,29
+"Male","Some College",20,22
+"Male","Some College",22,28
+"Male","Some College",17,35
+"Female","Undergraduate Degree",22,24
+"Female","Undergraduate Degree",31,27
+"Female","Some College",21,32
+"Female","Some College",27,17
+"Female","Some College",19,18
+"Male","Some College",19,20
+"Female","Graduate Degree",50,35
+"Female","Undergraduate Degree",22,32
+"Male","Undergraduate Degree",25,24
+"Male","Finished High School",33,32
+"Female","Graduate Degree",29,29
+"Male","Graduate Degree",31,27
+"Female","Some High School",17,27
+"Female","Graduate Degree",37,20
+"Female","Some College",18,22
+"Female","Some College",32,33
+"Female","Graduate Degree",25,30
+"Male","Some College",20,34
+"Female","Undergraduate Degree",48,28
+"Female","Undergraduate Degree",49,32
+"Female","Some College",22,30
+"Female","Finished High School",28,23
+"Female","Graduate Degree",33,34
+"Female","Undergraduate Degree",22,26
+"Female","Graduate Degree",29,32
+"Male","Some College",25,22
+"Female","Some College",17,29
+"Female","Finished High School",18,23
+"Female","Some College",19,35
+"Male","Graduate Degree",30,32
+"Female","Some College",19,31
+"Male","Some High School",18,27
+"Male","Some High School",18,29
+"Male","Some College",19,29
+"Male","Some High School",18,33
+"Female","Some College",20,35
+"Female","Finished High School",19,21
+"Female","Graduate Degree",28,29
+"Female","Some College",22,30
+"Female","Some College",19,30
+"Female","Undergraduate Degree",29,32
+"Female","Some College",19,28
+"Female","Some College",18,28
+"Female","Some College",21,25
+"Female","Some College",18,28
+"Male","Graduate Degree",55,33
+"Female","Some College",19,32
+"Male","Finished High School",20,20
+"Female","Some College",19,21
+"Female","Some College",19,28
+"Female","Some College",19,35
+"Male","Finished High School",19,26
+"Male","Finished High School",22,3
+"Female","Some College",20,21
+"Male","Some College",20,21
+"Female","Graduate Degree",34,32
+"Female","Some College",18,31
+"Male","Some College",25,27
+"Female","Some College",33,35
+"Male","Graduate Degree",43,32
+"Male","Finished High School",25,24
+"Female","Graduate Degree",34,34
+"Male","Finished High School",20,32
+"Female","Some College",18,31
+"Male","Some College",19,36
+"Female","Some College",20,23
+"Female","Finished High School",19,28
+"Male","Some College",19,35
+"Female","Some College",18,22
+"Female","Some College",20,26
+"Male","Some College",19,29
+"Female","Graduate Degree",36,29
+"Female","Some College",19,21
+"Male","Undergraduate Degree",24,31
+"Female","Some College",19,36
+"Male","Finished High School",20,25
+"Female","Graduate Degree",27,27
+"Male","Some College",20,17
+"Female","Finished High School",27,32
+"Male","Some College",19,32
+"Male","Some College",19,22
+"Female","Some High School",18,26
+"Female","Undergraduate Degree",21,30
+"Female","Some College",44,25
+"Female","Some College",44,25
+"Female","Some College",19,34
+"Male","Some College",22,24
+"Male","Finished High School",25,20
+"Male","Graduate Degree",22,32
+"Female","Finished High School",28,25
+"Female","Some College",20,20
+"Female","Some College",20,23
+"Male","Some High School",18,23
+"Female","Graduate Degree",24,29
+"Female","Some College",19,21
+"Male","Some High School",18,35
+"Female","Some High School",18,34
+"Male","Some High School",23,15
+"Male","Some College",18,34
+"Female","Graduate Degree",23,28
+"Female","Graduate Degree",27,32
+"Female","Some High School",18,35
+"Female","Some High School",18,26
+"Female","Undergraduate Degree",25,32
+"Female","Some High School",18,28
+"Female","Some High School",17,28
+"Male","Some College",20,30
+"Male","Graduate Degree",42,35
+"Male","Finished High School",31,30
+"Male","Some High School",18,25
+"Female","Graduate Degree",25,24
+"Female","Some College",18,16
+"Male","Some College",19,30
+"Female","Graduate Degree",38,28
+"Female","Undergraduate Degree",34,34
+"Male","Graduate Degree",28,35
+"Female","Graduate Degree",23,25
+"Male","Undergraduate Degree",26,34
+"Male","Finished High School",19,27
+"Female","Some College",19,31
+"Male","Some College",19,27
+"Female","Graduate Degree",56,34
+"Female","Some College",20,31
+"Female","Some College",20,27
+"Male","Some College",20,27
+"Female","Some College",20,30
+"Male","Some High School",17,15
+"Female","Graduate Degree",43,23
+"Female","Some College",20,26
+"Female","Graduate Degree",27,33
+"Female","Undergraduate Degree",22,34
+"Female","Graduate Degree",41,35
+"Female","Some College",19,27
+"Male","Graduate Degree",24,31
+"Male","Some College",22,33
+"Female","Undergraduate Degree",22,29
+"Female","Some College",23,21
+"Female","Undergraduate Degree",31,19
+"Female","Some High School",18,25
+"Male","Some High School",18,30
+"Female","Some College",19,21
+"Female","Some College",20,23
+"Female","Some College",20,32
+"Female","Some College",23,21
+"Male","Finished High School",20,25
+"Female","Graduate Degree",23,27
+"Female","Undergraduate Degree",25,29
+"Female","Finished High School",24,20
+"Male","Graduate Degree",27,32
+"Male","Undergraduate Degree",37,28
+"Female","Some High School",31,32
+"Male","Finished High School",18,32
+"Male","Graduate Degree",42,35
+"Male","Some High School",18,18
+"Female","Some College",19,31
+"Male","Some College",20,20
+"Female","Some College",18,32
+"Female","Some College",18,33
+"Female","Some High School",18,34
+"Female","Some College",19,31
+"Female","Some College",18,30
+"Male","Some College",19,34
+"Female","Some College",19,32
+"Female","Some College",19,28
+"Male","Some College",18,34
+"Female","Some College",19,31
+"Female","Some College",18,29
+"Female","Some College",19,34
+"Female","Graduate Degree",22,32
+"Male","Some College",19,31
+"Male","Some College",20,32
+"Female","Some College",18,32
+"Male","Some College",18,27
+"Male","Some College",19,33
+"Male","Some College",19,30
+"Male","Some College",18,27
+"Female","Finished High School",19,31
+"Female","Some College",21,33
+"Female","Some College",19,31
+"Male","Some College",19,33
+"Female","Some College",20,30
+"Female","Some College",18,32
+"Female","Some College",20,31
+"Female","Some College",18,33
+"Female","Some College",19,35
+"Male","Some College",19,32
+"Female","Some College",18,32
+"Male","Some College",18,33
+"Female","Undergraduate Degree",22,36
+"Female","Some College",18,26
+"Female","Some College",18,34
+"Female","Some College",19,36
+"Female","Some College",19,31
+"Female","Some College",46,30
+"Female","Undergraduate Degree",22,24
+"Male","Undergraduate Degree",29,34
+"Female","Some College",20,34
+"Female","Graduate Degree",23,29
+"Female","Some College",46,30
+"Female","Some College",20,31
+"Female","Undergraduate Degree",22,31
+"Female","Some College",38,26
+"Female","Some College",19,32
+"Female","Graduate Degree",61,30
+"Female","Some High School",18,28
+"Female","Some High School",21,32
+"Male","Graduate Degree",34,32
+"Female","Some College",24,25
+"Female","Undergraduate Degree",34,36
+"Female","Undergraduate Degree",36,25
+"Female","Undergraduate Degree",26,29
+"Male","Some College",22,28
+"Male","Some College",26,32
+"Male","Some College",19,33
+"Female","Undergraduate Degree",28,35
+"Female","Graduate Degree",36,27
+"Female","Undergraduate Degree",30,32
+"Male","Some High School",18,35
+"Male","Undergraduate Degree",35,29
+"Female","Some College",19,31
+"Female","Graduate Degree",35,34
+"Female","Graduate Degree",30,26
+"Female","Some College",20,35
+"Male","Some College",17,35
+"Female","Some College",22,28
+"Female","Some College",21,27
+"Male","Some College",20,20
+"Male","Some College",19,31
+"Male","Graduate Degree",58,34
+"Male","Some College",23,22
+"Female","Undergraduate Degree",26,35
+"Male","Some College",22,22
+"Male","Some College",22,22
+"Female","Undergraduate Degree",26,35
+"Male","Some College",19,34
+"Female","Graduate Degree",25,32
+"Male","Graduate Degree",24,31
+"Female","Some College",19,25
+"Female","Graduate Degree",24,32
+"Female","Some College",20,31
+"Female","Graduate Degree",37,29
+"Male","Graduate Degree",43,32
+"Female","Graduate Degree",42,27
+"Female","Some College",21,27
+"Female","Some College",18,34
+"Female","Undergraduate Degree",52,22
+"Female","Some College",19,36
+"Female","Some High School",18,36
+"Male","Undergraduate Degree",23,34
+"Male","Some College",19,33
+"Male","Some College",20,34
+"Female","Graduate Degree",24,21
+"Female","Graduate Degree",25,28
+"Female","Some College",19,29
+"Female","Some College",23,25
+"Female","Graduate Degree",36,31
+"Female","Some College",21,29
+"Male","Some College",34,31
+"Male","Some High School",21,22
+"Female","Graduate Degree",28,23
+"Male","Graduate Degree",23,33
+"Female","Undergraduate Degree",24,36
+"Female","Undergraduate Degree",46,30
+"Female","Undergraduate Degree",28,36
+"Male","Undergraduate Degree",25,32
+"Female","Some College",19,33
+"Female","Graduate Degree",30,28
+"Female","Undergraduate Degree",23,31
+"Female","Undergraduate Degree",29,32
+"Male","Some College",19,34
+"Male","Graduate Degree",54,33
+"Female","Some College",20,36
+"Male","Some College",23,30
+"Female","Some College",28,30
+"Female","Undergraduate Degree",29,27
+"Female","Some College",19,33
+"Female","Undergraduate Degree",28,32
+"Male","Graduate Degree",26,33
+"Male","Graduate Degree",34,25
+"Female","Finished High School",25,26
+"Female","Some College",25,27
+"Female","Some College",20,26
+"Male","Some College",25,30
+"Male","Undergraduate Degree",40,27
+"Female","Some College",24,31
+"Male","Undergraduate Degree",35,32
+"Male","Graduate Degree",25,25

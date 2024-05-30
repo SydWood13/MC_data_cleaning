@@ -1,0 +1,568 @@
+---
+title: "Lab2"
+author: "Jane He and Monica Orme"
+date: "`r Sys.Date()`"
+format: 
+  html:
+    code-tools: false
+    code-copy: true
+    code-line-numbers: true
+    code-link: true
+    highlight-style: tango
+    df-print: paged
+    code-fold: show
+    toc: true
+    toc-float: true
+    self-contained: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+```
+
+# Goals for Today
+
+-   Clarifying Questions from Lab 1
+-   How to Set up Working Directory?
+-   How to Import and Access Datasets?
+-   How to Create and Save Graphs?
+-   How to Compile a report in R?
+-   Practice with Lab Activity
+
+# Setting up Directory
+
+::: {style="font-size:150%"}
+It is important that **both you and R** are on the same page of where to find files.
+:::
+
+## What is a directory?
+
+-   You can think it as a folder on computer
+
+-   We can use directories to move and organize different files on computer
+
+    -   ::: {style="font-size:70%"}
+        For example, I have a folder named "PSC103A" that solely store all the materials related to the course
+        :::
+
+-   Directories can be nested within one another to further group related files
+
+    -   ::: {style="font-size:70%"}
+        For example, I have sub-folders ("Lab1", "Lab2", etc.) within the "PSC103A" folder to sort materials for each lab
+        :::
+
+        ![](images/directory_example.png){fig-align="left" width="300"}
+
+## What is a path?
+
+-   You can think it as the address to your folders on computer
+
+-   A path gives the location of a directory
+
+-   Paths usually appear in the address bar of your file explorer
+
+    -   ::: {style="font-size:85%"}
+        For example, on a Mac:
+
+        -   Visually, it look like this:
+
+            ![](images/path_example.png){width="80%"}
+
+        -   In the language of that a computer can understand, it looks like:
+
+            `/Users/jane/Documents/GitHub/PSC103A/Lab2`
+        :::
+
+## What is a working directory? {.smaller}
+
+-   It is the default folder that R is currently in
+
+-   It is where R will find, read, and write files by default
+
+-   You have only one working directory at a time
+
+-   We can tell R where is its "office" on your computer that you want it to work in by specifying a path to a directory
+
+    -   For example, I want to work in my folder for PSC103A Lab2:
+
+        -   To set a working directory
+
+            ```{r, eval=FALSE}
+            # Example for a Mac
+            setwd(dir = "/Users/jane/Documents/GitHub/PSC103A/Lab2")
+            # Example for a PC
+            setwd(dir = "C:\\Users\\Monica\\Documents\\GitHub\\PSC103A\\Lab2")
+            ```
+
+            -   [Note for PC:]{.underline} Using double slashes (\\\\ or //) instead of single slashes (\\) may be needed when specifying the path. Otherwise, the path may not be read into R correctly.
+
+        -   To verify the working directory
+
+            ```{r}
+            #| output-location: fragment	
+
+            # Same command on Mac and PC
+            getwd()
+            ```
+
+## Bonus Tip: Absolute vs. Relative Path {.smaller}
+
+-   A path can be absolute or relative
+
+    -   **Absolute** path is the **full** path from the very first **root directory**
+
+        -   When we want to access files stored **outside** of our working directory, R needs the full path to the file(s). For examples:
+
+            -   ::: {style="font-size:70%"}
+                On a Mac, a full path to my directory for PSC103A Lab 2 materials is: `/Users/jane/Documents/GitHub/PSC103A/Lab2/Lab2.qmd`
+                :::
+
+            -   ::: {style="font-size:70%"}
+                On a PC, a full path to my directory for PSC103A Lab 2 materials is: `C:\\Users\\Monica\\Documents\\GitHub\\PSC103A\\Lab2\\Lab2.qmd`
+                :::
+
+    -   **Relative** path is the path **relative** to the **working directory**
+
+        -   When we have the file(s) stored **inside** our working directory, R only needs the relative path in order to access. For examples:
+            -   ::: {style="font-size:70%"}
+                On a Mac, a relative path to my directory for PSC103A Lab 2 materials is: `Lab2/Lab2.qmd`
+                :::
+
+            -   ::: {style="font-size:70%"}
+                On a PC, a relative path to my directory for PSC103A Lab 2 materials is: `Lab2\\Lab2.qmd`
+                :::
+
+# Importing Data Files
+
+::: {style="font-size:120%"}
+R supports many data file formats; some common formats including .csv, .xlsx, .txt and more.
+
+For this course, we will focus on .txt and .csv formats.
+:::
+
+## .txt vs. .csv
+
+-   .txt (Text): plain text file, contains human-readable text.
+
+    -   Used for general-purpose storage of text data
+
+-   .csv (Comma-Separated Values): specific type of text file where data is separated by commas
+
+    -   Common choice for data exchange as it is suitable for representing tables of data
+
+    -   If you expect the need to switch between any spreadsheets or databases, this is the better option to go with
+
+## How to Import? {.smaller}
+
+There are many R functions can be used to import data files, some are more flexible for certain format than the others.
+
+-   Recall that a R object can be anything
+
+    -   We always should store our imported dataset as R object in R environment
+
+-   With .txt file, we can use `read.table()` to read in the dataset:
+
+    ```{r, eval=FALSE}
+    # create an object with self-explanatory name to store the dataset
+    lab2_data_txt <- read.table(
+                        file = "LearningModule2/lab2data.txt", 
+                            # specify the directory of the file
+                            ## I am in my working directory, so the relative path works
+                        header = TRUE,
+                            # tell R to recognize the first row as variable names
+                        stringsAsFactors = TRUE)
+                            # tell R to convert character values into factors
+    ```
+
+-   With .csv file, we can use `read.csv()` to read in the dataset:
+
+    ```{r, eval=FALSE, echo=FALSE}
+    #A01 
+
+    # create an object with self-explanatory name to store the dataset
+    lab2_data_csv <- read.csv(
+                        file = "//Users/jane/Documents/GitHub/PSC103A/Lab2/LearningModule2/lab2data.csv", 
+                            # specify the directory of the file
+                            ## a full path will always work, but especially when you don't set up working directory
+                        header = TRUE)
+                            # tell R to recognize the first row as variable names
+    ```
+
+    <!--# swap the eval and echo value for different section -->
+
+    ```{r, eval=TRUE, echo=TRUE}
+    #A02 
+
+    # create an object with self-explanatory name to store the dataset
+    lab2_data_csv <- read.csv(
+                        file = "C:\\Users\\Monica\\OneDrive\\st - PSC 103A\\Discussions-Labs\\Data\\lab2data.csv", 
+                            # specify the directory of the file
+                            ## a full path will always work, but especially when you don't set up working directory
+                        header = TRUE)
+                            # tell R to recognize the first row as variable names
+    ```
+
+## After Importing {.smaller}
+
+Once we imported the dataset and stored it as an object, let's check if we have done everything correctly.
+
+-   Let's take a quick look at the R Environment.
+
+    ![](images/importedCSV_example.png){width="464"}
+
+    -   This can tell us that this dataset consists of 5 variables and has a total of 232 data records
+
+-   We can check the behavior of our dataset by using `head()` to print out the fews rows of the dataset. Because we are only doing a quick check, we don't have to store it as an object.
+
+    ```{r}
+    #| output-location: fragment	
+
+    # I am going with the .csv file for personal preference 
+    head(lab2_data_csv, # specify the object we want to check 
+         n = 6) # specify how many rows we want to print out
+    ```
+
+<!-- -->
+
+-   Note: by default, R displays 6 rows if you omit the “n” argument. You can check by using either `?head()` or `help(head)`.
+
+## After Importing {.smaller}
+
+Let's also check the data types of the variables in our dataset to make sure they align with our expectations.
+
+-   We can check all the variables entirely by using `str()`:
+
+    ```{r}
+    #| output-location: fragment	
+
+    str(lab2_data_csv) # specify the object we want to check
+    ```
+
+    -   Note here that we are seeing a new data type:
+
+        -   ::: {style="font-size:90%"}
+            This object, `lab2_data_csv` , is a **data frame** which represents a table of data
+            :::
+
+    -   We would also expect that variables `biosex` and `ed_cmplt` to be categorical as it has two or more levels. But they are not here. This is because, in the `read.csv()` function, I didn't set the `stringsAsFactors` argument to `True` when importing.
+
+## After Importing {.smaller}
+
+Let's convert variables `biosex` and `ed_cmplt` into their correct data type.
+
+-   We can convert them into a data type called **factor**, which represents categorical variables, by using `as.factor()` in combination with the "\$" sign to specify the desired variables:
+
+    -   The "\$" sign allows us to extract content from a single object. In this case, we are asking R to select a column of data by specifying the variable name of the column.
+
+        ```{r}
+        # overwrite previous values by reassigning
+        lab2_data_csv$biosex <- as.factor(lab2_data_csv$biosex) # specify the object and variable wanted to convert
+        lab2_data_csv$ed_cmplt <- as.factor(lab2_data_csv$ed_cmplt) # specify the object and variable wanted to convert
+        ```
+
+-   To only check specific variables, we can use `class()` with "\$" sign:
+
+    ```{r}
+    class(lab2_data_csv$biosex) # specify the object and variable wanted to check
+    class(lab2_data_csv$ed_cmplt) # specify the object and variable wanted to check
+    ```
+
+    -   Now we see factor as the data type for variables `biosex` and `ed_cmplt` 🎉
+
+# Creating Data Visualizations
+
+Data visualizations (or graphical displays) are an important step in summarizing data and gaining a better understanding of it. There are various ways to visualize categorical and numerical data.
+
+## Review: Types of Data {.smaller}
+
+### Categorical Data
+
+-   Categorical data refer to variables with response options that are categories.
+
+    -   These do not have numeric properties (e.g. gender, graduation status).
+
+-   A **bar chart** is a common graph to visually display categorical data.
+
+-   Types of Bar Charts
+
+    -   Bar Chart: compare the categories of 1 group
+
+    -   Comparative Bar Chart: compare the categories among 2+ groups
+
+    -   Segmented (or Stacked) Bar Charts: display the relative frequencies across groups
+
+### Numeric Data
+
+-   Numeric data are measured in some numerical unit. There are 2 types of numeric data:
+
+    -   Discrete (counts)
+
+        -   Examples: number of pets in a household, number of students in a course
+
+    -   Continuous (measurements)
+
+        -   Examples: weights of pets, age
+
+-   Some common ways to visualize numeric data include:
+
+    -   Histograms
+
+    -   Dot Plots
+
+    -   Stem-Leaf Plots
+
+## Graphical Displays: Bar Charts
+
+-   Bart charts are used to compare the categories of **1 nominal variable**.
+
+-   Displayed as graphs of a frequency distribution for a categorical data set.
+
+-   Each category is represented by a bar, and the area of the bar is proportional to the corresponding **frequency** or **relative frequency**.
+
+    -   [Refresh**:**]{.underline} A **relative frequency** is the **proportion of observations in a category**. It can range between 0 and 1.
+
+    -   **Relative Frequency =** (frequency)/(# of observations in the dataset)
+
+-   The bars within the chart **must not touch**.
+
+## Graphical Displays: Bar Charts {.smaller}
+
+A bar chart requires the frequencies or relative frequencies for each category, so we need to **create a new object** that includes the frequencies/relative frequencies of each category.\
+\
+Steps to plot in R:
+
+1.  Use the `table()` function to produce the frequencies
+
+2.  (If creating relative frequencies) Divide the frequencies by the total number of observations
+
+3.  Plot the frequencies/relative of the categories using the `barplot()` function. Format for plotting:
+
+    ```{r, eval=FALSE}
+    barplot(data_freq, # frequncies or relative frequencies
+            main = "Variable Name", 
+            # 'main' title for the graph
+            ylab = "Frequency/Relative Frequency", 
+            # 'ylab' label the y-axis
+            names.arg = c("Category 1", "Category 2"), 
+            # 'names.arg' label the categories
+            col = c(2,4)) 
+            # 'col' change the bar colors
+    ```
+
+In learning module 2, we produced a bar chart to visualize the relative frequencies of the education levels.
+
+```{r, eval=TRUE, fig.width=8}
+#| output-location: fragment	
+
+educ_freq = table(lab2_data_csv$ed_cmplt) # produce frequencies
+educ_relfreq = educ_freq / length(lab2_data_csv$ed_cmplt) 
+# calculate relative frequencies
+barplot(educ_relfreq, # the stored object for relative frequencies
+        main = "Education", # give our graph a name
+        ylab = "Relative Frequency", # always label the y-axis
+        names.arg = c("2-yr college", "4-yr college", 
+                      "high school", "MA", "PhD"), # label the categories 
+        col = c(7,8,3,2,4)) # make the bars colorful
+```
+
+## Graphical Displays: Histograms {.smaller}
+
+Histograms are used to check the distribution of a **discrete or continuous variable**.
+
+These can be made using the `hist()` function.
+
+-   Format for plotting:
+
+```{r, eval=FALSE}
+hist(dataframe$variable, # numeric variable to plot
+     main="Histogram of (Variable Name)", 
+     # set title 
+     col = 4, 
+     # controls the color of the display
+     xlab = "Variable Name", 
+     # label the x-axis 
+     freq=T/F) 
+     # set to "T" for the frequency, "F" to plot the density
+```
+
+In learning module 2, we produced a histogram to visualize the distribution of the ages of the participants in the dataset "lab2data".
+
+```{r, eval=TRUE}
+#| output-location: fragment	
+
+hist(lab2_data_csv$age_yr, # numeric variable to plot
+     main = "Histogram", # title of graph
+     col = 4, # controls the color of the display
+     xlab = "Age (in years)", # x axis label
+     freq = F)  # set to "F" to plot the density
+```
+
+## Graphical Displays: Dot Charts {.smaller}
+
+A plot of a **numeric variable** with a **small sample size** in which each observation is represented by a dot on or above a horizontal measurement scale.
+
+They can be made using the `stripchart()` function.
+
+-   Format for plotting:
+
+```{r, eval=FALSE}
+stripchart(dataframe$variable, # variable to plot
+           method = "stack", # results in stacking the dots
+           col = 3, # col controls the color
+           at = 0, 
+           # numeric vector giving the locations 
+           #where the charts should be drawn
+           main="Dot Plot of (Variable Name)", 
+           # graph title
+           pch = 19)
+           # pch controls the shape, 19 is a solid dot
+```
+
+Example plot from Learning Module 2:
+
+```{r, eval=TRUE}
+#| output-location: fragment	
+
+stripchart(lab2_data_csv$age_yr, 
+           main = "Age (in years)", # set title
+           method = "stack", # results in stacking the dots
+           col = 3, # col controls the color
+           at = 0, 
+           # numeric vector giving the locations 
+           # where the charts should be drawn
+           pch = 19) # pch controls the shape, 19 is a solid dot
+```
+
+## Graphical Displays: Stem-and-Leaf Plots {.smaller}
+
+Stem-and-leaf plots are for **numeric data** when the **sample size is small**.
+
+They can be made using the `stem()` function.
+
+-   Format for plotting:
+
+    ```{r, eval=FALSE}
+    stem(data$variable) # numeric variable to plot
+    ```
+
+-   Example plot from Learning Module 2:\
+
+    ```{r, eval=TRUE}
+    stem(lab2_data_csv$age_yr) # numeric variable to plot
+    ```
+
+## Saving Graphs {.smaller}
+
+To save a plot generated in R onto your device, follow these steps:
+
+1.  Locate the plots tab in the bottom right window
+
+2.  Navigate the following: Export –\> Save as Image or Save as PDF\
+    ![](images/save%20as%20image.png)
+
+3.  Specify the directory, file type (such as PNG), and the name that you want to save for the image file.\
+    ![](images/image%20saving%20options.png){width="434"}\
+
+# Compiling a Report in R {.smaller}
+
+**Next week's lab assignment (Lab 3) will require that you** **submit a compiled report**, not your R script. Practice compiling your R script from this week's lab assignment.
+
+**How to compile a report in RStudio:**
+
+1.  Remove any install.packages() statements from your script or use "\#" to comment out that line of code. Reports will not compile if they include an install.packages() statement.
+
+2.  In the main menu of RStudio, click 'File' and then select 'Compile Report' OR click on the icon, as shown below:
+
+    ![](images/compile%20in%20RStudio.png){width="589"}
+
+3.  Save your report as **either a HTML, PDF or MS WORD file**
+
+-   **Tip: Make sure that all of your code runs correctly before compiling**
+
+    -   For example, your report will not compile if you reference an object that has not been created in your R script.
+
+# Lab Activity
+
+Now let's use a different dataset to practice data importing and visualization ✨
+
+## Practice Dataset {.smaller}
+
+This practice dataset, "lab2ACTScores", is a subset of the [sat.act dataset](https://personality-project.org/r/psych/help/sat.act.html) in the [`psych` R package](https://personality-project.org/r/psych/help/00Index.html) collected as part of the [Synthetic Aperture Personality Assessment (SAPA) web based personality assessment project](https://www.sapa-project.org/).
+
+We will only use this dataset for teaching purpose in this lab.
+
+-   There are a total of 643 observations on the following 4 variables:
+
+    -   `ACT`: ACT composite scores may range from 1 - 36. National norms have a mean of 20.
+
+    -   `age`: age of participants
+
+    -   `gender`: self-reported gender (male/female)
+
+    -   `education`: self-reported education levels (HS/finished HS/some college/college graduate/graduate degree)
+
+## Activity 1 (Your Turn)
+
+Now try to import the lab2ACTScores dataset into R.
+
+You can locate it on Canvas under "Lab-2" page.
+
+It is up to you to choose either the .txt or .csv file.
+
+\
+💡 **Hint**: think about the type of data for these variables! Do you have the appropriate data types after importing dataset?
+
+ <!-- Solution -->
+
+```{r, eval=FALSE, echo=TRUE}
+# SOLUTION 
+## Step 1: set working directory
+setwd(dir = "/Users/jane/Documents/GitHub/PSC103A/Lab2")
+## Step 2: import dataset
+activity_data <- read.csv(file = "lab2ACTScores.csv", # relative path if set up working directory
+                          header = T, stringsAsFactors = T)
+## Step 3: check dataset
+head(activity_data)
+## Step 4: check data types
+str(activity_data)
+```
+
+## Activity 2 (Together)
+
+Create a bar chart of gender using relative frequencies. **Make sure to include a main title and the y-axis and x-axis labels.** Export the graph and save it in your computer.
+
+\
+💡 **Hint**: Don't forget to create an object for the relative frequencies!
+
+ <!-- Solution -->
+
+```{r, eval=FALSE, echo=TRUE}
+# SOLUTION 
+## Step 1: find frequencies
+gender_freq = table(activity_data$gender) 
+## Step 2: calculate relative frequencies
+gender_relfreq = gender_freq / length(activity_data$gender) 
+## Step 3: make bar chart
+barplot(gender_relfreq, # the stored object for relative frequencies
+        main = "Relative Frequency by Gender", # give our graph a name
+        ylab = "Relative Frequency", # always label the y-axis
+        names.arg = c("Female", "Male"), # label the categories 
+        col = c(2,4)) # make the bars colorful
+```
+
+## Activity 3 (In Groups)
+
+Create a graphical display of age that shows the densities (not frequencies). **Make sure to include a main title and the y-axis and x-axis labels.** Export your work as a compiled report and save it as either a HTML, PDF or MS WORD file.
+
+\
+💡 **Hint**: How many observations are in this dataset? Is that number large or small? Which display is the most appropriate given the number of observations?
+
+ <!-- Solution -->
+
+```{r, eval=FALSE, echo=TRUE}
+# Looking for SOLUTION? 
+
+## Think about the hints! Revisit previous slides if need to :)
+## Try it out yourself!
+```

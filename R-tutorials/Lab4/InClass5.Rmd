@@ -1,0 +1,41 @@
+---
+title: "InClass 5"
+author: "Jane He"
+date: '`r Sys.Date()`'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+df = read.delim("/Users/jane/Downloads/dental.dat", sep = "")
+names(df) = c("id", "age", "y", "male", "wave")
+```
+
+```{r}
+library(lme4)
+model1 = lmer(y ~ age + male + age*male + (1|id), data = df)
+summary(model1)
+# age: mean for girl, center at 8 yr
+```
+
+```{r}
+model2 = lmer(y ~ age + male + age*male + (1 + age|id), data = df)
+summary(model2)
+# corr of random slope with random intercept
+```
+
+## Notes:
+Sample sizes change in model fitting sequences, impacting fit statistics
+
+Covariance structure
+
+Within Centering, forcing min corr
+
+age is not a random variable in the model
+
+change in std error 
+
+mlm missing NA at a predictor will lose the entire record. missing subject level predictor, lose entire subject record. permutation or Bayes. 

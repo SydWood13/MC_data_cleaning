@@ -1,0 +1,359 @@
+---
+output:
+  html_document: default
+  word_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+setwd("E:/Courses/PSC103A")
+
+```
+
+# Learning Module 3
+
+# Module Objectives
+
+1.  Review (from Learning Module 2) on setting up a working directory and importing data files
+2.  Review (from Learning Module 1) installing R packages and calling 'libraries'
+3.  R functions for descriptive statistics
+4.  Compiling your report
+
+**Create a new R script for this module and save to your course directory**
+
+In the previous module you were instructed to create a directory (such as one on your own computer, flash drive or other external hard drive) where you'll save your course files. For example, this is the path to the directory I'd set up on an external hard drive: "E:/Courses/PSC103A"
+
+In RStudio, create a new R script (call it "**module3**") and save it to your course directory (that is, save it on your computer or external drive).
+
+# 1. Review on setting up a working directory and importing data files
+
+**Setting up a working directory in R**
+
+Setting a working directory tells R where to find files. To set a working directory, use the **setwd()** function. For example, I set my working directory to the directory I'd set up on an external hard drive:
+
+```{r}
+
+setwd("E:/Courses/PSC103A")
+
+```
+
+Check that the working directory has been set by typing the following on a new line in your R script file:
+
+```{r}
+
+getwd()
+
+```
+
+The **getwd()** function will return what R has as your working directory.    
+
+&nbsp;
+&nbsp;
+
+**Importing data files**
+
+For this module, we'll use the same data set we'd used in the previous module. Import one of the two files (your choice of importing the .txt or .csv file). These two files are available again in the Canvas module where you found this learning module:
+
+lab2data.txt     
+lab2data.csv
+
+A data file is often stored in R as what's called a **data frame**, a table organized by rows and columns. The columns are variables and the rows are observations of those variables. 
+
+# If you choose to import the .txt file
+
+* Use the **read.table** function to import a .txt data file. 
+
+* Recall that the data file includes the names of the variables in the first row of the file. This is known as a **header**. 
+
+* To import the lab2data.txt file, go to a new line in your R script and type the following:
+
+```{r}
+
+bmiData <- read.table('lab2data.txt', header=T, stringsAsFactors =T)
+
+```
+
+# If you choose to import the .csv file
+
+* Use the **read.csv** function to import the .csv data file. 
+
+* To import the lab2data.csv file, go to a new line in your R script and type the following:
+
+```{r}
+
+bmiData <- read.csv('lab2data.csv', header=T, stringsAsFactors =T)
+
+```
+
+Now that you've created a data frame called **bmiData**, use the **head()** function to see the first 10 data records:
+
+```{r}
+
+head(bmiData, 10)
+
+```
+
+Next, use the **str()** function to see more information about the data frame. Type the following on a new line in your R script:
+
+```{r}
+
+str(bmiData)
+
+```
+
+The data frame includes 232 observations and 5 variables:
+
+-   biosex: biological sex of the subject
+-   height_in: height of the subject in inches
+-   weight_lbs: weight of the subject in pounds
+-   age_yr: age of the subject in years
+-   ed_cmplt: highest education completed by the subject
+
+Next, use the **class()** function to see the type of each variable in the data set.
+
+For example, if you type **class(biosex)** on a new line in your R script, you'll see that R recognizes this variable as a **factor** which is a type of categorical variable.
+
+# Take a break and answer Questions 1 and 2 in Learning Module Quiz 3
+
+# 2. Installing R packages and calling 'libraries'
+
+The Base R program has many functions but we need some that are not included in the Base program.  For that reason, we'll need to occasionally install some R packages.   For this learning module, we'll use a package called **'Hmisc'**.  
+
+To install the **'Hmisc'** package, type the following on a new line in your R Script: **install.packages("Hmisc")**
+
+&nbsp;
+
+```{r, echo=FALSE,eval = FALSE} 
+
+knitr::opts_chunk$set(eval = FALSE)
+install.packages("Hmisc") # we can install packages using this function. Here, we install the 'Hmisc' package
+
+```
+
+
+Once a package is installed, you won't need to re-install it. You do, however, need to **load** it every time your restart R and want to use its functions.
+
+Type the following on a new line in your R script so that you'll be able to use the Hmisc package during this current R session:
+
+```{r} 
+
+library(Hmisc) # The library function tells R to add the 'Hmisc' package to the library so we can access its function
+
+```
+
+# 3. R functions for descriptive statistics
+
+Let's begin by producing descriptive statistics for the two **categorical** variables: biosex and ed_cmplt
+
+Categorical variables can be summarized by a frequency table or a relative frequency table.
+
+Let's first produce frequency tables for the two categorical variables.
+
+&nbsp;
+On new lines in your R script, create two new objects, one that includes the frequencies of biosex and one that includes the frequencies of ed_cmplt.
+&nbsp;
+Type the following:
+
+```{r}
+
+biosex_freq = table(bmiData$biosex) # creates an object called "biosex_freq" that contains the frequencies of each category of the variable biosex
+biosex_freq # prints the frequency table
+
+educ_freq = table(bmiData$ed_cmplt) # creates an object called "educ_freq" that contains the frequencies of each category of the variable ed_cmplt
+educ_freq # prints the frequency table
+
+```
+
+Relative frequencies are easier to interpret because they give the proportion of cases for each category of a variable. To make a relative frequency table, we need to first produce the relative frequencies.
+
+Let's start with the variable biosex. Create a new object that includes the **relative frequencies** of each biosex category. You'll need to use the object **biosex_freq** created in the previous step.
+
+&nbsp;
+Type the following into your R script:
+
+```{r}
+biosex_relfreq = biosex_freq / length(bmiData$biosex) # this step divides the frequency of each category by the total number of observations
+biosex_relfreq # by typing the name of the object we can view the values produced in the step above
+
+```
+
+Repeat the steps above for the education variable, ed_cmplt.
+
+# Take a break and answer Questions 3 and 4 in Learning Module Quiz 3
+
+Now let's work on producing descriptive statistics for the numeric variables in the data frame **bmiData**:
+
+height_in
+
+weight_lbs
+
+age_yr
+
+Before we calculate descriptive statistics, let's check to see if all individuals in the data file have complete data for these variables.  We'll use the **describe()** function that is part of the **Hmisc package** that we installed earlier in this module. 
+
+```{r}
+
+describe(bmiData)
+
+```
+
+Carefully review the information produced by the **describe()** function.  Note that some of the variables have missing values.
+
+&nbsp;
+
+# Take a break and answer Questions 5 and 6 in Learning Module Quiz 3
+
+&nbsp;
+
+Numeric variables can be summarized in a variety of ways. Let's first obtain measures of central tendency, the mean and median, using the **mean()** and the **median()** functions, respectively.
+
+On new lines in your R script, use the **mean()** and the **median()** functions to describe central tendency for height:
+
+```{r}
+mean_height = mean(bmiData$height_in, na.rm=TRUE) # calculates the sample mean for the variable height_in and saves it as an object called 'mean_height'; we're saving the mean as an object here because we need it later when creating a boxplot 
+mean_height # print the mean
+
+median(bmiData$height_in, na.rm=TRUE) # calculates the sample median for the variable height_in
+
+```
+
+**Important note**: In the code above, we include the option **"na.rm=TRUE"** because the variable height_in includes some missing values. The mean() function won't return the mean of a variable without including "na.rm=TRUE" if there are missing values. The option 'na.rm=TRUE' will remove missing values (R denotes these in the data frame as 'NA') before calculating the mean.
+
+&nbsp;
+
+Let's add a graph so that we can visualize the mean and the median of the variable height_in. Use the code below to create a boxplot for the variable height_in:
+
+```{r}
+boxplot(bmiData$height_in)   # Draw boxplot in Base R
+points(x = 1,                # Add the mean value to the boxplot
+       y = mean_height,      # this is where we need the object 'mean_height' that we created earlier 
+       col = "red",          # controls the color of the symbol that denotes the mean 
+       pch = 16)             # controls the shape of the symbol that denotes the mean
+
+```
+
+Now let's produce descriptive statistics for one of the levels of the categorical variable **biosex**.
+
+To calculate the mean and median for biosex = "MALE" type the following:
+
+```{r}
+
+height_MALE = bmiData[bmiData$biosex == "MALE", "height_in"]  # save a subset of height_in values for biosex = MALE
+
+mean_height_MALE = mean(height_MALE, na.rm=TRUE) # create an object that is equal to the mean height for biosex = MALE
+mean_height_MALE # print the mean height for biosex=MALE
+```
+Let's again create a boxplot to visualize the mean and the median of height for this subset of the sample:
+
+```{r}
+
+boxplot(height_MALE )   # Draw boxplot in Base R using the subset of data we created
+points(x = 1,                # Add the mean value to the boxplot
+       y = mean_height_MALE,      # use the 'mean_height_MALE' that we created earlier 
+       col = "red",          # controls the color of the symbol that denotes the mean 
+       pch = 16)             # controls the shape of the symbol that denotes the mean
+
+```
+
+* Did you see any indication of outliers in either boxplot?  
+
+*If there were outliers, we could compute a trimmed mean using the **mean()** function and **adding an option to trim** the data set (**trim =**).
+
+* Let's calculate a 10% trimmed mean for the height variable where biosex=MALE. That is, use the subset of data you created above to save the heights for males. Type the following code into your script to calculate a 10% trimmed mean for this subset of values:
+
+```{r}
+mean(height_MALE, trim = .10, na.rm = T) # trim = .10 will trim the lowest 10% and the highest 10% of the data when computing a mean
+```
+
+How does the trimmed mean compare to the mean without trimming? They're actually fairly close to each other. Do you know why this is the case here? (HINT: consider the size of the sample)
+
+
+Now let's calculate measures of variability. 
+
+* Calculate the range, variance, standard deviation and interquartile range for age_yr (similar to the mean() and median() functions, we need to indicate that there are missing values (**na.rm = TRUE**) when using the following functions for calculating measure of variability).
+
+Let's calculate these measures of variability using the full sample and the measure of age (in years)
+
+```{r}
+
+range(bmiData$age_yr, na.rm = TRUE)
+var(bmiData$age_yr, na.rm = TRUE)
+sd(bmiData$age_yr, na.rm = TRUE)
+IQR(bmiData$age_yr, na.rm = TRUE)
+
+```
+
+**Now you know how to use R to calculate measures of central tendency and variability.**
+
+Using the skills that you practiced above, generate a summary of the variable weight_lb for biosex=MALE and age_yr > 25 years.
+
+HINT: Create a subset of the data set that includes only MALES older than 25 years using the **subset()** function: 
+
+```{r}
+
+MALE_older <- bmiData[ which(bmiData$biosex=='MALE'
+& bmiData$age_yr > 25), ]
+
+
+```
+
+Verify that the subsetting worked by checking that only records for MALES older than 25 years were retained in the new data frame that we called MALE_older:
+
+```{r}
+summary(MALE_older)
+```
+
+Then calculate all of the measures of central tendency and variability and include a boxplot and a histogram.
+
+# Finish this module by answering Questions 7, 8 and 9 in Learning Module Quiz 3
+
+Below is a solution to the problem of calculating descriptive statistics for males older than 25 years.
+
+```{r}
+
+
+mean_weight_MALE_older = mean(MALE_older$weight_lb, na.rm=TRUE) 
+mean_weight_MALE_older 
+
+median(MALE_older$weight_lb, na.rm=TRUE) 
+
+mean(MALE_older$weight_lb, trim = .10, na.rm = T) 
+
+range(MALE_older$weight_lb, na.rm=TRUE) # range (gives the minimum and maximum values)
+var(MALE_older$weight_lb, na.rm=TRUE)  # variance
+sd(MALE_older$weight_lb, na.rm=TRUE)   # standard deviation 
+iqr_x= IQR(MALE_older$weight_lb, na.rm=TRUE) # interquartile range
+
+
+boxplot(MALE_older$weight_lb )   
+points(x = 1,               
+       y = mean_weight_MALE_older,      
+       col = "red",           
+       pch = 16)             
+
+
+hist(MALE_older$weight_lb,
+     main = "Males older than 25 years",
+     col = 4,
+     xlab = "Weight (lb)")  
+```
+
+# 4.  Compiling your report
+
+Compiling your script to an HTML, PDF or MS Word document
+
+* Step 1: Remove any install.packages() statements from your script or use # to comment out that line of code (reports will not compile if they include an install.packages() statement.
+
+* Step 2: In the main menu of RStudio, click 'File' and then select 'Compile Report' OR click on the icon, as shown below:
+
+```{r, echo=FALSE}
+
+knitr::include_graphics("compile in RStudio.PNG")
+
+```
+
+Step 3: Save your report as HTML, PDF or MS WORD (Note: only compiled reports in one of these 3 formats will be accepted) 
+
+Important: To assign credit for your response, the file that you upload must be viewable to us. Files that are shown to be 'corrupted' will be assigned 0 points.   

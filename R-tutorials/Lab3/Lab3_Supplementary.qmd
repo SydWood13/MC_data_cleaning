@@ -1,0 +1,812 @@
+---
+title: "Lab3"
+author: "Jane He and Monica Orme"
+date: last-modified
+format: 
+  html:
+    toc: true
+    toc-float: true
+    df-print: tibble
+    code-copy: true
+    code-line-numbers: true
+    code-link: true
+    preview-links: true
+    self-contained: true
+    fig-height: 4
+    fig-width: 6
+    fig-align: center
+    html-math-method: mathml
+    output-file: Lab3_Supplementary_Page.html
+    format-links: true
+  revealjs: 
+    incremental: true
+    code-tools: false
+    code-copy: true
+    code-line-numbers: true
+    code-link: true
+    preview-links: true
+    slide-level: 4
+    slide-number: true
+    self-contained: true
+    fig-height: 4
+    fig-width: 6
+    fig-align: center
+    margin-left: "0"
+    margin-right: "0"
+    width: 1400
+    footer: "PSC103A WQ24"
+    output-file: Lab3_Supplementary_Slides.html
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+```
+
+# Goals for Today
+
+-   Clarifying Questions from Lab 2
+-   Refreshing R Basics
+-   Descriptive Statistics in R: How to?
+-   Compiling Reports from R Scripts
+-   Practice with Lab Activity
+
+# Lab 2 Recap {.smaller}
+
+::: columns
+::: {.column width="50%"}
+Concepts/skills we learned about:
+
+-   Setting up Directories
+
+    -   Directories –\> Folders
+
+    -   Path –\> Address to your folder
+
+    -   Working Directory –\> Default folder that R is currently using
+
+        -   Set working directories in R to a folder that contains your lab files inputting your folder's path into `setwd()`
+
+        -   Always check what your current working directory is using `getwd()`
+:::
+
+::: {.column width="50%"}
+-   Importing datasets
+
+    -   Use `read.csv()` for csv (.csv) files and `read.table()` for text (.txt) files
+
+    -   The resulting object from importing a dataset in R is a **dataframe**
+
+        -   It consists of rows and columns. Typically, each row is an observation and each column is a variable.
+
+-   Graphical Displays
+
+    -   Use bar charts for categorical data
+
+        -   Uses frequencies or relative frequencies
+
+    -   Use histograms, dot charts, or stem-leaf plots for numeric data
+:::
+:::
+
+# R Basics Refresher
+
+## Working Directory
+
+Once again, **both you and R** need to know where to find files.
+
+We talked about what is a directory, a path, and a working directory last week. You can refer back to supplementary materials from Lab 2 (linked in weekly recap announcement) for detailed definitions.
+
+For Lab 3, we will focus on setting up working directory.
+
+### Working Directory: Steps {.smaller}
+
+1.  Decide on the directory that you want R to work in
+
+    -   Tells R where is the destination, which is the working directory to set
+
+        ::: {.nonincremental style="font-size: 80%"}
+        -   E.g. a folder named Lab3
+        :::
+
+2.  Find the path to the directory from step 1
+
+    -   Gives the address to R, so that it knows the route to destination
+
+        ::: {.nonincremental style="font-size: 80%"}
+        -   E.g. "/Users/jane/Documents/GitHub/PSC103A/Lab3"
+        :::
+
+3.  Pass down the path from step 2 as an argument to `setwd()` function
+
+    -   Asks R to start routing to its given destination
+
+        ```{r, eval=FALSE}
+        setwd(dir = "/Users/jane/Documents/GitHub/PSC103A/Lab3") # Example for a Mac
+        setwd(dir = "C:/Users/Monica/OneDrive/st - PSC 103A/Discussions-Labs/Lab Slides-Code") # Example for a PC
+        ```
+
+4.  Call `getwd()` to verify the working directory
+
+    -   Has R report back on its arrival at the destination
+
+        ```{r}
+        getwd() # Same command on Mac and PC
+        ```
+
+## Data Files
+
+We talked about different data files format last week. You can refer back to supplementary materials from Lab 2 (linked in weekly recap announcement) for use cases.
+
+For this course, we focus on .txt or .csv formats.
+
+In practice, you can go with any format of your preference. However, make sure to use the R function suitable to the chosen format.
+
+### Importing Dataset: Steps {.smaller}
+
+1.  Decide on the data file and its format to import
+
+2.  Find the path of the chosen data file
+
+3.  Pass down the path from step 2 as an argument to R function
+
+    -   Call `read.table()` or `read.csv()` based on chosen format
+
+    -   Use the full or relative path based on the location of file
+
+    -   Always should store our imported dataset as a R object
+
+::: {.columns .smaller .fragment}
+For examples:
+
+::: {.column width="50%"}
+With .txt file, we can use `read.table()`:
+
+```{r, eval=FALSE}
+# create an object with self-explanatory name
+lab3_data_txt <- read.table(
+  file = "LearningModule3/lab2data.txt", 
+# specify the directory of the file
+## I am in my working directory
+### so the relative path is sufficient
+  header = TRUE,
+# to recognize the first row as variable names
+  stringsAsFactors = TRUE)
+# to convert character values into factors
+```
+:::
+
+::: {.column width="50%"}
+With .csv file, we can use `read.csv()`:
+
+```{r A01, eval=TRUE, echo=TRUE}
+# create an object with self-explanatory name
+lab3_data_csv <- read.csv(
+  file = "/Users/jane/Documents/GitHub/PSC103A/Lab3/LearningModule3/lab2data.csv", 
+# specify the directory of the file
+## a full path will always work
+### but especially when you don't set up working directory
+  header = TRUE,
+# to recognize the first row as variable names
+  stringsAsFactors = TRUE)
+# to convert character values into factors
+```
+
+<!--# swap code block values-->
+
+```{r A02, eval=FALSE, echo=FALSE}
+# create an object with self-explanatory name
+lab3_data_csv <- read.csv(
+  file = "C:\\Users\\Monica\\OneDrive\\st - PSC 103A\\Discussions-Labs\\Data\\lab2data.csv", 
+# specify the directory of the file
+## a full path will always work
+### but especially when you don't set up working directory
+  header = TRUE,
+# to recognize the first row as variable names
+  stringsAsFactors = TRUE)
+# to convert character values into factors
+```
+:::
+:::
+
+### Checking Dataset: Steps {.smaller}
+
+1.  Take a quick look at the R Environment. Do you see the dataset show up?
+
+    ![](images/importedCSV_example.png){width="504"}
+
+2.  Quickly check the behavior of our dataset with `head()`
+
+    ```{r}
+    head(lab3_data_csv, n = 2) # "n" specifies how many rows we want to print out, omit it will return 6 rows by default
+    ```
+
+3.  Check the data types of the variables in our dataset
+
+    ::: {.columns .smaller}
+    ::: {.column width="50%"}
+    Check all variables by using `str()`:
+
+    ```{r}
+    str(lab3_data_csv) # specify the object we want to check
+    ```
+    :::
+
+    ::: {.column width="50%"}
+    Check one variable by using `class()` with `$`:
+
+    ```{r}
+    # specify the object and variable wanted to check
+    class(lab3_data_csv$biosex) 
+    ```
+
+    ```{r}
+    # specify the object and variable wanted to check
+    class(lab3_data_csv$age_yr) 
+    ```
+    :::
+    :::
+
+## R Packages
+
+We briefly touched on R packages before. You can refer back to supplementary materials from Lab 1 (linked in weekly recap announcement).
+
+When the Base R functions are not sufficient for our purposes, we can use functions from R packages developed by the R community.
+
+For today's lab, we look at two packages: `psych` and `Hmisc`. Both have functions that can give us descriptive statistics, but also have their own advantages.
+
+### Accessing Packages: Steps {.smaller}
+
+1.  Decide on the package in need
+
+2.  Install the package via `install.packages()`
+
+    ```{r, eval=FALSE}
+    install.packages("psych") # specify the package name
+    ```
+
+    -   Typically, we only need to install the package(s) once, then we can comment this command out, especially when compiling reports. However, we will need to re-install the package(s) after updating R and RStudio.
+
+3.  Load in the installed package via `library()`
+
+    ```{r, message=FALSE}
+    library("psych") # specify the package name
+    ```
+
+    -   Asks R to open and read the installed package
+        -   Simply having the package installed doesn't equal to telling R to open the pakcage. We should never comment out this command out.
+
+4.  Quickly check the package is loaded in the "Packages" tab. Do you see a checked box?
+
+    ![](images/checkPackage.png){width="404"}
+
+### Bonus Tip: Package Conflicts
+
+There are a couple of R packages has different functions under the same name. Those functions do not work the same or return identical outputs.
+
+-   A potential issue that we might run into with loading in those packages in the same R script is package conflicts.
+
+-   That means, though the function called is able to run, we might not be calling it from the intended package.
+
+::: fragment
+Let's look at an example.
+:::
+
+#### Package Conflicts: Example {.smaller}
+
+::: columns
+::: {.column width="49%"}
+-   In the `psych` package that we installed and loaded in earlier, there is a function named `describe()`. It outputs many descriptive statistics covered in this course:
+
+    ```{r}
+    describe(lab3_data_csv) # pass in the sotred data frame
+    ```
+:::
+
+::: {.column width="1%"}
+<!-- empty space -->
+:::
+
+::: {.column width="50%"}
+-   Now let's install and load in the `Hmisc` package, which also have a function called `describe()`. It shows number of missing values and unique values in dataset:
+
+    ```{r, eval=FALSE}
+    # install.packages("Hmisc") # specify package name
+    # I commented it out after installing and before compiling
+    ```
+
+    ```{r, message=FALSE}
+    library("Hmisc") # specify package name
+    describe(lab3_data_csv) # pass in the sotred data frame
+    ```
+:::
+:::
+
+<!--# not include extra wording on this slide, just showing them the different outputs-->
+
+#### Package Conflicts: Solution {.smaller}
+
+We can see from the example that, calling functions that have the same name might return different outputs.
+
+-   This is because the order of loading in packages matters
+
+-   The functions from the package loaded later can overwrites the functions from earlier loaded package
+
+-   One way to resolve the package conflicts is the specify the package before calling function using "::" sign
+
+-   For example:
+
+    ```{r}
+    psych::describe(lab3_data_csv) # specify we want the function from psych package, not Hmisc
+    ```
+
+::: fragment
+Now we can see expected output from the `psych` package :)
+:::
+
+# Descriptive Statistics
+
+Descriptive statistics can provide information about the center and variability (spread) of a dataset.
+
+-   For Categorical Data
+
+    -   Frequency, Relative Frequency
+
+-   For Numeric Data
+
+    -   Center: Mean, Median, Trimmed Mean (when there are outliers)
+
+    -   Variability: Variance, Standard Deviation, Range, Interquartile Range
+
+## Descriptive Statistics: Categorical Data
+
+-   Frequency: The counts for each category
+
+-   Relative Frequency: **proportion of observations in a category**. It can range between 0 and 1.
+
+    -   **Relative Frequency =** $\frac{\textbf{frequency}}{\textbf{# of observations in the dataset}}$
+
+## Descriptive Statistics: Numeric Data
+
+-   Center: what is the norm?
+
+-   Variability: how spread out is the data?
+
+### Numeric Data: Center {.smaller}
+
+-   The central tendency informs us about the typical value of a variable. You can also think about it as where the scores of a numeric variable tend to cluster.
+-   Measures of Central Tendency:
+    -   Mean: the arithmetic **average**. It can be influenced by outliers.
+
+        -   $\bar{x} = \frac{\text{sum of all observations in the sample}}{\text{number of observations in the sample}}$
+
+    -   Median: the **middle** value of a numeric variable from a dataset. It is not influenced by outliers.
+
+    -   Trimmed mean: the arithmetic average after removing a certain percentage of the largest and smallest values. It is a compromise between the mean and the median.
+
+        -   The trimmed mean is preferred over the mean when there are outliers since it is less sensitive to extreme values.
+
+    -   Mode: The most **frequent** value.
+-   Order of Sensitivity to extreme values: Median \< Trimmed Mean \< Mean
+
+### Numeric Data: Variability {.smaller}
+
+-   Variability quantifies how much observations differ from one another. In other words, variability measures the spread between observations. Oftentimes, the larger the value is for a variability measure, the more spread (variability) that exists within the data.
+
+-   Measures of Central Tendency:
+
+    -   Variance: typical **squared** distance that a score lies from the mean
+
+    -   Standard Deviation: typical distance that a score lies from the mean
+
+    -   Range: difference between the maximum score and minimum score
+
+        -   Range = (maximum – minimum)
+
+    -   Interquartile Range (IQR): The difference between the upper (the largest 25%) and lower quartiles (smallest 75%)
+
+        -   IQR = upper quartile (Q3) – lower quartile (Q1)
+
+-   The variance, standard deviation, and range are more sensitive to extreme values. The IQR is less sensitive to extreme values.
+
+## Calculating Descriptive Statistics {.smaller}
+
+Descriptive statistics for datasets can be readily calculated using functions from Base R.
+
+We will focus more on the numeric data today.
+
+::: columns
+::: {.column width="55%"}
+-   Central Measures
+
+    -   Mean - `mean()`
+
+    -   Median - `median()`
+
+    -   Trimmed Mean - `mean(..., trim = ...)`
+
+        -   Specify the % of data to trim in the `trim` argument
+            -   E.g. the `trim` argument for a 10% trimmed mean is `trim = 0.1`
+:::
+
+::: {.column width="5%"}
+<!-- empty space -->
+:::
+
+::: {.column width="40%"}
+-   Variability Measures
+
+    -   Variance - `var()`
+
+    -   Standard Deviation - `sd()`
+
+    -   Range - `range()`
+
+    -   Interquartile Range - `IQR()`
+:::
+:::
+
+-   Datasets may contain missing values. Check if they are in your dataset using the `summary()` function from Base R or the `describe()` function from the `Hmisc` package.
+
+    -   If missing values exist within a variable, remove the missing values before calculating each descriptive statistic using the option **`na.rm=TRUE`**. (Recall that R denotes missing values as `NA`)
+
+### Calculating Descriptive Statistics: Format and Example {.smaller}
+
+::: columns
+::: {.column width="48%"}
+-   Central Measures
+
+    -   General format:
+
+        ```{r, eval=FALSE, echo=TRUE}
+        mean(dataframe$variable, na.rm=TRUE) # mean 
+        median(dataframe$variable, na.rm=TRUE) # median
+        mean(dataframe$variable,  trim = .10, 
+             na.rm = TRUE) # 10% trimmed mean 
+        ```
+
+    -   Example:
+
+        ```{r}
+        # measures of central tendency
+        mean_height <- mean(lab3_data_csv$height_in, 
+                            na.rm=TRUE)  
+        median_height <- median(lab3_data_csv$height_in, 
+                                na.rm=TRUE) 
+        trimm_mean_height <- mean(lab3_data_csv$height_in, 
+                                  trim = .10, 
+                                  na.rm = TRUE)
+        ```
+
+        ::: fragment
+        ```{r}
+        # displaying central measures
+        mean_height
+        median_height
+        trimm_mean_height
+        ```
+        :::
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="50%"}
+-   Variability Measures
+
+    -   General format:
+
+        ```{r, eval=FALSE, echo=TRUE}
+        var(dataframe$variable, na.rm = TRUE) # sample variance
+        sd(dataframe$variable, na.rm = TRUE) # sample standard deviation
+        range(dataframe$variable, na.rm = TRUE) # range
+        IQR(dataframe$variable, na.rm = TRUE) # IQR
+        ```
+
+    -   Example:
+
+        ```{r}
+        # measures of variability
+        range_age <- range(lab3_data_csv$age_yr, na.rm = TRUE)
+        variance_age <- var(lab3_data_csv$age_yr, na.rm = TRUE)
+        sd_age <- sd(lab3_data_csv$age_yr, na.rm = TRUE)
+        iqr_age <- IQR(lab3_data_csv$age_yr, na.rm = TRUE)
+        ```
+
+        ::: fragment
+        ```{r}
+        # displaying variability measures
+        range_age
+        variance_age
+        sd_age
+        iqr_age
+        ```
+        :::
+:::
+:::
+
+## Graphical Displays for Summarizing Data {.smaller}
+
+::: columns
+::: {.column width="50%"}
+-   Categorical Data
+
+    -   Bar Plots (also called bar charts)\
+        ![](images/bar_chart_example.png){width="268"}
+
+-   Numeric Data
+
+    -   Histograms\
+        ![](images/histogram_example.png){width="277"}
+:::
+
+::: {.column width="50%"}
+-   Numeric Data
+
+    -   Box-Plots\
+        ![](images/boxplot_example_horizontal.png){width="261"}
+
+    -   Stem and Leaf Plot (used for a small number of observations)
+
+    -   Dot Chart (used for a small number of observations)
+:::
+:::
+
+### Graphical Displays: Box Plots {.smaller}
+
+Boxplots show the the center, spread, and symmetry or skewness of the data. These can be plotted using the `boxplot()` function in R.
+
+-   Steps for plotting
+
+    -   Calculate the mean of your numeric variable using the `mean()` command
+
+    -   Input your variable from the dataframe object into the `boxplot()` command
+
+        -   Recall a specific variable can be extracted from a dataframe object using the `$` operator (e.g. - `dataframe$variable_name` - using the correct names for your dataframe object and variable)
+
+    -   Use the `points()` command to plot your mean along the boxplot.
+
+#### Box Plots: Format and Example {.smaller}
+
+::: columns
+::: {.column width="50%"}
+-   Format for plotting
+
+    ```{r, eval=FALSE, echo=TRUE}
+    # save the mean
+    mean_variable <- mean(dataframe$variable,
+                          na.rm=TRUE)
+
+    # create boxplot
+    boxplot(dataframe$variable, 
+            # Draw boxplot in Base R
+            # sets boxplot to be horizontal
+            # when set to TRUE
+            ylab = "Variable Name (Units)", 
+            # x-axis label of the variable
+            main = "Boxplot of Variable Name"
+            # provide a title for your boxplot
+            )   
+
+    # add the mean to the plot
+    points(x = 1,  
+           # Add the mean value to the boxplot
+           y = mean_variable,      
+           # places the point on the boxplot
+           col = "red",          
+           # dot color for the mean
+           pch = 16) 
+           # dot mean shape 
+    ```
+:::
+
+::: {.column width="50%"}
+-   Example Code:
+
+    ```{r, eval=TRUE, echo=TRUE}
+    #| output-location: fragment	
+
+    # save the mean of the heights
+    mean_height <- mean(lab3_data_csv$height_in, na.rm=TRUE)
+
+    # create boxplot
+    boxplot(lab3_data_csv$height_in,# plot the variable
+            ylab = "Height (in)", # y-axis label 
+            main = "Boxplot of Height") # title for your boxplot
+
+    # add the mean to the plot
+    points(x = 1, # places mean on the plot
+           y = mean_height, # Add the mean to the plot 
+           col = "red", # dot color for the mean
+           pch = 16) # dot shape for the mean     
+    ```
+:::
+:::
+
+#### Box Plots: Horizontal Orientation {.smaller}
+
+Box plots can also be displayed horizontally, which may be more intuitive to understand the spread and central tendency of a distribution.
+
+::: columns
+::: {.column width="50%"}
+-   Format for plotting
+
+    ```{r, eval=FALSE, echo=TRUE}
+    mean_variable <- mean(dataframe$variable,
+                          na.rm=TRUE)
+
+    boxplot(dataframe$variable, 
+            # Draw boxplot in Base R
+            horizontal = TRUE,
+            # sets boxplot to be horizontal
+            # when set to TRUE
+            xlab = "Variable Name (Units)", 
+            # x-axis label of the variable
+            main = "Boxplot of Variable Name")
+            # provide a title for your boxplot
+
+    points(x = mean_variable,  
+           # Add the mean value to the boxplot
+           y = 1,      
+           # places the point on the boxplot
+           col = "red",          
+           # dot color for the mean 
+           pch = 16) 
+           # dot mean shape         
+    ```
+:::
+
+::: {.column width="50%"}
+-   Example:
+
+    ```{r, eval=TRUE}
+    #| output-location: fragment	
+
+    boxplot(lab3_data_csv$height_in, # plot height
+            xlab = "Height (in)", # x-axis label
+            horizontal = T,# set plot in the horizontal direction
+            main = "Boxplot of Height") # add title   
+
+    points(x = mean_height, # Add the mean value to the boxplot
+           y = 1, # places mean on the plot   
+           col = "red", pch = 16)      
+    ```
+:::
+:::
+
+# Compiling a Report {.smaller}
+
+**This week's lab assignment (Lab 3) will require that you** **submit a compiled report**, not your R script (.R file). Practice compiling your R script from this week's lab assignment.
+
+::: columns
+::: {.column width="50%"}
+**How to compile a report in RStudio:**
+
+1.  Remove any install.packages() statements from your script or use "\#" to comment out that line of code. Reports will not compile if they include an install.packages() statement.
+
+2.  In the main menu of RStudio, click 'File' and then select 'Compile Report' OR click on the icon, as shown below:
+
+    ![](images/compile%20in%20RStudio.png){width="505"}
+:::
+
+::: {.column width="50%"}
+3.  Save your report as **either a HTML (.html), PDF (.pdf) or MS WORD file (.docx).** Other file types will not be accepted.
+    -   **Tip: Make sure that all of your code runs correctly before compiling.** For example, your report will not compile if you reference an object that has not been created in your R script or if your code contains programming errors.
+:::
+:::
+
+# Lab Activity
+
+Now let's practice using a different dataset ✨
+
+## Practice Dataset {.smaller}
+
+This practice dataset, "lab3ACTScores", is a subset of the [sat.act dataset](https://personality-project.org/r/psych/help/sat.act.html) in the [`psych` R package](https://personality-project.org/r/psych/help/00Index.html) collected as part of the [Synthetic Aperture Personality Assessment (SAPA) web based personality assessment project](https://www.sapa-project.org/).
+
+We will only use this dataset for teaching purpose in this lab.
+
+-   There are a total of 643 observations on the following 4 variables:
+
+    -   `ACT`: ACT composite scores may range from 1 - 36. National norms have a mean of 20.
+
+    -   `age`: age of participants
+
+    -   `gender`: self-reported gender (male/female)
+
+    -   `education`: self-reported education levels (HS/finished HS/some college/college graduate/graduate degree)
+
+## Activity 1 (Your Turn) {.smaller}
+
+First, try to install and load the `Hmisc` R package. Then, import the `lab3ACTScores` dataset into R.\
+
+You can locate the dataset on Canvas in the"Lab-3" page. To find it, navigate in the Canvas course website: \> Modules \> Week 4 \> Lab 3 Page \> Scroll down to "Lab Activity Datasets" \> Download either "lab3ACTScores.csv" or "lab3ACTScores.txt" using the Google Chrome web browser. It is up to you to choose either the .txt or .csv file.
+
+\
+💡 **Hint**: There are two steps in accessing a R package! Do you have the appropriate data types after importing dataset?
+
+<!--# work on it by themselves, swap echo value when posting announcement -->
+
+::: {.fragment style="font-size:80%"}
+```{r, eval=FALSE, echo=TRUE}
+# SOLUTION
+## Step 1: set working directory
+setwd(dir = "/Users/jane/Documents/GitHub/PSC103A/Lab3")
+## Step 2: install package
+install.packages("Hmisc") # comment this line out if compile report
+## Step 3: load package
+library("Hmisc")
+## Step 4: import dataset
+activity_data <- read.csv(file = "lab3ACTScores.csv", # relative path if set up working directory
+                          header = T, stringsAsFactors = T)
+## Step 5: check dataset
+head(activity_data)
+## Step 6: check data types
+str(activity_data)
+```
+:::
+
+## Activity 2 (Together) {.smaller}
+
+Describe `age` with measures of central tendency and variability using functions from Base R.
+
+\
+💡 **Hint**: Are there any missing observations in this variable? What are the measures of central tendency?
+
+<!--# live code during lab, swap echo value when posting announcement -->
+
+::: {.fragment style="font-size:80%"}
+```{r, eval=FALSE, echo=TRUE}
+# SOLUTION 
+## Step 1: check if have missing data 
+summary(activity_data$age)
+## Step 2: find central measures
+mean_height <- mean(activity_data$age, na.rm=TRUE)  
+median_height <- median(activity_data$age, na.rm=TRUE) 
+trimm_mean_height <- mean(activity_data$age, trim = .10, na.rm = TRUE)
+## Step 3: find variability measures
+range_age <- range(activity_data$age, na.rm = TRUE)
+variance_age <- var(activity_data$age, na.rm = TRUE)
+sd_age <- sd(activity_data$age, na.rm = TRUE) 
+iqr_age <- IQR(activity_data$age, na.rm = TRUE)
+## Step 4: print out measure of central tendency
+mean_height
+median_height
+trimm_mean_height
+range_age
+variance_age
+sd_age
+iqr_age
+```
+:::
+
+## Activity 3 (In Groups)
+
+Create a graphical display that summarizes `ACT`. **Make sure to include the mean, a main title, and an axis label.** Export your work as a compiled report and save it as either a HTML, PDF or MS WORD file. Make sure to comment out any lines of code with `install.packages()`
+
+\
+💡 **Hint**: Are there any missing observations in this variable? What is the variable type? Which display is the most appropriate for summarizing data given the variable type?
+
+<!--# no live code shown in lab, swap echo value when posting announcement -->
+
+```{r, eval=FALSE, echo=TRUE}
+# Looking for SOLUTION? 
+
+## Think about the hints! Revisit previous slides if need to :)
+## Try it out yourself!
+```
+
+<!--# no code shown in lab or announcement, don't swap echo value ever -->
+
+```{r, eval=FALSE, echo=FALSE}
+# SOLUTION
+mean_act <- mean(activity_data$ACT,
+                      na.rm=TRUE)
+boxplot(activity_data$ACT, # plot height
+        xlab = "ACT Scores", # x-axis label
+        horizontal = T,# set plot in the horizontal direction
+        main = "Boxplot of ACT") # add title   
+
+points(x = mean_act, # Add the mean value to the boxplot
+       y = 1, # places mean on the plot   
+       col = "red", pch = 16)  
+```
