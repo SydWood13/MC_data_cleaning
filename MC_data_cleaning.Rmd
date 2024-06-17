@@ -122,27 +122,88 @@ wq_grades_final <- wq_grades_clean %>% mutate_at(colnames(exam_col), div) %>% mu
 write.csv(wq_grades_final, file = "wq_grade_data.csv")
 
 ```
-#### Observation Data 
-
-```{r}
-obs_data <- read.csv(file = "canvas_data_Feb24.csv", sep = "," )
 
 
-pre_prep <- obs_data %>% select("ID", "Prep.Participation..up.to.250.points..Final.Points")
+### Written Exam Data 
 
-colnames(pre_prep) <- c("ID", "pre_prep")
+Very very messy brute force solution. I recomend finding a better solution- 
 
-```
+}
+## only written Qs data
+###run for each exam separately 
+
+
+setwd("C:/Users/woods/Desktop/Meta-Cognition Project/DataSets/collected data/Observation Data Files-selected")
+
+##version a 
+w_exama <- read.csv("5_A_Mar23.csv") #I manually changed the file name for each exam
+
+w_exama <- w_exama %>% select("SID", "Status", "View.Count", 14, 19,23, 24, 25, 29, 30, 31) #these change for each exam as well 
+  
+q_names <- c("student_id", "status", "views", "pv_op", "cv", "cv_compare", "confound", "internal","interpret", "external", "replication")
+
+colnames(w_exama) <- q_names
+
+w_exama <- w_exama %>% filter(status != "Missing") %>% select(-"status")
+
+## version b
+w_examb <- read.csv("5_B_Mar23.csv")
+w_examb <- w_examb %>% select("SID", "Status", "View.Count", 14, 19,23, 24, 25, 29, 30, 31)
+  
+q_names <- c("student_id", "status", "views", "pv_op", "cv", "cv_compare", "confound", "internal","interpret", "external", "replication")
+
+colnames(w_examb) <- q_names
+
+w_examb <- w_examb %>% filter(status != "Missing") %>% select(-"status")
+
+## version c
+w_examc <- read.csv("5_C_Mar23.csv")
+w_examc <- w_examc %>% select("SID", "Status", "View.Count", 14, 19,23, 24, 25, 29, 30, 31)
+  
+q_names <- c("student_id", "status", "views", "pv_op", "cv", "cv_compare", "confound", "internal","interpret", "external", "replication")
+
+colnames(w_examc) <- q_names
+
+w_examc <- w_examc %>% filter(status != "Missing") %>% select(-"status")
+
+## version d
+w_examd <- read.csv("5_D_Mar23.csv")
+
+w_examd <- w_examd %>% select("SID", "Status", "View.Count", 14, 19,23, 24, 25, 29, 30, 31)
+  
+q_names <- c("student_id", "status", "views", "pv_op", "cv", "cv_compare", "confound", "internal","interpret", "external", "replication")
+
+colnames(w_examd) <- q_names
+
+w_examd <- w_examd %>% filter(status != "Missing") %>% select(-"status")
+
+w_exam <- rbind(w_exama, w_examb, w_examc, w_examd)
+
+write.csv(w_exam, file = "exam5_writtenQs.csv")
+
+
+
+
+
+### Combine Written and Full exam scores 
+
+
+1. read in each written exam file 
+2. calculate the % total for each 
+3. add only those columns to the final grades data 
+4. save a final_grade_data
+
 
 
 #### Combine data 
 
 
 ```{r}
+#read in final_grade_data
 
 full_grades <- wq_grades_final %>% select(-"ID")
 
-full_data <- full_join(dem_data, full_grades, by = "student_id")
+full_data <- full_join(dem_data, final_grades, by = "anon_id")
 
 full_data <- full_data %>% filter(!is.na(consent))
 

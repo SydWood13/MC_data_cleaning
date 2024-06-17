@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r}
-finalData <- read.csv(file = "Final_Data_anon.csv")
+
 
 raw_canvas <- read.csv(file = "wq23_canvas_data_anon.csv")
 
