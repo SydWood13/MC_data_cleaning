@@ -1,0 +1,159 @@
+---
+title: "MC_data_cleaning"
+author: "Sydney Wood"
+date: "2023-07-17"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Setup 
+
+
+#### Load Packages 
+
+```{r}
+library(tidycode)
+library(tibble)
+library(dplyr)
+library(tidyverse)
+library(glue)
+```
+# Make data files
+
+#### data_Key 
+TODO 
+1. assign random identifier to all students in the course 
+2. write file with key of anon_id to student id
+3. write all files replacing student id with rand-id and remove all other identifying info 
+
+
+#### Demographic data 
+
+In the commented code: import raw data and get only the columns of relevence. rename colums for ease. write file with the cleaned data
+
+```{r}
+
+#dem_data_raw <- read.csv("Demographics Survey Student Analysis Report.csv", sep =",")
+
+#dem_data_short <- dem_data_raw %>% select("id","sis_id",contains(".."))
+
+
+
+#colnames(dem_data_short) <- c("ID", "student_id", "consent", "age", "year", "gender", "int_student", "esl", "e_exp", "e_lvl", "ethnicity", "p_education", "m_education", "par_rel", "fin_support", "ses", "grant", "soc_med", "hw_time", "transfer")
+
+#write.csv(dem_data_short, file = "WQ23_dem_data_shortened.csv")
+
+
+dem_data <- read.csv("WQ23_Dem_data_cleaned.csv", sep = ",")
+
+
+#change categrical dat ato factors
+dem_data <- dem_data %>% mutate_at(c(5,6,7,8,11,14, 16,17, 20), factor)
+
+#take only consenting student data
+dem_data <- dem_data %>%  filter(consent == 1)
+
+# create variable first gen
+dem_data <- dem_data %>% mutate(first_gen = case_when(p_education < 4 & m_education < 4 ~ 1, p_education > 3 | m_education > 3 ~ 0))
+
+#write data file with cleaned data (should also have both student_id and anon_id)
+write.csv(dem_data, file = "WQ23demographicsFull.csv")
+
+
+```
+
+
+
+#### Grades data (Canvas)
+
+```{r}
+wq_grades <- read.csv2("wq23FinalGrades.csv", sep =",")
+
+####Calculate grades 
+
+wq_grades_short <- wq_grades %>% select("ID", "SIS.User.ID", "Exam.1..965996.", "Exam.2..965997.", "Exam.3..965998.", "Exam.4..965999.", "Exam.5..966000.", "Final.Exam..966002.", "Prep.Participation..up.to.250.points..Final.Points", "Extra.Credit.Final.Points", "Exam.Corrections...966001." ) %>% mutate_at(-c(1,2), as.numeric)
+
+
+colnames(wq_grades_short) <- c("ID", "student_id", "exam1", "exam2","exam3","exam4","exam5","exam6", "prep_p_raw", "extra_credit", "e_correct")
+
+
+###Prep and participation max points
+wq_grades_short$p_p_final <- wq_grades_short$prep_p_raw
+wq_grades_short$p_p_final[wq_grades_short$prep_p_raw >= 250] <- 250
+
+
+##drop lowest exam total
+wq_exams <- wq_grades_short %>% select(contains("exam"))
+
+wq_exams$lowest <- apply(wq_exams, 1, min)
+
+wq_exams$lowest <- wq_exams$lowest * -1
+
+wq_grades_short$exam_total <- apply(wq_exams, 1, sum)
+
+
+
+##Course grade
+
+final_grade_calc <- wq_grades_short %>% select("extra_credit", "p_p_final", "exam_total")
+
+
+wq_grades_clean <- wq_grades_short %>% 
+  mutate(final_grade = apply(final_grade_calc, 1, sum)) %>%
+  mutate(opt_in = case_when(e_correct == 0 ~ 0, e_correct > 0 ~ 1)) 
+
+
+###Turn 0 into NA on exams 
+
+
+wq_grades_clean <- wq_grades_clean %>% mutate_at(c(3:8),~na_if(.,0) )
+
+exam_col <- wq_grades_clean %>% select(contains("exam"), -exam_total)
+
+#function to get the % score for each exam 
+div <- function(x) ((x/150) *100)
+
+wq_grades_final <- wq_grades_clean %>% mutate_at(colnames(exam_col), div) %>% mutate(exam_total = (exam_total/750)*100) %>% mutate(final_grade = (final_grade/1000)*100)
+
+
+write.csv(wq_grades_final, file = "wq_grade_data.csv")
+
+```
+#### Observation Data 
+
+```{r}
+obs_data <- read.csv(file = "canvas_data_Feb24.csv", sep = "," )
+
+
+pre_prep <- obs_data %>% select("ID", "Prep.Participation..up.to.250.points..Final.Points")
+
+colnames(pre_prep) <- c("ID", "pre_prep")
+
+```
+
+
+#### Combine data 
+
+
+```{r}
+
+full_grades <- wq_grades_final %>% select(-"ID")
+
+full_data <- full_join(dem_data, full_grades, by = "student_id")
+
+full_data <- full_data %>% filter(!is.na(consent))
+
+full_data <- full_data %>% select(-"ID", -"consent")
+
+write.csv(full_data, file = "cleaned_data_no_qual.csv")
+```
+
+
+
+
+
+
+
