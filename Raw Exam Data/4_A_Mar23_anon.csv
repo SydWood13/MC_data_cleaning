@@ -1,0 +1,447 @@
+First Name,Last Name,SID,anon_id,Email,Sections,Total Score,Max Points,Status,Submission ID,Submission Time,Lateness (H:M:S),View Count,Submission Count,1: PV Type (2.0 pts),2: PV Measure (2.0 pts),3: Claim Type (5.0 pts),4: Research Design (5.0 pts),5: New PV Measure (2.0 pts),6: New Claim Type (10.0 pts),7: OV OP Def  (10.0 pts),8: OV Type (2.0 pts),9: OV Measure (2.0 pts),10: OV CV (10.0 pts),11: Internal Threat (10.0 pts),12: Confound (10.0 pts),13: Fix Confound (5.0 pts),14: Sample Comparisons (5.0 pts),15: Error Bars/Relationship  (5.0 pts),16: P-values (5.0 pts),17: Sampling Method (5.0 pts),18: Sampling Type (5.0 pts),19: Define random sampling (10.0 pts),20: External Validity (10.0 pts),21: Replication (10.0 pts),22: MC1 (2.0 pts),23: MC2 (2.0 pts),24: MC3 (2.0 pts),25: MC4 (2.0 pts),26: MC5 (2.0 pts),27: MC6 (2.0 pts),28: MC7 (2.0 pts),29: MC8 (2.0 pts),30: MC9 (2.0 pts),31: MC10 (2.0 pts)
+redacted,redacted,redacted,453529,redacted,psc-041-001-wq-2023,127.5,150,Graded,165934579,3/2/2023 12:30,0:00:00,3,1,2,2,5,5,2,10,7,0,2,10,10,10,5,0,5,5,5,5,1.5,10,10,2,2,2,2,2,0,2,2,2,0
+redacted,redacted,redacted,861674,redacted,psc-041-001-wq-2023,130.25,150,Graded,165934580,3/2/2023 12:30,0:00:00,2,1,2,2,5,5,2,10,7,2,2,7.25,5,10,5,5,5,5,0,5,10,10,10,2,2,2,2,2,0,2,2,2,0
+redacted,redacted,redacted,652942,redacted,psc-041-001-wq-2023,135,150,Graded,165934581,3/2/2023 12:30,0:00:00,1,1,2,2,5,5,2,10,7,0,2,7,10,10,5,0,5,5,5,5,10,10,10,2,2,2,2,2,2,2,0,2,2
+redacted,redacted,redacted,530411,redacted,psc-041-001-wq-2023,128.5,150,Graded,165934582,3/2/2023 12:30,0:00:00,5,1,2,2,5,5,0,1,10,2,2,7.5,10,10,5,5,5,5,5,5,4,10,10,2,2,2,2,2,2,0,2,2,2
+redacted,redacted,redacted,364560,redacted,psc-041-001-wq-2023,124,150,Graded,165934583,3/2/2023 12:30,0:00:00,0,1,2,2,5,5,2,6,7,0,2,10,10,10,5,0,5,5,5,5,10,10,6,2,0,0,2,2,2,0,2,2,0
+redacted,redacted,redacted,394484,redacted,psc-041-001-wq-2023,77,150,Graded,165934584,3/2/2023 12:30,0:00:00,1,1,2,0,0,5,0,0,8,0,2,4,7.5,5.5,1.5,5,5,5,5,0,7.5,0,0,0,2,0,2,2,0,2,2,2,2
+redacted,redacted,redacted,175573,redacted,psc-041-001-wq-2023,126.75,150,Graded,165934585,3/2/2023 12:30,0:00:00,0,1,2,2,5,5,2,6,7,0,2,6.75,9,10,5,5,5,5,5,5,2,10,10,2,0,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,919266,redacted,psc-041-002-wq-2023,95,150,Graded,165934586,3/2/2023 12:30,0:00:00,7,1,2,2,5,5,2,10,7,0,2,0,0,10,5,0,5,5,0,0,10,10,3,0,2,2,2,2,0,0,2,2,0
+redacted,redacted,redacted,557781,redacted,psc-041-002-wq-2023,146,150,Graded,165934587,3/2/2023 12:30,0:00:00,1,1,2,2,5,5,2,10,10,2,2,10,6,10,5,5,5,5,5,5,10,10,10,2,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,695840,redacted,psc-041-002-wq-2023,97.5,150,Graded,165934588,3/2/2023 12:30,0:00:00,2,1,2,2,5,5,2,6,7,0,2,0,9,0,5,5,5,5,0,0,1,10,8.5,2,2,2,2,2,2,2,2,2,0
+redacted,redacted,redacted,822752,redacted,psc-041-001-wq-2023,130,150,Graded,165934589,3/2/2023 12:30,0:00:00,3,1,2,2,5,5,2,6,10,2,2,9,10,10,5,5,5,5,0,0,10,9,10,0,2,2,2,2,2,2,2,2,0
+redacted,redacted,redacted,361425,redacted,psc-041-001-wq-2023,143,150,Graded,165934590,3/2/2023 12:30,0:00:00,2,1,2,2,5,5,2,10,7,2,2,10,9,10,5,5,5,5,5,5,10,7,10,2,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,142556,redacted,psc-041-001-wq-2023,127.25,150,Graded,165934591,3/2/2023 12:30,0:00:00,2,1,2,2,5,5,2,10,10,0,2,8.25,4,10,5,0,5,5,5,5,4,10,10,2,0,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,975639,redacted,psc-041-002-wq-2023,112,150,Graded,165934592,3/2/2023 12:30,0:00:00,0,1,2,2,5,5,2,6,6,0,2,0,4,10,5,0,5,5,5,0,10,10,10,0,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,886232,redacted,psc-041-002-wq-2023,78.5,150,Graded,165934593,3/2/2023 12:30,0:00:00,1,1,2,2,5,5,0,0,0,0,2,0,7.5,10,5,0,5,5,5,0,0,4,9,0,2,2,2,2,0,2,2,0,0
+redacted,redacted,redacted,617396,redacted,psc-041-002-wq-2023,142.5,150,Graded,165934594,3/2/2023 12:30,0:00:00,1,1,2,2,5,5,2,10,10,2,2,7,10,10,5,5,5,5,5,5,10,10,7.5,0,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,244223,redacted,psc-041-001-wq-2023,149.25,150,Graded,165934595,3/2/2023 12:30,0:00:00,2,1,2,2,5,5,2,10,10,2,2,9.25,10,10,5,5,5,5,5,5,10,10,10,2,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,307053,redacted,psc-041-001-wq-2023,85.5,150,Graded,165934596,3/2/2023 12:30,0:00:00,0,1,2,2,5,0,2,10,4,0,2,0,6.5,10,5,5,5,5,0,0,4,4,0,0,2,2,2,2,0,2,2,2,0
+redacted,redacted,redacted,316657,redacted,psc-041-001-wq-2023,136,150,Graded,165934597,3/2/2023 12:30,0:00:00,2,1,2,2,5,5,2,6,7,2,2,10,10,10,5,5,5,5,5,5,10,10,5,2,2,2,2,2,2,2,2,2,0
+redacted,redacted,redacted,535753,redacted,psc-041-001-wq-2023,108.5,150,Graded,165934598,3/2/2023 12:30,0:00:00,1,1,2,2,5,5,2,10,10,2,0,0,8.5,10,5,5,5,5,0,0,4,4,8,2,2,2,2,2,2,0,2,2,0
+redacted,redacted,redacted,937053,redacted,psc-041-001-wq-2023,141.5,150,Graded,165934599,3/2/2023 12:30,0:00:00,2,1,2,2,5,5,0,10,10,2,2,10,9,10,5,5,5,0,5,5,10,9.5,10,2,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,553565,redacted,psc-041-001-wq-2023,133.5,150,Graded,165934600,3/2/2023 12:30,0:00:00,0,1,2,2,5,5,2,10,10,2,2,9.5,10,10,5,5,5,5,0,5,4,10,9,0,2,2,2,2,0,2,2,2,2
+redacted,redacted,redacted,866180,redacted,psc-041-002-wq-2023,109,150,Graded,165934601,3/2/2023 12:30,0:00:00,0,1,2,2,0,5,0,0,8,0,2,5,9,10,3,0,5,5,5,5,10,10,7,0,2,2,2,2,2,2,2,2,0
+redacted,redacted,redacted,388918,redacted,psc-041-001-wq-2023,127.5,150,Graded,165934602,3/2/2023 12:30,0:00:00,5,1,2,2,5,5,2,10,5,0,2,6.5,10,10,5,5,5,5,5,5,10,8,4,2,2,2,2,2,2,2,2,0,0
+redacted,redacted,redacted,426634,redacted,psc-041-001-wq-2023,134,150,Graded,165934603,3/2/2023 12:30,0:00:00,1,1,2,2,5,5,2,6,7,2,0,8.5,7.5,7,5,5,5,5,5,5,10,10,10,2,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,107302,redacted,psc-041-001-wq-2023,87.5,150,Graded,165934604,3/2/2023 12:30,0:00:00,0,1,2,0,0,5,0,7,7,0,2,5.5,2,10,5,0,5,0,5,0,10,4,2,2,2,2,2,2,0,2,0,2,2
+redacted,redacted,redacted,749976,redacted,psc-041-001-wq-2023,145,150,Graded,165934605,3/2/2023 12:30,0:00:00,2,1,2,2,5,5,2,6,10,2,2,9,10,10,5,5,5,5,5,5,10,10,10,2,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,439234,redacted,psc-041-002-wq-2023,145,150,Graded,165934606,3/2/2023 12:30,0:00:00,3,1,2,2,5,5,2,10,7,2,2,10,10,10,5,5,5,5,5,5,10,10,8,2,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,313801,redacted,psc-041-001-wq-2023,98.75,150,Graded,165934607,3/2/2023 12:30,0:00:00,11,1,2,2,5,5,2,1,10,0,2,0,6.5,5.25,1.5,0,5,5,5,5,4.5,9,9,2,2,2,0,2,2,0,2,2,0
+redacted,redacted,redacted,941242,redacted,psc-041-001-wq-2023,141.5,150,Graded,165934608,3/2/2023 12:30,0:00:00,1,1,2,2,5,5,2,6,7,2,2,10,8.5,10,5,5,5,5,5,5,10,10,10,2,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,357577,redacted,psc-041-002-wq-2023,86,150,Graded,165934609,3/2/2023 12:30,0:00:00,0,1,2,0,5,5,0,10,9,0,0,0,8.5,10,1.5,0,5,5,0,0,5,2,10,0,0,0,2,2,2,0,2,0,0
+redacted,redacted,redacted,494166,redacted,psc-041-002-wq-2023,137,150,Graded,165934610,3/2/2023 12:30,0:00:00,2,1,2,2,5,5,2,6,8,2,2,10,10,10,5,5,5,5,5,5,10,9,10,0,2,2,2,2,0,2,0,2,2
+redacted,redacted,redacted,139950,redacted,psc-041-002-wq-2023,124,150,Graded,165934611,3/2/2023 12:30,0:00:00,0,1,2,2,5,5,2,10,7,0,2,7.5,8.5,10,5,0,5,5,0,0,10,10,10,2,2,2,2,2,2,2,2,2,0
+redacted,redacted,redacted,509369,redacted,psc-041-001-wq-2023,143.5,150,Graded,165934612,3/2/2023 12:30,0:00:00,2,1,2,2,5,5,2,10,7,2,2,10,10,10,5,5,5,5,5,5,10,10,8.5,2,2,2,2,2,2,0,2,2,2
+redacted,redacted,redacted,808560,redacted,psc-041-002-wq-2023,128,150,Graded,165936374,3/2/2023 12:36,0:00:00,1,1,2,2,5,5,2,6,10,0,2,10,4,10,5,5,5,5,5,5,10,10,6,0,2,2,2,2,0,2,2,2,0
+redacted,redacted,redacted,603399,redacted,psc-041-001-wq-2023,97,150,Graded,165936375,3/2/2023 12:36,0:00:00,0,1,2,2,5,5,2,4,8,0,2,1,2,10,5,5,5,0,5,0,1.5,10,4.5,2,0,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,518197,redacted,psc-041-002-wq-2023,128,150,Graded,165936376,3/2/2023 12:36,0:00:00,3,1,2,2,5,5,2,10,7,0,2,10,10,10,5,0,5,5,5,5,5.5,10,8.5,0,0,2,2,2,2,2,2,2,0
+redacted,redacted,redacted,819135,redacted,psc-041-002-wq-2023,142.5,150,Graded,165936377,3/2/2023 12:36,0:00:00,3,1,2,2,5,5,2,10,7,2,2,9,10,10,5,5,5,5,5,5,10,10,6.5,2,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,861958,redacted,psc-041-002-wq-2023,136,150,Graded,165936378,3/2/2023 12:36,0:00:00,1,1,2,2,5,5,2,10,10,2,2,9.5,8.5,10,5,5,5,5,5,5,10,6,8,2,0,2,2,2,2,0,2,2,0
+redacted,redacted,redacted,193857,redacted,psc-041-001-wq-2023,119.5,150,Graded,165936379,3/2/2023 12:36,0:00:00,6,1,2,2,5,5,2,1,7,0,2,10,10,10,5,0,5,0,5,5,10,9,8.5,2,2,2,2,2,0,2,2,2,0
+redacted,redacted,redacted,907662,redacted,psc-041-001-wq-2023,84.5,150,Graded,165936380,3/2/2023 12:36,0:00:00,2,1,2,2,5,5,0,1,6,0,2,9,0,7,5,0,5,5,5,5,0,10,4.5,0,2,0,0,2,0,0,2,0,0
+redacted,redacted,redacted,972609,redacted,psc-041-001-wq-2023,115.5,150,Graded,165936381,3/2/2023 12:36,0:00:00,1,1,2,2,5,5,0,1,10,2,2,1.5,10,10,5,5,5,5,5,5,7,10,6,2,2,2,0,2,0,2,0,2,0
+redacted,redacted,redacted,335736,redacted,psc-041-001-wq-2023,128,150,Graded,165936382,3/2/2023 12:36,0:00:00,7,1,2,2,5,5,2,10,10,0,2,0,10,10,5,0,5,5,5,5,10,10,9,0,2,2,0,2,2,2,2,2,2
+redacted,redacted,redacted,265323,redacted,psc-041-001-wq-2023,116.75,150,Graded,165936383,3/2/2023 12:36,0:00:00,4,1,2,2,5,5,2,7.5,10,2,2,10,2,5.75,1.5,0,5,5,5,0,9.5,9,8.5,2,2,2,2,2,2,2,2,2,0
+redacted,redacted,redacted,909875,redacted,psc-041-001-wq-2023,124.25,150,Graded,165936384,3/2/2023 12:36,0:00:00,0,1,2,2,5,5,2,10,7,0,2,6.75,0,10,5,5,5,5,5,5,10,9,5.5,2,2,0,2,2,2,2,2,2,2
+redacted,redacted,redacted,130380,redacted,psc-041-001-wq-2023,79,150,Graded,165936385,3/2/2023 12:36,0:00:00,4,1,2,2,5,5,2,10,9,2,2,0,2,5.5,5,5,0,0,0,0,1.5,0,5,0,0,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,564146,redacted,psc-041-001-wq-2023,118,150,Graded,165936386,3/2/2023 12:36,0:00:00,1,1,2,2,5,5,2,6,10,2,2,4,9,10,5,0,5,5,5,5,0,9,7,2,2,2,2,2,0,2,2,2,2
+redacted,redacted,redacted,776985,redacted,psc-041-002-wq-2023,132,150,Graded,165936387,3/2/2023 12:36,0:00:00,5,1,2,2,5,5,2,10,7,2,2,4,10,10,5,5,5,5,5,5,10,10,9,0,2,2,2,2,2,0,0,2,0
+redacted,redacted,redacted,190892,redacted,psc-041-002-wq-2023,96,150,Graded,165936388,3/2/2023 12:36,0:00:00,0,1,2,2,5,5,2,6,9,0,2,0,0,10,5,5,5,5,0,0,6,9,4,0,2,2,2,2,2,2,2,0,0
+redacted,redacted,redacted,223333,redacted,psc-041-002-wq-2023,101,150,Graded,165936389,3/2/2023 12:36,0:00:00,0,1,2,2,5,5,2,10,10,0,0,0,10,10,5,0,5,5,0,0,3.5,0,8.5,2,2,0,2,2,2,2,2,2,2
+redacted,redacted,redacted,930504,redacted,psc-041-002-wq-2023,124.5,150,Graded,165936390,3/2/2023 12:36,0:00:00,0,1,2,2,5,5,2,0,10,2,2,5.5,10,10,5,5,5,5,5,5,5,10,10,2,0,2,2,2,0,0,2,2,2
+redacted,redacted,redacted,431825,redacted,psc-041-002-wq-2023,113.5,150,Graded,165936391,3/2/2023 12:36,0:00:00,4,1,2,2,5,5,0,1,8,2,2,0,10,10,5,5,5,5,5,5,1.5,10,7,0,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,167773,redacted,psc-041-001-wq-2023,148,150,Graded,165936392,3/2/2023 12:36,0:00:00,1,1,2,2,5,5,2,10,10,2,2,10,10,10,5,5,5,5,5,5,10,10,10,0,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,514088,redacted,psc-041-002-wq-2023,110.5,150,Graded,165936393,3/2/2023 12:36,0:00:00,3,1,2,2,5,5,2,6,7,0,2,4.5,9,4.5,3,0,5,5,5,5,4,10,8.5,2,2,2,2,2,0,2,2,2,0
+redacted,redacted,redacted,370378,redacted,psc-041-001-wq-2023,134.5,150,Graded,165936394,3/2/2023 12:36,0:00:00,16,1,2,2,5,5,2,10,10,0,2,10,8.5,10,5,0,5,5,5,5,10,10,9,2,2,0,2,2,2,2,0,2,0
+redacted,redacted,redacted,704993,redacted,psc-041-001-wq-2023,141.5,150,Graded,165936395,3/2/2023 12:36,0:00:00,0,1,2,2,5,5,2,10,7,2,2,9,8.5,10,5,5,5,5,5,5,10,9,10,2,2,2,2,2,0,2,2,2,2
+redacted,redacted,redacted,849990,redacted,psc-041-001-wq-2023,105,150,Graded,165936396,3/2/2023 12:36,0:00:00,2,1,2,0,5,5,2,10,6,0,2,9,7,10,5,5,0,0,0,0,10,8,7,0,2,2,2,2,0,2,2,0,0
+redacted,redacted,redacted,507880,redacted,psc-041-001-wq-2023,128,150,Graded,165936397,3/2/2023 12:36,0:00:00,2,1,2,2,5,5,2,6,9,0,2,7,8.5,10,5,0,5,5,5,5,10,10,8.5,0,2,2,2,2,2,2,2,2,0
+redacted,redacted,redacted,700441,redacted,psc-041-002-wq-2023,64,150,Graded,165937526,3/2/2023 12:39,0:00:00,0,1,2,2,5,0,0,1,6,0,2,0,2,10,5,0,5,0,0,0,4,2,4,0,2,2,2,2,2,2,2,0,0
+redacted,redacted,redacted,862239,redacted,psc-041-001-wq-2023,112,150,Graded,165937527,3/2/2023 12:39,0:00:00,0,1,2,2,5,5,2,3.5,10,0,2,7,8.5,10,5,5,5,5,5,5,1,0,8,2,2,2,2,2,0,2,2,2,0
+redacted,redacted,redacted,128513,redacted,psc-041-001-wq-2023,119.5,150,Graded,165937528,3/2/2023 12:39,0:00:00,0,1,2,2,5,5,2,10,7,0,2,3,8.5,10,5,5,5,5,0,0,10,7,6,2,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,176796,redacted,psc-041-001-wq-2023,119.25,150,Graded,165937529,3/2/2023 12:39,0:00:00,5,1,2,2,5,5,2,6,10,0,2,7.25,0,10,5,5,5,5,5,5,5.5,7.5,9,2,2,2,2,2,2,2,2,0,0
+redacted,redacted,redacted,685171,redacted,psc-041-001-wq-2023,72,150,Graded,165937530,3/2/2023 12:39,0:00:00,0,1,2,2,5,5,2,3,0,0,2,0,4,10,5,5,0,5,0,0,0,0,10,0,2,0,2,2,0,2,2,2,0
+redacted,redacted,redacted,657848,redacted,psc-041-001-wq-2023,122.5,150,Graded,165937531,3/2/2023 12:39,0:00:00,5,1,2,2,5,5,2,6,8,0,2,0,10,10,5,0,5,5,5,5,5.5,10,10,2,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,796250,redacted,psc-041-001-wq-2023,136,150,Graded,165937532,3/2/2023 12:39,0:00:00,1,1,2,2,5,5,2,6,10,2,2,10,8.5,10,5,5,5,5,5,0,10,10,8.5,0,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,783300,redacted,psc-041-002-wq-2023,138.5,150,Graded,165937533,3/2/2023 12:39,0:00:00,2,1,2,2,5,5,2,10,8,0,2,9.5,10,10,5,0,5,5,5,5,10,10,10,2,2,2,2,2,2,2,2,2,0
+redacted,redacted,redacted,864689,redacted,psc-041-002-wq-2023,137.5,150,Graded,165937534,3/2/2023 12:39,0:00:00,0,1,2,2,5,5,2,6,7,2,2,7.5,10,10,5,5,5,5,5,5,10,10,7,2,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,840840,redacted,psc-041-002-wq-2023,102.25,150,Graded,165937535,3/2/2023 12:39,0:00:00,1,1,2,2,5,5,0,1,8,0,0,4,8.5,6.5,5,0,5,5,5,5,5.5,8.75,5,0,2,2,2,2,2,2,2,2,0
+redacted,redacted,redacted,980357,redacted,psc-041-001-wq-2023,127,150,Graded,165937536,3/2/2023 12:39,0:00:00,3,1,2,2,5,5,2,6,8,2,2,7,2,10,5,5,5,5,5,5,10,9,7,2,2,2,2,2,2,2,2,2,0
+redacted,redacted,redacted,319559,redacted,psc-041-002-wq-2023,88.5,150,Graded,165937537,3/2/2023 12:39,0:00:00,2,1,2,2,5,5,0,1,2,0,2,0,10,10,5,0,5,5,0,0,7.5,10,7,0,0,2,2,2,0,2,0,2,0
+redacted,redacted,redacted,939066,redacted,psc-041-002-wq-2023,143,150,Graded,165937538,3/2/2023 12:39,0:00:00,2,1,2,2,5,5,2,10,10,2,2,10,10,10,5,0,5,5,5,5,10,10,10,0,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,914016,redacted,psc-041-002-wq-2023,108.75,150,Graded,165937539,3/2/2023 12:39,0:00:00,0,1,2,2,5,5,2,6,9,0,2,4.5,7.5,10,5,0,5,5,0,5,6,8.75,7,0,0,2,2,2,2,0,2,0,2
+redacted,redacted,redacted,780786,redacted,psc-041-002-wq-2023,143,150,Graded,165937540,3/2/2023 12:39,0:00:00,0,1,2,2,5,5,2,10,10,2,2,10,7.5,10,5,5,5,5,5,5,10,9,6.5,2,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,197878,redacted,psc-041-001-wq-2023,127.25,150,Graded,165937541,3/2/2023 12:39,0:00:00,2,1,2,2,5,5,2,10,8,0,2,0,10,10,5,5,5,5,5,5,5.5,8.75,9,0,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,115362,redacted,psc-041-002-wq-2023,134,150,Graded,165937542,3/2/2023 12:39,0:00:00,1,1,2,2,5,5,2,4,10,0,2,10,10,10,5,5,5,0,5,5,10,10,9,2,2,2,2,2,2,2,2,2,0
+redacted,redacted,redacted,450272,redacted,psc-041-002-wq-2023,141.75,150,Graded,165937543,3/2/2023 12:39,0:00:00,2,1,2,2,5,5,2,10,10,0,2,10,10,10,5,0,5,5,5,5,10,8.75,10,2,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,815620,redacted,psc-041-002-wq-2023,92.5,150,Graded,165937544,3/2/2023 12:39,0:00:00,1,1,2,2,5,5,0,0,2,0,2,0,0,10,5,5,5,5,5,5,6.5,8,6,0,2,2,2,2,0,2,2,2,0
+redacted,redacted,redacted,429085,redacted,psc-041-002-wq-2023,106.5,150,Graded,165937545,3/2/2023 12:39,0:00:00,0,1,2,2,5,0,2,10,2,0,2,10,0,10,5,0,5,5,5,5,4.5,10,10,0,0,2,2,2,0,2,2,2,0
+redacted,redacted,redacted,515838,redacted,psc-041-002-wq-2023,125.5,150,Graded,165937546,3/2/2023 12:39,0:00:00,1,1,2,2,5,5,2,10,8,0,2,8,7.5,10,5,5,5,5,5,0,8.5,6,6.5,0,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,348376,redacted,psc-041-002-wq-2023,114.25,150,Graded,165937547,3/2/2023 12:39,0:00:00,0,1,2,2,5,5,2,6,2,0,2,8.75,6.5,5.5,5,0,5,5,5,5,5.5,10,9,2,2,2,2,2,2,2,2,2,0
+redacted,redacted,redacted,425200,redacted,psc-041-002-wq-2023,139.5,150,Graded,165939288,3/2/2023 12:45,0:00:00,2,1,2,2,5,5,2,10,7,2,2,10,10,10,5,5,5,5,5,5,6.5,10,8,2,0,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,502302,redacted,psc-041-002-wq-2023,138.5,150,Graded,165939289,3/2/2023 12:45,0:00:00,1,1,2,2,5,5,2,6,7,2,2,10,10,10,5,5,5,5,5,5,10,9,8.5,2,0,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,471494,redacted,psc-041-002-wq-2023,134,150,Graded,165939290,3/2/2023 12:45,0:00:00,2,1,2,2,5,5,2,10,8,0,2,10,10,10,5,0,5,5,5,5,4,10,9,2,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,928498,redacted,psc-041-002-wq-2023,114.25,150,Graded,165939291,3/2/2023 12:45,0:00:00,0,1,2,2,5,5,2,6,2,0,2,8.25,10,10,5,5,5,5,0,0,5,10,7,2,2,2,2,2,0,2,2,2,2
+redacted,redacted,redacted,495024,redacted,psc-041-001-wq-2023,114,150,Graded,165939292,3/2/2023 12:45,0:00:00,5,1,2,2,5,5,2,10,8,0,2,10,0,10,5,0,5,5,5,0,5,10,7,0,2,2,2,2,0,2,2,2,2
+redacted,redacted,redacted,682407,redacted,psc-041-001-wq-2023,127.5,150,Graded,165939293,3/2/2023 12:45,0:00:00,5,1,2,2,5,5,2,6,7,0,2,9,10,10,5,0,5,5,5,5,5.5,10,7,2,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,292900,redacted,psc-041-002-wq-2023,133,150,Graded,165939294,3/2/2023 12:45,0:00:00,0,1,2,2,5,5,2,6,10,2,2,10,0,10,5,5,5,5,5,5,10,10,7,2,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,156364,redacted,psc-041-002-wq-2023,85,150,Graded,165939295,3/2/2023 12:45,0:00:00,0,1,2,2,5,5,0,10,2,2,2,0,10,10,5,0,5,5,5,5,0,0,0,0,0,2,2,2,0,2,0,2,0
+redacted,redacted,redacted,967176,redacted,psc-041-002-wq-2023,143.5,150,Graded,165939296,3/2/2023 12:45,0:00:00,1,1,2,2,5,5,2,10,7,2,2,10,8.5,10,5,5,5,5,5,5,10,10,10,0,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,929062,redacted,psc-041-002-wq-2023,134.75,150,Graded,165939297,3/2/2023 12:45,0:00:00,2,1,2,2,5,5,2,10,7,0,2,7.75,10,10,5,5,5,5,0,5,10,10,9,0,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,298091,redacted,psc-041-001-wq-2023,115,150,Graded,165939298,3/2/2023 12:45,0:00:00,3,1,2,2,5,5,2,10,10,2,2,0,0,10,5,5,5,5,5,5,5,7,7,0,2,2,2,2,2,2,2,2,0
+redacted,redacted,redacted,671655,redacted,psc-041-001-wq-2023,138.75,150,Graded,165939299,3/2/2023 12:45,0:00:00,0,1,2,2,5,5,2,6,10,2,2,6.25,10,10,5,5,5,5,5,5,10,10,6.5,2,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,627572,redacted,psc-041-001-wq-2023,105,150,Graded,165939300,3/2/2023 12:45,0:00:00,8,1,2,2,5,5,2,10,10,0,2,3,0,10,5,0,5,5,5,5,2,4,9,0,0,2,2,2,2,2,2,2,0
+redacted,redacted,redacted,497496,redacted,psc-041-001-wq-2023,81,150,Graded,165939301,3/2/2023 12:45,0:00:00,7,1,2,2,5,5,0,0,2,2,2,0,0,10,5,5,5,5,5,0,5,3,8,0,0,0,2,2,0,0,2,2,2
+redacted,redacted,redacted,903345,redacted,psc-041-001-wq-2023,116,150,Graded,165939302,3/2/2023 12:45,0:00:00,0,1,2,2,5,5,2,10,10,0,2,7,0,10,5,0,5,5,5,5,5.5,10,8.5,0,0,2,2,2,0,2,0,2,2
+redacted,redacted,redacted,449769,redacted,psc-041-002-wq-2023,131.5,150,Graded,165939303,3/2/2023 12:45,0:00:00,6,1,2,2,5,5,0,1,10,2,2,10,9,10,5,5,5,5,5,5,6.5,10,9,0,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,570017,redacted,psc-041-001-wq-2023,142.5,150,Graded,165939304,3/2/2023 12:45,0:00:00,2,1,2,2,5,5,2,10,10,2,2,8,10,10,5,5,5,5,5,5,10,10,8.5,2,2,2,2,2,2,0,2,2,0
+redacted,redacted,redacted,877146,redacted,psc-041-001-wq-2023,105.5,150,Graded,165939305,3/2/2023 12:45,0:00:00,0,1,2,2,5,5,2,6,0,0,2,6,7.5,10,5,0,5,5,5,5,0,10,5,0,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,257545,redacted,psc-041-002-wq-2023,112.5,150,Graded,165939306,3/2/2023 12:45,0:00:00,1,1,2,2,5,5,2,6,10,2,2,0,10,10,5,5,5,5,0,5,2,9,6.5,2,0,2,2,2,2,0,2,2,0
+redacted,redacted,redacted,756469,redacted,psc-041-002-wq-2023,120.75,150,Graded,165939307,3/2/2023 12:45,0:00:00,2,1,2,2,5,5,2,10,7,0,2,8,10,10,3,5,5,5,5,5,0,8.75,9,0,0,2,2,2,2,0,2,2,0
+redacted,redacted,redacted,646241,redacted,psc-041-002-wq-2023,133.25,150,Graded,165939308,3/2/2023 12:45,0:00:00,3,1,2,2,5,5,2,6,7,0,2,9,8.5,10,5,5,5,5,5,5,10,8.75,10,2,2,2,2,2,0,2,2,2,0
+redacted,redacted,redacted,458187,redacted,psc-041-002-wq-2023,85.5,150,Graded,165939309,3/2/2023 12:45,0:00:00,1,1,2,2,5,5,0,1,0,0,2,8.5,7.5,5.5,1.5,0,5,5,0,5,1,10,7.5,2,0,2,2,2,2,0,0,2,0
+redacted,redacted,redacted,469937,redacted,psc-041-002-wq-2023,128.5,150,Graded,165939310,3/2/2023 12:45,0:00:00,3,1,2,2,5,5,2,6,10,2,2,6,7.5,10,5,5,5,5,5,5,1,10,10,0,2,2,2,2,2,2,2,2,2
+redacted,redacted,redacted,392584,redacted,psc-041-002-wq-2023,136,150,Graded,165939311,3/2/2023 12:45,0:00:00,1,1,2,2,5,5,2,6,8,2,2,10,10,10,5,5,5,5,5,5,10,10,10,0,0,2,2,2,2,0,2,2,0
+redacted,redacted,redacted,190818,redacted,psc-041-001-wq-2023,143.75,150,Graded,165939312,3/2/2023 12:45,0:00:00,0,1,2,2,5,5,2,10,10,2,2,9.25,7.5,10,5,5,5,5,5,5,10,10,9,2,2,2,2,2,2,0,2,2,2
+redacted,redacted,redacted,464491,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,259122,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,122746,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,484728,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,143458,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,311227,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,401033,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,191876,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,863048,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,720723,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,294860,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,951938,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,846172,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,970613,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,460606,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,124704,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,993306,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,560484,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,416172,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,504530,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,652357,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,843535,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,980127,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,238823,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,309943,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,976464,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,758184,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,980472,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,162187,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,737475,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,210273,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,690059,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,745036,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,377090,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,946128,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,785013,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,135727,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,447538,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,177840,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,165680,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,873291,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,711072,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,736790,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,570810,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,480961,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,880562,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,601701,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,422809,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,316719,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,741913,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,357173,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,820889,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,520659,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,755204,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,158549,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,587423,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,229553,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,221958,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,618706,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,100915,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,231177,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,543411,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,441521,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,184622,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,768234,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,820879,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,337398,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,362052,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,898473,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,335731,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,266622,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,787036,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,780541,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,323859,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,166548,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,721359,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,214276,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,282874,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,832756,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,134149,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,199772,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,149203,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,113553,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,478268,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,187418,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,444720,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,919451,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,172263,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,423080,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,186775,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,100168,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,920816,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,690064,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,689023,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,568721,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,863924,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,351711,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,208750,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,465537,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,781336,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,819274,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,857405,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,664851,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,825875,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,326394,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,955242,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,840605,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,193776,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,126548,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,660431,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,700506,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,117848,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,124193,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,353441,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,116312,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,947959,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,411906,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,980134,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,179184,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,158198,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,493377,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,479550,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,887391,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,927645,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,669717,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,375253,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,635780,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,411472,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,600034,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,841731,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,878824,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,496293,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,877116,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,920586,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,687940,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,109338,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,808404,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,483406,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,267132,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,209254,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,585527,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,522922,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,643893,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,769753,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,340708,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,690036,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,893307,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,676026,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,218653,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,324135,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,957384,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,794376,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,590181,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,402997,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,378876,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,623912,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,863598,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,935965,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,819157,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,132340,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,681486,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,100124,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,451623,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,298840,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,127794,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,637438,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,946353,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,151246,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,644205,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,760890,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,805441,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,128016,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,488889,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,720293,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,693045,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,331406,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,499213,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,806967,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,867083,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,978499,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,999023,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,970240,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,356382,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,221844,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,907718,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,116004,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,268619,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,448698,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,687838,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,270982,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,687844,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,324553,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,242493,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,376854,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,352012,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,120124,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,517181,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,341372,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,706979,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,802878,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,805091,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,323214,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,243610,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,992103,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,883903,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,884161,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,548019,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,327020,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,427397,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,189428,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,589905,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,205295,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,868406,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,936964,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,273032,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,862880,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,329867,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,141625,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,202048,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,370790,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,607016,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,938861,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,634523,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,485565,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,752695,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,912689,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,710489,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,957708,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,354907,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,575085,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,796147,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,611968,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,742806,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,550977,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,693286,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,925742,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,254596,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,878864,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,266782,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,437305,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,306957,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,338073,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,738332,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,789124,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,147145,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,802566,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,274235,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,711460,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,676277,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,187671,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,482126,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,789281,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,700670,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,487505,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,739544,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,331418,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,352138,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,781433,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,666059,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,392325,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,766313,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,562658,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,980587,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,776965,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,714184,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,562399,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,620808,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,578485,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,288842,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,829820,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,670267,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,566878,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,348715,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,684227,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,624947,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,958843,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,338114,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,607045,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,583798,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,574860,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,965522,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,917655,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,582644,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,354057,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,962814,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,282568,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,571323,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,297437,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,224768,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,708858,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,843368,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,882657,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,676794,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,850664,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,207486,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,293634,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,289163,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,761526,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,891202,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,859374,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,215621,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,806039,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,822014,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,398075,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,646067,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,839513,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,467652,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,852104,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,936273,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,992343,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,987447,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,533181,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,877109,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,555054,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,342170,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,277425,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,282845,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,879263,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,216877,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,743784,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,649892,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,844340,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,505593,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,783735,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,850435,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,785732,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,556020,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,613766,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,205809,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,237582,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,868195,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,751500,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,840463,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,298429,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,868090,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,766084,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,841390,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,889441,redacted,psc-041-001-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,678041,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,882737,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+redacted,redacted,redacted,736790,redacted,psc-041-002-wq-2023,,150,Missing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

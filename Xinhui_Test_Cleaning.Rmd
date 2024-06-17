@@ -1,0 +1,21 @@
+---
+title: "CleaningTestScript"
+author: "Sydney Wood"
+date: "2024-06-17"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r}
+finalData <- read.csv(file = "Final_Data_anon.csv")
+
+raw_canvas <- read.csv(file = "wq23_canvas_data_anon.csv")
+
+exam1_written <- read.csv(file = "exam1_writtenQs_anon.csv")
+```
+
