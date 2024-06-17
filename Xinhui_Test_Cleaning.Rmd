@@ -19,7 +19,4 @@ raw_canvas <- read.csv(file = "wq23_canvas_data_anon.csv")
 exam1_written <- read.csv(file = "exam1_writtenQs_anon.csv")
 ```
 
-hi
-
-helo to you too 
 
