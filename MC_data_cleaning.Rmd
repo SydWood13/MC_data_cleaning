@@ -36,9 +36,10 @@ In the commented code: import raw data and get only the columns of relevence. re
 
 ```{r}
 
-#dem_data_raw <- read.csv("Demographics Survey Student Analysis Report.csv", sep =",")
+dem_data_raw <- read.csv("Raw_dem_data_anon.csv", sep =",")
 
-#dem_data_short <- dem_data_raw %>% select("id","sis_id",contains(".."))
+
+dem_data_short <- dem_data_raw %>% select("anon_id", "consent", contains(".."))
 
 
 
@@ -47,7 +48,9 @@ In the commented code: import raw data and get only the columns of relevence. re
 #write.csv(dem_data_short, file = "WQ23_dem_data_shortened.csv")
 
 
-dem_data <- read.csv("WQ23_Dem_data_cleaned.csv", sep = ",")
+
+
+#dem_data <- read.csv("WQ23_Dem_data_cleaned_anon.csv", sep = ",")
 
 
 #change categrical dat ato factors
@@ -200,6 +203,7 @@ write.csv(w_exam, file = "exam5_writtenQs.csv")
 
 ```{r}
 #read in final_grade_data
+#
 
 full_grades <- wq_grades_final %>% select(-"ID")
 
