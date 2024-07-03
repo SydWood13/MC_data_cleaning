@@ -16,6 +16,7 @@ library(tidycode)
 library(tibble)
 library(dplyr)
 library(tidyverse)
+setwd("~/Documents/GitHub/MC_data_cleaning")
 ```
 
 
@@ -43,10 +44,29 @@ dem_data_clean <- dem_data %>%
 
 
 
-
 dem_data_clean <- dem_data_clean %>%
   filter(consent == 1)
 ```
 
+## there is a 2002 in age column.
 
+## year
+```{r}
+dem_data_clean <- dem_data %>%
+  mutate(year = case_when(
+    grepl("Freshman", year, fixed = TRUE) ~ 1,
+    grepl("Sophomore", year, fixed = TRUE) ~ 2,
+    grepl("Jonior", year, fixed = TRUE) ~ 3,
+    grepl("Senior", year, fixed = TRUE) ~ 4,
+    TRUE~NA
+  ))
+```
+
+## Gender
+```{r}
+dem_data_clean <- dem_data %>%
+  mutate(gender = case_when(
+    TURE~NA ~"I decline to answe",
+  ))
+```
 
