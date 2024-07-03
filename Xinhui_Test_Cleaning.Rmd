@@ -12,19 +12,41 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Load Packages 
 ```{r}
-
+library(tidycode)
+library(tibble)
+library(dplyr)
+library(tidyverse)
 ```
-
 
 
 ## Demographic Cleaning
 
 ```{r}
+dem_data_raw <- read.csv(file = "Raw_dem_data_anon.csv")
+dem_data_short <- dem_data_raw %>% select("anon_id", "consent", contains(".."))
 
-
-raw_canvas <- read.csv(file = "Raw_dem_data_anon.csv")
-
-
+colnames(dem_data_short) <- c("anon_id", "consent", "age", "year", "gender", "int_student", "esl", "e_exp", "e_lvl", "URM", "p_education", "m_education", "par_rel", "fin_support", "ses", "grant", "soc_med", "hw_time", "transfer")
 ```
+
+## Change the categorical data to factors
+```{r}
+dem_data<- dem_data_short %>% mutate_at(c(4,5,6,7,10,13,15,16,19), factor)
+```
+
+## consent
+```{r}
+dem_data_clean <- dem_data %>%
+  mutate(consent = case_when(
+    grepl("I do not consent", consent, fixed = TRUE) ~ 0,
+    grepl("I consent to participate", consent, fixed = TRUE) ~ 1,
+    TRUE ~ 0))
+
+
+
+
+dem_data_clean <- dem_data_clean %>%
+  filter(consent == 1)
+```
+
 
 

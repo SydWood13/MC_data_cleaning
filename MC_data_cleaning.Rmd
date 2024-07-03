@@ -53,7 +53,7 @@ dem_data_short <- dem_data_raw %>% select("anon_id", "consent", contains(".."))
 #dem_data <- read.csv("WQ23_Dem_data_cleaned_anon.csv", sep = ",")
 
 
-#change categrical dat ato factors
+#change categorical data to factors
 dem_data <- dem_data %>% mutate_at(c(5,6,7,8,11,14, 16,17, 20), factor)
 
 #take only consenting student data
