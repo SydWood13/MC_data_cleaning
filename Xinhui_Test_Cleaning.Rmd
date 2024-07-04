@@ -66,10 +66,30 @@ dem_data_clean <- dem_data_clean %>%
 ```{r}
 dem_data_clean <- dem_data_clean %>%
   mutate(gender = case_when(
-    grepl("Woman", year, fixed = TRUE) ~ 'Woman',
-    grepl("Man", year, fixed = TRUE) ~ 'Man',
-    grepl("Non-binary or Gender queer", year, fixed = TRUE) ~ 3,
-    grepl("Senior", year, fixed = TRUE) ~ 4,
+    grepl("Woman", gender, fixed = TRUE) ~ 'Woman',
+    grepl("Man", gender, fixed = TRUE) ~ 'Man',
+    grepl("Non-binary or Genderqueer", gender, fixed = TRUE) ~ 'Other',
     TRUE~NA
+  ))
+```
+
+## int_student
+```{r}
+dem_data_clean <- dem_data_clean %>%
+  mutate(int_student = case_when(
+    grepl("Yes", int_student, fixed = TRUE) ~ 1,
+    grepl("No", int_student, fixed = TRUE) ~ 0,
+    TRUE~NA
+  ))
+```
+
+## esl
+```{r}
+dem_data_clean <- dem_data_clean %>%
+  mutate(esl = case_when(
+    grepl("is my first language", esl, fixed = TRUE) ~ 1,
+    grepl("is not my first language", esl, fixed = TRUE) ~ 0,
+    TRUE~NA
+  ))
 ```
 
