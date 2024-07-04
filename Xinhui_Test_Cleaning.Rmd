@@ -52,7 +52,7 @@ dem_data_clean <- dem_data_clean %>%
 
 ## year
 ```{r}
-dem_data_clean <- dem_data %>%
+dem_data_clean <- dem_data_clean %>%
   mutate(year = case_when(
     grepl("Freshman", year, fixed = TRUE) ~ 1,
     grepl("Sophomore", year, fixed = TRUE) ~ 2,
@@ -64,9 +64,12 @@ dem_data_clean <- dem_data %>%
 
 ## Gender
 ```{r}
-dem_data_clean <- dem_data %>%
+dem_data_clean <- dem_data_clean %>%
   mutate(gender = case_when(
-    TURE~NA ~"I decline to answe",
-  ))
+    grepl("Woman", year, fixed = TRUE) ~ 'Woman',
+    grepl("Man", year, fixed = TRUE) ~ 'Man',
+    grepl("Non-binary or Gender queer", year, fixed = TRUE) ~ 3,
+    grepl("Senior", year, fixed = TRUE) ~ 4,
+    TRUE~NA
 ```
 
