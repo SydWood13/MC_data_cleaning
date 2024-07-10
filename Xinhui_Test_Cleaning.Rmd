@@ -87,8 +87,40 @@ dem_data_clean <- dem_data_clean %>%
 ```{r}
 dem_data_clean <- dem_data_clean %>%
   mutate(esl = case_when(
-    grepl("is my first language", esl, fixed = TRUE) ~ 1,
-    grepl("is not my first language", esl, fixed = TRUE) ~ 0,
+    grepl("English is my first language", esl, fixed = TRUE) ~ 1,
+    grepl("English is not my first language", esl, fixed = TRUE) ~ 0,
+    TRUE~NA
+  ))
+```
+
+## e_lvl
+```{r}
+dem_data_clean <- dem_data_clean %>%
+  mutate(e_lvl = case_when(
+    grepl("0", e_lvl, fixed = TRUE) ~ 0,
+    grepl("1", e_lvl, fixed = TRUE) ~ 1,
+    grepl("2", e_lvl, fixed = TRUE) ~ 2,
+    grepl("3", e_lvl, fixed = TRUE) ~ 3,
+    grepl("4", e_lvl, fixed = TRUE) ~ 4,
+    grepl("5", e_lvl, fixed = TRUE) ~ 5, 
+    grepl("6", e_lvl, fixed = TRUE) ~ 6, 
+    TRUE~NA
+  ))
+```
+
+### URM
+```{r}
+dem_data_clean <- dem_data_clean %>%
+  mutate(URM = case_when(
+    grepl("Black or African American", e_lvl, fixed = TRUE) ~ 1,
+    grepl("Caucasian", e_lvl, fixed = TRUE) ~ 2, 
+    grepl("East or South East Asian", e_lvl, fixed = TRUE) ~ 3,
+    grepl("Hispanic or Latino", e_lvl, fixed = TRUE) ~ 4,
+    grepl("Middle Eastern or West Asian", e_lvl, fixed = TRUE) ~ 5,
+    grepl("Mixed Race", e_lvl, fixed = TRUE) ~ 6,
+    grepl("North or Central Asian", e_lvl, fixed = TRUE) ~ 7,
+    grepl("Pacific Islander", e_lvl, fixed = TRUE) ~ 8,
+    grepl("South Asian", e_lvl, fixed = TRUE) ~ 9,
     TRUE~NA
   ))
 ```
