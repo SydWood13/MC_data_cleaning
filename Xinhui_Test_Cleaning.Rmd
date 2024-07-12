@@ -31,7 +31,7 @@ colnames(dem_data_short) <- c("anon_id", "consent", "age", "year", "gender", "in
 
 ## Change the categorical data to factors
 ```{r}
-dem_data<- dem_data_short %>% mutate_at(c(4,5,6,7,10,13,15,16,19), factor)
+dem_data<- dem_data_short %>% mutate_at(c(4,5,6,7,10,13,14,15,16,19), factor)
 ```
 
 ## consent
@@ -56,8 +56,9 @@ dem_data_clean <- dem_data_clean %>%
   mutate(year = case_when(
     grepl("Freshman", year, fixed = TRUE) ~ 1,
     grepl("Sophomore", year, fixed = TRUE) ~ 2,
-    grepl("Jonior", year, fixed = TRUE) ~ 3,
-    grepl("Senior", year, fixed = TRUE) ~ 4,
+    grepl("Junior", year, fixed = TRUE) ~ 3,
+    grepl("Senior - 4th year", year, fixed = TRUE) ~ 4,
+    grepl("Senior - 5th+ year", year, fixed = TRUE) ~ 5,
     TRUE~NA
   ))
 ```
@@ -112,16 +113,129 @@ dem_data_clean <- dem_data_clean %>%
 ```{r}
 dem_data_clean <- dem_data_clean %>%
   mutate(URM = case_when(
-    grepl("Black or African American", e_lvl, fixed = TRUE) ~ 1,
-    grepl("Caucasian", e_lvl, fixed = TRUE) ~ 2, 
-    grepl("East or South East Asian", e_lvl, fixed = TRUE) ~ 3,
-    grepl("Hispanic or Latino", e_lvl, fixed = TRUE) ~ 4,
-    grepl("Middle Eastern or West Asian", e_lvl, fixed = TRUE) ~ 5,
-    grepl("Mixed Race", e_lvl, fixed = TRUE) ~ 6,
-    grepl("North or Central Asian", e_lvl, fixed = TRUE) ~ 7,
-    grepl("Pacific Islander", e_lvl, fixed = TRUE) ~ 8,
-    grepl("South Asian", e_lvl, fixed = TRUE) ~ 9,
+    grepl("Black or African American", URM, fixed = TRUE) ~ 1,
+    grepl("Caucasian", URM, fixed = TRUE) ~ 2, 
+    grepl("East or South East Asian", URM, fixed = TRUE) ~ 3,
+    grepl("Hispanic or Latino", URM, fixed = TRUE) ~ 4,
+    grepl("Middle Eastern or West Asian", URM, fixed = TRUE) ~ 5,
+    grepl("Mixed Race", URM, fixed = TRUE) ~ 6,
+    grepl("North or Central Asian",URM, fixed = TRUE) ~ 7,
+    grepl("Pacific Islander", URM, fixed = TRUE) ~ 8,
+    grepl("South Asian", URM, fixed = TRUE) ~ 9,
     TRUE~NA
   ))
 ```
 
+### p_education
+```{r}
+dem_data_clean <- dem_data_clean %>%
+  mutate(p_education = case_when(
+    grepl("He never attended school", p_education, fixed = TRUE) ~ 1,
+    grepl("He left when he graduated from high school (or GED)", p_education, fixed = TRUE) ~ 2, 
+    grepl("He left school before he graduated from high school", p_education, fixed = TRUE) ~ 3,
+    grepl("He attended some college, but left before he earned a 4-year degree", p_education, fixed = TRUE) ~ 4,
+    grepl("He earned a 4-year degree", p_education, fixed = TRUE) ~ 5,
+    grepl("He earned a graduate degree (Masters or Ph.D)", p_education, fixed = TRUE) ~ 6,
+    TRUE~NA
+  ))
+```
+
+
+### m_education
+```{r}
+dem_data_clean <- dem_data_clean %>%
+  mutate(m_education = case_when(
+    grepl("She never attended school", m_education, fixed = TRUE) ~ 1,
+    grepl("She left when she graduated from high school (or GED)", m_education, fixed = TRUE) ~ 2, 
+    grepl("She left school before she graduated from high school", m_education, fixed = TRUE) ~ 3,
+    grepl("She attended some college, but left before she earned a 4-year degree", m_education, fixed = TRUE) ~ 4,
+    grepl("She earned a 4-year degree", m_education, fixed = TRUE) ~ 5,
+    grepl("She earned a graduate degree (Masters or Ph.D)", m_education, fixed = TRUE) ~ 6,
+    TRUE~NA
+  ))
+```
+
+##Get a new column first_gen by p_education and m_education
+```{r}
+dem_data_clean <- dem_data_clean %>% mutate(first_gen = case_when(p_education < 5 & m_education < 5 ~ 1, p_education >= 4 | m_education >= 4 ~ 0))
+
+dem_data_clean <- dem_data_clean %>%  mutate(first_gen = case_when(first_gen == NA & p_education < 5 | m_education < 5 ~ 1, .default = first_gen)) %>% mutate( first_gen = case_when(first_gen == NA & m_education < 5 | p_education < 5 ~ 1, .default = first_gen)) 
+```
+
+## par_rel
+```{r}
+dem_data_clean <- dem_data_clean %>%
+  mutate(par_rel = case_when(
+    grepl("Together", par_rel, fixed = TRUE) ~ "Together",
+    grepl("Divorced", par_rel, fixed = TRUE) ~ "Divorced",
+    grepl("Separated", par_rel, fixed = TRUE) ~ "Separated",
+    grepl("Single", par_rel, fixed = TRUE) ~ "Single",
+    TRUE~NA
+  ))
+```
+
+##fin_support
+```{r}
+dem_data_clean <- dem_data_clean %>%
+  mutate(fin_support = case_when(
+    grepl("No support", fin_support, fixed = TRUE) ~ 1,
+    grepl("Very little support", fin_support, fixed = TRUE) ~ 2,
+    grepl("A little support",fin_support, fixed = TRUE) ~ 3,
+    grepl("Some support", fin_support, fixed = TRUE) ~ 4,
+    grepl("Halfway supported", fin_support, fixed = TRUE) ~ 5, 
+    grepl("Mostly supported", fin_support, fixed = TRUE) ~ 6, 
+    grepl("Fully supported", fin_support, fixed = TRUE) ~ 7,
+    TRUE~NA
+  ))
+```
+
+## ses
+```{r}
+dem_data_clean <- dem_data_clean %>%
+  mutate(ses = case_when(
+    grepl("I did not qualify for 'free or reduced cost lunch' at all in high school", ses, fixed = TRUE) ~ 0,
+    grepl("I don't know if I qualified for a 'free or reduced cost lunch' program", ses, fixed = TRUE) ~ 1,
+    grepl("I qualified for 'free or reduced cost lunch' for all or most of high school",ses, fixed = TRUE) ~ 2,
+    grepl("I qualified for 'free or reduced cost lunch' for some of high school", ses, fixed = TRUE) ~ 3,
+    TRUE~NA
+  ))
+```
+
+## grant
+```{r}
+dem_data_clean <- dem_data_clean %>%
+  mutate(grant = case_when(
+    grepl("I do not qualify for a Pell Grant", grant, fixed = TRUE) ~ 0,
+    grepl("I do qualify for a Pell Grant", grant, fixed = TRUE) ~ 1,
+    grepl("I don't know if I qualify for a Pell Grant",grant, fixed = TRUE) ~ 2,
+    TRUE~NA
+  ))
+```
+
+## soc_med
+```{r}
+dem_data_test <- dem_data_clean %>%
+  mutate(soc_med = case_when(
+    soc_med == 0 ~ NA, .default = soc_med
+    ))
+```
+
+## hw_time
+```{r}
+dem_data_test <- dem_data_test %>%
+  mutate(hw_time = case_when(
+    hw_time == 0 ~ NA, .default = hw_time
+    ))
+```
+
+
+
+## transfer
+```{r}
+dem_data_clean <- dem_data_clean %>%
+  mutate(transfer = case_when(
+    grepl("Yes", transfer, fixed = TRUE) ~ 1,
+    grepl("No", transfer, fixed = TRUE) ~ 0,
+    TRUE~NA
+  ))
+```
