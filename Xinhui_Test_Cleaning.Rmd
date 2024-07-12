@@ -239,3 +239,47 @@ dem_data_clean <- dem_data_clean %>%
     TRUE~NA
   ))
 ```
+
+# save csv 
+```{r}
+
+```
+
+
+
+## Overall Grade Data (canvas)
+
+```{r}
+cleaned <- read.csv(file = "wq_grade_data_cleaned_anon.csv")
+
+raw <-  read.csv(file = "wq23_canvas_data_raw_anon.csv")
+
+```
+
+
+P+P (prep & Participation) --- Final score cannot be above 250 
+
+
+There are 6 exams, but only 5 count toward the final grade. The "exam_total" the sum of  the 5 highest grades of the "exam" category turned in to a percentage (out of 750). 
+
+
+while calculating the final column you will have columns for all the raw exam and raw_final_grade, but at the very end you will drop those 
+
+
+For exams:  Turn each exam to % correct (all exams are out of 150) 
+
+
+Extra Credit: Final Points & Exam.Correction... 
+
+P+P - Final Points 
+
+
+final grade calculation = p+p_final(upto 250) + raw_exam_total(upto 750, not percent, but only included the 5 highest exam grades) + extra_credit_total
+
+
+After calculating turn final grade into % by divide by 1000 and then * 100 
+
+
+
+
+
