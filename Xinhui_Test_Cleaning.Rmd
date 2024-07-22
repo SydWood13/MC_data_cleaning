@@ -31,12 +31,12 @@ colnames(dem_data_short) <- c("anon_id", "consent", "age", "year", "gender", "in
 
 ## Change the categorical data to factors
 ```{r}
-dem_data<- dem_data_short %>% mutate_at(c(4,5,6,7,10,13,14,15,16,19), factor)
+#dem_data<- dem_data_short %>% mutate_at(c(2,4,5,6,7, 10,13,14,15,16,19), factor) 
 ```
 
 ## consent
 ```{r}
-dem_data_clean <- dem_data %>%
+dem_data_clean <- dem_data_short %>%
   mutate(consent = case_when(
     grepl("I do not consent", consent, fixed = TRUE) ~ 0,
     grepl("I consent to participate", consent, fixed = TRUE) ~ 1,
@@ -48,8 +48,15 @@ dem_data_clean <- dem_data_clean %>%
   filter(consent == 1)
 ```
 
-## there is a 2002 in age column.
 
+## there is a 2002 in age column.
+## age
+```{r}
+dem_data_clean <- dem_data_clean %>%
+  mutate(age = case_when(
+     grepl("2,002", age, fixed = TRUE) ~ "21",
+    TRUE ~ age)) %>% mutate_at(3,as.numeric) 
+```
 ## year
 ```{r}
 dem_data_clean <- dem_data_clean %>%
@@ -60,7 +67,7 @@ dem_data_clean <- dem_data_clean %>%
     grepl("Senior - 4th year", year, fixed = TRUE) ~ 4,
     grepl("Senior - 5th+ year", year, fixed = TRUE) ~ 5,
     TRUE~NA
-  ))
+  )) %>% mutate_at(4,factor)
 ```
 
 ## Gender
@@ -71,7 +78,7 @@ dem_data_clean <- dem_data_clean %>%
     grepl("Man", gender, fixed = TRUE) ~ 'Man',
     grepl("Non-binary or Genderqueer", gender, fixed = TRUE) ~ 'Other',
     TRUE~NA
-  ))
+  )) %>% mutate_at(5, factor)
 ```
 
 ## int_student
@@ -81,7 +88,7 @@ dem_data_clean <- dem_data_clean %>%
     grepl("Yes", int_student, fixed = TRUE) ~ 1,
     grepl("No", int_student, fixed = TRUE) ~ 0,
     TRUE~NA
-  ))
+  )) %>% mutate_at(6, factor)
 ```
 
 ## esl
@@ -91,8 +98,16 @@ dem_data_clean <- dem_data_clean %>%
     grepl("English is my first language", esl, fixed = TRUE) ~ 1,
     grepl("English is not my first language", esl, fixed = TRUE) ~ 0,
     TRUE~NA
-  ))
+  ))%>% mutate_at(7, factor)
 ```
+
+##e_exp
+```{r}
+dem_data_clean <- dem_data_clean %>%
+  mutate(e_exp = str_remove_all(e_exp, "%")
+  )%>% mutate_at(8, as.numeric)
+```
+
 
 ## e_lvl
 ```{r}
@@ -106,7 +121,7 @@ dem_data_clean <- dem_data_clean %>%
     grepl("5", e_lvl, fixed = TRUE) ~ 5, 
     grepl("6", e_lvl, fixed = TRUE) ~ 6, 
     TRUE~NA
-  ))
+  ))%>% mutate_at(9, as.integer)
 ```
 
 ### URM
@@ -123,7 +138,7 @@ dem_data_clean <- dem_data_clean %>%
     grepl("Pacific Islander", URM, fixed = TRUE) ~ 8,
     grepl("South Asian", URM, fixed = TRUE) ~ 9,
     TRUE~NA
-  ))
+  ))%>% mutate_at(10, factor)
 ```
 
 ### p_education
@@ -159,7 +174,7 @@ dem_data_clean <- dem_data_clean %>%
 ```{r}
 dem_data_clean <- dem_data_clean %>% mutate(first_gen = case_when(p_education < 5 & m_education < 5 ~ 1, p_education >= 4 | m_education >= 4 ~ 0))
 
-dem_data_clean <- dem_data_clean %>%  mutate(first_gen = case_when(first_gen == NA & p_education < 5 | m_education < 5 ~ 1, .default = first_gen)) %>% mutate( first_gen = case_when(first_gen == NA & m_education < 5 | p_education < 5 ~ 1, .default = first_gen)) 
+dem_data_clean <- dem_data_clean %>%  mutate(first_gen = case_when(first_gen == NA & p_education < 5 | m_education < 5 ~ 1, .default = first_gen)) %>% mutate( first_gen = case_when(first_gen == NA & m_education < 5 | p_education < 5 ~ 1, .default = first_gen)) %>% mutate_at(20, factor)
 ```
 
 ## par_rel
@@ -198,7 +213,7 @@ dem_data_clean <- dem_data_clean %>%
     grepl("I qualified for 'free or reduced cost lunch' for all or most of high school",ses, fixed = TRUE) ~ 2,
     grepl("I qualified for 'free or reduced cost lunch' for some of high school", ses, fixed = TRUE) ~ 3,
     TRUE~NA
-  ))
+  ))%>% mutate_at(15, factor)
 ```
 
 ## grant
@@ -209,23 +224,25 @@ dem_data_clean <- dem_data_clean %>%
     grepl("I do qualify for a Pell Grant", grant, fixed = TRUE) ~ 1,
     grepl("I don't know if I qualify for a Pell Grant",grant, fixed = TRUE) ~ 2,
     TRUE~NA
-  ))
+  ))%>% mutate_at(16, factor)
 ```
 
 ## soc_med
 ```{r}
-dem_data_test <- dem_data_clean %>%
+dem_data_clean <- dem_data_clean %>%
   mutate(soc_med = case_when(
     soc_med == 0 ~ NA, .default = soc_med
-    ))
+    ))%>%mutate(soc_med = str_remove_all(soc_med, ",")
+  )%>% mutate_at(17, as.numeric)
 ```
 
 ## hw_time
 ```{r}
-dem_data_test <- dem_data_test %>%
+dem_data_clean <- dem_data_clean %>%
   mutate(hw_time = case_when(
     hw_time == 0 ~ NA, .default = hw_time
-    ))
+    ))%>% mutate(hw_time = str_remove_all(hw_time, ",")
+  )%>% mutate_at(18, as.numeric)
 ```
 
 
@@ -237,12 +254,12 @@ dem_data_clean <- dem_data_clean %>%
     grepl("Yes", transfer, fixed = TRUE) ~ 1,
     grepl("No", transfer, fixed = TRUE) ~ 0,
     TRUE~NA
-  ))
+  ))%>% mutate_at(19, factor)
 ```
 
 # save csv 
 ```{r}
-
+write.csv(dem_data_clean, file = "First_dataset.csv")
 ```
 
 
@@ -279,7 +296,51 @@ final grade calculation = p+p_final(upto 250) + raw_exam_total(upto 750, not per
 
 After calculating turn final grade into % by divide by 1000 and then * 100 
 
+### Canvas
+```{r}
+wq_grades <- read.csv(file = "wq23_canvas_data_raw_anon.csv")
+wq_grades_short <- wq_grades %>% select("anon_id", "Exam.1..965996.", "Exam.2..965997.", "Exam.3..965998.", "Exam.4..965999.", "Exam.5..966000.", "Final.Exam..966002.", "Prep.Participation..up.to.250.points..Final.Points", "Extra.Credit.Final.Points", "Exam.Corrections...966001." ) %>% mutate_at(-c(1,2), as.numeric)
+
+colnames(wq_grades_short) <- c("anon_id", "exam1", "exam2","exam3","exam4","exam5","exam6", "prep_p_raw", "extra_credit", "e_correct")
+
+```
+
+##p_p_final
+```{r}
+wq_grades_short$p_p_final <- wq_grades_short$prep_p_raw
+wq_grades_short$p_p_final[wq_grades_short$prep_p_raw >= 250] <- 250
+```
 
 
+#drop the lowst exam score
+```{r}
+wq_exams <- wq_grades_short %>% select(contains("exam"))
+wq_exams$lowest <- apply(wq_exams, 1, min)
+wq_exams$lowest <- wq_exams$lowest * -1
+wq_grades_short$exam_total <- apply(wq_exams, 1, sum)
+```
 
+
+```{r}
+final_grade_calc <- wq_grades_short %>% select("extra_credit", "p_p_final", "exam_total")
+wq_grades_clean <- wq_grades_short %>% 
+  mutate(final_grade = apply(final_grade_calc, 1, sum)) %>%
+  mutate(opt_in = case_when(e_correct == 0 ~ 0, e_correct > 0 ~ 1)) 
+```
+
+```{r}
+wq_grades_clean <- wq_grades_clean %>% mutate_at(c(2:8),~na_if(.,0) )
+exam_col <- wq_grades_clean %>% select(contains("exam"), -exam_total)
+```
+
+```{r}
+div <- function(x) ((x/150) *100)
+
+wq_grades_final <- wq_grades_clean %>% mutate_at(colnames(exam_col), div) %>% mutate(exam_total = (exam_total/750)*100) %>% mutate(final_grade = (final_grade/1000)*100)
+```
+
+#save file
+```{r}
+write.csv(wq_grades_final, file = "wq_grades_final.csv")
+```
 
