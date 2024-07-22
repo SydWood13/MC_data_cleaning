@@ -16,6 +16,7 @@ library(tidycode)
 library(tibble)
 library(dplyr)
 library(tidyverse)
+library(readr)
 setwd("~/Documents/GitHub/MC_data_cleaning")
 ```
 
@@ -257,9 +258,11 @@ dem_data_clean <- dem_data_clean %>%
   ))%>% mutate_at(19, factor)
 ```
 
+
+
 # save csv 
 ```{r}
-write.csv(dem_data_clean, file = "First_dataset.csv")
+write.csv(dem_data_clean, file = "First_dataset.csv", row.names = F)
 ```
 
 
@@ -341,6 +344,63 @@ wq_grades_final <- wq_grades_clean %>% mutate_at(colnames(exam_col), div) %>% mu
 
 #save file
 ```{r}
-write.csv(wq_grades_final, file = "wq_grades_final.csv")
+write.csv(wq_grades_final, file = "wq_grades_final.csv", row.names = F)
 ```
+
+
+
+
+# Full Data 
+
+
+## Combine Dem & Grades
+```{r}
+grades <- read.csv(file ="wq_grades_final.csv")
+
+dem <- read.csv("First_dataset.csv")
+
+
+
+
+
+
+
+```
+
+
+
+
+## Get only the written score 
+
+
+```{r}
+setwd("~/GitHub/MC_data_cleaning/Raw Exam Data")
+
+
+exam <- read.csv("~/GitHub/MC_data_cleaning/Raw Exam Data/1_A_Mar23_anon.csv")
+
+
+
+exam1A <- exam1A %>% filter(Status == "Graded") %>% select(1:11)
+exam1B <- exam1B %>% filter(Status == "Graded") %>% select(1:11)
+
+
+e1Agrade
+e1Bgrade
+e1Cgrade
+e1Dgrade
+
+write.csv()
+
+exam1_full <- rbind(exam1A, exam1B)
+
+```
+
+Exam 1:
+
+H1_nondirectional == h2 
+claim.type.explain == claim_ex
+Mill's.Criteria == temp
+Alternate.Explination == alt.exp
+
 
