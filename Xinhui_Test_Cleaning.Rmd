@@ -350,6 +350,8 @@ write.csv(wq_grades_final, file = "wq_grades_final.csv", row.names = F)
 
 
 
+## 
+
 # Full Data 
 
 
@@ -359,12 +361,13 @@ grades <- read.csv(file ="wq_grades_final.csv")
 
 dem <- read.csv("First_dataset.csv")
 
+full_grades <- grades %>% select(-"anon_id")
 
+full_data <- full_join(dem,grades, by = "anon_id")
 
+full_data <- full_data %>% filter(!is.na(consent))
 
-
-
-
+full_data <- full_data %>% select(-"consent")
 ```
 
 
@@ -374,10 +377,138 @@ dem <- read.csv("First_dataset.csv")
 
 
 ```{r}
-setwd("~/GitHub/MC_data_cleaning/Raw Exam Data")
+setwd("~/Documents/GitHub/MC_data_cleaning/Raw Exam Data/Exam1")
+exam1A <- read.csv("1_A_Mar23_anon.csv")
+```
 
 
-exam <- read.csv("~/GitHub/MC_data_cleaning/Raw Exam Data/1_A_Mar23_anon.csv")
+```{r}
+setwd("~/Documents/GitHub/MC_data_cleaning/Raw Exam Data/Exam1")
+w_exam1D<- read.csv("1_D_Mar23_anon.csv") #I manually changed the file name for each exam
+
+w_exam1D <- w_exam1D %>% select("anon_id","View.Count", "Status", 15, 17, 18, 20, 24, 29, 30, 31, 32) #these change for each exam as well 
+  
+q_names <- c("anon_id", "views", "Status", "h0", "h1", "h2", "pv_op", "ov_op", "claim_ex", "temp", "alt_ex","interpret")
+
+colnames(w_exam1D) <- q_names
+
+w_exam1D <- w_exam1D %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(anon_id != "#N/A")
+```
+
+#w_exam1B <- w_exam1B %>% select("anon_id","View Count", 15, 17, 18, 20, 24, 29, 30, 31, 32)
+#w_exam1C <- w_exam1C %>% select("anon_id","View Count", 15, 17, 18, 20, 24, 29, 30, 31, 32)
+#w_exam1D <- w_exam1D %>% select("anon_id","View Count", 15, 17, 18, 20, 24, 29, 30, 31, 32)
+
+##Combine the results
+```{r}
+w_exam1_full <- rbind(w_exam1A, w_exam1B, w_exam1C, w_exam1D)
+
+w_exam1_full <- w_exam1_full %>% filter(anon_id != "dropped")
+
+```
+
+## write the file
+```{r}
+write.csv(exam1_full, file = "exam1_writtenQs.csv")
+```
+
+
+## Exam 1 Loop
+```{r}
+library(dplyr)
+file_directory <- "~/Documents/GitHub/MC_data_cleaning/Raw Exam Data/Exam1"
+Exam1 <- list.files(file_directory, pattern = "*.csv", full.names = TRUE)
+
+```
+
+```{r}
+# Create an empty list to store the results
+results_list <- list()
+```
+
+```{r}
+# Iterate over each file
+for (file in Exam1) {
+  # Read the CSV file
+  exam1 <- read.csv(file)
+  
+  # Select the required columns
+  exam1 <- exam1 %>% 
+    select("anon_id", "View.Count", "Status", 15, 17, 18, 20, 24, 29, 30, 31, 32)
+  
+  # Rename the columns
+  q_names <- c("anon_id", "views", "Status", "h0", "h1", "h2", "pv_op", "ov_op", "claim_ex", "temp", "alt_ex","interpret")
+  colnames(exam1) <- q_names
+  
+  # Filter out rows where the status is "Missing" and remove the status column if it exists
+  exam1 <- exam1 %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(anon_id != "#N/A") %>% filter(anon_id != "dropped")
+  
+  # Add the processed data to the results list
+  results_list[[basename(file)]] <- exam1
+}
+
+# Combine all results into a single data frame
+Exam1_full <- bind_rows(results_list, .id = "source")
+
+
+```
+
+
+## write the file
+```{r}
+write.csv(Exam1_full, file = "exam1_writtenQs.csv", row.names = F)
+```
+
+
+## Exam 2 Loop 
+```{r}
+library(dplyr)
+file_directory <- "~/Documents/GitHub/MC_data_cleaning/Raw Exam Data/Exam2"
+Exam2 <- list.files(file_directory, pattern = "*.csv", full.names = TRUE)
+
+```
+
+```{r}
+# Create an empty list to store the results
+results_list2 <- list()
+```
+
+```{r}
+# Iterate over each file
+for (file in Exam2) {
+  # Read the CSV file
+  exam2 <- read.csv(file)
+  
+  # Select the required columns
+  exam2 <- exam2 %>% 
+    select("anon_id", "View.Count", "Status", contains("floater"), contains("Construct.Validity") )
+  
+  # Rename the columns
+  q_names <- c("anon_id", "views", "Status", "floater", "cv")
+  colnames(exam2) <- q_names
+  
+  # Filter out rows where the status is "Missing" and remove the status column if it exists
+  exam2 <- exam2 %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(anon_id != "#N/A") %>% filter(anon_id != "dropped")
+  
+  # Add the processed data to the results list
+  results_list2[[basename(file)]] <- exam2
+}
+
+# Combine all results into a single data frame
+final_result <- bind_rows(results_list2, .id = "source")
+
+# View the result
+print(final_result)
+
+Exam2
+```
+
+
+```{r}
+setwd("/~/GitHub/MC_data_cleaning/Raw Exam Data")
+
+
+exam1A <- read.csv("~/GitHub/MC_data_cleaning/Raw Exam Data/1_A_Mar23_anon.csv")
 
 
 
@@ -403,4 +534,9 @@ claim.type.explain == claim_ex
 Mill's.Criteria == temp
 Alternate.Explination == alt.exp
 
+
+## Combine the datasets
+```{r}
+
+```
 
