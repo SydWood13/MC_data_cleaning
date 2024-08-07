@@ -705,7 +705,7 @@ exam1_end <- exam1_final %>% select("anon_id", "views1", "p_tot1")
 ```
 
 ```{r}
-full_data <- left_join(full_data, exam1_end, by = anon_id )
+full_data <- left_join(full_data, exam1_end, by = "anon_id" )
 ```
 
 
