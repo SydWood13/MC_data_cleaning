@@ -731,7 +731,7 @@ exam2_end <- exam2_final %>% select("anon_id", "views2", "p_tot2")
 ```
 
 ```{r}
-full_data <- left_join(full_data, exam2_end, by = anon_id )
+full_data <- left_join(full_data, exam2_end, by = "anon_id" )
 ```
 
 ## p_tot3
@@ -755,7 +755,7 @@ exam3_end <- exam3_final %>% select("anon_id", "views3", "p_tot3")
 ```
 
 ```{r}
-full_data <- left_join(full_data, exam3_end, by = anon_id )
+full_data <- left_join(full_data, exam3_end, by = "anon_id" )
 ```
 
 
@@ -780,7 +780,7 @@ exam4_end <- exam4_final %>% select("anon_id", "views4", "p_tot4")
 ```
 
 ```{r}
-full_data <- left_join(full_data, exam4_end, by = anon_id )
+full_data <- left_join(full_data, exam4_end, by = "anon_id" )
 ```
 
 
@@ -806,7 +806,7 @@ exam5_end <- exam5_final %>% select("anon_id", "views5", "p_tot5")
 ```
 
 ```{r}
-full_data <- left_join(full_data, exam5_end, by = anon_id )
+full_data <- left_join(full_data, exam5_end, by = "anon_id" )
 ```
 
 
