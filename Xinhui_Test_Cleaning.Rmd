@@ -438,7 +438,7 @@ w_exam1_full <- w_exam1_full %>% filter(anon_id != "dropped")
 
 ## write the file
 ```{r}
-write.csv(exam1_full, file = "exam1_writtenQs.csv")
+write.csv(w_exam1_full, file = "exam1_writtenQs.csv")
 ```
 
 
