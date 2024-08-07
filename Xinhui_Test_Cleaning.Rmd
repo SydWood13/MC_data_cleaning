@@ -371,6 +371,35 @@ full_data <- full_data %>% select(-"consent")
 ```
 
 
+```{r}
+setwd("/~/GitHub/MC_data_cleaning/Raw Exam Data")
+
+
+exam1A <- read.csv("~/GitHub/MC_data_cleaning/Raw Exam Data/1_A_Mar23_anon.csv")
+
+
+
+exam1A <- exam1A %>% filter(Status == "Graded") %>% select(1:11)
+exam1B <- exam1B %>% filter(Status == "Graded") %>% select(1:11)
+
+
+e1Agrade
+e1Bgrade
+e1Cgrade
+e1Dgrade
+
+write.csv()
+
+exam1_full <- rbind(exam1A, exam1B)
+
+```
+
+Exam 1:
+
+H1_nondirectional == h2 
+claim.type.explain == claim_ex
+Mill's.Criteria == temp
+Alternate.Explination == alt.exp
 
 
 ## Get only the written score 
@@ -437,7 +466,7 @@ for (file in Exam1) {
     select("anon_id", "View.Count", "Status", 15, 17, 18, 20, 24, 29, 30, 31, 32)
   
   # Rename the columns
-  q_names <- c("anon_id", "views", "Status", "h0", "h1", "h2", "pv_op", "ov_op", "claim_ex", "temp", "alt_ex","interpret")
+  q_names <- c("anon_id", "views1", "Status", "h0", "h1", "h2", "pv_op", "ov_op", "claim_ex", "temp", "alt_ex","interpret")
   colnames(exam1) <- q_names
   
   # Filter out rows where the status is "Missing" and remove the status column if it exists
@@ -458,6 +487,7 @@ Exam1_full <- bind_rows(results_list, .id = "source")
 ```{r}
 write.csv(Exam1_full, file = "exam1_writtenQs.csv", row.names = F)
 ```
+
 
 
 ## Exam 2 Loop 
@@ -481,10 +511,10 @@ for (file in Exam2) {
   
   # Select the required columns
   exam2 <- exam2 %>% 
-    select("anon_id", "View.Count", "Status", contains("floater"), contains("Construct.Validity") )
+    select("anon_id", "View.Count", "Status", 15,contains("floater"), 20, contains("Construct.Validity"), 24, 26, contains("Interpretation"))
   
   # Rename the columns
-  q_names <- c("anon_id", "views", "Status", "floater", "cv")
+  q_names <- c("anon_id", "views2", "Status", "pv_op", "cv_float", "ov_op", "cv", "reliability", "h1", "interpret")
   colnames(exam2) <- q_names
   
   # Filter out rows where the status is "Missing" and remove the status column if it exists
@@ -495,48 +525,296 @@ for (file in Exam2) {
 }
 
 # Combine all results into a single data frame
-final_result <- bind_rows(results_list2, .id = "source")
+final_result2 <- bind_rows(results_list2, .id = "source")
 
-# View the result
-print(final_result)
-
-Exam2
+## write file
+write.csv(final_result2, file = "exam2_writtenQs.csv", row.names = F)
 ```
 
+## Exam 3 Loop 
+```{r}
+library(dplyr)
+file_directory <- "~/Documents/GitHub/MC_data_cleaning/Raw Exam Data/Exam3"
+Exam3 <- list.files(file_directory, pattern = "*.csv", full.names = TRUE)
+```
 
 ```{r}
-setwd("/~/GitHub/MC_data_cleaning/Raw Exam Data")
-
-
-exam1A <- read.csv("~/GitHub/MC_data_cleaning/Raw Exam Data/1_A_Mar23_anon.csv")
-
-
-
-exam1A <- exam1A %>% filter(Status == "Graded") %>% select(1:11)
-exam1B <- exam1B %>% filter(Status == "Graded") %>% select(1:11)
-
-
-e1Agrade
-e1Bgrade
-e1Cgrade
-e1Dgrade
-
-write.csv()
-
-exam1_full <- rbind(exam1A, exam1B)
-
+# Create an empty list to store the results
+results_list3 <- list()
 ```
 
-Exam 1:
-
-H1_nondirectional == h2 
-claim.type.explain == claim_ex
-Mill's.Criteria == temp
-Alternate.Explination == alt.exp
-
-
-## Combine the datasets
 ```{r}
+# Iterate over each file
+for (file in Exam3) {
+  # Read the CSV file
+  exam3 <- read.csv(file)
+  
+  ## Turn the files to character
+   exam3$anon_id <- as.character(exam3$anon_id)
+  
+  # Select the required columns
+  exam3 <- exam3 %>% 
+    select("anon_id", "View.Count", "Status",15, 19, 23, 24, 25, contains("Confound"), 29, contains("Interpretation"))
+  
+  # Rename the columns
+  q_names <- c("anon_id", "views3", "Status", "pv_op", "cv", "compare_cv", "internal1", "internal2", "confound", "design_ex", "interpret")
+  colnames(exam3) <- q_names
+  
+  # Filter out rows where the status is "Missing" and remove the status column if it exists
+  exam3 <- exam3 %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(anon_id != "#N/A") %>% filter(anon_id != "dropped")
+  
+  # Add the processed data to the results list
+  results_list3[[basename(file)]] <- exam3
+}
+
+# Combine all results into a single data frame
+final_result3 <- bind_rows(results_list3, .id = "source")
+
+## write file
+write.csv(final_result3, file = "exam3_writtenQs.csv", row.names = F)
+```
+
+## Exam 4 Loop 
+```{r}
+library(dplyr)
+file_directory <- "~/Documents/GitHub/MC_data_cleaning/Raw Exam Data/Exam4"
+Exam4 <- list.files(file_directory, pattern = "*.csv", full.names = TRUE)
 
 ```
 
+```{r}
+# Create an empty list to store the results
+results_list4 <- list()
+```
+
+```{r}
+# Iterate over each file
+for (file in Exam4) {
+  # Read the CSV file
+  exam4 <- read.csv(file)
+  
+  # Select the required columns
+  exam4 <- exam4 %>% 
+    select("anon_id", "View.Count", "Status", 20, 21, 24, 25, 26, 27, 33, 34, 35)
+  
+  # Rename the columns
+  q_names <- c("anon_id", "views4", "Status", "new_claim", "ov_op", "cv", "internal", "confound", "fix_confound", "sampling", "external", "replication")
+  colnames(exam4) <- q_names
+  
+  # Filter out rows where the status is "Missing" and remove the status column if it exists
+  exam4 <- exam4 %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(anon_id != "#N/A") %>% filter(anon_id != "dropped")
+  
+  # Add the processed data to the results list
+  results_list4[[basename(file)]] <- exam4
+}
+
+# Combine all results into a single data frame
+final_result4 <- bind_rows(results_list4, .id = "source")
+
+## write file
+write.csv(final_result4, file = "exam4_writtenQs.csv", row.names = F)
+```
+
+
+
+
+## Exam 5 Loop 
+```{r}
+library(dplyr)
+file_directory <- "~/Documents/GitHub/MC_data_cleaning/Raw Exam Data/Exam5"
+Exam5 <- list.files(file_directory, pattern = "*.csv", full.names = TRUE)
+
+```
+
+```{r}
+# Create an empty list to store the results
+results_list5 <- list()
+```
+
+```{r}
+# Iterate over each file
+for (file in Exam5) {
+  # Read the CSV file
+  exam5 <- read.csv(file)
+  
+  # Select the required columns
+  exam5 <- exam5 %>% 
+    select("anon_id", "View.Count", "Status", 15, 20, 24, 25, 26, 30, 31, 32)
+  
+  # Rename the columns
+  q_names <- c("anon_id", "views5", "Status", "pv_op", "cv", "cv_compare", "confound", "internal", "interpret", "external", "replication")
+  colnames(exam5) <- q_names
+  
+  # Filter out rows where the status is "Missing" and remove the status column if it exists
+  exam5 <- exam5 %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(anon_id != "#N/A") %>% filter(anon_id != "dropped")
+  
+  # Add the processed data to the results list
+  results_list5[[basename(file)]] <- exam5
+}
+
+# Combine all results into a single data frame
+final_result5 <- bind_rows(results_list5, .id = "source")
+
+## write file
+write.csv(final_result5, file = "exam5_writtenQs.csv", row.names = F)
+```
+
+
+
+
+
+
+
+
+## Combine Dem & Grades
+```{r}
+grades <- read.csv(file ="wq_grades_final.csv")
+
+dem <- read.csv("First_dataset.csv")
+
+full_grades <- grades %>% select(-"anon_id")
+
+full_data <- full_join(dem,grades, by = "anon_id")
+
+full_data <- full_data %>% filter(!is.na(consent))
+
+full_data <- full_data %>% select(-"consent")
+```
+
+
+# create p_tot (percent accuracy of just the written portion of the exam )
+
+## p_tot1
+```{r}
+library(dplyr)
+exam1_short <- read.csv("exam1_writtenQs.csv", sep = ",")
+```
+
+```{r}
+exam1_calc <- exam1_short %>% select(4:12)
+exam1_short <- exam1_short %>%
+  mutate(written = rowSums(exam1_calc, na.rm = TRUE))
+```
+
+```{r}
+exam1_final <- exam1_short %>% mutate(p_tot1 = (written/75)*100) 
+```
+
+```{r}
+exam1_end <- exam1_final %>% select("anon_id", "views1", "p_tot1")
+```
+
+```{r}
+full_data <- left_join(full_data, exam1_end, by = anon_id )
+```
+
+
+
+##p_tot2
+```{r}
+library(dplyr)
+exam2_short <- read.csv("exam2_writtenQs.csv", sep = ",")
+```
+
+```{r}
+exam2_calc <- exam2_short %>% select(4:10)
+exam2_short <- exam2_short %>%
+  mutate(written = rowSums(exam2_calc, na.rm = TRUE))
+```
+
+```{r}
+exam2_final <- exam2_short %>% mutate(p_tot2 = (written/85)*100) 
+```
+
+```{r}
+exam2_end <- exam2_final %>% select("anon_id", "views2", "p_tot2")
+```
+
+```{r}
+full_data <- left_join(full_data, exam2_end, by = anon_id )
+```
+
+## p_tot3
+```{r}
+library(dplyr)
+exam3_short <- read.csv("exam3_writtenQs.csv", sep = ",")
+```
+
+```{r}
+exam3_calc <- exam3_short %>% select(4:11)
+exam3_short <- exam3_short %>%
+  mutate(written = rowSums(exam3_calc, na.rm = TRUE))
+```
+
+```{r}
+exam3_final <- exam3_short %>% mutate(p_tot3 = (written/80)*100) 
+```
+
+```{r}
+exam3_end <- exam3_final %>% select("anon_id", "views3", "p_tot3")
+```
+
+```{r}
+full_data <- left_join(full_data, exam3_end, by = anon_id )
+```
+
+
+## p_tot4
+```{r}
+library(dplyr)
+exam4_short <- read.csv("exam4_writtenQs.csv", sep = ",")
+```
+
+```{r}
+exam4_calc <- exam4_short %>% select(4:12)
+exam4_short <- exam4_short %>%
+  mutate(written = rowSums(exam4_calc, na.rm = TRUE))
+```
+
+```{r}
+exam4_final <- exam4_short %>% mutate(p_tot4 = (written/85)*100) 
+```
+
+```{r}
+exam4_end <- exam4_final %>% select("anon_id", "views4", "p_tot4")
+```
+
+```{r}
+full_data <- left_join(full_data, exam4_end, by = anon_id )
+```
+
+
+
+## p_tot5
+```{r}
+library(dplyr)
+exam5_short <- read.csv("exam5_writtenQs.csv", sep = ",")
+```
+
+```{r}
+exam5_calc <- exam5_short %>% select(4:11)
+exam5_short <- exam5_short %>%
+  mutate(written = rowSums(exam5_calc, na.rm = TRUE))
+```
+
+```{r}
+exam5_final <- exam5_short %>% mutate(p_tot5 = (written/80)*100) 
+```
+
+```{r}
+exam5_end <- exam5_final %>% select("anon_id", "views5", "p_tot5")
+```
+
+```{r}
+full_data <- left_join(full_data, exam5_end, by = anon_id )
+```
+
+
+
+
+You'll end with a dataset: 
+
+exam1_short <- anon_id, views, p_tot1
+
+
+full_data <- left_join(full_data, exam1_short, by = anon_id )
