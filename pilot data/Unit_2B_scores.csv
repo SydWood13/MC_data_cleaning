@@ -1,0 +1,71 @@
+First Name,Last Name,SID,Email,Sections,Total Score,Max Points,Status,Submission ID,Submission Time,Lateness (H:M:S),View Count,Submission Count,1: Operational Definition PV (10.0 pts),2: PV Type (5.0 pts),3: PV measured (5.0 pts),4: Causal vs. Associative (5.0 pts),5: Construct Validity PV (20.0 pts),6: Operational Definition OV (10.0 pts),7: OV type (5.0 pts),8: OV measured (5.0 pts),9: Construct Validity OV (20.0 pts),10: Effects on research (10.0 pts),11: Reliability (10.0 pts),12: Sketch (5.0 pts),13: Directional Hypothesis (5.0 pts),14: Type of relationship (5.0 pts),15: p-value (5.0 pts),16: Interpretation (5.0 pts),17: MC1 (2.0 pts),18: MC2 (2.0 pts),19: MC3 (2.0 pts),20: MC4 (2.0 pts),21: MC5 (2.0 pts),22: MC6 (2.0 pts),23: MC7 (2.0 pts),24: MC8 (2.0 pts),25: Error Bar (2.0 pts),26: MC10 (2.0 pts)
+Thao,Bui,916568458,thmbui@ucdavis.edu,psc-041-001-ss1-2022,87.75,150.0,Graded,129065989,2022-07-05 14:44:32 -0700,00:00:00,2,1,9.25,5.0,5.0,5.0,2.0,5.5,0.0,5.0,15.0,7.0,3.0,0.0,4.0,5.0,0.0,5.0,0.0,0.0,0.0,2.0,2.0,0.0,2.0,2.0,2.0,2.0
+Amy,Chen,918205421,amxchen@ucdavis.edu,psc-041-001-ss1-2022,133.0,150.0,Graded,129065990,2022-07-05 14:44:32 -0700,00:00:00,2,1,10.0,5.0,5.0,5.0,20.0,10.0,5.0,5.0,15.0,10.0,5.0,4.0,5.0,0.0,5.0,4.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0
+Yifan,Chen,918538402,yvnchen@ucdavis.edu,psc-041-001-ss1-2022,133.5,150.0,Graded,129065991,2022-07-05 14:44:32 -0700,00:00:00,11,1,6.75,5.0,5.0,5.0,20.0,10.0,5.0,5.0,20.0,5.75,3.0,4.0,5.0,5.0,5.0,4.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0
+Laila,Golde,921622745,lbgolde@ucdavis.edu,psc-041-001-ss1-2022,126.5,150.0,Graded,129065992,2022-07-05 14:44:32 -0700,00:00:00,4,1,10.0,5.0,5.0,5.0,12.5,10.0,5.0,5.0,15.0,10.0,3.0,5.0,4.0,5.0,5.0,4.0,2.0,2.0,2.0,2.0,0.0,2.0,2.0,2.0,2.0,2.0
+Valeria,Gonzalez,919269518,vvgonzalez@ucdavis.edu,psc-041-001-ss1-2022,139.0,150.0,Graded,129065993,2022-07-05 14:44:32 -0700,00:00:00,13,1,8.0,5.0,5.0,5.0,17.5,10.0,5.0,5.0,20.0,8.5,10.0,5.0,5.0,5.0,5.0,4.0,2.0,2.0,0.0,0.0,2.0,2.0,2.0,2.0,2.0,2.0
+Aoze,Kang,918192916,aozkang@ucdavis.edu,psc-041-001-ss1-2022,131.0,150.0,Graded,129065994,2022-07-05 14:44:32 -0700,00:00:00,6,1,6.75,5.0,5.0,5.0,20.0,6.25,5.0,5.0,17.0,7.0,10.0,5.0,4.0,5.0,5.0,4.0,2.0,0.0,0.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0
+Jasjeet,Kaur,917551749,jjkaur@ucdavis.edu,psc-041-001-ss1-2022,128.25,150.0,Graded,129065995,2022-07-05 14:44:32 -0700,00:00:00,0,1,6.75,5.0,5.0,5.0,20.0,7.5,5.0,5.0,17.0,0.0,10.0,5.0,5.0,5.0,5.0,4.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,0.0,2.0,2.0
+Kaitlyn,Kim,917351062,kxkim@ucdavis.edu,psc-041-001-ss1-2022,130.5,150.0,Graded,129065996,2022-07-05 14:44:32 -0700,00:00:00,4,1,5.5,5.0,5.0,5.0,15.0,10.0,5.0,5.0,20.0,10.0,10.0,5.0,5.0,5.0,0.0,4.0,2.0,2.0,2.0,2.0,2.0,0.0,2.0,0.0,2.0,2.0
+Eugene,Ko,917048906,eugko@ucdavis.edu,psc-041-001-ss1-2022,136.25,150.0,Graded,129065997,2022-07-05 14:44:32 -0700,00:00:00,1,1,10.0,5.0,5.0,5.0,15.0,6.25,0.0,5.0,20.0,10.0,10.0,5.0,5.0,5.0,5.0,5.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0
+Scott,Ho,918702966,sctho@ucdavis.edu,psc-041-001-ss1-2022,119.0,150.0,Graded,129065998,2022-07-05 14:44:32 -0700,00:00:00,0,1,9.25,5.0,5.0,5.0,12.0,4.75,5.0,5.0,17.0,0.0,10.0,4.0,5.0,5.0,5.0,4.0,2.0,2.0,2.0,2.0,2.0,2.0,0.0,2.0,2.0,2.0
+Callan,Malone,920068465,cmmalone@ucdavis.edu,psc-041-001-ss1-2022,138.25,150.0,Graded,129065999,2022-07-05 14:44:32 -0700,00:00:00,1,1,9.25,5.0,5.0,5.0,20.0,5.0,0.0,5.0,20.0,10.0,10.0,5.0,5.0,5.0,5.0,4.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0
+Manuel,Martinez-Cruz,919565982,mmartinezcruz@ucdavis.edu,psc-041-001-ss1-2022,93.5,150.0,Graded,129066000,2022-07-05 14:44:32 -0700,00:00:00,1,1,5.5,0.0,5.0,5.0,12.0,10.0,5.0,5.0,12.0,0.0,3.0,5.0,5.0,5.0,0.0,4.0,0.0,2.0,2.0,2.0,2.0,0.0,0.0,0.0,2.0,2.0
+Miguel,Melgoza-Zamora,917070039,mamelgozazamora@ucdavis.edu,psc-041-001-ss1-2022,119.75,150.0,Graded,129066001,2022-07-05 14:44:32 -0700,00:00:00,5,1,6.75,5.0,5.0,5.0,15.0,10.0,0.0,5.0,20.0,10.0,5.0,5.0,5.0,5.0,0.0,0.0,2.0,0.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0
+Savanna,Mendoza,917443815,smmendoza@ucdavis.edu,psc-041-001-ss1-2022,111.75,150.0,Graded,129066002,2022-07-05 14:44:32 -0700,00:00:00,0,1,5.75,5.0,5.0,5.0,20.0,6.0,5.0,5.0,5.0,10.0,7.0,5.0,0.0,5.0,5.0,0.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,0.0,2.0,2.0
+Lisseth,Mora,917551082,lismora@ucdavis.edu,psc-041-001-ss1-2022,79.25,150.0,Graded,129066003,2022-07-05 14:44:32 -0700,00:00:00,0,1,0.0,5.0,0.0,5.0,9.5,3.75,5.0,5.0,10.0,0.0,3.0,5.0,5.0,5.0,5.0,1.0,0.0,2.0,0.0,2.0,0.0,2.0,2.0,0.0,2.0,2.0
+Ana,Nadirashvili,919281884,anadirashvili@ucdavis.edu,psc-041-001-ss1-2022,116.25,150.0,Graded,129066004,2022-07-05 14:44:32 -0700,00:00:00,9,1,5.5,5.0,5.0,5.0,20.0,8.75,5.0,5.0,17.0,0.0,10.0,5.0,5.0,5.0,0.0,1.0,0.0,0.0,0.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0
+Jazmyne,Newman,918087487,jnnnewman@ucdavis.edu,psc-041-001-ss1-2022,104.5,150.0,Graded,129066005,2022-07-05 14:44:32 -0700,00:00:00,2,1,8.0,5.0,5.0,5.0,17.0,7.5,5.0,5.0,20.0,0.0,3.0,5.0,5.0,5.0,0.0,1.0,2.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,2.0,2.0
+Alexandria,Oehlcke,918893367,aloehlcke@ucdavis.edu,psc-041-001-ss1-2022,107.75,150.0,Graded,129066006,2022-07-05 14:44:32 -0700,00:00:00,2,1,3.25,5.0,0.0,5.0,15.0,8.75,5.0,5.0,17.0,8.75,10.0,5.0,0.0,0.0,0.0,0.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0
+Maithili,Patel,917340675,maipatel@ucdavis.edu,psc-041-001-ss1-2022,131.75,150.0,Graded,129066007,2022-07-05 14:44:32 -0700,00:00:00,3,1,10.0,5.0,5.0,5.0,20.0,5.0,5.0,5.0,20.0,8.75,3.0,5.0,5.0,5.0,5.0,0.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0
+Mikayla,Segura,920153516,mdsegura@ucdavis.edu,psc-041-001-ss1-2022,105.5,150.0,Graded,129066008,2022-07-05 14:44:32 -0700,00:00:00,3,1,9.25,5.0,5.0,5.0,20.0,6.25,0.0,5.0,5.0,10.0,10.0,5.0,0.0,5.0,5.0,0.0,0.0,0.0,2.0,0.0,2.0,0.0,2.0,0.0,2.0,2.0
+Jamie,Serrano,918795135,jjserrano@ucdavis.edu,psc-041-001-ss1-2022,143.5,150.0,Graded,129066009,2022-07-05 14:44:32 -0700,00:00:00,7,1,9.25,5.0,5.0,5.0,20.0,7.5,5.0,5.0,20.0,8.75,10.0,5.0,5.0,5.0,5.0,5.0,0.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0
+Jesselyn,Sjah,918420264,jfsjah@ucdavis.edu,psc-041-001-ss1-2022,84.25,150.0,Graded,129066010,2022-07-05 14:44:32 -0700,00:00:00,3,1,3.25,5.0,5.0,5.0,9.5,2.5,5.0,5.0,7.0,0.0,0.0,5.0,5.0,5.0,5.0,1.0,2.0,2.0,0.0,2.0,2.0,0.0,2.0,2.0,2.0,2.0
+Jesus,Vargas,918165082,jaavargas@ucdavis.edu,psc-041-001-ss1-2022,105.5,150.0,Graded,129066011,2022-07-05 14:44:32 -0700,00:00:00,0,1,4.5,5.0,5.0,5.0,10.0,10.0,0.0,5.0,10.0,0.0,10.0,5.0,5.0,5.0,5.0,5.0,2.0,2.0,0.0,2.0,2.0,0.0,2.0,2.0,2.0,2.0
+Vera,Wang,918698151,wwrwang@ucdavis.edu,psc-041-001-ss1-2022,118.5,150.0,Graded,129066012,2022-07-05 14:44:32 -0700,00:00:00,1,1,6.75,5.0,5.0,5.0,15.0,3.75,5.0,5.0,17.0,10.0,10.0,5.0,5.0,0.0,5.0,4.0,2.0,0.0,2.0,2.0,0.0,2.0,0.0,0.0,2.0,2.0
+Aurora,Wilson Dominque,919610206,awilsondominque@ucdavis.edu,psc-041-001-ss1-2022,135.0,150.0,Graded,129066013,2022-07-05 14:44:32 -0700,00:00:00,2,1,6.75,5.0,5.0,5.0,20.0,6.25,5.0,5.0,17.0,10.0,10.0,5.0,5.0,5.0,5.0,4.0,2.0,2.0,2.0,2.0,0.0,2.0,0.0,2.0,2.0,2.0
+Shirley,Xu,920112450,shrxu@ucdavis.edu,psc-041-001-ss1-2022,91.5,150.0,Graded,129066014,2022-07-05 14:44:32 -0700,00:00:00,1,1,6.75,5.0,5.0,5.0,7.5,3.75,5.0,5.0,12.5,0.0,10.0,5.0,5.0,0.0,5.0,1.0,2.0,0.0,0.0,0.0,0.0,0.0,2.0,2.0,2.0,2.0
+Ashley,Young,920055973,ayou@ucdavis.edu,psc-041-001-ss1-2022,114.25,150.0,Graded,129066015,2022-07-05 14:44:32 -0700,00:00:00,1,1,9.25,5.0,5.0,5.0,12.5,6.0,5.0,5.0,7.5,10.0,3.0,4.0,5.0,5.0,5.0,4.0,2.0,2.0,2.0,2.0,2.0,2.0,0.0,2.0,2.0,2.0
+Betty,Zhong,919261532,wanzhong@ucdavis.edu,psc-041-001-ss1-2022,63.5,150.0,Graded,129066016,2022-07-05 14:44:32 -0700,00:00:00,0,1,0.0,0.0,0.0,5.0,1.5,0.0,5.0,5.0,0.0,0.0,10.0,5.0,5.0,5.0,5.0,1.0,2.0,2.0,2.0,2.0,2.0,2.0,0.0,2.0,2.0,0.0
+Natalia,Mendez,915707634,nmendez@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Kelly,Pham,916455972,kktpham@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Ebelin,Montoya Martinez,916586485,egmontoyamartinez@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Noe,Fernandez-Duarte,917489219,nfernandezduarte@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Alice,Bashizadeh,917587933,aabashizadeh@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Rachel,Espinoza,917030914,rmespinoza@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Haydee,Calderon,917634417,hecalderon@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Wendy,Doan,917455230,wvdoan@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Santiago,Quijas,917360121,sdquijas@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Alexia,Carranza,918609519,ahcarranza@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Ashley,Rivas,918734963,alrivas@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Shkula,Ahmadi,918009850,sjahmadi@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Linda,Ortega,918151821,limortega@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Abigail,Ko,918689050,abko@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Lea,Cha,918680907,lcha@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Monzerrat,Garcia,918110998,mgbgarcia@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Anqi,Ren,918827498,aqrren@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Claire,Phan,918600644,caphan@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Adrienne,Cummings,918003801,aalcummings@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Maaya,George,918130761,mvgeorge@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Ryan,Farkhondeh,918210445,rfarkhondeh@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Jiaying,Li,918774774,jygli@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Ryoji,Uchino,918544360,ruchino@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Kylie,Garcia,918455873,kymgarcia@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Abimael,Leyva Hernandez,920136724,aleyva@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Jacob,Yu,919565539,jbyu@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Jennifer,Chuwdry,919831263,jchuwdry@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Qihang,Xu,919373705,qhxu@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Ami,Singh,919539617,aingh@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Ruma,Poudell,920102091,rpoudell@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Aaron,Ye,919827316,jhyye@ucdavis.edu,,,150.0,Missing
+Zia,Moore,919820517,zfmoore@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Julia,Zhu,919611904,idkzhu@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Bella,Khor,920016132,brkhor@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Yuki,Chen,919930148,uiichen@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Tia,Thomas,920172021,ttthomas@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Camryn,Nichelson,917170285,csnichelson@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Noordeep,Nagra,919280322,nknagra@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Tianwen,Wang,919636293,johwang@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Yulika,Martinez,920075830,ymmartinez@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Erika,Rivas,916931687,eeerivas@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
+Jaden,Sandiford,918890687,jsandiford@ucdavis.edu,psc-041-001-ss1-2022,,150.0,Missing
