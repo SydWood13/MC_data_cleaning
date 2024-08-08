@@ -817,4 +817,4 @@ You'll end with a dataset:
 exam1_short <- anon_id, views, p_tot1
 
 
-full_data <- left_join(full_data, exam1_short, by = anon_id )
+full_data <- left_join(full_data, exam1_short, by = "anon_id" )
