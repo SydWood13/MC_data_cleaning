@@ -6,6 +6,198 @@ output: html_document
 ---
 
 ```{r}
+library(tidycode)
+library(tibble)
+library(dplyr)
+library(tidyverse)
+library(readr)
 
 ```
+
+
+```{r}
+library(dplyr)
+file_directory <- "~/Documents/GitHub/MC_data_cleaning/pilot data"
+```
+
+
+## randomly assign the number to each person after you used SID to clean the dataset
+
+```{r}
+dem_summer_raw <- Pilot_demographic_data %>% select("sis_id", contains(":"), "n correct", "n incorrect", "score")
+```
+
+## Rename the data
+```{r}
+colnames(dem_summer_raw) <- c("SID", "consent", "age", "year", "gender", "first_language", "exp_eng", "confidence", "ethcity", "f_education", "m_education", "lunch_program", "Grant", "Transfer", "n correct", "n incorrect", "score")
+```
+
+## consent
+```{r}
+dem_summer_short <- dem_summer_raw %>%
+  mutate(consent = case_when(
+    grepl("I do not consent", consent, fixed = TRUE) ~ 0,
+    grepl("I consent to participate", consent, fixed = TRUE) ~ 1,
+    TRUE ~ 0))
+```
+
+##filter
+```{r}
+dem_summer_short <- dem_summer_short %>%
+  filter(consent == 1)
+```
+
+## age
+```{r}
+dem_summer_clean <- dem_summer_short %>%
+  mutate(age = str_remove_all(age, "years old")) %>%
+  mutate(age = case_when(
+    grepl("I am 20", age, fixed = TRUE) ~ "20",
+    grepl("21 years of age at the time of this study", age, fixed = TRUE) ~ "21",
+    TRUE ~ age
+  ))
+```
+
+
+##age#2
+```{r}
+dem_summer_test <- dem_summer_short %>%
+  mutate(age = str_remove_all(age, "years old|I am|years of age at the time of this study"))
+```
+
+## year
+```{r}
+dem_summer_clean <- dem_summer_clean %>%
+  mutate(year = case_when(
+    grepl("1st", year, fixed = TRUE) ~ 1,
+     grepl("2nd", year, fixed = TRUE) ~ 2,
+     grepl("3rd", year, fixed = TRUE) ~ 3,
+     grepl("4th", year, fixed = TRUE) ~ 4,
+  ))
+```
+
+
+##gender
+```{r}
+dem_summer_clean <- dem_summer_clean %>%
+  mutate(gender = case_when(
+    grepl("Woman", gender, fixed = TRUE) ~ 'Woman',
+    grepl("Man", gender, fixed = TRUE) ~ 'Man',
+    grepl("Non-binary or Genderqueer", gender, fixed = TRUE) ~ 'Other',
+    TRUE~NA
+  ))
+```
+
+##first_language
+```{r}
+dem_summer_clean <- dem_summer_clean %>%
+  mutate(first_language = case_when(
+    grepl("English is my first language", first_language, fixed = TRUE) ~ 1,
+    grepl("English is not my first language", first_language, fixed = TRUE) ~ 0,
+    TRUE~NA
+  ))
+```
+
+## exp_eng
+```{r}
+dem_summer_clean <- dem_summer_clean%>%
+  mutate(exp_eng = case_when(
+    grepl("Some of my education has been in English", exp_eng, fixed = TRUE) ~ 1,
+    grepl("About half of my education has been in English", exp_eng, fixed = TRUE) ~ 2,
+    grepl("Most of my education has been in English", exp_eng, fixed = TRUE) ~ 3,
+    grepl("All or almost all of my academic experience has been in English", exp_eng, fixed = TRUE) ~ 4,
+    #TRUE~NA
+  ))
+```
+
+
+## confidence
+```{r}
+dem_summer_clean <- dem_summer_clean%>%
+  mutate(confidence = case_when(
+    grepl("I am confident reading more advanced books in English", confidence, fixed = TRUE) ~ 0,
+    grepl("I am confident reading very complex information", confidence, fixed = TRUE) ~ 1,
+  ))
+```
+
+## ethcity
+```{r}
+dem_summer_clean <- dem_summer_clean%>%
+  mutate(ethcity = case_when(
+    grepl("South Asian,Pacific Islander,Mixed Race", ethcity, fixed = TRUE) ~ 0,
+    grepl("Black or African American", ethcity, fixed = TRUE) ~ 1,
+    grepl("Caucasian", ethcity, fixed = TRUE) ~ 2, 
+    grepl("East or South East Asian", ethcity, fixed = TRUE) ~ 3,
+    grepl("Hispanic or Latino", ethcity, fixed = TRUE) ~ 4,
+    grepl("Middle Eastern or West Asian", ethcity, fixed = TRUE) ~ 5,
+    grepl("Mixed Race", ethcity, fixed = TRUE) ~ 6,
+    grepl("Native American",ethcity, fixed = TRUE) ~ 7,
+    grepl("South Asian", ethcity, fixed = TRUE) ~ 8,
+    TRUE~NA
+  ))
+```
+
+## f_education
+```{r}
+dem_summer_clean <- dem_summer_clean %>%
+  mutate(f_education = case_when(
+    grepl("He left when he graduated from high school (or GED)", f_education, fixed = TRUE) ~ 1, 
+    grepl("He left school before he graduated from high school", f_education, fixed = TRUE) ~ 2,
+    grepl("He attended some college, but left before he earned a 4-year degree", f_education, fixed = TRUE) ~ 3,
+    grepl("He earned a 4-year degree", f_education, fixed = TRUE) ~ 4,
+    grepl("He earned a graduate degree (Masters or Ph.D)", f_education, fixed = TRUE) ~ 5,
+    TRUE~NA
+  ))
+```
+
+## m_education
+```{r}
+dem_summer_clean <- dem_summer_clean %>%
+  mutate(m_education = case_when(
+    grepl("She left school when she graduated from high school (or GED)", m_education, fixed = TRUE) ~ 1, 
+    grepl("She left school before she graduated from high school", m_education, fixed = TRUE) ~ 2,
+    grepl("She attended some college, but left before she earned a 4-year degree", m_education, fixed = TRUE) ~ 3,
+    grepl("She earned a 4-year degree", m_education, fixed = TRUE) ~ 4,
+    grepl("She earned a graduate degree (Masters or Ph.D)", m_education, fixed = TRUE) ~ 5,
+    TRUE~NA
+  ))
+```
+
+
+## lunch_program
+```{r}
+dem_summer_clean <- dem_summer_clean %>%
+  mutate(lunch_program = case_when(
+    grepl("I did not", lunch_program, fixed = TRUE) ~ 0,
+    grepl("I don't know", lunch_program, fixed = TRUE) ~ 1,
+    grepl("I qualified", lunch_program, fixed = TRUE) ~ 2,
+    TRUE~NA
+  ))
+```
+
+
+##Pell Grant
+
+```{r}
+dem_summer_clean <- dem_summer_clean %>%
+  mutate(Grant = case_when(
+    grepl("I do not qualify", Grant, fixed = TRUE) ~ 0,
+    grepl("I do qualify", Grant, fixed = TRUE) ~ 1,
+    grepl("I don't know", Grant, fixed = TRUE) ~ 2,
+    TRUE~NA
+  ))
+```
+
+
+## Transfer
+```{r}
+dem_summer_clean <- dem_summer_clean %>%
+  mutate(Transfer = case_when(
+    grepl("No", Transfer, fixed = TRUE) ~ 0,
+    grepl("Yes", Transfer, fixed = TRUE) ~ 1,
+    TRUE~NA
+  ))
+```
+
+
 
