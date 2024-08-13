@@ -17,7 +17,12 @@ library(readr)
 
 ```{r}
 library(dplyr)
-file_directory <- "~/Documents/GitHub/MC_data_cleaning/pilot data"
+
+
+
+data <- read.csv("Pilot_demographic_data.csv")
+
+
 ```
 
 
@@ -25,6 +30,8 @@ file_directory <- "~/Documents/GitHub/MC_data_cleaning/pilot data"
 
 ```{r}
 dem_summer_raw <- Pilot_demographic_data %>% select("sis_id", contains(":"), "n correct", "n incorrect", "score")
+
+getwd()
 ```
 
 ## Rename the data
