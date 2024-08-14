@@ -16,27 +16,19 @@ library(readr)
 
 
 ```{r}
-library(dplyr)
-
-
-
 data <- read.csv("Pilot_demographic_data.csv")
-
-
 ```
 
 
 ## randomly assign the number to each person after you used SID to clean the dataset
 
 ```{r}
-dem_summer_raw <- Pilot_demographic_data %>% select("sis_id", contains(":"), "n correct", "n incorrect", "score")
-
-getwd()
+dem_summer_raw <- data %>% select("sis_id", contains(".."))
 ```
 
 ## Rename the data
 ```{r}
-colnames(dem_summer_raw) <- c("SID", "consent", "age", "year", "gender", "first_language", "exp_eng", "confidence", "ethcity", "f_education", "m_education", "lunch_program", "Grant", "Transfer", "n correct", "n incorrect", "score")
+colnames(dem_summer_raw) <- c("SID", "consent", "age", "year", "gender", "first_language", "exp_eng", "confidence", "ethcity", "f_education", "m_education", "lunch_program", "Grant", "Transfer")
 ```
 
 ## consent
@@ -55,7 +47,7 @@ dem_summer_short <- dem_summer_short %>%
 ```
 
 ## age
-```{r}
+
 dem_summer_clean <- dem_summer_short %>%
   mutate(age = str_remove_all(age, "years old")) %>%
   mutate(age = case_when(
@@ -63,13 +55,13 @@ dem_summer_clean <- dem_summer_short %>%
     grepl("21 years of age at the time of this study", age, fixed = TRUE) ~ "21",
     TRUE ~ age
   ))
-```
 
 
 ##age#2
 ```{r}
-dem_summer_test <- dem_summer_short %>%
-  mutate(age = str_remove_all(age, "years old|I am|years of age at the time of this study"))
+dem_summer_clean <- dem_summer_short %>%
+  mutate(age = str_remove_all(age, "[[:space:]]|[[:punct:]]|years old|I am|years of age at the time of this study")) %>% mutate_at(3,as.numeric)
+
 ```
 
 ## year
@@ -113,7 +105,7 @@ dem_summer_clean <- dem_summer_clean%>%
     grepl("About half of my education has been in English", exp_eng, fixed = TRUE) ~ 2,
     grepl("Most of my education has been in English", exp_eng, fixed = TRUE) ~ 3,
     grepl("All or almost all of my academic experience has been in English", exp_eng, fixed = TRUE) ~ 4,
-    #TRUE~NA
+    TRUE ~ NA
   ))
 ```
 
@@ -124,6 +116,7 @@ dem_summer_clean <- dem_summer_clean%>%
   mutate(confidence = case_when(
     grepl("I am confident reading more advanced books in English", confidence, fixed = TRUE) ~ 0,
     grepl("I am confident reading very complex information", confidence, fixed = TRUE) ~ 1,
+    TRUE ~ NA
   ))
 ```
 
@@ -206,5 +199,29 @@ dem_summer_clean <- dem_summer_clean %>%
   ))
 ```
 
+## first_gen
+```{r}
+dem_summer_clean <- dem_summer_clean %>% mutate(first_gen = case_when(f_education <4 & m_education < 4 ~ 1, f_education >= 4 | m_education >= 4 ~ 0))
 
+dem_summer_clean <- dem_summer_clean %>%  mutate(first_gen = case_when(first_gen == NA & f_education < 4 | m_education < 4 ~ 1, .default = first_gen)) %>% mutate( first_gen = case_when(first_gen == NA & m_education < 4 | f_education < 4 ~ 1, .default = first_gen)) %>% mutate_at(c(1,4,5,6,7,8,9), factor) 
+```
+
+## save file
+```{r}
+write.csv(dem_summer_clean, file = "Pilot_dem_cleaned.csv", row.names = F)
+```
+
+
+
+```{r}
+test <- read.csv("Pilot_dem_cleaned.csv")
+
+test <- test %>% mutate_at(c(1,4, 5), factor)
+
+
+
+
+table <- test %>% group
+
+```
 
