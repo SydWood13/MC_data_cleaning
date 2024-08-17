@@ -11,7 +11,7 @@ library(tibble)
 library(dplyr)
 library(tidyverse)
 library(readr)
-
+library(ggplot2)
 ```
 
 
@@ -221,7 +221,9 @@ test <- test %>% mutate_at(c(1,4, 5), factor)
 
 
 
-table <- test %>% group
+table <- test %>% group_by(year) %>% summarise(n= n(), mean = mean(age))
+
+hist(test$age)
 
 ```
 
