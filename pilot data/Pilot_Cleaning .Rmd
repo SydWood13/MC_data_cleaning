@@ -46,6 +46,9 @@ dem_summer_short <- dem_summer_short %>%
   filter(consent == 1)
 ```
 
+
+
+
 ## age
 
 dem_summer_clean <- dem_summer_short %>%
@@ -227,3 +230,66 @@ hist(test$age)
 
 ```
 
+##canvas
+```{r}
+setwd("~/Documents/GitHub/MC_data_cleaning/pilot data")
+```
+
+```{r}
+data<- read.csv ("Pilot_canvas_data.csv")
+```
+
+
+
+```{r}
+canvas_data <- data %>% select("SIS.User.ID", contains("Exam.1..892860."), contains("Exam.2..892861."), contains("Exam.3..892862."), contains("Exam.4..892863."), contains("Exam.5..892864."), contains("Final.Exam..892865."),"Prep.Participation..up.to.250.points..Final.Points", contains("Extra.Credit.Final.Points"), contains("Exam.Corrections")) %>% mutate_at(-c(1), as.numeric)
+```
+
+```{r}
+colnames(canvas_data)<- c("SID", "exam1", "exam2", "exam3","exam4","exam5","final_exam", "prep_p_raw", "extra_credit", "e_correct")
+```
+
+## p_p_final
+```{r}
+canvas_data$p_p_final <- canvas_data$prep_p_raw
+canvas_data$p_p_final[canvas_data$prep_p_raw >= 250]<- 250
+```
+
+## drop the lowest exam score
+```{r}
+canvas_data <- canvas_data %>% filter(!is.na(SID))
+canvas_data[is.na(canvas_data)] <- 0
+canvas_exam <- canvas_data %>% select(contains("exam"))
+canvas_exam$lowest <- apply(canvas_exam, 1, min)
+canvas_exam$lowest <- canvas_exam$lowest * -1
+canvas_data$exam_total <- apply(canvas_exam, 1, sum)
+```
+
+```{r}
+final_grade_calc <- canvas_data %>% select("extra_credit", "p_p_final", "exam_total")
+canvas_clean <- canvas_data %>% 
+  mutate(final_grade = apply(final_grade_calc, 1, sum)) %>%
+  mutate(opt_in = case_when(e_correct == 0 ~ 0, e_correct > 0 ~ 1)) 
+```
+
+
+```{r}
+
+exam_col <- canvas_clean %>% select(contains("exam"), -exam_total)
+```
+
+```{r}
+canvas_final <- canvas_clean %>% mutate(exam_total = (exam_total/750)*100) %>% mutate(final_grade = (final_grade/1000)*100)
+```
+
+
+## write document
+```{r}
+write.csv(canvas_final, file = "Pilot_canvas_cleaned.csv", row.names = F)
+```
+
+
+
+
+
+Final_data <- left_join(dem_data, canvas, by = SID) # only fills in the data from canvas for SIDs that exist in the dem data set --- leaves out students who don't consent
