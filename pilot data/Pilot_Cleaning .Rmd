@@ -296,9 +296,6 @@ Final_data <- left_join(dem_data, canvas, by = SID) # only fills in the data fro
 setwd("~/Documents/GitHub/MC_data_cleaning/pilot data")
 ```
 
-```{r}
-Final_data <- left_join(dem_data, canvas_final, by = SID)
-```
 
 ## Unit 1
 ```{r}
@@ -314,8 +311,8 @@ results_list <- list()
 ```{r}
 for (file in Unit1) {
   unit1 <- read.csv(file)
-   unit1 <- unit1 %>% select("SID","View.Count", "Status", 14, 16, 17, 18, 19, 22, 23, 28, 29, 30, 31)
-   q_names <- c("SID", "views1", "Status", "h0", "h1", "h2", "pv_iv", "pv_op", "ov_dv", "ov_op", "claim_ex", "temp", "alt_ex", "interpret")
+   unit1 <- unit1 %>% select("SID","View.Count", "Status", 14, 16, 17, 19, 23, 28, 29, 30, 31)
+   q_names <- c("SID", "views1", "Status", "h0", "h1", "h2", "pv_op", "ov_op", "claim_ex", "temp", "alt_ex", "interpret")
    colnames(unit1) <- q_names
    unit1 <- unit1 %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
     results_list[[basename(file)]] <- unit1
@@ -342,7 +339,7 @@ results_list <- list()
 for (file in Unit2) {
   unit2 <- read.csv(file)
    unit2 <- unit2 %>% select("SID", "View.Count", "Status", 14, 18, 19, 22, 23, 24, 26, 29)
-   q_names <- c("SID", "views2", "Status", "pv_op", "pv_cv", "ov_op", "cv_ov", "effect", "ov_reliability", "h1", "distress_ex")
+   q_names <- c("SID", "views2", "Status", "pv_op", "pv_cv", "ov_op", "ov_cv", "effect", "ov_reliability", "h1", "interpret")
    colnames(unit2) <- q_names
    unit2 <- unit2 %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
     results_list[[basename(file)]] <- unit2
@@ -453,7 +450,7 @@ unit1_short <- read.csv("unit1_written.cleaned.csv", sep = ",")
 ```
 
 ```{r}
-unit1_calc <- unit1_short %>% select(4:14)
+unit1_calc <- unit1_short %>% select(4:12)
 unit1_short <- unit1_short %>%
   mutate(written = rowSums(unit1_calc, na.rm = TRUE))
 ```
@@ -493,7 +490,7 @@ unit2_end <- unit2_final %>% select("SID", "views2", "p_tot2")
 
 ```{r}
 unit2_end$SID <- as.factor(unit2_end$SID)
-full_data <- left_join(Final_data, unit2_end, by = "SID" )
+full_data <- left_join(full_data, unit2_end, by = "SID" )
 ```
 
 ##p_tot3
@@ -518,7 +515,7 @@ unit3_end <- unit3_final %>% select("SID", "views3", "p_tot3")
 
 ```{r}
 unit3_end$SID <- as.factor(unit3_end$SID)
-full_data <- left_join(Final_data, unit3_end, by = "SID" )
+full_data <- left_join(full_data, unit3_end, by = "SID" )
 ```
 
 #p_tot4
@@ -543,7 +540,7 @@ unit4_end <- unit4_final %>% select("SID", "views4", "p_tot4")
 
 ```{r}
 unit4_end$SID <- as.factor(unit4_end$SID)
-full_data <- left_join(Final_data, unit4_end, by = "SID" )
+full_data <- left_join(full_data, unit4_end, by = "SID" )
 ```
 
 ## p_tot5
@@ -568,5 +565,5 @@ unit5_end <- unit5_final %>% select("SID", "views5", "p_tot5")
 
 ```{r}
 unit5_end$SID <- as.factor(unit5_end$SID)
-full_data <- left_join(Final_data, unit5_end, by = "SID" )
+full_data <- left_join(full_data, unit5_end, by = "SID" )
 ```
