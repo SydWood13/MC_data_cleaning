@@ -567,3 +567,9 @@ unit5_end <- unit5_final %>% select("SID", "views5", "p_tot5")
 unit5_end$SID <- as.factor(unit5_end$SID)
 full_data <- left_join(full_data, unit5_end, by = "SID" )
 ```
+
+## Deidentify the data 
+
+Assign students "anon_id" by pulling random 9 digit number for each student. Go back to each clean data set and replace SID with anon_id (be very very careful to make sure the anon_id is the same for the same student on all data sets). Once you are sure it's consistent delete the SID from all cleaned data
+
+
