@@ -289,7 +289,284 @@ write.csv(canvas_final, file = "Pilot_canvas_cleaned.csv", row.names = F)
 ```
 
 
-
-
-
 Final_data <- left_join(dem_data, canvas, by = SID) # only fills in the data from canvas for SIDs that exist in the dem data set --- leaves out students who don't consent
+
+## Combine Data
+```{r}
+setwd("~/Documents/GitHub/MC_data_cleaning/pilot data")
+```
+
+```{r}
+Final_data <- left_join(dem_data, canvas_final, by = SID)
+```
+
+## Unit 1
+```{r}
+library(dplyr)
+file_directory <- "~/Documents/GitHub/MC_data_cleaning/pilot data/Unit 1"
+Unit1 <- list.files(file_directory, pattern = "*.csv", full.names = TRUE)
+```
+
+```{r}
+results_list <- list()
+```
+
+```{r}
+for (file in Unit1) {
+  unit1 <- read.csv(file)
+   unit1 <- unit1 %>% select("SID","View.Count", "Status", 14, 16, 17, 18, 19, 22, 23, 28, 29, 30, 31)
+   q_names <- c("SID", "views1", "Status", "h0", "h1", "h2", "pv_iv", "pv_op", "ov_dv", "ov_op", "claim_ex", "temp", "alt_ex", "interpret")
+   colnames(unit1) <- q_names
+   unit1 <- unit1 %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+    results_list[[basename(file)]] <- unit1
+}
+unit1_full <- bind_rows(results_list, .id = "source")
+```
+
+```{r}
+write.csv(unit1_full, file = "unit1_written.cleaned.csv", row.names = F)
+```
+
+## Unit 2
+```{r}
+library(dplyr)
+file_directory <- "~/Documents/GitHub/MC_data_cleaning/pilot data/Unit 2"
+Unit2 <- list.files(file_directory, pattern = "*.csv", full.names = TRUE)
+```
+
+```{r}
+results_list <- list()
+```
+
+```{r}
+for (file in Unit2) {
+  unit2 <- read.csv(file)
+   unit2 <- unit2 %>% select("SID", "View.Count", "Status", 14, 18, 19, 22, 23, 24, 26, 29)
+   q_names <- c("SID", "views2", "Status", "pv_op", "pv_cv", "ov_op", "cv_ov", "effect", "ov_reliability", "h1", "distress_ex")
+   colnames(unit2) <- q_names
+   unit2 <- unit2 %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+    results_list[[basename(file)]] <- unit2
+}
+unit2_full <- bind_rows(results_list, .id = "source")
+```
+
+```{r}
+write.csv(unit2_full, file = "unit2_written.cleaned.csv", row.names = F)
+```
+
+##Unit 3
+```{r}
+library(dplyr)
+file_directory <- "~/Documents/GitHub/MC_data_cleaning/pilot data/Unit 3"
+Unit3 <- list.files(file_directory, pattern = "*.csv", full.names = TRUE)
+```
+
+```{r}
+results_list <- list()
+```
+
+```{r}
+for (file in Unit3) {
+  unit3 <- read.csv(file)
+   unit3 <- unit3 %>% select("SID", "View.Count", "Status", 14, 18, 22, 23, 24, 25, 28)
+   q_names <- c("SID", "views3", "Status", "pv_op", "pv_cv", "ov_cv", "internal1", "internal2", "confound", "interpret")
+   colnames(unit3) <- q_names
+   unit3 <- unit3 %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+   
+    results_list[[basename(file)]] <- unit3
+}
+unit3_full <- bind_rows(results_list, .id = "source")
+```
+
+```{r}
+write.csv(unit3_full, file = "unit3_written.cleaned.csv", row.names = F)
+```
+
+##Unit 4
+```{r}
+library(dplyr)
+file_directory <- "~/Documents/GitHub/MC_data_cleaning/pilot data/Unit 4"
+Unit4 <- list.files(file_directory, pattern = "*.csv", full.names = TRUE)
+```
+
+```{r}
+results_list <- list()
+```
+
+```{r}
+for (file in Unit4) {
+  unit4 <- read.csv(file)
+   unit4 <- unit4 %>% select("SID", "View.Count", "Status", 19, 20, 23, 24, 25, 29, 30, 31, 32)
+   q_names <- c("SID", "views4", "Status", "design_ex", "ov_op", "ov_cv", "bias_ex", "confound", "IRB", "sampling", "external", "replicate")
+   colnames(unit4) <- q_names
+   unit4 <- unit4 %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+    results_list[[basename(file)]] <- unit4
+}
+unit4_full <- bind_rows(results_list, .id = "source")
+```
+
+```{r}
+write.csv(unit4_full, file = "unit4_written.cleaned.csv", row.names = F)
+```
+
+
+##Unit 5
+```{r}
+library(dplyr)
+file_directory <- "~/Documents/GitHub/MC_data_cleaning/pilot data/Unit 5"
+Unit5 <- list.files(file_directory, pattern = "*.csv", full.names = TRUE)
+```
+
+```{r}
+results_list <- list()
+```
+
+```{r}
+for (file in Unit5) {
+  unit5 <- read.csv(file)
+   unit5 <- unit5 %>% select("SID", "View.Count", "Status", 14, 19, 23, 24, 25, 29, 30, 31)
+   q_names <- c("SID", "views5", "Status", "pv_op", "pv_cv", "construct_ex", "confound", "maturation", "interpret", "external", "replication")
+   colnames(unit5) <- q_names
+   unit5 <- unit5 %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+    results_list[[basename(file)]] <- unit5
+}
+unit5_full <- bind_rows(results_list, .id = "source")
+```
+
+```{r}
+write.csv(unit5_full, file = "unit5_written.cleaned.csv", row.names = F)
+```
+
+```{r}
+canvas_final$SID <- as.factor(canvas_final$SID)
+```
+
+```{r}
+Final_data <- left_join(dem_summer_clean, canvas_final, by = "SID")
+```
+
+
+## p_tot1
+```{r}
+library(dplyr)
+unit1_short <- read.csv("unit1_written.cleaned.csv", sep = ",")
+```
+
+```{r}
+unit1_calc <- unit1_short %>% select(4:14)
+unit1_short <- unit1_short %>%
+  mutate(written = rowSums(unit1_calc, na.rm = TRUE))
+```
+
+```{r}
+unit1_final <- unit1_short %>% mutate(p_tot1 = (written/85)*100) 
+```
+
+```{r}
+unit1_end <- unit1_final %>% select("SID", "views1", "p_tot1")
+```
+
+```{r}
+unit1_end$SID <- as.factor(unit1_end$SID)
+full_data <- left_join(Final_data, unit1_end, by = "SID" )
+```
+
+## p_tot2
+```{r}
+library(dplyr)
+unit2_short <- read.csv("unit2_written.cleaned.csv", sep = ",")
+```
+
+```{r}
+unit2_calc <- unit2_short %>% select(4:11)
+unit2_short <- unit2_short %>%
+  mutate(written = rowSums(unit2_calc, na.rm = TRUE))
+```
+
+```{r}
+unit2_final <- unit2_short %>% mutate(p_tot2 = (written/90)*100) 
+```
+
+```{r}
+unit2_end <- unit2_final %>% select("SID", "views2", "p_tot2")
+```
+
+```{r}
+unit2_end$SID <- as.factor(unit2_end$SID)
+full_data <- left_join(Final_data, unit2_end, by = "SID" )
+```
+
+##p_tot3
+```{r}
+library(dplyr)
+unit3_short <- read.csv("unit3_written.cleaned.csv", sep = ",")
+```
+
+```{r}
+unit3_calc <- unit3_short %>% select(4:10)
+unit3_short <- unit3_short %>%
+  mutate(written = rowSums(unit3_calc, na.rm = TRUE))
+```
+
+```{r}
+unit3_final <- unit3_short %>% mutate(p_tot3 = (written/75)*100) 
+```
+
+```{r}
+unit3_end <- unit3_final %>% select("SID", "views3", "p_tot3")
+```
+
+```{r}
+unit3_end$SID <- as.factor(unit3_end$SID)
+full_data <- left_join(Final_data, unit3_end, by = "SID" )
+```
+
+#p_tot4
+```{r}
+library(dplyr)
+unit4_short <- read.csv("unit4_written.cleaned.csv", sep = ",")
+```
+
+```{r}
+unit4_calc <- unit4_short %>% select(4:12)
+unit4_short <- unit4_short %>%
+  mutate(written = rowSums(unit4_calc, na.rm = TRUE))
+```
+
+```{r}
+unit4_final <- unit4_short %>% mutate(p_tot4 = (written/90)*100) 
+```
+
+```{r}
+unit4_end <- unit4_final %>% select("SID", "views4", "p_tot4")
+```
+
+```{r}
+unit4_end$SID <- as.factor(unit4_end$SID)
+full_data <- left_join(Final_data, unit4_end, by = "SID" )
+```
+
+## p_tot5
+```{r}
+library(dplyr)
+unit5_short <- read.csv("unit5_written.cleaned.csv", sep = ",")
+```
+
+```{r}
+unit5_calc <- unit5_short %>% select(4:11)
+unit5_short <- unit5_short %>%
+  mutate(written = rowSums(unit5_calc, na.rm = TRUE))
+```
+
+```{r}
+unit5_final <- unit5_short %>% mutate(p_tot5 = (written/80)*100) 
+```
+
+```{r}
+unit5_end <- unit5_final %>% select("SID", "views5", "p_tot5")
+```
+
+```{r}
+unit5_end$SID <- as.factor(unit5_end$SID)
+full_data <- left_join(Final_data, unit5_end, by = "SID" )
+```
