@@ -572,4 +572,26 @@ full_data <- left_join(full_data, unit5_end, by = "SID" )
 
 Assign students "anon_id" by pulling random 9 digit number for each student. Go back to each clean data set and replace SID with anon_id (be very very careful to make sure the anon_id is the same for the same student on all data sets). Once you are sure it's consistent delete the SID from all cleaned data
 
+```{r}
+original_id <- full_data %>% select("SID")
+```
+
+```{r}
+set.seed(123)
+original_id$anon_id <- sample(100000000:999999999, nrow(original_id), replace = FALSE)
+```
+
+```{r}
+full_data <- left_join(full_data, original_id, by = "SID")
+```
+
+```{r}
+anon_data <- full_data %>%
+  select(2:39)
+```
+
+```{r}
+id_modified <- anon_data %>%
+  relocate(anon_id, .before = 1)
+```
 
