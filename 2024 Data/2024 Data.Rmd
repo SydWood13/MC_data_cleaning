@@ -1,0 +1,15 @@
+---
+title: "2024 Data"
+author: "Xinhui Zhang"
+date: "2024-09-04"
+output: html_document
+---
+
+```{r}
+library(tidycode)
+library(tibble)
+library(dplyr)
+library(tidyverse)
+library(readr)
+```
+
