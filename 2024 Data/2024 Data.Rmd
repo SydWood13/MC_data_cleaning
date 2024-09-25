@@ -13,3 +13,268 @@ library(tidyverse)
 library(readr)
 ```
 
+```{r}
+setwd("~/Documents/GitHub/MC_data_cleaning/2024 Data")
+```
+
+
+```{r}
+dem_raw_data <- read.csv("Demographics Survey Student Analysis Report.csv", sep = ",")
+```
+
+```{r}
+short_data <- dem_raw_data %>% select("sis_id", "attempt", contains(".."))
+```
+
+```{r}
+colnames(short_data) <- c("SID", "attempt", "consent", "age", "year", "gender", "int", "first_language", "academic_exp", "eng_level", "ethnicity", "f_edu", "m_edu", "p_relation", "financial", "program", "pell_grant", "minutes", "hours", "transfer")
+```
+##consent
+```{r}
+dem_short <- short_data %>%
+  mutate(consent = case_when(
+    grepl("I do not consent", consent, fixed = TRUE) ~ 0,
+    grepl("I consent to participate", consent, fixed = TRUE) ~ 1,
+    TRUE ~ 0)) 
+```
+
+```{r}
+dem_short <- dem_short %>%
+  filter(consent == 1)
+```
+
+##year
+```{r}
+dem_short <- dem_short %>%
+  mutate(year = case_when(
+    grepl("Freshman", year, fixed = TRUE) ~ 1,
+    grepl("Sophomore", year, fixed = TRUE) ~ 2, 
+    grepl("Junior", year, fixed = TRUE) ~ 3,
+    grepl("Senior", year, fixed = TRUE) ~ 4,
+    TRUE ~ NA
+  ))
+```
+
+## gender
+```{r}
+dem_short <- dem_short %>%
+  mutate(gender = case_when(
+    grepl("Man", gender, fixed = TRUE) ~ 1, 
+    grepl("Woman", gender, fixed = TRUE) ~ 2,
+    grepl("Non-binary or Genderqueer", gender, fixed = TRUE) ~ 3,
+    TRUE ~ NA
+    ))
+```
+
+##int
+```{r}
+dem_short <- dem_short %>%
+  mutate(int = case_when(
+    grepl("Yes, I am an international student", int, fixed = TRUE) ~ 0,
+    grepl("No, I am not an international student", int, fixed = TRUE) ~ 1,
+    TRUE ~ NA
+  ))
+```
+
+##first_language
+```{r}
+dem_short <- dem_short %>%
+  mutate(first_language = case_when(
+    grepl("English is my first language", first_language, fixed = TRUE) ~ 0,
+    grepl("English is not my first language", first_language, fixed = TRUE) ~ 1,
+    TRUE ~ NA
+  ))
+```
+
+## academic_exp
+```{r}
+dem_short <- dem_short %>%
+  mutate(academic_exp = str_remove_all(academic_exp, "%"))
+```
+
+##eng_level
+```{r}
+dem_short <- dem_short %>%
+  mutate(eng_level = case_when(
+    grepl("I am not confident reading in English", eng_level, fixed = TRUE) ~ 0,
+    grepl("I am confident reading simple information in English", eng_level, fixed = TRUE) ~ 1,
+    grepl("I am confident reading simple books in English", eng_level, fixed = TRUE) ~ 2,
+    grepl("I am confident reading moderate books in English", eng_level, fixed = TRUE) ~ 3,
+    grepl("I am confident reading difficult books in English", eng_level, fixed = TRUE) ~ 4,
+    grepl("I am confident reading advanced books in English", eng_level, fixed = TRUE) ~ 5,
+    grepl("I am confident reading very complex information in English", eng_level, fixed = TRUE) ~ 6,
+    TRUE ~ NA
+  ))
+```
+
+##ethnicity
+```{r}
+dem_short <- dem_short %>% 
+  mutate(ethnicity = case_when(
+    grepl("Black or African American", ethnicity, fixed = TRUE) ~ 0,
+    grepl("Mixed Race", ethnicity, fixed = TRUE) ~ 1,
+    grepl("Black or African American,Hispanic or Latino", ethnicity, fixed = TRUE) ~ 2,
+    grepl("Caucasian", ethnicity, fixed = TRUE) ~ 3,
+    grepl("East or South East Asian", ethnicity, fixed = TRUE) ~ 4,
+    grepl("Hispanic or Latino", ethnicity, fixed = TRUE) ~ 5,
+    grepl("Middle Eastern or West Asian", ethnicity, fixed = TRUE) ~ 6,
+    grepl("Native American or American Indian", ethnicity, fixed = TRUE) ~ 7,
+    grepl("North or Central Asian", ethnicity, fixed = TRUE) ~ 8,
+    grepl("South Asian", ethnicity, fixed = TRUE) ~ 9,
+    TRUE ~ NA
+  ))
+```
+
+## f_edu
+```{r}
+dem_short <- dem_short %>% 
+  mutate(f_edu = case_when(
+    grepl("He never attended school", f_edu, fixed = TRUE) ~ 0,
+    grepl("He left when he graduated from high school (or GED)", f_edu, fixed = TRUE) ~ 1,
+    grepl("He left school before he graduated from high school", f_edu, fixed = TRUE) ~ 2,
+    grepl("He attended some college, but left before he earned a 4-year degree", f_edu, fixed = TRUE) ~ 3,
+    grepl("He earned a 4-year degree", f_edu, fixed = TRUE) ~ 4,
+    grepl("He earned a graduate degree (Masters or Ph.D)", f_edu, fixed = TRUE) ~ 5,
+    TRUE ~ NA
+  ))
+```
+
+## m_edu
+```{r}
+dem_short <- dem_short %>% 
+  mutate(m_edu = case_when(
+    grepl("She never attended school", m_edu, fixed = TRUE) ~ 0,
+    grepl("She left school when she graduated from high school (or GED)", m_edu, fixed = TRUE) ~ 1,
+    grepl("She left school before she graduated from high school", m_edu, fixed = TRUE) ~ 2,
+    grepl("She attended some college, but left before she earned a 4-year degree", m_edu, fixed = TRUE) ~ 3,
+    grepl("She earned a 4-year degree", m_edu, fixed = TRUE) ~ 4,
+    grepl("She earned a graduate degree (Masters or Ph.D)", m_edu, fixed = TRUE) ~ 5,
+    TRUE ~ NA
+  ))
+```
+
+## first_gen
+```{r}
+dem_short <- dem_short %>% 
+  mutate(first_gen = case_when(
+    f_edu < 4 & m_edu < 4 ~ 1,
+    f_edu >= 4 | m_edu >= 4 ~ 0
+  ))
+
+dem_short <- dem_short %>% 
+  mutate(first_gen = case_when(
+    first_gen == NA & f_edu < 4 | m_edu < 4 ~ 1, .default = first_gen
+  )) %>% mutate_at(21, factor)
+```
+
+##p_relation
+```{r}
+dem_short <- dem_short %>% 
+  mutate(p_relation = case_when(
+    grepl("Divorced", p_relation, fixed = TRUE) ~ 0,
+    grepl("Single", p_relation, fixed = TRUE) ~ 1,
+    grepl("Seperated", p_relation, fixed = TRUE) ~ 2,
+    grepl("Together", p_relation, fixed = TRUE) ~ 3,
+    TRUE ~ NA
+  ))
+```
+
+## financial
+```{r}
+dem_short <- dem_short %>% 
+  mutate(financial = case_when(
+    grepl("No support", financial, fixed = TRUE) ~ 1,
+    grepl("Very little support", financial, fixed = TRUE) ~ 2,
+    grepl("A little support", financial, fixed = TRUE) ~ 3,
+    grepl("Some support", financial, fixed = TRUE) ~ 4,
+    grepl("Halfway supported", financial, fixed = TRUE) ~ 5,
+    grepl("Mostly supported", financial, fixed = TRUE) ~ 6,
+    grepl("Fully supported", financial, fixed = TRUE) ~ 7,
+    TRUE ~ NA
+  ))
+```
+
+##program
+```{r}
+dem_short <- dem_short %>% 
+  mutate(program = case_when(
+    grepl("I did not qualify for 'free or reduced cost lunch' at all in high school", program, fixed = TRUE) ~ 0,
+    grepl("I don't know if I qualified for a 'free or reduced cost lunch' program", program, fixed = TRUE) ~ 1,
+     grepl("I qualified for 'free or reduced cost lunch' for some of high school", program, fixed = TRUE) ~ 2,
+    grepl("I qualified for 'free or reduced cost lunch' for all or most of high school", program, fixed = TRUE) ~ 3,
+    TRUE ~ NA
+  ))
+```
+
+##pell_grant
+```{r}
+dem_short <- dem_short %>% 
+  mutate(pell_grant = case_when(
+    grepl("I do not qualify for a Pell Grant", pell_grant, fixed = TRUE) ~ 0,
+    grepl("I do qualify for a Pell Grant", pell_grant, fixed = TRUE) ~ 1,
+    grepl("I don't know if I qualify for a Pell Grant", pell_grant, fixed = TRUE) ~ 2,
+    TRUE ~ NA
+  ))
+```
+
+##transfer
+```{r}
+dem_short <- dem_short %>% 
+  mutate(transfer = case_when(
+    grepl("No", transfer, fixed = TRUE) ~ 0,
+    grepl("Yes", transfer, fixed = TRUE) ~ 1,
+    TRUE ~ NA
+  ))
+```
+
+##save files
+```{r}
+write.csv(dem_short, file = "dem_2024_cleaned.csv", row.names = F)
+```
+
+## canvas
+```{r}
+raw_data <- read.csv(file = "WQ_2024_canvas_data.csv")
+short_data <- raw_data %>% select("SIS.User.ID", "Exam.1..1154283.", "Exam.2..1154284.", "Exam.3..1154285.", "Exam.4..1154286.", "Exam.5..1154287.", "Final.Exam..1154289.", "Prep.Participation..up.to.250.points..Final.Points", "Extra.Credit.Final.Points")%>% mutate_at(-c(1), as.numeric)
+```
+```{r}
+colnames(short_data) <- c("SID", "exam1", "exam2","exam3","exam4","exam5","final_exam", "prep_p_raw", "extra_credit")
+```
+
+##p_p_final
+```{r}
+short_data$p_p_final <- short_data$prep_p_raw
+short_data$p_p_final[short_data$prep_p_raw >= 250] <- 250
+```
+
+## drop the lowest exam score
+```{r}
+short_data<- short_data %>% filter(!is.na(SID))
+short_data[is.na(short_data)] <- 0
+exam_data <- short_data %>% select(contains("exam"))
+exam_data$lowest <- apply(exam_data, 1, min)
+exam_data$lowest <- exam_data$lowest * -1
+short_data$exam_total <- apply(exam_data, 1, sum)
+```
+
+```{r}
+final_grade_calc <- short_data %>% select("extra_credit", "p_p_final", "exam_total")
+data_clean <- short_data %>% 
+  mutate(final_grade = apply(final_grade_calc, 1, sum)) 
+```
+
+```{r}
+# data_clean <- data_clean %>% mutate_at(c(2:12),~na_if(.,0) )
+# exam_col <- data_clean %>% select(contains("exam"), -exam_total)
+```
+
+```{r}
+div <- function(x)((x/150)*100)
+final_data <- data_clean %>% mutate_at(colnames(exam_col), div) %>% mutate(exam_total = (exam_total/750)*100) %>% mutate(final_grade = (final_grade/1000)*100)
+```
+
+```{r}
+write.csv(final_data, file = "canvas_2024_cleaned.csv", row.names = F )
+```
+
+## 
