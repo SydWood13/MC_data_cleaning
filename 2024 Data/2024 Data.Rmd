@@ -235,10 +235,10 @@ write.csv(dem_short, file = "dem_2024_cleaned.csv", row.names = F)
 ## canvas
 ```{r}
 raw_data <- read.csv(file = "WQ_2024_canvas_data.csv")
-short_data <- raw_data %>% select("SIS.User.ID", "Exam.1..1154283.", "Exam.2..1154284.", "Exam.3..1154285.", "Exam.4..1154286.", "Exam.5..1154287.", "Final.Exam..1154289.", "Prep.Participation..up.to.250.points..Final.Points", "Extra.Credit.Final.Points")%>% mutate_at(-c(1), as.numeric)
+short_data <- raw_data %>% select("SIS.User.ID", "Exam.1..1154283.", "Exam.2..1154284.", "Exam.3..1154285.", "Exam.4..1154286.", "Exam.5..1154287.", "Final.Exam..1154289.", "Prep.Participation..up.to.250.points..Final.Points", "Extra.Credit.Final.Points", "Internal.Validity.in.Practice..1154290.")%>% mutate_at(-c(1), as.numeric)
 ```
 ```{r}
-colnames(short_data) <- c("SID", "exam1", "exam2","exam3","exam4","exam5","final_exam", "prep_p_raw", "extra_credit")
+colnames(short_data) <- c("SID", "exam1", "exam2","exam3","exam4","exam5","final_exam", "prep_p_raw", "extra_credit", "e_correct")
 ```
 
 ##p_p_final
@@ -259,13 +259,12 @@ short_data$exam_total <- apply(exam_data, 1, sum)
 
 ```{r}
 final_grade_calc <- short_data %>% select("extra_credit", "p_p_final", "exam_total")
-data_clean <- short_data %>% 
-  mutate(final_grade = apply(final_grade_calc, 1, sum)) 
+data_clean <- short_data %>% mutate(final_grade = apply(final_grade_calc, 1, sum)) %>% mutate(opt_in = case_when(e_correct == 0 ~ 0, e_correct > 0 ~ 1))
 ```
 
 ```{r}
 # data_clean <- data_clean %>% mutate_at(c(2:12),~na_if(.,0) )
-# exam_col <- data_clean %>% select(contains("exam"), -exam_total)
+exam_col <- data_clean %>% select(contains("exam"), -exam_total)
 ```
 
 ```{r}
@@ -277,4 +276,184 @@ final_data <- data_clean %>% mutate_at(colnames(exam_col), div) %>% mutate(exam_
 write.csv(final_data, file = "canvas_2024_cleaned.csv", row.names = F )
 ```
 
-## 
+## Unit 1
+##unit1a
+```{r}
+library(dplyr)
+setwd("~/Documents/GitHub/MC_data_cleaning/2024 Data/Unit_1_Exam_Version_Set_Scores")
+```
+```{r}
+getwd()
+```
+
+
+```{r}
+unit1a <- read.csv("Unit_1_Exam_Version_Set_Scores/Exam_1A_scores.csv")
+```
+
+```{r}
+unit1a <- unit1a %>% select("SID","View.Count", "Status", 13, 15, 17, 21, 26, 27)
+q_names <- c("SID", "views1", "Status", "h0", "h1", "pv_op", "ov_op", "claim_ex", "interpret")
+colnames(unit1a) <- q_names
+unit1a <- unit1a %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+```
+
+```{r}
+write.csv(unit1a, file = "Unit_1a.csv", row.names = F)
+```
+
+##unit1b
+```{r}
+unit1b <- read.csv("Unit_1_Exam_Version_Set_Scores/Exam_1B_scores.csv")
+```
+
+```{r}
+unit1b<- unit1b %>% select("SID","View.Count", "Status", 13, 15, 17, 22, 26, 27)
+q_names <- c("SID", "views1", "Status", "h0", "h1", "pv_op", "ov_op", "claim_ex", "interpret")
+colnames(unit1b) <- q_names
+unit1b <- unit1b %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+```
+
+```{r}
+write.csv(unit1b, file = "Unit_1b.csv", row.names = F)
+```
+
+##unit1c
+```{r}
+unit1c <- read.csv("Unit_1_Exam_Version_Set_Scores/Exam_1C_scores.csv")
+```
+
+```{r}
+unit1c<- unit1c %>% select("SID","View.Count", "Status", 13, 17, 21, 26, 27)
+q_names <- c("SID", "views1", "Status", "h0", "pv_op", "ov_op", "claim_ex", "interpret")
+colnames(unit1c) <- q_names
+unit1c <- unit1c %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+```
+
+```{r}
+write.csv(unit1c, file = "Unit_1c.csv", row.names = F)
+```
+
+##unit1d
+```{r}
+unit1d <- read.csv("Unit_1_Exam_Version_Set_Scores/Exam_1D_scores.csv")
+```
+
+```{r}
+unit1d<- unit1d %>% select("SID","View.Count", "Status", 13, 15, 17, 21, 26, 27)
+q_names <- c("SID", "views1", "Status", "h0", "h1", "pv_op", "ov_op", "claim_ex", "interpret")
+colnames(unit1d) <- q_names
+unit1d <- unit1d %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+```
+
+```{r}
+write.csv(unit1d, file = "Unit_1d.csv", row.names = F)
+```
+
+
+##Unit2
+##unit2c
+```{r}
+unit2c <- read.csv("Exam_2_Version_Set_Scores/Exam_2C_scores.csv")
+```
+
+```{r}
+unit2c<- unit2c %>% select("SID","View.Count", "Status", 13, 17, 24)
+q_names <- c("SID", "views1", "Status", "pv_op", "pv_cv", "interpret")
+colnames(unit2c) <- q_names
+unit2c <- unit2c %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+```
+
+```{r}
+write.csv(unit2c, file = "Unit_2c.csv", row.names = F)
+```
+
+##I didn't find the corresponding pdf of 2023 for F, and when I use others, I don't feel correct when I used others.
+
+##Unit3,
+##Unit3b
+```{r}
+unit3b <- read.csv("Exam_3_Version_Set_Scores/Exam_3B_scores.csv")
+```
+
+```{r}
+unit3b<- unit3b %>% select("SID","View.Count", "Status", 13, 17, 23, 28)
+q_names <- c("SID", "views1", "Status", "pv_def", "pv_cv", "internal2", "interpret")
+colnames(unit3b) <- q_names
+unit3b <- unit3b %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+```
+
+```{r}
+write.csv(unit3b, file = "Unit_3b.csv", row.names = F)
+```
+
+##Unit3c
+```{r}
+unit3c <- read.csv("Exam_3_Version_Set_Scores/Exam_3C_scores.csv")
+```
+
+```{r}
+unit3c<- unit3c %>% select("SID","View.Count", "Status", 13, 17, 23, 28)
+q_names <- c("SID", "views1", "Status", "pv_def", "pv_cv", "internal2", "interpret")
+colnames(unit3c) <- q_names
+unit3c <- unit3c %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+```
+
+```{r}
+write.csv(unit3c, file = "Unit_3c.csv", row.names = F)
+```
+
+##Unit4
+##unit4a
+```{r}
+unit4a <- read.csv("Exam_4_Version_Set_Scores/Exam_4A_scores.csv")
+```
+
+```{r}
+unit4a<- unit4a %>% select("SID","View.Count", "Status", 19, 22, 29)
+q_names <- c("SID", "views1", "Status", "ov_op", "ov_cv", "external")
+colnames(unit4a) <- q_names
+unit4a <- unit4a %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+```
+
+```{r}
+write.csv(unit4a, file = "Unit_4a.csv", row.names = F)
+```
+
+
+##unit4b
+```{r}
+unit4b <- read.csv("Exam_4_Version_Set_Scores/Exam_4B_scores.csv")
+```
+
+```{r}
+unit4b<- unit4b %>% select("SID","View.Count", "Status", 19, 22, 23, 24, 29)
+q_names <- c("SID", "views1", "Status", "ov_op", "ov_cv", "internal", "cofound", "external")
+colnames(unit4b) <- q_names
+unit4b <- unit4b %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+```
+
+```{r}
+write.csv(unit4b, file = "Unit_4b.csv", row.names = F)
+```
+
+
+## the numbers of columns of 4a and 4b are different, thus I am not be able to get the deleted version for Unit4 rn
+
+##Unit 5
+##Unit5a
+```{r}
+unit5b <- read.csv("Exam_5_Version_Set_Scores/Exam_5B_scores.csv")
+```
+
+```{r}
+unit5b<- unit5b %>% select("SID","View.Count", "Status", 20, 23, 25, 29)
+q_names <- c("SID", "views1", "Status", "ov_op", "ov_cv", "internal", "interpretation")
+colnames(unit5b) <- q_names
+unit5b <- unit5b %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+```
+
+```{r}
+write.csv(unit5b, file = "Unit_5b.csv", row.names = F)
+```
+
