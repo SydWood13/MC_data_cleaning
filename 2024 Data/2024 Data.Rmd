@@ -276,148 +276,228 @@ final_data <- data_clean %>% mutate_at(colnames(exam_col), div) %>% mutate(exam_
 write.csv(final_data, file = "canvas_2024_cleaned.csv", row.names = F )
 ```
 
-## Unit 1
-##unit1a
-```{r}
-library(dplyr)
-setwd("~/Documents/GitHub/MC_data_cleaning/2024 Data/Unit_1_Exam_Version_Set_Scores")
-```
-```{r}
-getwd()
-```
 
-
+## combine the dataset
+## Combine Dem & Grades
 ```{r}
-unit1a <- read.csv("Unit_1_Exam_Version_Set_Scores/Exam_1A_scores.csv")
+grades <- read.csv(file ="canvas_2024_cleaned.csv")
+
+dem <- read.csv("dem_2024_cleaned.csv")
+
+full_grades <- grades %>% select(-"SID")
+
+full_data <- full_join(dem,grades, by = "SID")
 ```
 
-```{r}
-unit1a <- unit1a %>% select("SID","View.Count", "Status", 13, 15, 17, 21, 26, 27)
-q_names <- c("SID", "views1", "Status", "h0", "h1", "pv_op", "ov_op", "claim_ex", "interpret")
-colnames(unit1a) <- q_names
-unit1a <- unit1a %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
-```
 
-```{r}
-write.csv(unit1a, file = "Unit_1a.csv", row.names = F)
-```
-
-##unit1b
+##Exchange the column number of 21st and 22nd in 1b
 ```{r}
 unit1b <- read.csv("Unit_1_Exam_Version_Set_Scores/Exam_1B_scores.csv")
 ```
 
 ```{r}
-unit1b<- unit1b %>% select("SID","View.Count", "Status", 13, 15, 17, 22, 26, 27)
-q_names <- c("SID", "views1", "Status", "h0", "h1", "pv_op", "ov_op", "claim_ex", "interpret")
-colnames(unit1b) <- q_names
-unit1b <- unit1b %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+unit1b <- unit1b[, c(1:20, 22, 21, 23:ncol(unit1b))]
 ```
 
 ```{r}
-write.csv(unit1b, file = "Unit_1b.csv", row.names = F)
+write.csv(unit1b, "Exam_1B_scores.csv", row.names = F)
 ```
 
-##unit1c
-```{r}
-unit1c <- read.csv("Unit_1_Exam_Version_Set_Scores/Exam_1C_scores.csv")
-```
 
+##Unit 1 loop
 ```{r}
-unit1c<- unit1c %>% select("SID","View.Count", "Status", 13, 17, 21, 26, 27)
-q_names <- c("SID", "views1", "Status", "h0", "pv_op", "ov_op", "claim_ex", "interpret")
-colnames(unit1c) <- q_names
-unit1c <- unit1c %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+library(dplyr)
+file_directory <- "~/Documents/GitHub/MC_data_cleaning/2024 Data/Unit_1_Exam_Version_Set_Scores"
+Exam1 <- list.files(file_directory, pattern = "*.csv", full.names = TRUE)
+
 ```
 
 ```{r}
-write.csv(unit1c, file = "Unit_1c.csv", row.names = F)
-```
-
-##unit1d
-```{r}
-unit1d <- read.csv("Unit_1_Exam_Version_Set_Scores/Exam_1D_scores.csv")
+# Create an empty list to store the results
+results_list <- list()
 ```
 
 ```{r}
-unit1d<- unit1d %>% select("SID","View.Count", "Status", 13, 15, 17, 21, 26, 27)
-q_names <- c("SID", "views1", "Status", "h0", "h1", "pv_op", "ov_op", "claim_ex", "interpret")
-colnames(unit1d) <- q_names
-unit1d <- unit1d %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+# Iterate over each file
+for (file in Exam1) {
+  # Read the CSV file
+  exam1 <- read.csv(file)
+  
+  # Select the required columns
+  exam1 <- exam1 %>% 
+    select("SID","View.Count", "Status", 13, 15, 17, 21, 26, 27)
+  
+  # Rename the columns
+  q_names <- c("SID", "views1", "Status", "h0", "h1", "pv_op", "ov_op", "claim_ex", "interpret")
+  colnames(exam1) <- q_names
+  
+  # Filter out rows where the status is "Missing" and remove the status column if it exists
+  exam1 <- exam1 %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+  
+  # Add the processed data to the results list
+  results_list[[basename(file)]] <- exam1
+}
+
+# Combine all results into a single data frame
+Exam1_full <- bind_rows(results_list, .id = "source")
+
+
 ```
 
+
+save files
 ```{r}
-write.csv(unit1d, file = "Unit_1d.csv", row.names = F)
+write.csv(Exam1_full, "Unit1_scores_cleaned.csv", row.names = F)
 ```
 
 
 ##Unit2
-##unit2c
+
+##Unit 2 loop
 ```{r}
-unit2c <- read.csv("Exam_2_Version_Set_Scores/Exam_2C_scores.csv")
+library(dplyr)
+file_directory <- "~/Documents/GitHub/MC_data_cleaning/2024 Data/Exam_2_Version_Set_Scores"
+Exam2 <- list.files(file_directory, pattern = "*.csv", full.names = TRUE)
 ```
 
 ```{r}
-unit2c<- unit2c %>% select("SID","View.Count", "Status", 13, 17, 24)
-q_names <- c("SID", "views1", "Status", "pv_op", "pv_cv", "interpret")
-colnames(unit2c) <- q_names
-unit2c <- unit2c %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+# Create an empty list to store the results
+results_list <- list()
 ```
 
 ```{r}
-write.csv(unit2c, file = "Unit_2c.csv", row.names = F)
+# Iterate over each file
+for (file in Exam2) {
+  # Read the CSV file
+  exam2 <- read.csv(file)
+  
+  # Select the required columns
+  exam2 <- exam2 %>% 
+    select("SID","View.Count", "Status", 13, 17, 20, 24)
+  
+  # Rename the columns
+  q_names <- c("SID", "views2", "Status", "pv_op", "pv_cv", "ov_cv", "interpret")
+  colnames(exam2) <- q_names
+  
+  # Filter out rows where the status is "Missing" and remove the status column if it exists
+  exam2 <- exam2 %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+  
+  # Add the processed data to the results list
+  results_list[[basename(file)]] <- exam2
+}
+
+# Combine all results into a single data frame
+Exam2_full <- bind_rows(results_list, .id = "source")
 ```
 
-##I didn't find the corresponding pdf of 2023 for F, and when I use others, I don't feel correct when I used others.
 
-##Unit3,
-##Unit3b
+save files
 ```{r}
-unit3b <- read.csv("Exam_3_Version_Set_Scores/Exam_3B_scores.csv")
+write.csv(Exam2_full, "Unit2_scores_cleaned.csv", row.names = F)
+```
+
+
+##Unit 3
+```{r}
+library(dplyr)
+file_directory <- "~/Documents/GitHub/MC_data_cleaning/2024 Data/Exam_3_Version_Set_Scores"
+Exam3 <- list.files(file_directory, pattern = "*.csv", full.names = TRUE)
 ```
 
 ```{r}
-unit3b<- unit3b %>% select("SID","View.Count", "Status", 13, 17, 23, 28)
-q_names <- c("SID", "views1", "Status", "pv_def", "pv_cv", "internal2", "interpret")
-colnames(unit3b) <- q_names
-unit3b <- unit3b %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+# Create an empty list to store the results
+results_list <- list()
 ```
 
 ```{r}
-write.csv(unit3b, file = "Unit_3b.csv", row.names = F)
+# Iterate over each file
+for (file in Exam3) {
+  # Read the CSV file
+  exam3 <- read.csv(file)
+  
+  # Select the required columns
+  exam3 <- exam3 %>% 
+    select("SID","View.Count", "Status", 13, 17, 23, 28)
+  
+  # Rename the columns
+  q_names <- c("SID", "views3", "Status", "pv_def", "pv_cv", "internal2", "interpret")
+  colnames(exam3) <- q_names
+  
+  # Filter out rows where the status is "Missing" and remove the status column if it exists
+  exam3 <- exam3 %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+  
+  # Add the processed data to the results list
+  results_list[[basename(file)]] <- exam3
+}
+
+# Combine all results into a single data frame
+Exam3_full <- bind_rows(results_list, .id = "source")
 ```
 
-##Unit3c
+
+save files
 ```{r}
-unit3c <- read.csv("Exam_3_Version_Set_Scores/Exam_3C_scores.csv")
+write.csv(Exam3_full, "Unit3_scores_cleaned.csv", row.names = F)
 ```
 
-```{r}
-unit3c<- unit3c %>% select("SID","View.Count", "Status", 13, 17, 23, 28)
-q_names <- c("SID", "views1", "Status", "pv_def", "pv_cv", "internal2", "interpret")
-colnames(unit3c) <- q_names
-unit3c <- unit3c %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
-```
-
-```{r}
-write.csv(unit3c, file = "Unit_3c.csv", row.names = F)
-```
 
 ##Unit4
+```{r}
+library(dplyr)
+file_directory <- "~/Documents/GitHub/MC_data_cleaning/2024 Data/Exam_4_Version_Set_Scores"
+Exam4 <- list.files(file_directory, pattern = "*.csv", full.names = TRUE)
+```
+
+```{r}
+# Create an empty list to store the results
+results_list <- list()
+```
+
+```{r}
+# Iterate over each file
+for (file in Exam4) {
+  # Read the CSV file
+  exam4 <- read.csv(file)
+  
+  # Select the required columns
+  exam4 <- exam4 %>% 
+    select("SID","View.Count", "Status", 19, 22, 24, 29) ##the 23rd column is appear in many other datasets but 4a
+  
+  # Rename the columns
+  q_names <- c("SID", "views4", "Status", "ov_op", "ov_cv", "confound", "external")
+  colnames(exam4) <- q_names
+  
+  # Filter out rows where the status is "Missing" and remove the status column if it exists
+  exam4 <- exam4 %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+  
+  # Add the processed data to the results list
+  results_list[[basename(file)]] <- exam4
+}
+
+# Combine all results into a single data frame
+Exam4_full <- bind_rows(results_list, .id = "source")
+```
+
+#save files
+```{r}
+write.csv(Exam4_full, "Unit4_scores_cleaned.csv", row.names = F)
+```
+
+
 ##unit4a
 ```{r}
 unit4a <- read.csv("Exam_4_Version_Set_Scores/Exam_4A_scores.csv")
 ```
 
 ```{r}
-unit4a<- unit4a %>% select("SID","View.Count", "Status", 19, 22, 29)
+unit4a<- unit4a %>% select("SID","View.Count", "Status", 19, 22, 24, 29)
 q_names <- c("SID", "views1", "Status", "ov_op", "ov_cv", "external")
 colnames(unit4a) <- q_names
 unit4a <- unit4a %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
 ```
 
 ```{r}
-write.csv(unit4a, file = "Unit_4a.csv", row.names = F)
+write.csv(unit4a, file = "Unit_4a_cleaned.csv", row.names = F)
 ```
 
 
@@ -434,26 +514,226 @@ unit4b <- unit4b %>% filter(Status != "Missing") %>% select(-"Status") %>%  filt
 ```
 
 ```{r}
-write.csv(unit4b, file = "Unit_4b.csv", row.names = F)
+write.csv(unit4b, file = "Unit_4b_cleaned.csv", row.names = F)
 ```
 
 
 ## the numbers of columns of 4a and 4b are different, thus I am not be able to get the deleted version for Unit4 rn
 
 ##Unit 5
+
+```{r}
+library(dplyr)
+file_directory <- "~/Documents/GitHub/MC_data_cleaning/2024 Data/Exam_5_Version_Set_Scores"
+Exam5 <- list.files(file_directory, pattern = "*.csv", full.names = TRUE)
+```
+
+```{r}
+# Create an empty list to store the results
+results_list <- list()
+```
+
+```{r}
+# Iterate over each file
+for (file in Exam5) {
+  # Read the CSV file
+  exam5 <- read.csv(file)
+  
+  # Select the required columns
+  exam5 <- exam5 %>% 
+    select("SID","View.Count", "Status", 20, 23, 24, 29) ##the 25th column is appear in many other datasets but 5a
+  
+  # Rename the columns
+  q_names <- c("SID", "views5", "Status", "ov_op", "ov_cv", "confound", "interpretation")
+  colnames(exam5) <- q_names
+  
+  # Filter out rows where the status is "Missing" and remove the status column if it exists
+  exam5 <- exam5 %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
+  
+  # Add the processed data to the results list
+  results_list[[basename(file)]] <- exam5
+}
+
+# Combine all results into a single data frame
+Exam5_full <- bind_rows(results_list, .id = "source")
+```
+
+#save files
+```{r}
+write.csv(Exam5_full, "Unit5_scores_cleaned.csv", row.names = F)
+```
+
+
 ##Unit5a
 ```{r}
 unit5b <- read.csv("Exam_5_Version_Set_Scores/Exam_5B_scores.csv")
 ```
 
 ```{r}
-unit5b<- unit5b %>% select("SID","View.Count", "Status", 20, 23, 25, 29)
+unit5b<- unit5b %>% select("SID","View.Count", "Status", 20, 23, 24, 29) 
 q_names <- c("SID", "views1", "Status", "ov_op", "ov_cv", "internal", "interpretation")
 colnames(unit5b) <- q_names
 unit5b <- unit5b %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
 ```
 
 ```{r}
-write.csv(unit5b, file = "Unit_5b.csv", row.names = F)
+write.csv(unit5b, file = "Unit_5b_cleaned.csv", row.names = F)
+```
+
+
+
+
+
+## p_tot1
+```{r}
+library(dplyr)
+exam1_short <- read.csv("Unit1_scores_cleaned.csv", sep = ",")
+```
+
+```{r}
+exam1_calc <- exam1_short %>% select(4:9)
+exam1_short <- exam1_short %>%
+  mutate(written = rowSums(exam1_calc, na.rm = TRUE))
+```
+
+```{r}
+exam1_final <- exam1_short %>% mutate(p_tot1 = (written/60)*100) 
+```
+
+```{r}
+exam1_end <- exam1_final %>% select("SID", "views1", "p_tot1")
+```
+
+```{r}
+full_data <- left_join(full_data, exam1_end, by = "SID" )
+```
+
+
+##p_tot2
+```{r}
+library(dplyr)
+exam2_short <- read.csv("Unit2_scores_cleaned.csv", sep = ",")
+```
+
+```{r}
+exam2_calc <- exam2_short %>% select(4:7)
+exam2_short <- exam2_short %>%
+  mutate(written = rowSums(exam2_calc, na.rm = TRUE))
+```
+
+```{r}
+exam2_final <- exam2_short %>% mutate(p_tot2 = (written/55)*100) 
+```
+
+```{r}
+exam2_end <- exam2_final %>% select("SID", "views2", "p_tot2")
+```
+
+```{r}
+full_data <- left_join(full_data, exam2_end, by = "SID" )
+```
+
+##p_tot3
+```{r}
+library(dplyr)
+exam3_short <- read.csv("Unit3_scores_cleaned.csv", sep = ",")
+```
+
+```{r}
+exam3_calc <- exam3_short %>% select(4:7)
+exam3_short <- exam3_short %>%
+  mutate(written = rowSums(exam3_calc, na.rm = TRUE))
+```
+
+```{r}
+exam3_final <- exam3_short %>% mutate(p_tot3 = (written/50)*100) 
+```
+
+```{r}
+exam3_end <- exam3_final %>% select("SID", "views3", "p_tot3")
+```
+
+```{r}
+full_data <- left_join(full_data, exam3_end, by = "SID" )
+```
+
+
+##p_tot4
+```{r}
+library(dplyr)
+exam4_short <- read.csv("Unit4_scores_cleaned.csv", sep = ",")
+```
+
+```{r}
+exam4_calc <- exam4_short %>% select(4:7)
+exam4_short <- exam4_short %>%
+  mutate(written = rowSums(exam4_calc, na.rm = TRUE))
+```
+
+```{r}
+exam4_final <- exam4_short %>% mutate(p_tot4 = (written/40)*100) 
+```
+
+```{r}
+exam4_end <- exam4_final %>% select("SID", "views4", "p_tot4")
+```
+
+```{r}
+full_data <- left_join(full_data, exam4_end, by = "SID" )
+```
+
+##p_tot5
+```{r}
+library(dplyr)
+exam5_short <- read.csv("Unit5_scores_cleaned.csv", sep = ",")
+```
+
+```{r}
+exam5_calc <- exam5_short %>% select(4:7)
+exam5_short <- exam5_short %>%
+  mutate(written = rowSums(exam5_calc, na.rm = TRUE))
+```
+
+```{r}
+exam5_final <- exam5_short %>% mutate(p_tot5 = (written/40)*100) 
+```
+
+```{r}
+exam5_end <- exam5_final %>% select("SID", "views5", "p_tot5")
+```
+
+```{r}
+full_data <- left_join(full_data, exam5_end, by = "SID" )
+```
+
+
+
+## Deidentify the data 
+
+```{r}
+original_id <- full_data %>% select("SID")
+```
+
+```{r}
+set.seed(123)
+original_id$anon_id <- sample(100000000:999999999, nrow(original_id), replace = FALSE)
+```
+
+```{r}
+full_data <- left_join(full_data, original_id, by = "SID")
+```
+
+```{r}
+anon_data <- full_data %>%
+  select(2:45)
+```
+
+```{r}
+id_modified <- anon_data %>%
+  relocate(anon_id, .before = 1)
+```
+
+```{r}
+write.csv(id_modified, "2024_full_data_cleaned.csv", row.names = F)
 ```
 

@@ -260,7 +260,7 @@ canvas_data$p_p_final[canvas_data$prep_p_raw >= 250]<- 250
 canvas_data <- canvas_data %>% filter(!is.na(SID))
 canvas_data[is.na(canvas_data)] <- 0
 canvas_exam <- canvas_data %>% select(contains("exam"))
-canvas_exam$lowest <- apply(canvas_exam, 1, min)
+canvas_exam$lowest <- apply(canvas_exam, 1, min) 
 canvas_exam$lowest <- canvas_exam$lowest * -1
 canvas_data$exam_total <- apply(canvas_exam, 1, sum)
 ```
