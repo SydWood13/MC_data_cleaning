@@ -461,10 +461,10 @@ for (file in Exam4) {
   
   # Select the required columns
   exam4 <- exam4 %>% 
-    select("SID","View.Count", "Status", 19, 22, 24, 29) ##the 23rd column is appear in many other datasets but 4a
+    select("SID","View.Count", "Status", 19, 22, 23, 24, 29) ##the 23rd column is appear in many other datasets but 4a
   
   # Rename the columns
-  q_names <- c("SID", "views4", "Status", "ov_op", "ov_cv", "confound", "external")
+  q_names <- c("SID", "views4", "Status", "ov_op", "ov_cv", "internal", "confound", "external")
   colnames(exam4) <- q_names
   
   # Filter out rows where the status is "Missing" and remove the status column if it exists
@@ -484,38 +484,6 @@ write.csv(Exam4_full, "Unit4_scores_cleaned.csv", row.names = F)
 ```
 
 
-##unit4a
-```{r}
-unit4a <- read.csv("Exam_4_Version_Set_Scores/Exam_4A_scores.csv")
-```
-
-```{r}
-unit4a<- unit4a %>% select("SID","View.Count", "Status", 19, 22, 24, 29)
-q_names <- c("SID", "views1", "Status", "ov_op", "ov_cv", "external")
-colnames(unit4a) <- q_names
-unit4a <- unit4a %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
-```
-
-```{r}
-write.csv(unit4a, file = "Unit_4a_cleaned.csv", row.names = F)
-```
-
-
-##unit4b
-```{r}
-unit4b <- read.csv("Exam_4_Version_Set_Scores/Exam_4B_scores.csv")
-```
-
-```{r}
-unit4b<- unit4b %>% select("SID","View.Count", "Status", 19, 22, 23, 24, 29)
-q_names <- c("SID", "views1", "Status", "ov_op", "ov_cv", "internal", "cofound", "external")
-colnames(unit4b) <- q_names
-unit4b <- unit4b %>% filter(Status != "Missing") %>% select(-"Status") %>%  filter(SID != "#N/A") %>% filter(SID != "dropped")
-```
-
-```{r}
-write.csv(unit4b, file = "Unit_4b_cleaned.csv", row.names = F)
-```
 
 
 ## the numbers of columns of 4a and 4b are different, thus I am not be able to get the deleted version for Unit4 rn
