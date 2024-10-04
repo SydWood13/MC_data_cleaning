@@ -1,0 +1,1571 @@
+---
+title: "MC_Analysis"
+author: 
+date: "2023-07-17"
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Manuscript Data
+
+Load Packages
+
+```{r, echo= FALSE, include = FALSE}
+library(viridis)
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+library(gridExtra)
+library(lme4)
+library(jtools)
+library(car)
+library(coin)
+library(ggpubr)
+library(rstatix)
+library(olsrr)
+library(lmerTest)
+library(glue)
+library(apaTables)
+library(lavaan)
+library(did)
+library(stargazer)
+library(plm)
+library(sandwich)
+library(coefplot)
+library(naniar)
+```
+#### Import data 
+
+```{r}
+ex_data <- read.csv(file = "Final_Data.csv")
+
+
+```
+
+
+
+
+## Demographics 
+
+### Conitnous Demographics 
+
+```{r}
+##Aggregate pre vs post exam grades
+
+ex_data <- ex_data %>% mutate(pre_exams_w = rowMeans(across(p_tot1:p_tot3), na.rm = T))
+ex_data <- ex_data %>% mutate(post_exams_w = rowMeans(across(p_tot4:p_tot5), na.rm = T))
+
+ex_data$opt_in <- factor(ex_data$opt_in)
+ex_opt_in <- ex_data %>% filter(opt_in == 1)
+
+ex_opt_out <- ex_data %>% filter(opt_in == 0)
+
+
+plot <- ex_data %>% ggplot()
+
+
+
+### Continuous Demographic variables 
+
+age_char <- ex_data %>% summarise(variable = "age", n = n(),
+                                    mean = mean(age), 
+                                    sd = sd(age),
+                                    median = median(age),
+                                    MAD = mad(age, na.rm = T),
+                                    Q1 = quantile(age, probs = .25),
+                                    Q3 = quantile(age, probs = .75),
+                                    IQR = IQR(age, na.rm = T),
+                                    min = min(age, na.rm = T),
+                                    max = max(age, na.rm = T)
+            )
+
+grade_char <- ex_data %>% summarise(variable = "grade", n = n(),
+                                      mean = mean(final_grade, na.rm = T), 
+                                    sd = sd(final_grade, na.rm = T),
+                                    median = median(final_grade, na.rm = T),
+                                    MAD = mad(final_grade, na.rm = T),
+                                    Q1 = quantile(final_grade, probs = .25),
+                                    Q3 = quantile(final_grade, probs = .75),
+                                    IQR = IQR(final_grade, na.rm = T),
+                                    min = min(final_grade, na.rm = T),
+                                    max = max(final_grade, na.rm = T)
+            )
+
+fin_support_char <- ex_data %>% summarise(variable = "fin_support", n = n(),
+                                            mean = mean(fin_support, na.rm = T), 
+                                    sd = sd(final_grade, na.rm = T),
+                                    median = median(fin_support, na.rm = T),
+                                    MAD = mad(fin_support, na.rm = T),
+                                    Q1 = quantile(fin_support, probs = .25, na.rm = T),
+                                    Q3 = quantile(fin_support, probs = .75, na.rm = T),
+                                    IQR = IQR(fin_support, na.rm = T),
+                                    min = min(fin_support, na.rm = T),
+                                    max = max(fin_support, na.rm = T)
+            )
+
+e_lvl_char <- ex_data %>% summarise(variable = "e_lvl",
+                                                                n = n(),
+                                            mean = mean(e_lvl, na.rm = T), 
+                                    sd = sd(e_lvl, na.rm = T),
+                                    median = median(e_lvl, na.rm = T),
+                                    MAD = mad(e_lvl, na.rm = T),
+                                    Q1 = quantile(e_lvl, probs = .25, na.rm = T),
+                                    Q3 = quantile(e_lvl, probs = .75, na.rm = T),
+                                    IQR = IQR(e_lvl, na.rm = T),
+                                    min = min(e_lvl, na.rm = T),
+                                    max = max(e_lvl, na.rm = T))
+
+
+
+
+pre_char_w <- ex_data %>% summarise(variable = "pre_exams_w",
+                                    n = n(),
+                                    mean = mean(pre_exams_w, na.rm = T), 
+                                    sd = sd(pre_exams_w, na.rm = T),
+                                    median = median(pre_exams_w, na.rm = T),
+                                    MAD = mad(pre_exams_w, na.rm = T),
+                                    Q1 = quantile(pre_exams_w, probs = .25, na.rm = T),
+                                    Q3 = quantile(pre_exams_w, probs = .75, na.rm = T),
+                                    IQR = IQR(pre_exams_w, na.rm = T),
+                                    min = min(pre_exams_w, na.rm = T),
+                                    max = max(pre_exams_w, na.rm = T))
+ 
+cont_descr <- rbind(age_char, grade_char, fin_support_char, e_lvl_char, pre_char_w)
+
+
+
+#Continuous Variables Descriptive Stats                               
+tibble(cont_descr)
+
+##continous diff by Intevention 
+
+
+
+age_int <- ex_data %>% group_by(opt_in) %>% summarise(variable = "age", n = n(),
+                                    mean = mean(age), 
+                                    sd = sd(age),
+                                    median = median(age),
+                                     MAD = mad(age, na.rm = T),
+                                    Q1 = quantile(age, probs = .25, na.rm = T),
+                                    Q3 = quantile(age, probs = .75, na.rm = T),
+                                    IQR = IQR(age, na.rm = T),
+                                    min = min(age, na.rm = T),
+                                    max = max(age, na.rm = T))
+
+grade_int <- ex_data %>% group_by(opt_in) %>% summarise(variable = "grade", n = n(),
+                                      mean = mean(final_grade, na.rm = T), 
+                                    sd = sd(final_grade, na.rm = T),
+                                    median = median(final_grade, na.rm = T),
+                                    MAD = mad(final_grade, na.rm = T),
+                                    Q1 = quantile(final_grade, probs = .25),
+                                    Q3 = quantile(final_grade, probs = .75),
+                                    IQR = IQR(final_grade, na.rm = T),
+                                    min = min(final_grade, na.rm = T),
+                                    max = max(final_grade, na.rm = T))
+
+fin_support_int <- ex_data %>% group_by(opt_in) %>% summarise(variable = "fin_support",
+                                                                n = n(),
+                                            mean = mean(fin_support, na.rm = T), 
+                                    sd = sd(final_grade, na.rm = T),
+                                    median = median(fin_support, na.rm = T),
+                                    MAD = mad(fin_support, na.rm = T),
+                                    Q1 = quantile(fin_support, probs = .25, na.rm = T),
+                                    Q3 = quantile(fin_support, probs = .75, na.rm = T),
+                                    IQR = IQR(fin_support, na.rm = T),
+                                    min = min(fin_support, na.rm = T),
+                                    max = max(fin_support, na.rm = T))
+
+
+e_lvl_int <- ex_data %>% group_by(opt_in) %>% summarise(variable = "e_lvl",
+                                                                n = n(),
+                                            mean = mean(e_lvl, na.rm = T), 
+                                    sd = sd(e_lvl, na.rm = T),
+                                    median = median(e_lvl, na.rm = T),
+                                    MAD = mad(e_lvl, na.rm = T),
+                                    Q1 = quantile(e_lvl, probs = .25, na.rm = T),
+                                    Q3 = quantile(e_lvl, probs = .75, na.rm = T),
+                                    IQR = IQR(e_lvl, na.rm = T),
+                                    min = min(e_lvl, na.rm = T),
+                                    max = max(e_lvl, na.rm = T))
+
+
+
+
+pre_int <- ex_data %>% group_by(opt_in) %>% summarise(variable = "pre_exams",
+                                    n = n(),
+                                    mean = mean(pre_exams_w, na.rm = T), 
+                                    sd = sd(pre_exams_w, na.rm = T),
+                                    median = median(pre_exams_w, na.rm = T),
+                                    MAD = mad(pre_exams_w, na.rm = T),
+                                    Q1 = quantile(pre_exams_w, probs = .25, na.rm = T),
+                                    Q3 = quantile(pre_exams_w, probs = .75, na.rm = T),
+                                    IQR = IQR(pre_exams_w, na.rm = T),
+                                    min = min(pre_exams_w, na.rm = T),
+                                    max = max(pre_exams_w, na.rm = T))
+
+cont_dem_by_int <- rbind(age_int, grade_int, fin_support_int, e_lvl_int, pre_int)
+
+cont_dem_by_int
+```
+
+###
+
+### Age difference by intervention
+
+#### (Age)Test for Normality and equality of variance
+```{r}
+shapiro.test((ex_opt_in$age))
+
+shapiro.test((ex_opt_out$age))
+
+leveneTest(ex_data$age, ex_data$opt_in)
+```
+
+Not normally distributed but there are equal variances: non-parametric test of differences needed. 
+
+#### (Age)Mann-Whitney Test of Differences (U-Test)
+```{r}
+wilcox_test(age ~ opt_in, data = ex_data)
+```
+
+Not significantly different U=17595 p = 0.62
+
+###
+
+### Financial Support Differences by opting in 
+
+
+#### (Fin Support) Test for Normality and equality of variance
+```{r}
+shapiro.test((ex_opt_in$fin_support))
+
+shapiro.test((ex_opt_out$fin_support))
+
+leveneTest(ex_data$fin_support, ex_data$opt_in)
+```
+
+Not normally distributed but there are equal variances 
+
+#### (Fin Support) Mann-Whitney Test of Differences (U-Test) 
+```{r}
+wilcox_test(fin_support ~ opt_in, data = ex_data)
+```
+
+Not significantly different U=16629 p = .93
+
+###
+
+### English Proficiency Differences by opt-ing in 
+
+#### (ESL) Test for Normality and equality of variance
+```{r}
+shapiro.test((ex_opt_in$e_lvl))
+
+shapiro.test((ex_opt_out$e_lvl))
+
+leveneTest(ex_data$e_lvl, ex_data$opt_in)
+```
+
+Not normally distributed but there is equal variances 
+
+#### (ESL) Mann-Whitney Test of Differences (U-Test) 
+```{r}
+wilcox_test(e_lvl ~ opt_in, data = ex_data)
+```
+
+Not significantly different U=16147 p =.34
+
+
+### (Final Grade) Mann-Whitney Test of Differences (U-Test)
+```{r}
+wilcox_test(final_grade ~ opt_in, data = ex_data)
+```
+
+
+###
+
+### Categorical Descriptives 
+
+
+```{r}
+##Assign Factors
+ex_data$first_gen <- factor(ex_data$first_gen)
+ex_data$year <- factor(ex_data$year)
+ex_data$URM <- factor(ex_data$URM)
+ex_data$int_student <- factor(ex_data$int_student)
+ex_data$gender <- factor(ex_data$gender)
+ex_data$esl <- factor(ex_data$esl)
+ex_data$transfer <- factor(ex_data$transfer)
+
+
+##First Gen 
+first_gen_table <- ex_data %>% group_by(first_gen) %>%
+  summarise(var = "first_gen", n = n(), percent = (n()/379))
+
+
+first_gen_table
+
+first_gen_table_int <- ex_data %>% group_by(first_gen, opt_in) %>%
+  summarise(var = "first_gen", n = n())
+
+
+first_gen_table_int
+
+##URM
+URM_table <- ex_data %>% group_by(URM) %>%
+  summarise(var = "URM", n = n(), percent = (n()/379))
+
+
+URM_table
+
+URM_table_int <- ex_data %>% group_by(URM, opt_in) %>%
+  summarise(var = "URM", n = n())
+
+
+URM_table_int
+
+##Transfer 
+transfer_table <- ex_data %>% group_by(transfer) %>%
+  summarise(var = "transfer", n = n(), percent = (n()/379))
+
+
+transfer_table
+
+transfer_table_int <- ex_data %>% group_by(transfer, opt_in) %>%
+  summarise(var = "transfer", n = n())
+
+
+transfer_table_int
+
+
+##Gender
+
+gender_table <- ex_data %>% group_by(gender) %>%
+  summarise(var = "gender", n = n(), percent = (n()/379))
+
+
+gender_table
+
+gender_table_int <- ex_data %>% group_by(gender, opt_in) %>%
+  summarise(var = "gender", n = n())
+
+
+gender_table_int
+
+## International table 
+int_table <- ex_data %>% group_by(int_student) %>%
+  summarise(var = "International", n = n(), percent = (n()/379))
+
+
+int_table
+
+int_table_int <- ex_data %>% group_by(int_student, opt_in) %>%
+  summarise(var = "International", n = n())
+
+```
+
+
+###
+
+### Differences in Opt-in by First Gen 
+```{r}
+chisq.test(ex_data$first_gen, ex_data$opt_in)
+```
+
+No differences by first gen status in the decision to opt-in to the intervention, chi = .41, p = .52.
+###
+
+### Differences in Opt-in by Gender 
+```{r}
+chisq.test(ex_data$gender, ex_data$opt_in)
+```
+
+No difference by gender in decision to opt-in to treatment, chi = .43, p = .81.
+###
+
+### Differences in Opt-in by URM 
+
+```{r}
+chisq.test(ex_data$URM, ex_data$opt_in)
+```
+
+No difference in URM in the decision to opt-in to treatement, chi = 2.23, p = .14.
+###
+
+### Differences in Opt-in by International student
+
+```{r}
+chisq.test(ex_data$int_student, ex_data$opt_in)
+```
+
+No difference in residency status in the decision to opt-in to treatment, chi = 2.37, p = .12.
+###
+
+### Differences in Opt-in by Transfer 
+
+```{r}
+chisq.test(ex_data$transfer, ex_data$opt_in)
+```
+
+No difference in transfer status in the decision to opt-in to treatment, chi = .12, p = .73.
+
+###
+
+### Results of Demographic differences 
+
+
+No differences in any demographic characteristics on the decision to opt-in to the intervention Chi_Square between 2.37  & .12, p between .12 & .81
+
+##
+
+## EXAM Descriptives 
+
+```{r}
+
+
+
+exam1_d <- ex_data %>% summarise(variable = "exam1",
+                                                                n = n(),
+                                            mean = mean(p_tot1, na.rm = T), 
+                                    sd = sd(p_tot1, na.rm = T),
+                                    median = median(p_tot1, na.rm = T),
+                                    MAD = mad(p_tot1, na.rm = T),
+                                    Q1 = quantile(p_tot1, probs = .25, na.rm = T),
+                                    Q3 = quantile(p_tot1, probs = .75, na.rm = T),
+                                    IQR = IQR(p_tot1, na.rm = T),
+                                    IQR = IQR(p_tot1, na.rm = T),
+                                    min = min(p_tot1, na.rm = T),
+                                    max = max(p_tot1, na.rm = T))
+
+exam1_d_i <- ex_data %>% group_by(opt_in) %>% summarise(variable = "exam1",
+                                                                n = n(),
+                                            mean = mean(p_tot1, na.rm = T), 
+                                    sd = sd(p_tot1, na.rm = T),
+                                    median = median(p_tot1, na.rm = T),
+                                    MAD = mad(p_tot1, na.rm = T),
+                                    Q1 = quantile(p_tot1, probs = .25, na.rm = T),
+                                    Q3 = quantile(p_tot1, probs = .75, na.rm = T),
+                                    IQR = IQR(p_tot1, na.rm = T),
+                                    IQR = IQR(p_tot1, na.rm = T),
+                                    min = min(p_tot1, na.rm = T),
+                                    max = max(p_tot1, na.rm = T))
+
+exam2_d <- ex_data %>% summarise(variable = "exam2",
+                                                                n = n(),
+                                            mean = mean(p_tot2, na.rm = T), 
+                                    sd = sd(p_tot2, na.rm = T),
+                                    median = median(p_tot2, na.rm = T),
+                                    MAD = mad(p_tot2, na.rm = T),
+                                    Q1 = quantile(p_tot2, probs = .25, na.rm = T),
+                                    Q3 = quantile(p_tot2, probs = .75, na.rm = T),
+                                    IQR = IQR(p_tot2, na.rm = T),
+                                    min = min(p_tot2, na.rm = T),
+                                    max = max(p_tot2, na.rm = T))
+
+exam2_d_i <- ex_data %>% group_by(opt_in) %>% summarise(variable = "exam2",
+                                                                n = n(),
+                                            mean = mean(p_tot2, na.rm = T), 
+                                    sd = sd(p_tot2, na.rm = T),
+                                    median = median(p_tot2, na.rm = T),
+                                    MAD = mad(p_tot2, na.rm = T),
+                                    Q1 = quantile(p_tot2, probs = .25, na.rm = T),
+                                    Q3 = quantile(p_tot2, probs = .75, na.rm = T),
+                                    IQR = IQR(p_tot2, na.rm = T),
+                                    min = min(p_tot2, na.rm = T),
+                                    max = max(p_tot2, na.rm = T))
+
+
+
+exam3_d <- ex_data %>% summarise(variable = "exam3",
+                                                                n = n(),
+                                            mean = mean(p_tot3, na.rm = T), 
+                                    sd = sd(p_tot3, na.rm = T),
+                                    median = median(p_tot3, na.rm = T),
+                                    MAD = mad(p_tot3, na.rm = T),
+                                    Q1 = quantile(p_tot3, probs = .25, na.rm = T),
+                                    Q3 = quantile(p_tot3, probs = .75, na.rm = T),
+                                    IQR = IQR(p_tot3, na.rm = T),
+                                    min = min(p_tot3, na.rm = T),
+                                    max = max(p_tot3, na.rm = T))
+
+exam3_d_i <- ex_data %>% group_by(opt_in) %>%  summarise(variable = "exam3",
+                                                                n = n(),
+                                            mean = mean(p_tot3, na.rm = T), 
+                                    sd = sd(p_tot3, na.rm = T),
+                                    median = median(p_tot3, na.rm = T),
+                                     MAD = mad(p_tot3, na.rm = T),
+                                    Q1 = quantile(p_tot3, probs = .25, na.rm = T),
+                                    Q3 = quantile(p_tot3, probs = .75, na.rm = T),
+                                    IQR = IQR(p_tot3, na.rm = T),
+                                    min = min(p_tot3, na.rm = T),
+                                    max = max(p_tot3, na.rm = T))
+
+
+exam4_d <- ex_data %>% summarise(variable = "exam4",
+                                                                n = n(),
+                                            mean = mean(p_tot4, na.rm = T), 
+                                    sd = sd(p_tot4, na.rm = T),
+                                    median = median(p_tot4, na.rm = T),
+                                     MAD = mad(p_tot4, na.rm = T),
+                                    Q1 = quantile(p_tot4, probs = .25, na.rm = T),
+                                    Q3 = quantile(p_tot4, probs = .75, na.rm = T),
+                                    IQR = IQR(p_tot4, na.rm = T),
+                                    min = min(p_tot4, na.rm = T),
+                                    max = max(p_tot4, na.rm = T))
+
+exam4_d_i <- ex_data %>% group_by(opt_in) %>%  summarise(variable = "exam4",
+                                                                n = n(),
+                                            mean = mean(p_tot4, na.rm = T), 
+                                    sd = sd(p_tot4, na.rm = T),
+                                    median = median(p_tot4, na.rm = T),
+                                     MAD = mad(p_tot4, na.rm = T),
+                                    Q1 = quantile(p_tot4, probs = .25, na.rm = T),
+                                    Q3 = quantile(p_tot4, probs = .75, na.rm = T),
+                                    IQR = IQR(p_tot4, na.rm = T),
+                                    min = min(p_tot4, na.rm = T),
+                                    max = max(p_tot4, na.rm = T))
+
+exam5_d <- ex_data %>% summarise(variable = "exam5",
+                                                                n = n(),
+                                            mean = mean(p_tot5, na.rm = T), 
+                                    sd = sd(p_tot5, na.rm = T),
+                                    median = median(p_tot5, na.rm = T),
+                                  MAD = mad(p_tot5, na.rm = T),
+                                    Q1 = quantile(p_tot5, probs = .25, na.rm = T),
+                                    Q3 = quantile(p_tot5, probs = .75, na.rm = T),
+                                    IQR = IQR(p_tot5, na.rm = T),
+                                    min = min(p_tot5, na.rm = T),
+                                    max = max(p_tot5, na.rm = T))
+
+exam5_d_i <- ex_data %>% group_by(opt_in) %>%  summarise(variable = "exam5",
+                                                                n = n(),
+                                            mean = mean(p_tot5, na.rm = T), 
+                                    sd = sd(p_tot5, na.rm = T),
+                                    median = median(p_tot5, na.rm = T),
+                                     MAD = mad(p_tot5, na.rm = T),
+                                    Q1 = quantile(p_tot5, probs = .25, na.rm = T),
+                                    Q3 = quantile(p_tot5, probs = .75, na.rm = T),
+                                    IQR = IQR(p_tot5, na.rm = T),
+                                    min = min(p_tot5, na.rm = T),
+                                    max = max(p_tot5, na.rm = T))
+
+
+
+overall_table <- rbind(exam1_d, exam2_d, exam3_d, exam4_d, exam5_d)
+
+by_opt_table <- rbind(exam1_d_i, exam2_d_i, exam3_d_i, exam4_d_i, exam5_d_i)
+
+
+
+overall_table
+
+by_opt_table
+
+```
+
+### Normality and Assumptions 
+
+Exam 1
+```{r}
+shapiro.test((ex_opt_in$p_tot1))
+
+shapiro.test((ex_opt_out$p_tot1))
+
+leveneTest(ex_data$p_tot1, ex_data$opt_in)
+```
+
+
+Exam 2 
+```{r}
+shapiro.test((ex_opt_in$p_tot2))
+
+shapiro.test((ex_opt_out$p_tot2))
+
+leveneTest(ex_data$p_tot2, ex_data$opt_in)
+```
+
+
+Exam 3 
+```{r}
+shapiro.test((ex_opt_in$p_tot3))
+
+shapiro.test((ex_opt_out$p_tot3))
+
+leveneTest(ex_data$p_tot3, ex_data$opt_in)
+```
+
+
+Exam 4
+```{r}
+shapiro.test((ex_opt_in$p_tot4))
+
+shapiro.test((ex_opt_out$p_tot4))
+
+leveneTest(ex_data$p_tot4, ex_data$opt_in)
+```
+
+
+Exam 5 
+```{r}
+shapiro.test((ex_opt_in$p_tot5))
+
+shapiro.test((ex_opt_out$p_tot5))
+
+leveneTest(ex_data$p_tot5, ex_data$opt_in)
+```
+
+
+```{r}
+naniar::mcar_test(ex_data)
+```
+
+
+
+##
+
+## SEM 
+
+### Dataset 
+
+```{r}
+data <- ex_data
+
+    ```
+
+### No Growth Models
+
+#### No growth model structure 
+```{r}
+no_growth <- ('#latent structure
+i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
+
+'
+)
+```
+
+
+
+#### Model 0: Fully Constrained no growth  ---Null model  
+
+```{r}
+fit0 <- growth(model = no_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("residuals", "means", "lv.variances"), se = "robust")
+
+fitMeasures(fit0)
+
+parameterestimates(fit0)
+
+```
+
+##### Interpetation 
+Baseline model, represents the null hypothesis assuming no change overtime and no differences between groups. 
+
+See supplemental section to see other no growth models tested 
+
+###
+
+### Linear Growth Models
+
+Linear Model Structure: 
+```{r}
+lin_growth <- ('#latent structure
+i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
+s =~ 0*p_tot1 + 1*p_tot2 + 2*p_tot3 + 3*p_tot4 + 4*p_tot5')
+```
+
+
+#### Model 1: Linear growth but Fully Constrained in both groups ---ignoring the effect of opt-in
+
+```{r}
+lin_fit0 <- growth(model = lin_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("residuals", "means", "lv.variances", "lv.covariances"), se = "robust")
+
+fitMeasures(lin_fit0)
+
+parameterEstimates(lin_fit0)
+
+anova(fit0, lin_fit0)
+```
+Linear growth (no group differences) is significantly better than Null model. Main effect of exam number-- Assumes that students scores linearly improve over time. p < .001. 
+
+
+#### Model 2: free means in both groups  linear growth 
+```{r}
+lin_fit1 <- growth(model = lin_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("residuals", "lv.covariances", "lv.variances"), se = "robust")
+
+parameterEstimates(lin_fit1)
+
+fitMeasures(lin_fit1)
+
+anova(lin_fit0, lin_fit1)
+
+```
+
+#### Model 3: Free Means and Covariance in Both groups Linear Growth
+```{r}
+lin_fit2 <- growth(model = lin_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("residuals", "lv.variances"), se = "robust")
+
+fitMeasures(lin_fit2)
+parameterEstimates(lin_fit2)
+
+
+anova(lin_fit1, lin_fit2)
+
+```
+
+
+##### Here is where we  stop linear comparisons. 
+Because generally once a model is no longer explaining more variance it wont change with more complexity, which works out well because these other variables are more difficult to interpret when there is differences. 
+
+
+##### Overall Linear vs No Growth
+Overall, assuming linear growth over time explains more variance than assuming no growth over time. In addition, group means (trajectory intercepts) are significantly different in the groups when we assume linear growth. Specifically, students who opted-out of the intervention had a slightly higher intercept but a smaller slope than students who opted-in to the intervention. When we also take the variability of each group into account(marginally significant) we see the same pattern in intercept and slope however there is higher variability in students who opt-out than those who opt-in for both the intercept(mean) and slope (change over time). 
+
+
+
+###
+
+### Latent Basis Non-linear Growth 
+
+Here we set the slope loadings to look at whether the change in scores from exams 1 - 3(pre intervention) are the same as the change in performance from exam 3-5(after intervention). Aka assessing non-linear change over time 
+
+Latent basis model structure: 
+
+
+```{r}
+
+lb_growth <- ('#latent structure
+i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
+s =~ 0*p_tot1 + NA*p_tot2 + 1*p_tot3 + NA*p_tot4 + NA*p_tot5')
+```
+
+#### Model 4: Fully constrained in both groups ---Non-linear model  
+
+```{r}
+lb_fit0 <- growth(model = lb_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("residuals", "loadings", "means", "lv.variances", "lv.covariances"), se = "robust")
+
+parameterEstimates(lb_fit0)
+
+fitMeasures(lb_fit0)
+
+anova(lb_fit0, lin_fit0) ###Latent basis is better than linear
+
+```
+
+##### Interpretation 
+The latent basis constrained model is significantly better than the linear constrained model p < .005. We set exam 1 loading to 0 (the starting performance) and exam 3 loadings to 1 since intervention occurs between exams 3 & 4. Therefore, performance at exam 3 (1) represent all students maximum ("natural") growth. What this says is that students have a larger increase in performance from exam 2 to 3 than 1 to 2. In addition, students do worse in exam 4 than exam 3, but have a significant increase again between exam 4 and 5. (remember this is not take groups differences into account) 
+
+####
+
+
+#### Model 5 : Free loadings accept exam2 in both groups latent basis -- only allows post treament to vary by group -- post- trajectory only  different by groups -- Hypothesized Model 
+
+```{r}
+
+lb_growth_par <- ('#latent structure
+i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
+s =~ 0*p_tot1 + m*p_tot2 + 1*p_tot3 + NA*p_tot4 + NA*p_tot5')
+```
+
+
+```{r}
+lb_fit1 <- growth(model = lb_growth_par, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("means", "residuals", "lv.variances", "lv.covariances"), se = "robust")
+
+
+fitMeasures(lb_fit1)
+
+parameterEstimates(lb_fit1)
+
+anova(lb_fit1, lb_fit0) ##Lin_fit2 is better than lin_fit1
+
+```
+
+##### Interpretation
+Significant different! The growth trajectories post intervention are different for the two groups when we assume equivalent starting groups. 
+
+#### Model 6- free all loading to be different by group -- test the parallel trends Hypothesis
+```{r}
+lb_fit2 <- growth(model = lb_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("means", "residuals", "lv.variances", "lv.covariances"), se = "robust")
+
+parameterEstimates(lb_fit2)
+
+fitMeasures(lb_fit2)
+
+anova(lb_fit2, lb_fit1) 
+
+```
+
+
+##### Interpretation 
+
+Model 6 did not fit better than model 5, meaning the parallel trends assumption holds:  no difference in loadings at time 2. 
+
+####
+
+#### Model 7 -- Under the assumption of parallel trends pre-intervention (which hold based on the SEM results) we  free the slope and intercepts by group 
+```{r}
+lb_fit3 <- growth(model = lb_growth_par, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c( "residuals", "lv.variances", "lv.covariances"), se = "robust")
+
+parameterEstimates(lb_fit3)
+
+fitMeasures(lb_fit3)
+
+anova(lb_fit3, lb_fit1) 
+
+```
+
+##### Interpretation 
+
+Model 7 is better than Model 5, showing there are some differences between groups outside of the effect of treatment... so need to test whether different means with the same trajectory is sufficient to explain difference between groups 
+
+Take away: As expected the model provides evidence students who opt in have improved faster than those who opt-out regardless of the intervention. This baseline difference cannot explain the difference in non-linear shape (which we can be interpret as exam specific effects like difficulty of the exam) which only occurs after the intervention. Therefore, Our model provides evidence that the intervention improved exam performance in student's who opted in. However, we can not conclude that the intervention would have had the same causal effect on students who opt-ed out of the exams, since there are systematic differences between groups that could contribute to the effectiveness of the intervention.    
+
+####
+
+
+#### Model 8: Are underlying differences between groups with the same trajectory enough to explain differences?-- alt explination
+If 7 is not significantly better than 8 then that means all differences in performance can be attributed to underlying differences between groups 
+
+```{r}
+lb_fit4 <- growth(model = lb_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c( "loadings", "residuals", "lv.variances", "lv.covariances"), se = "robust")
+
+parameterEstimates(lb_fit4)
+
+fitMeasures(lb_fit4)
+
+
+anova(lb_fit3, lb_fit4)
+
+```
+Mean differences are not sufficient to explain change in trajectory. 
+
+ 
+##### Interpretion 
+
+Model 7 is significantly better than Model 8, so there are inherent differences between those who opt-in and those who opt-out. However those differences are not sufficient to explain the change in trajectory between those who opt-in and those who opt-out. Group differences do not fully explain the change in trajectory post treatment. So we can conclude that the intervention very likely helped those who opted into the treatments, however we do not have the evidence to conclude that the intervention would be equally helpful to those who opted-out of treatment.  
+
+##
+
+*** See Supplementary section for more Alternative Models 
+
+## Difference in Difference written only 
+
+GLM of student pre intervention and post intervention average 
+
+#### Prepping data
+```{r}
+
+
+ex_data_long <- ex_data %>% gather(key = "time", value = "score", p_tot1:p_tot5, factor_key = T)
+
+ex_data_long <- ex_data_long %>% mutate(post = case_when(time == "p_tot4" | time == "p_tot5" ~ 1)) 
+
+ex_data_long$post[is.na(ex_data_long$post)] <- 0
+
+ex_data_long <- ex_data_long %>% mutate(w = case_when(opt_in == 0 | post == 0 ~ 0, opt_in == 1 & post == 1 ~ 1)) 
+
+pdata <- pdata.frame(ex_data_long, index = c("student_id", "time"))
+
+is.pbalanced(pdata)
+
+
+
+pdata <- pdata %>% mutate(dexam2 = (time=="p_tot2") * (opt_in == 1), 
+                          dexam3 = (time=="p_tot3") * (opt_in == 1),
+                          dexam4 = (time=="p_tot4") * (opt_in == 1),
+                          dexam5 = (time=="p_tot5") * (opt_in == 1),)
+
+
+```
+
+
+###
+
+##### load packages
+```{r}
+
+library(plm)
+
+```
+
+
+#### Full Model
+
+```{r}
+mod1 <- lm(score~student_id + time + dexam2 + dexam3 + dexam4 + dexam5, data = pdata)
+
+mod1_cr_se <- sqrt(diag(vcovCL(mod1, cluster = ~ student_id)))
+coef_keep = c("time", "dexam2", "dexam3", "dexam4", "dexam5")
+stargazer(mod1, keep = coef_keep, type = "text", se= list(mod1_cr_se), digits = 6, notes = "cluster Robust standard errors in parantheses", intercept.bottom = TRUE, star.cutoffs = c(.05, .01, .001) )
+
+coefplot(mod1, coefficients= coef_keep, innerCI= 0, horizontal =T)
+
+
+```
+
+###
+
+## 
+
+#
+
+# Supplementary Analysis 
+
+## SEM Exploratory Alternative Explanation Models Tested 
+
+### No growth models rulled out  
+```{r}
+no_growth <- ('#latent structure
+i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
+
+'
+)
+```
+
+#### Model 0.1: Free Means in groups - No Growth  
+
+```{r}
+fit1 <- growth(model = no_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("residuals", "lv.variances"), se = "robust")
+
+fitMeasures(fit1)
+
+parameterEstimates(fit1)
+
+
+anova(fit1, fit0)
+```
+##### Interpetation 
+No differences between group estimates in no growth model. p = .08 --- unlikely to be a main effect of opting in to treatment (ignoring exam number and assuming they don't learn over time. (aka the overall performance of the groups))
+
+
+#### Model 0.2: Free means and Latent Variable Variances in both groups ---No Growth 
+
+```{r}
+fit2 <- growth(model = no_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("residuals"), se = "robust")
+
+fitMeasures(fit2)
+parameterEstimates(fit2)
+
+
+anova(fit2, fit1)
+```
+No difference in Latent Variable Variances p > .1 -- means that it is unlikely that performance across time variance is different in the two group if we assume they do not change over time but are different from each other in means. 
+
+
+
+#### Model 0.3: Unconstrained No Growth 
+
+```{r}
+fit3 <- growth(model = no_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", se = "robust")
+
+fitMeasures(fit3)
+parameterEstimates(fit3)
+
+
+anova(fit0, fit1, fit2, fit3)
+```
+Overall, result suggest no variation of the No Growth model preforms better than the null
+
+###
+
+
+### Linear Models ruled out  
+```{r}
+lin_growth <- ('#latent structure
+i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
+s =~ 0*p_tot1 + 1*p_tot2 + 2*p_tot3 + 3*p_tot4 + 4*p_tot5')
+```
+
+
+
+#### Fit 3.2: free means, latent variable covariance and latent variable variance in both groups Linear Growth 
+
+```{r}
+lin_fit3 <- growth(model = lin_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("residuals"), se = "robust")
+
+fitMeasures(lin_fit3)
+parameterEstimates(lin_fit3)
+
+
+anova(lin_fit2, lin_fit3) 
+
+```
+No difference in Lin fit 2 and linfit3 --- this is good and expected 
+
+
+
+#### Fit 3.3: Unconstrained group differences linear growth 
+
+```{r}
+lin_fit4 <- growth(model = lin_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", se = "robust")
+
+fitMeasures(lin_fit4)
+parameterEstimates(lin_fit4)
+
+anova(lin_fit3, lin_fit4) 
+anova(fit3, lin_fit4) 
+
+
+anova(lin_fit0, lin_fit1, lin_fit2, lin_fit3, lin_fit4)
+```
+No difference in Lin fit 3 and line fit 4 
+
+Significant differences in Unconstrained linear growth and unconstrained no Growth --- same as lin fit 3 
+##### Interpretation of ruled out linear 
+ If we assume Linear growth the only difference between groups is in the slopes and intercepts. 
+
+### 
+
+### Latent Basis Growth -- Alternative Explanations Ruled Out  
+
+#### Fit Alt 1: Latent basis with linear pre-trajectory -- Alt explination 1 
+
+```{r}
+
+lin_growth_par <- ('#latent structure
+i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
+s =~ 0*p_tot1 + 1*p_tot2 + 2*p_tot3 + NA*p_tot4 + NA*p_tot5')
+```
+
+
+```{r}
+lb_fit0_1 <- growth(model = lin_growth_par, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("means", "residuals", "lv.variances", "lv.covariances", "loadings"), se = "robust")
+
+fitMeasures(lb_fit0_1)
+parameterEstimates(lb_fit0_1)
+
+anova(lin_fit0, lb_fit0_1)
+
+anova(lb_fit0_1, lb_fit0)
+
+```
+##### Interpretation 
+
+  Test the assumption that the pre-intervention trajectory is non-linear freeing Exam 2 loading fits better! 
+  
+
+##### Fit Alt 1.1: estimating loadings by group when pre-trajectory is linear  
+```{r}
+lb_fit0_2 <- growth(model = lin_growth_par, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("means", "residuals", "lv.variances", "lv.covariances"), se = "robust") ## different loading per group 
+
+fitMeasures(lb_fit0_2)
+parameterEstimates(lb_fit0_2)
+
+anova(lb_fit0_1, lb_fit0_2)
+
+anova(lb_fit0_2, lb_fit1)
+
+```
+##### Interpretation 
+
+Freeing the means fits better than no group, but non-linear pre-trajectory with free means is still better 
+
+##### Fit Alt 1.2: now with esimating means and loadings
+
+```{r}
+lb_fit0_3 <- growth(model = lin_growth_par, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c( "residuals", "lv.variances", "lv.covariances"), se = "robust") ## different loading per group 
+
+summary(lb_fit0_3, fit.measures = T)
+
+anova(lb_fit0_2, lb_fit0_3) 
+```
+
+###### Interpretation of Alt Fit 1 
+
+
+Assuming that growth is linear before the exam does not fit better than assuming non-linear growth 
+
+####
+
+
+
+#### Fit Alt 2: Latent Basis with parallel pre, but free after, but only means freed not slopes 
+
+```{r}
+fit2_1 <- ('#latent structure
+i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
+s =~ 0*p_tot1 + m*p_tot2 + 1*p_tot3 + NA*p_tot4 + NA*p_tot5
+s ~ n*1')
+
+lb_fit2_1 <- growth(model = fit2_1, data = data, estimator = "ML", missing = "fiml" , group = "opt_in", group.equal = c( "residuals", "lv.variances", "lv.covariances"), se = "robust")
+
+
+parameterEstimates(lb_fit2_1)
+
+
+anova(lb_fit2_1, lb_fit3, lb_fit1)
+
+
+```
+ 
+##### Interpretation 
+
+Both the slope and intercept of both groups are different. It would have been stronger evidence of causal impact of intervention if the intercept differences were sufficient to make up the explained variance in the mean structure differences. However, this model still explains more variance than the less restricted (non-nested) model 8 where the loading are fixed, but the mean structure is free. These models are not directly comparable since they are not nested, but the fact that a restricted model has more explanatory power does suggest that model 8 is not a good model fit for the data. 
+
+####
+##
+
+## Restricted DiD model 
+
+```{r}
+
+dif_model <- lm(score ~ student_id + time + w, data = pdata )
+
+mod1_ro_se <- sqrt(diag(vcovHC(dif_model, type = "HC1")))
+
+stargazer(dif_model, keep = "w", type = "text", se= list(mod1_ro_se), digits = 6, notes = "HS Robust standard errors in parantheses" )
+
+mod1_cr_se <- sqrt(diag(vcovCL(dif_model, cluster = ~ student_id)))
+
+stargazer(dif_model, keep = "w", type = "text", se= list(mod1_cr_se), digits = 6, notes = "cluster Robust standard errors in parantheses" )
+
+```
+##
+
+
+## Full Exam Score Analyses 
+
+
+##### Descriptives 
+
+```{r}
+
+ex_data_f <- ex_data %>% mutate(pre_exams = rowMeans(across(exam1:exam3), na.rm = T))
+ex_data_f <- ex_data_f %>% mutate(post_exams = rowMeans(across(exam4:exam5), na.rm = T))
+
+ex_opt_in_f <- ex_data_f %>% filter(opt_in == 1)
+
+ex_opt_out_f <- ex_data_f %>% filter(opt_in == 0)
+
+pre_char <- ex_data_f %>% summarise(variable = "pre_exams",
+                                                                n = n(),
+                                            mean = mean(pre_exams, na.rm = T), 
+                                    sd = sd(pre_exams, na.rm = T),
+                                    median = median(pre_exams, na.rm = T),
+                                  MAD = mad(pre_exams, na.rm = T),
+                                    Q1 = quantile(pre_exams, probs = .25),
+                                    Q3 = quantile(pre_exams, probs = .75),
+                                    IQR = IQR(pre_exams, na.rm = T),
+                                    min = min(pre_exams, na.rm = T),
+                                    max = max(pre_exams, na.rm = T))
+
+
+
+```
+
+
+
+### EXAM DESCRIPTIVES
+```{r}
+
+
+
+exam1_d <- ex_data %>% summarise(variable = "exam1",
+                                                                n = n(),
+                                            mean = mean(exam1, na.rm = T), 
+                                    sd = sd(exam1, na.rm = T),
+                                    median = median(exam1, na.rm = T),
+                                    MAD = mad(exam1, na.rm = T),
+                                    Q1 = quantile(exam1, probs = .25, na.rm = T),
+                                    Q3 = quantile(exam1, probs = .75, na.rm = T),
+                                    IQR = IQR(exam1, na.rm = T),
+                                    IQR = IQR(exam1, na.rm = T),
+                                    min = min(exam1, na.rm = T),
+                                    max = max(exam1, na.rm = T))
+
+exam1_d_i <- ex_data %>% group_by(opt_in) %>% summarise(variable = "exam1",
+                                                                n = n(),
+                                            mean = mean(exam1, na.rm = T), 
+                                    sd = sd(exam1, na.rm = T),
+                                    median = median(exam1, na.rm = T),
+                                    MAD = mad(exam1, na.rm = T),
+                                    Q1 = quantile(exam1, probs = .25, na.rm = T),
+                                    Q3 = quantile(exam1, probs = .75, na.rm = T),
+                                    IQR = IQR(exam1, na.rm = T),
+                                    IQR = IQR(exam1, na.rm = T),
+                                    min = min(exam1, na.rm = T),
+                                    max = max(exam1, na.rm = T))
+
+exam2_d <- ex_data %>% summarise(variable = "exam2",
+                                                                n = n(),
+                                            mean = mean(p_tot2, na.rm = T), 
+                                    sd = sd(p_tot2, na.rm = T),
+                                    median = median(p_tot2, na.rm = T),
+                                    MAD = mad(p_tot2, na.rm = T),
+                                    Q1 = quantile(p_tot2, probs = .25, na.rm = T),
+                                    Q3 = quantile(p_tot2, probs = .75, na.rm = T),
+                                    IQR = IQR(p_tot2, na.rm = T),
+                                    min = min(p_tot2, na.rm = T),
+                                    max = max(p_tot2, na.rm = T))
+
+exam2_d_i <- ex_data %>% group_by(opt_in) %>% summarise(variable = "exam2",
+                                                                n = n(),
+                                            mean = mean(p_tot2, na.rm = T), 
+                                    sd = sd(p_tot2, na.rm = T),
+                                    median = median(p_tot2, na.rm = T),
+                                    MAD = mad(p_tot2, na.rm = T),
+                                    Q1 = quantile(p_tot2, probs = .25, na.rm = T),
+                                    Q3 = quantile(p_tot2, probs = .75, na.rm = T),
+                                    IQR = IQR(p_tot2, na.rm = T),
+                                    min = min(p_tot2, na.rm = T),
+                                    max = max(p_tot2, na.rm = T))
+
+
+
+exam3_d <- ex_data %>% summarise(variable = "exam3",
+                                                                n = n(),
+                                            mean = mean(p_tot3, na.rm = T), 
+                                    sd = sd(p_tot3, na.rm = T),
+                                    median = median(p_tot3, na.rm = T),
+                                    MAD = mad(p_tot3, na.rm = T),
+                                    Q1 = quantile(p_tot3, probs = .25, na.rm = T),
+                                    Q3 = quantile(p_tot3, probs = .75, na.rm = T),
+                                    IQR = IQR(p_tot3, na.rm = T),
+                                    min = min(p_tot3, na.rm = T),
+                                    max = max(p_tot3, na.rm = T))
+
+exam3_d_i <- ex_data %>% group_by(opt_in) %>%  summarise(variable = "exam3",
+                                                                n = n(),
+                                            mean = mean(p_tot3, na.rm = T), 
+                                    sd = sd(p_tot3, na.rm = T),
+                                    median = median(p_tot3, na.rm = T),
+                                     MAD = mad(p_tot3, na.rm = T),
+                                    Q1 = quantile(p_tot3, probs = .25, na.rm = T),
+                                    Q3 = quantile(p_tot3, probs = .75, na.rm = T),
+                                    IQR = IQR(p_tot3, na.rm = T),
+                                    min = min(p_tot3, na.rm = T),
+                                    max = max(p_tot3, na.rm = T))
+
+
+exam4_d <- ex_data %>% summarise(variable = "exam4",
+                                                                n = n(),
+                                            mean = mean(p_tot4, na.rm = T), 
+                                    sd = sd(p_tot4, na.rm = T),
+                                    median = median(p_tot4, na.rm = T),
+                                     MAD = mad(p_tot4, na.rm = T),
+                                    Q1 = quantile(p_tot4, probs = .25, na.rm = T),
+                                    Q3 = quantile(p_tot4, probs = .75, na.rm = T),
+                                    IQR = IQR(p_tot4, na.rm = T),
+                                    min = min(p_tot4, na.rm = T),
+                                    max = max(p_tot4, na.rm = T))
+
+exam4_d_i <- ex_data %>% group_by(opt_in) %>%  summarise(variable = "exam4",
+                                                                n = n(),
+                                            mean = mean(p_tot4, na.rm = T), 
+                                    sd = sd(p_tot4, na.rm = T),
+                                    median = median(p_tot4, na.rm = T),
+                                     MAD = mad(p_tot4, na.rm = T),
+                                    Q1 = quantile(p_tot4, probs = .25, na.rm = T),
+                                    Q3 = quantile(p_tot4, probs = .75, na.rm = T),
+                                    IQR = IQR(p_tot4, na.rm = T),
+                                    min = min(p_tot4, na.rm = T),
+                                    max = max(p_tot4, na.rm = T))
+
+exam5_d <- ex_data %>% summarise(variable = "exam5",
+                                                                n = n(),
+                                            mean = mean(p_tot5, na.rm = T), 
+                                    sd = sd(p_tot5, na.rm = T),
+                                    median = median(p_tot5, na.rm = T),
+                                  MAD = mad(p_tot5, na.rm = T),
+                                    Q1 = quantile(p_tot5, probs = .25, na.rm = T),
+                                    Q3 = quantile(p_tot5, probs = .75, na.rm = T),
+                                    IQR = IQR(p_tot5, na.rm = T),
+                                    min = min(p_tot5, na.rm = T),
+                                    max = max(p_tot5, na.rm = T))
+
+exam5_d_i <- ex_data %>% group_by(opt_in) %>%  summarise(variable = "exam5",
+                                                                n = n(),
+                                            mean = mean(p_tot5, na.rm = T), 
+                                    sd = sd(p_tot5, na.rm = T),
+                                    median = median(p_tot5, na.rm = T),
+                                     MAD = mad(p_tot5, na.rm = T),
+                                    Q1 = quantile(p_tot5, probs = .25, na.rm = T),
+                                    Q3 = quantile(p_tot5, probs = .75, na.rm = T),
+                                    IQR = IQR(p_tot5, na.rm = T),
+                                    min = min(p_tot5, na.rm = T),
+                                    max = max(p_tot5, na.rm = T))
+
+
+
+overall_table <- rbind(exam1_d, exam2_d, exam3_d, exam4_d, exam5_d)
+
+by_opt_table <- rbind(exam1_d_i, exam2_d_i, exam3_d_i, exam4_d_i, exam5_d_i)
+
+
+
+overall_table
+
+by_opt_table
+
+```
+
+
+
+### SEM 
+
+###### Dataset 
+
+```{r}
+data <- ex_data_f
+
+
+
+```
+
+#### No Growth Models
+
+##### No growth model structure 
+```{r}
+no_growth <- ('#latent structure
+i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
+
+'
+)
+```
+
+
+
+##### Model 0: Fully Constrained no growth  ---Null model  
+
+```{r}
+fit0 <- growth(model = no_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("residuals", "means", "lv.variances"), se = "robust")
+
+fitMeasures(fit0)
+
+parameterestimates(fit0)
+
+```
+
+###### Interpetation 
+Baseline model, represents the null hypothesis assuming no change overtime and no differences between groups. 
+
+
+####
+
+#### Linear Growth Models
+
+Linear Model Structure: 
+```{r}
+lin_growth <- ('#latent structure
+i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
+s =~ 0*p_tot1 + 1*p_tot2 + 2*p_tot3 + 3*p_tot4 + 4*p_tot5')
+```
+
+
+##### Model 2: Linear growth but Fully Constrained in both groups ---ignoring the effect of opt-in
+
+```{r}
+lin_fit0 <- growth(model = lin_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("residuals", "means", "lv.variances", "lv.covariances"), se = "robust")
+
+fitMeasures(lin_fit0)
+
+parameterEstimates(lin_fit0)
+
+anova(fit0, lin_fit0)
+```
+Linear growth (no group differences) is significantly better than NULL model. Main effect of exam number-- Assumes that students scores linearly improve over time. P < .001 
+
+
+##### Model 3: free means in both groups  linear growth 
+```{r}
+lin_fit1 <- growth(model = lin_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("residuals", "lv.covariances", "lv.variances"), se = "robust")
+
+parameterEstimates(lin_fit1)
+
+fitMeasures(lin_fit1)
+
+anova(lin_fit0, lin_fit1)
+
+anova(fit1, lin_fit1)
+```
+
+
+###### Overall Linear vs No Growth
+Overall, assuming linear growth over time explains more variance than assuming no growth over time. In addition, groups means (trajectory intercepts) are significantly different in the groups when we assume linear growth. Specifically, students who opted-out of the intervention had a slightly higher intercept but a smaller slope  than students who opted-in to the intervention. When we also take the variability of each group into account(marginally significant) we see the same pattern in intercept and slope however there is higher variability in students who opt-out than those who opt-in for both the intercept(mean) and slope (change over time). 
+####
+
+#### Latent Basis Non-linear Growth 
+
+Here we set the slope loadings to look at whether the change in scores from exams 1 - 3(pre intervention) are the same as the change in performance from exam 3-5(after intervention). Aka assessing non-linear change over time 
+
+Latent basis model structure: 
+
+
+```{r}
+
+lb_growth <- ('#latent structure
+i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
+s =~ 0*p_tot1 + NA*p_tot2 + 1*p_tot3 + NA*p_tot4 + NA*p_tot5')
+```
+
+##### Model 4: Fully constrained in both groups ---Non-linear model  
+
+```{r}
+lb_fit0 <- growth(model = lb_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("residuals", "loadings", "means", "lv.variances", "lv.covariances"), se = "robust")
+
+parameterEstimates(lb_fit0)
+
+fitMeasures(lb_fit0)
+
+anova(lb_fit0, lin_fit0) ###Latent basis is better than linear and better than if we assume that the pre trajectory is linear
+
+```
+
+###### Interpretation 
+The latent basis constrained model is significantly better than the linear constrained model p < .005. Specifically, the model suggests that students improve in this pattern -- we set exam 1 loading to 0 (the starting performance) and exam 3 loadings to 1 since intervention occurs between exams 3 & 4. so performance at exam 3 (1) represent all students maximum (natural) growth. What this says is that students have a large increase in performance from exam 2 to 3 than 1 to 2. In addition, students do worse in exam 4 than exam 3, but have a significant increase again between exam 4 and 5. (remember this is not take groups differences into account) 
+
+#####
+
+
+##### Model 5 : Free loadings accept exam2 in both groups latent basis -- only allows post treament to vary by group -- post- trajectory only  different by groups -- Hypothesized Model 
+
+```{r}
+
+lb_growth_par <- ('#latent structure
+i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
+s =~ 0*p_tot1 + m*p_tot2 + 1*p_tot3 + NA*p_tot4 + NA*p_tot5')
+```
+
+
+```{r}
+lb_fit1 <- growth(model = lb_growth_par, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("means", "residuals", "lv.variances", "lv.covariances"), se = "robust")
+
+
+fitMeasures(lb_fit1)
+
+parameterEstimates(lb_fit1)
+
+anova(lb_fit1, lb_fit0) ##Lin_fit2 is better than lin_fit1
+
+```
+
+###### Interpretation
+Significant different! the growth trajectories post intervention are different for the two groups when we assume equivalent starting groups 
+
+##### Model 6- free all loading to be different by group -- test the parallel trends Hypothesis
+```{r}
+lb_fit2 <- growth(model = lb_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("means", "residuals", "lv.variances", "lv.covariances"), se = "robust")
+
+parameterEstimates(lb_fit2)
+
+fitMeasures(lb_fit2)
+
+anova(lb_fit2, lb_fit1) 
+
+```
+
+
+###### Interpretation 
+
+Model 6 did not fit better than model 5, meaning the parallel trends assumption holds no difference in loadings at time 2. 
+
+####
+
+##### Model 7 -- used to plot...Under the assumption of parallel trends pre-intervention (which hold based on the SEM results) we  free the slope and intercepts by group -- alt explination
+```{r}
+lb_fit3 <- growth(model = lb_growth_par, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c( "residuals", "lv.variances", "lv.covariances"), se = "robust")
+
+parameterEstimates(lb_fit3)
+
+fitMeasures(lb_fit3)
+
+anova(lb_fit3, lb_fit1) 
+
+```
+
+###### Interpretation 
+
+Model 7 is better than Model 7 Significantly better, shows there are some differences between groups outside of the effect of treatment... so need to test whether different means with the same trajectory is suffiecient to explain difference between groups 
+
+Take away: As expected the model provides evidence students who opt in have improved faster than those who opt-out regardless of the intervention. This baseline difference cannot explain the difference in non-linear shape (which we can be interpret as exam specific effects like difficulty of the exam) which only occurs after the intervention. Therefore, Our model provides evidence that the intervention improved exam performance in student's who opted in. However, we can not conclude that the intervention would have had the same causal effect on students who opt-ed out of the exams, since there are systematic differences between groups that could contribute to the effectiveness of the intervention.    
+
+#####
+
+
+##### Model 8: Are underlying differences between groups with the same trajectory enough to explain differences?-- alt explination
+-- if 7 is not significantly better than 8 then that means all differences in performance can be attributed to underlying differences between groups 
+
+```{r}
+lb_fit4 <- growth(model = lb_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c( "loadings", "residuals", "lv.variances", "lv.covariances"), se = "robust")
+
+parameterEstimates(lb_fit4)
+
+fitMeasures(lb_fit4)
+
+
+anova(lb_fit3, lb_fit4)
+
+```
+No! Mean differences are not sufficient to explain change in trajectory 
+
+ 
+###### Interpretion 
+
+Model 7 is significantly better than Model 8, So their are inherent differences between those who opt-in and those who opt-out however those differences are not sufficient to explain the change in trajectory between those who opt-in and those who opt-out does not fully explain the change in trajectory post treatment. SO we can conclude that the intervention very likely help those who opted into the treatments, however we do not have the evidence to conclude that the intervention would be equally helpful to those who opted-out of treatment.  
+
+###
+
+
+### Difference in Difference Model 
+
+GLM of student pre intervention and post intervention average 
+
+#####  prepping the data
+```{r}
+ex_data_long_f <- ex_data %>% gather(key = "time", value = "score", exam1:exam5, factor_key = T)
+
+ex_data_long_f <- ex_data_long_f %>% mutate(post = case_when(time == "exam4" | time == "exam5" ~ 1)) 
+
+ex_data_long_f$post[is.na(ex_data_long_f$post)] <- 0
+
+ex_data_long_f <- ex_data_long_f %>% mutate(w = case_when(opt_in == 0 | post == 0 ~ 0, opt_in == 1 & post == 1 ~ 1)) 
+
+pdata <- pdata.frame(ex_data_long_f, index = c("student_id", "time"))
+
+is.pbalanced(pdata)
+
+
+
+pdata <- pdata %>% mutate(dexam2 = (time=="exam2") * (opt_in == 1), 
+                          dexam3 = (time=="exam3") * (opt_in == 1),
+                          dexam4 = (time=="exam4") * (opt_in == 1),
+                          dexam5 = (time=="exam5") * (opt_in == 1),)
+
+
+
+```
+
+```{r}
+#Restructed model
+dif_model <- lm(score ~ student_id + time + w, data = pdata )
+
+mod1_ro_se <- sqrt(diag(vcovHC(dif_model, type = "HC1")))
+
+stargazer(dif_model, keep = "w", type = "text", se= list(mod1_ro_se), digits = 6, notes = "HS Robust standard errors in parantheses" )
+
+mod1_cr_se <- sqrt(diag(vcovCL(dif_model, cluster = ~ student_id)))
+
+stargazer(dif_model, keep = "w", type = "text", se= list(mod1_cr_se), digits = 6, notes = "cluster Robust standard errors in parantheses" )
+
+
+#unrestricted 
+
+
+mod3 <- lm(score~student_id + time + dexam2 + dexam3 + dexam4 + dexam5, data = pdata)
+
+mod3_cr_se <- sqrt(diag(vcovCL(mod3, cluster = ~ student_id)))
+coef_keep = c("time", "dexam2", "dexam3", "dexam4", "dexam5")
+stargazer(mod3, keep = coef_keep, type = "text", se= list(mod3_cr_se), digits = 6, notes = "cluster Robust standard errors in parantheses" )
+
+coefplot(mod3, coefficients= coef_keep, innerCI= 0, horizontal =T)
+
+
+```
+
+###
+
+## 

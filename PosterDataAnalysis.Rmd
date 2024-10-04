@@ -1,0 +1,47 @@
+---
+title: "2024 Data"
+author: "Xinhui Zhang"
+date: "2024-09-04"
+output: html_document
+---
+
+# libraries
+## Libraries and Packages
+```{r}
+# Package names
+packages <- c("ggplot2",  "tidyverse", "apaTables", "colourpicker", "swirl", "dplyr", "gridExtra", "knitr", "lme4", "reshape2", "stargazer", "colourpicker", "afex", "jtools", "glmmTMB", "lavaan", "plm", "sandwich", "naniar", "coefplot", "ggpubr", "glue", "olsrr")
+
+# Install packages not yet installed
+installed_packages <- packages %in% rownames(installed.packages())
+if (any(installed_packages == FALSE)) {
+  install.packages(packages[!installed_packages])
+}
+
+# Packages loading
+invisible(lapply(packages, library, character.only = TRUE))
+```
+
+
+# Import data 
+
+```{r}
+
+dat24 <- read.csv(file = "~/GitHub/MC_data_cleaning/2024 Data/2024_full_data_cleaned.csv")
+
+dat24 <- dat24 %>% rename(e_internal = e_correct)
+
+
+
+```
+
+
+
+# Structural Equation Model  Data 
+```{r}
+
+
+
+
+
+```
+
