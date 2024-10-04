@@ -112,15 +112,14 @@ dem_short <- dem_short %>%
 dem_short <- dem_short %>% 
   mutate(ethnicity = case_when(
     grepl("Black or African American", ethnicity, fixed = TRUE) ~ 0,
-    grepl("Mixed Race", ethnicity, fixed = TRUE) ~ 1,
-    grepl("Black or African American,Hispanic or Latino", ethnicity, fixed = TRUE) ~ 2,
-    grepl("Caucasian", ethnicity, fixed = TRUE) ~ 3,
-    grepl("East or South East Asian", ethnicity, fixed = TRUE) ~ 4,
-    grepl("Hispanic or Latino", ethnicity, fixed = TRUE) ~ 5,
+    grepl("Native American or American Indian", ethnicity, fixed = TRUE) ~ 1,
+    grepl("Hispanic or Latino", ethnicity, fixed = TRUE) ~ 2,
+    grepl("East or South East Asian", ethnicity, fixed = TRUE) ~ 3,
+    grepl("Mixed Race", ethnicity, fixed = TRUE) ~ 4,
+    grepl("Caucasian", ethnicity, fixed = TRUE) ~ 5,
     grepl("Middle Eastern or West Asian", ethnicity, fixed = TRUE) ~ 6,
-    grepl("Native American or American Indian", ethnicity, fixed = TRUE) ~ 7,
-    grepl("North or Central Asian", ethnicity, fixed = TRUE) ~ 8,
-    grepl("South Asian", ethnicity, fixed = TRUE) ~ 9,
+    grepl("North or Central Asian", ethnicity, fixed = TRUE) ~ 7,
+    grepl("South Asian", ethnicity, fixed = TRUE) ~ 8,
     TRUE ~ NA
   ))
 ```

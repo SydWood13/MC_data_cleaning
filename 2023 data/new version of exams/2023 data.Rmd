@@ -13,6 +13,7 @@ getwd()
 
 
 ```{r}
+setwd("~/Documents/GitHub/MC_data_cleaning")
 grades <- read.csv(file ="wq_grades_final.csv")
 
 dem <- read.csv("First_dataset.csv")
@@ -27,7 +28,7 @@ final_data <- final_data %>% select(-"consent")
 ```
 
 ```{r}
-write.csv(full_data, "2023_initial_dataset.csv", row.names = F)
+write.csv(final_data, "2023_initial_dataset.csv", row.names = F)
 ```
 
 ## p_tot1
@@ -52,7 +53,7 @@ exam1_end <- exam1_final %>% select("anon_id", "views1", "p_tot1")
 ```
 
 ```{r}
-final_data <- left_join(full_data, exam1_end, by = "anon_id" )
+final_data <- left_join(final_data, exam1_end, by = "anon_id" )
 ```
 
 
@@ -77,7 +78,7 @@ exam2_end <- exam2_final %>% select("anon_id", "views2", "p_tot2")
 ```
 
 ```{r}
-final_data <- left_join(full_data, exam2_end, by = "anon_id" )
+final_data <- left_join(final_data, exam2_end, by = "anon_id" )
 ```
 
 ##p_tot3
@@ -101,7 +102,7 @@ exam3_end <- exam3_final %>% select("anon_id", "views3", "p_tot3")
 ```
 
 ```{r}
-final_data <- left_join(full_data, exam3_end, by = "anon_id" )
+final_data <- left_join(final_data, exam3_end, by = "anon_id" )
 ```
 
 
@@ -112,13 +113,13 @@ exam4_short <- read.csv("exam4_writtenQs_deleted.csv", sep = ",")
 ```
 
 ```{r}
-exam4_calc <- exam4_short %>% select(4:7)
+exam4_calc <- exam4_short %>% select(4:8)
 exam4_short <- exam4_short %>%
   mutate(written = rowSums(exam4_calc, na.rm = TRUE))
 ```
 
 ```{r}
-exam4_final <- exam4_short %>% mutate(p_tot4 = (written/40)*100) 
+exam4_final <- exam4_short %>% mutate(p_tot4 = (written/50)*100) 
 ```
 
 ```{r}
@@ -126,7 +127,7 @@ exam4_end <- exam4_final %>% select("anon_id", "views4", "p_tot4")
 ```
 
 ```{r}
-final_data <- left_join(full_data, exam4_end, by = "anon_id" )
+final_data <- left_join(final_data, exam4_end, by = "anon_id" )
 ```
 
 ##p_tot5
@@ -136,13 +137,13 @@ exam5_short <- read.csv("exam5_writtenQs_deleted.csv", sep = ",")
 ```
 
 ```{r}
-exam5_calc <- exam5_short %>% select(4:7)
+exam5_calc <- exam5_short %>% select(4:9)
 exam5_short <- exam5_short %>%
   mutate(written = rowSums(exam5_calc, na.rm = TRUE))
 ```
 
 ```{r}
-exam5_final <- exam5_short %>% mutate(p_tot5 = (written/40)*100) 
+exam5_final <- exam5_short %>% mutate(p_tot5 = (written/60)*100) 
 ```
 
 ```{r}
@@ -150,11 +151,11 @@ exam5_end <- exam5_final %>% select("anon_id", "views5", "p_tot5")
 ```
 
 ```{r}
-final_data <- left_join(full_data, exam5_end, by = "anon_id" )
+final_data <- left_join(final_data, exam5_end, by = "anon_id" )
 ```
 
 ```{r}
-write.csv(full_data, "2023_cleaned.csv", row.names = F)
+write.csv(final_data, "2023_cleaned.csv", row.names = F)
 ```
 
 
