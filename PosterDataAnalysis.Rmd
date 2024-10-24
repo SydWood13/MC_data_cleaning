@@ -32,6 +32,26 @@ data <- read.csv(file = "~/GitHub/MC_data_cleaning/2023 data/new version of exam
 
 #data <- data %>% rename(e_internal = e_correct)
 
+data1 <- data %>% select(anon_id, contains("p_tot"))
+
+data1 <- data1 %>% mutate(drop = rowSums(is.na(data1)))
+
+data1 <- data1 %>%  select(anon_id, drop)
+data <- left_join(data, data1, by = "anon_id")
+
+data <- data %>% filter(drop < 2)
+
+data <- data %>% mutate(z1 = (p_tot1 - mean(p_tot1, na.rm = T))/sd(p_tot1, na.rm = T))
+data <- data %>% mutate(z2 = (p_tot2 - mean(p_tot2, na.rm = T))/sd(p_tot2, na.rm = T))
+data <- data %>% mutate(z3 = (p_tot3 - mean(p_tot3, na.rm = T))/sd(p_tot3, na.rm = T))
+data <- data %>% mutate(z4 = (p_tot4 - mean(p_tot4, na.rm = T))/sd(p_tot4, na.rm = T))
+data <- data %>% mutate(z5 = (p_tot5 - mean(p_tot5, na.rm = T))/sd(p_tot5, na.rm = T))
+
+data24 <- data
+data23 <- data
+
+
+
 
 
 ```
@@ -142,7 +162,7 @@ grade_table <- data %>% group_by(opt_in) %>%
 ```{r}
 
 no_growth <- ('#latent structure
-i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
+i =~ 1*z1 + 1*z2 + 1*z3 + 1*z4 + 1*z5
 '
 )
 
@@ -153,7 +173,7 @@ i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
 #### Model 0: Fully Constrained no growth  ---Null model  
 
 ```{r}
-fit0 <- growth(model = no_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("residuals", "means", "lv.variances"), se = "robust")
+fit0 <- growth(model = no_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.label = c("0", "1"),  group.equal = c("residuals", "means", "lv.variances"), se = "robust")
 
 fitMeasures(fit0)
 
@@ -169,7 +189,7 @@ Baseline model, represents the null hypothesis assuming no change overtime and n
 
 
 ```{r}
-fit0_5 <- growth(model = no_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("residuals", "lv.variances"), se = "robust")
+fit0_5 <- growth(model = no_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.label = c("0", "1"), group.equal = c("residuals", "lv.variances"), se = "robust")
 
 fitMeasures(fit0_5)
 
@@ -177,7 +197,7 @@ parameterestimates(fit0_5)
 
 anova(fit0, fit0_5)
 
-
+data <- data24
 
 ```
 
@@ -189,6 +209,12 @@ Linear Model Structure:
 lin_growth <- ('#latent structure
 i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
 s =~ 0*p_tot1 + 1*p_tot2 + 2*p_tot3 + 3*p_tot4 + 4*p_tot5')
+```
+
+```{r}
+lin_growth <- ('#latent structure
+i =~ 1*z1 + 1*z2 + 1*z3 + 1*z4 + 1*z5
+s =~ 0*z1 + 1*z2 + 2*z3 + 3*z4 + 4*z5')
 ```
 
 #### Model 1: Linear growth but Fully Constrained in both groups ---ignoring the effect of opt-in
@@ -227,6 +253,14 @@ i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
 s =~ 0*p_tot1 + NA*p_tot2 + 1*p_tot3 + NA*p_tot4 + NA*p_tot5')
 ```
 
+
+```{r}
+
+lb_growth <- ('#latent structure
+i =~ 1*z1 + 1*z2 + 1*z3 + 1*z4 + 1*z5
+s =~ 0*z1 + NA*z2 + 1*z3 + NA*z4 + NA*z5')
+```
+
 #### Model 4: Fully constrained in both groups ---Non-linear model  
 
 ```{r}
@@ -250,6 +284,13 @@ i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
 s =~ 0*p_tot1 + m*p_tot2 + 1*p_tot3 + NA*p_tot4 + NA*p_tot5')
 ```
 
+
+```{r}
+
+lb_growth_par <- ('#latent structure
+i =~ 1*z1 + 1*z2 + 1*z3 + 1*z4 + 1*z5
+s =~ 0*z1 + m*z2 + 1*z3 + NA*z4 + NA*z5')
+```
 
 ```{r}
 lb_fit1 <- growth(model = lb_growth_par, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.label = c("0", "1"),  group.equal = c("means", "residuals", "lv.variances", "lv.covariances"), se = "robust")
