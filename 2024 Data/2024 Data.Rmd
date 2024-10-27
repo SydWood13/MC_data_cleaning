@@ -14,7 +14,7 @@ library(readr)
 ```
 
 ```{r}
-setwd("~/Documents/GitHub/MC_data_cleaning/2024 Data")
+#setwd("~/Documents/GitHub/MC_data_cleaning/2024 Data")
 ```
 
 
@@ -70,8 +70,8 @@ dem_short <- dem_short %>%
 ```{r}
 dem_short <- dem_short %>%
   mutate(int = case_when(
-    grepl("Yes, I am an international student", int, fixed = TRUE) ~ 0,
-    grepl("No, I am not an international student", int, fixed = TRUE) ~ 1,
+    grepl("Yes, I am an international student", int, fixed = TRUE) ~ 1,
+    grepl("No, I am not an international student", int, fixed = TRUE) ~ 0,
     TRUE ~ NA
   ))
 ```
@@ -285,7 +285,7 @@ dem <- read.csv("dem_2024_cleaned.csv")
 
 full_grades <- grades %>% select(-"SID")
 
-full_data <- full_join(dem,grades, by = "SID")
+full_data <- left_join(dem,grades, by = "SID")
 ```
 
 

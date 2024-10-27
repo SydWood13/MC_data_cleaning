@@ -26,9 +26,31 @@ invisible(lapply(packages, library, character.only = TRUE))
 
 ```{r}
 
-dat24 <- read.csv(file = "~/GitHub/MC_data_cleaning/2024 Data/2024_full_data_cleaned.csv")
+data <- read.csv(file = "~/GitHub/MC_data_cleaning/2024 Data/2024_full_data_cleaned.csv")
 
-dat24 <- dat24 %>% rename(e_internal = e_correct)
+data <- read.csv(file = "~/GitHub/MC_data_cleaning/2023 data/new version of exams/2023_cleaned.csv")
+
+#data <- data %>% rename(e_internal = e_correct)
+
+data1 <- data %>% select(anon_id, contains("p_tot"))
+
+data1 <- data1 %>% mutate(drop = rowSums(is.na(data1)))
+
+data1 <- data1 %>%  select(anon_id, drop)
+data <- left_join(data, data1, by = "anon_id")
+
+data <- data %>% filter(drop < 2)
+
+data <- data %>% mutate(z1 = (p_tot1 - mean(p_tot1, na.rm = T))/sd(p_tot1, na.rm = T))
+data <- data %>% mutate(z2 = (p_tot2 - mean(p_tot2, na.rm = T))/sd(p_tot2, na.rm = T))
+data <- data %>% mutate(z3 = (p_tot3 - mean(p_tot3, na.rm = T))/sd(p_tot3, na.rm = T))
+data <- data %>% mutate(z4 = (p_tot4 - mean(p_tot4, na.rm = T))/sd(p_tot4, na.rm = T))
+data <- data %>% mutate(z5 = (p_tot5 - mean(p_tot5, na.rm = T))/sd(p_tot5, na.rm = T))
+
+data24 <- data
+data23 <- data
+
+
 
 
 
@@ -36,12 +58,316 @@ dat24 <- dat24 %>% rename(e_internal = e_correct)
 
 
 
-# Structural Equation Model  Data 
+## Demographic Data 
+
+
 ```{r}
 
 
+data <- data %>% mutate(URM = case_when(ethnicity <= 2 ~ 1, TRUE ~ 0))
+
+
+##Assign Factors
+data$first_gen <- factor(data$first_gen)
+data$URM <- factor(data$URM)
+data$int <- factor(data$int)
+data$gender <- factor(data$gender)
+
+
+data %>%  group_by(opt_in) %>%
+  summarise(var = "optin", n = n())
+
+##First Gen 
+first_gen_table <- data %>% group_by(first_gen) %>%
+  summarise(var = "first_gen", n = n(), percent = (n()/429))
+
+
+first_gen_table
+
+first_gen_table_int <- data %>% group_by(first_gen, opt_in) %>%
+  summarise(var = "first_gen", n = n())
+
+
+first_gen_table_int
+
+
+
+##URM
+URM_table <- data %>% group_by(URM) %>%
+  summarise(var = "URM", n = n(), percent = (n()/429))
+
+
+URM_table
+
+URM_table_int <- data %>% group_by(URM, opt_in) %>%
+  summarise(var = "URM", n = n())
+
+
+URM_table_int
+
+##Transfer 
+transfer_table <- data %>% group_by(transfer) %>%
+  summarise(var = "transfer", n = n(), percent = (n()/429))
+
+
+transfer_table
+
+transfer_table_int <- data %>% group_by(transfer, opt_in) %>%
+  summarise(var = "transfer", n = n())
+
+
+transfer_table_int
+
+
+##Gender
+
+gender_table <- data %>% group_by(gender) %>%
+  summarise(var = "gender", n = n(), percent = (n()/429))
+
+
+gender_table
+
+gender_table_int <- data %>% group_by(gender, opt_in) %>%
+  summarise(var = "gender", n = n())
+
+
+gender_table_int
+
+## International table 
+int_table <- data %>% group_by(int) %>%
+  summarise(var = "International", n = n(), percent = (n()/429))
+
+
+int_table
+
+int_table_int <- data %>% group_by(int, opt_in) %>%
+  summarise(var = "International", n = n())
+
+
+
+grade_table <- data %>% group_by(opt_in) %>%
+  summarise( mean(p_tot1, na.rm = T), mean(p_tot2, na.rm = T ), mean(p_tot3, na.rm = T), mean(p_tot4, na.rm = T), mean(p_tot5, na.rm = T) )
+
 
 
 
 ```
 
+
+
+# Structural Equation Models 
+
+
+
+```{r}
+
+no_growth <- ('#latent structure
+i =~ 1*z1 + 1*z2 + 1*z3 + 1*z4 + 1*z5
+'
+)
+
+
+
+```
+
+#### Model 0: Fully Constrained no growth  ---Null model  
+
+```{r}
+fit0 <- growth(model = no_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.label = c("0", "1"),  group.equal = c("residuals", "means", "lv.variances"), se = "robust")
+
+fitMeasures(fit0)
+
+parameterestimates(fit0)
+
+```
+
+##### Interpetation 
+Baseline model, represents the null hypothesis assuming no change overtime and no differences between groups. 
+
+
+#### Model 0.5 Intercepts only different 
+
+
+```{r}
+fit0_5 <- growth(model = no_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.label = c("0", "1"), group.equal = c("residuals", "lv.variances"), se = "robust")
+
+fitMeasures(fit0_5)
+
+parameterestimates(fit0_5)
+
+anova(fit0, fit0_5)
+
+data <- data24
+
+```
+
+
+
+### Linear Growth Models
+Linear Model Structure: 
+```{r}
+lin_growth <- ('#latent structure
+i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
+s =~ 0*p_tot1 + 1*p_tot2 + 2*p_tot3 + 3*p_tot4 + 4*p_tot5')
+```
+
+```{r}
+lin_growth <- ('#latent structure
+i =~ 1*z1 + 1*z2 + 1*z3 + 1*z4 + 1*z5
+s =~ 0*z1 + 1*z2 + 2*z3 + 3*z4 + 4*z5')
+```
+
+#### Model 1: Linear growth but Fully Constrained in both groups ---ignoring the effect of opt-in
+
+```{r}
+lin_fit0 <- growth(model = lin_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("residuals", "means", "lv.variances", "lv.covariances"), se = "robust")
+
+fitMeasures(lin_fit0)
+
+parameterEstimates(lin_fit0)
+
+anova(fit0, lin_fit0)
+```
+### Interpretation 
+
+Linear growth (no group differences) is not significantly better than Null model.In the 2024 data when we assume linear growth 
+
+#### Model 2: free means in both groups  linear growth 
+```{r}
+lin_fit1 <- growth(model = lin_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.label = c("0", "1"), group.equal = c("residuals", "lv.covariances", "lv.variances"), se = "robust")
+
+parameterEstimates(lin_fit1)
+
+fitMeasures(lin_fit1)
+
+anova(fit0, lin_fit1)
+
+```
+
+
+
+```{r}
+
+lb_growth <- ('#latent structure
+i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
+s =~ 0*p_tot1 + NA*p_tot2 + 1*p_tot3 + NA*p_tot4 + NA*p_tot5')
+```
+
+
+```{r}
+
+lb_growth <- ('#latent structure
+i =~ 1*z1 + 1*z2 + 1*z3 + 1*z4 + 1*z5
+s =~ 0*z1 + NA*z2 + 1*z3 + NA*z4 + NA*z5')
+```
+
+#### Model 4: Fully constrained in both groups ---Non-linear model  
+
+```{r}
+lb_fit0 <- growth(model = lb_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c("residuals", "loadings", "means", "lv.variances", "lv.covariances"), se = "robust")
+
+parameterEstimates(lb_fit0)
+
+fitMeasures(lb_fit0)
+
+anova(lb_fit0, lin_fit0) ###Latent basis is better than null 
+
+```
+
+
+#### Model 5 : Free loadings accept exam2 in both groups latent basis -- only allows post treament to vary by group -- post- trajectory only  different by groups -- Hypothesized Model 
+
+```{r}
+
+lb_growth_par <- ('#latent structure
+i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
+s =~ 0*p_tot1 + m*p_tot2 + 1*p_tot3 + NA*p_tot4 + NA*p_tot5')
+```
+
+
+```{r}
+
+lb_growth_par <- ('#latent structure
+i =~ 1*z1 + 1*z2 + 1*z3 + 1*z4 + 1*z5
+s =~ 0*z1 + m*z2 + 1*z3 + NA*z4 + NA*z5')
+```
+
+```{r}
+lb_fit1 <- growth(model = lb_growth_par, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.label = c("0", "1"),  group.equal = c("means", "residuals", "lv.variances", "lv.covariances"), se = "robust")
+
+
+fitMeasures(lb_fit1)
+
+parameterEstimates(lb_fit1)
+
+anova(lb_fit1, lb_fit0) ##Lin_fit2 is better than lin_fit1
+
+```
+
+
+#### Model 6- free all loading to be different by group -- test the parallel trends Hypothesis
+```{r}
+lb_fit2 <- growth(model = lb_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.label = c("0", "1"), group.equal = c("means", "residuals", "lv.variances", "lv.covariances"), se = "robust")
+
+parameterEstimates(lb_fit2)
+
+fitMeasures(lb_fit2)
+
+anova(lb_fit2, lb_fit1) 
+
+```
+
+##### Interpretation 
+
+Model 6 did not fit better than model 5, meaning the parallel trends assumption holds:  no difference in loadings at time 2. 
+
+
+
+#### Model 7 -- Under the assumption of parallel trends pre-intervention (which hold based on the SEM results) we  free the slope and intercepts by group 
+```{r}
+lb_fit3 <- growth(model = lb_growth_par, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.label = c("0", "1"), group.equal = c( "residuals", "lv.variances", "lv.covariances"), se = "robust")
+
+parameterEstimates(lb_fit3)
+
+fitMeasures(lb_fit3)
+
+anova(lb_fit3, lb_fit1) 
+
+```
+
+
+#### Model 8: Are underlying differences between groups with the same trajectory enough to explain differences?-- alt explination
+If 7 is not significantly better than 8 then that means all differences in performance can be attributed to underlying differences between groups 
+
+```{r}
+lb_fit4 <- growth(model = lb_growth, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.equal = c( "loadings", "residuals", "lv.variances", "lv.covariances"), se = "robust")
+
+parameterEstimates(lb_fit4)
+
+fitMeasures(lb_fit4)
+
+
+anova(lb_fit3, lb_fit4)
+
+```
+
+
+```{r}
+
+lb_growth2 <- ('#latent structure
+i =~ 1*p_tot1 + 1*p_tot2 + 1*p_tot3 + 1*p_tot4 + 1*p_tot5
+s =~ 0*p_tot1 + NA*p_tot2 + NA*p_tot3 + NA*p_tot4 + 1*p_tot5')
+```
+
+#### Model 4: Fully constrained in both groups ---Non-linear model  
+
+```{r}
+lb_fit5 <- growth(model = lb_growth2, data = data, estimator = "ML", missing = "fiml", group = "opt_in", group.label = c("0", "1"), group.equal = c("residuals", "means", "lv.variances", "lv.covariances"), se = "robust")
+
+parameterEstimates(lb_fit5)
+
+fitMeasures(lb_fit5)
+
+anova(lb_fit1, lb_fit5) ###Latent basis is better than null 
+
+```
