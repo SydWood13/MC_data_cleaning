@@ -1,0 +1,112 @@
+---
+title: "JSON transformation"
+author: "Xinhui Zhang"
+date: "2024-11-14"
+output: html_document
+---
+```{r}
+library(jsonlite)
+```
+```{r}
+setwd("~/Documents/GitHub/MC_data_cleaning/W23 Rubric Item Data")
+json_data <- read_json("~/Documents/GitHub/MC_data_cleaning/W23 Rubric Item Data/Exam 1A-rubric.json", simplifyVector = TRUE)
+```
+
+
+
+```{r}
+library(jsonlite)
+library(dplyr)
+library(tidyr)
+
+# Initialize an empty list to store each student's data
+students_list <- list()
+
+# Loop through each question (e.g., H0, H1, etc.)
+for (question_id in names(json_data)) {
+  question <- json_data[[question_id]]
+  
+  # Loop through each answer type (e.g., Correct, Inaccurate, Partial Correct)
+  answer_types <- names(question$Relationship)
+  for (answer_type in answer_types) {
+    # Extract the data for this answer type
+    answer_data <- question$Relationship[[answer_type]]
+    
+    # If the students list is not empty, proceed
+    if (!is.null(answer_data$students)) {
+      # Loop through each student
+      for (student in answer_data$students) {
+        # Create a data frame row containing the student info, question ID, and answer type
+        student_df <- data.frame(
+          student = student,
+          question_id = question_id,
+          answer_type = answer_type,
+          stringsAsFactors = FALSE
+        )
+        
+        # Add this row of data to the student list
+        students_list[[length(students_list) + 1]] <- student_df
+      }
+    }
+  }
+}
+
+# Combine all student data into a single data frame
+final_df <- bind_rows(students_list)
+
+# View the result
+View(final_df)
+```
+
+```{r}
+# Initialize an empty list to store each student's data
+students_list <- list()
+
+# Loop through each question (e.g., H0, H1, etc.)
+for (question_id in names(json_data)) {
+  question <- json_data[[question_id]]
+  
+  # Extract additional variables if available
+  question_text <- if (!is.null(question$question_text)) question$question_text else NA
+  score <- if (!is.null(question$score)) question$score else NA
+
+  # Loop through each answer type within the relationship
+  answer_types <- names(question$Relationship)
+  for (answer_type in answer_types) {
+    # Extract the data for this answer type
+    answer_data <- question$Relationship[[answer_type]]
+    
+    # If the students list is not empty, proceed
+    if (!is.null(answer_data$students)) {
+      # Loop through each student
+      for (student in answer_data$students) {
+        # Create a data frame row with all relevant information
+        student_df <- data.frame(
+          student = student,
+          question_id = question_id,
+          answer_type = answer_type,
+          question_text = question_text,
+          score = score,
+          href = answer_data$href,
+          points = answer_data$points,
+          stringsAsFactors = FALSE
+        )
+        
+        # Add this row of data to the student list
+        students_list[[length(students_list) + 1]] <- student_df
+      }
+    }
+  }
+}
+
+# Combine all student data into a single data frame
+final_df1 <- bind_rows(students_list)
+
+# View the result
+View(final_df1)
+```
+
+```{r}
+write.csv(file = "json_transformation.csv", final_df1)
+```
+
