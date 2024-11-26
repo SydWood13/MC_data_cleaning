@@ -4,109 +4,306 @@ author: "Xinhui Zhang"
 date: "2024-11-14"
 output: html_document
 ---
+
 ```{r}
 library(jsonlite)
 ```
+
 ```{r}
 setwd("~/Documents/GitHub/MC_data_cleaning/W23 Rubric Item Data")
 json_data <- read_json("~/Documents/GitHub/MC_data_cleaning/W23 Rubric Item Data/Exam 1A-rubric.json", simplifyVector = TRUE)
 ```
 
 
-
+## Exam 1
 ```{r}
 library(jsonlite)
 library(dplyr)
-library(tidyr)
 
-# Initialize an empty list to store each student's data
-students_list <- list()
+file_paths <- list.files(path = "~/Documents/GitHub/MC_data_cleaning/W23 Rubric Item Data/Exam 1", pattern = "\\.json$", full.names = TRUE)
 
-# Loop through each question (e.g., H0, H1, etc.)
-for (question_id in names(json_data)) {
-  question <- json_data[[question_id]]
+
+all_students_list <- list()
+
+for (file_path in file_paths) {
   
-  # Loop through each answer type (e.g., Correct, Inaccurate, Partial Correct)
-  answer_types <- names(question$Relationship)
-  for (answer_type in answer_types) {
-    # Extract the data for this answer type
-    answer_data <- question$Relationship[[answer_type]]
+  json_data <- fromJSON(file_path, flatten = FALSE)
+  
+  students_list <- list()
+
+  for (question_id in names(json_data)) {
+    question <- json_data[[question_id]]
     
-    # If the students list is not empty, proceed
-    if (!is.null(answer_data$students)) {
-      # Loop through each student
-      for (student in answer_data$students) {
-        # Create a data frame row containing the student info, question ID, and answer type
-        student_df <- data.frame(
-          student = student,
-          question_id = question_id,
-          answer_type = answer_type,
-          stringsAsFactors = FALSE
-        )
-        
-        # Add this row of data to the student list
-        students_list[[length(students_list) + 1]] <- student_df
+  
+    for (variable_name in names(question)) {
+      variable <- question[[variable_name]]
+      
+   
+      if (is.list(variable)) {
+        for (answer_type in names(variable)) {
+          answer_data <- variable[[answer_type]]
+
+          if (is.list(answer_data) && !is.null(answer_data$students)) {
+           
+            for (student in answer_data$students) {
+              student_df <- data.frame(
+                student = student,
+                question_id = question_id,
+                variable_name = variable_name,
+                answer_type = answer_type,
+                file_name = basename(file_path), 
+                stringsAsFactors = FALSE
+              )
+              students_list[[length(students_list) + 1]] <- student_df
+            }
+          } else if (is.character(answer_data)) {
+            print(paste("String data encountered in", question_id, variable_name, answer_type, ":", answer_data))
+          } else {
+            print(paste("Unexpected data format in", question_id, variable_name, answer_type))
+          }
+        }
       }
     }
   }
-}
 
-# Combine all student data into a single data frame
-final_df <- bind_rows(students_list)
-
-# View the result
-View(final_df)
-```
-
-```{r}
-# Initialize an empty list to store each student's data
-students_list <- list()
-
-# Loop through each question (e.g., H0, H1, etc.)
-for (question_id in names(json_data)) {
-  question <- json_data[[question_id]]
-  
-  # Extract additional variables if available
-  question_text <- if (!is.null(question$question_text)) question$question_text else NA
-  score <- if (!is.null(question$score)) question$score else NA
-
-  # Loop through each answer type within the relationship
-  answer_types <- names(question$Relationship)
-  for (answer_type in answer_types) {
-    # Extract the data for this answer type
-    answer_data <- question$Relationship[[answer_type]]
-    
-    # If the students list is not empty, proceed
-    if (!is.null(answer_data$students)) {
-      # Loop through each student
-      for (student in answer_data$students) {
-        # Create a data frame row with all relevant information
-        student_df <- data.frame(
-          student = student,
-          question_id = question_id,
-          answer_type = answer_type,
-          question_text = question_text,
-          score = score,
-          href = answer_data$href,
-          points = answer_data$points,
-          stringsAsFactors = FALSE
-        )
-        
-        # Add this row of data to the student list
-        students_list[[length(students_list) + 1]] <- student_df
-      }
-    }
+  if (length(students_list) > 0) {
+    all_students_list[[length(all_students_list) + 1]] <- bind_rows(students_list)
   }
 }
 
-# Combine all student data into a single data frame
-final_df1 <- bind_rows(students_list)
+final_df1 <- bind_rows(all_students_list)
 
-# View the result
 View(final_df1)
 ```
 
 ```{r}
-write.csv(file = "json_transformation.csv", final_df1)
+write.csv(file = "json_transformation_Exam_1.csv", final_df1)
+```
+## Exam 2
+```{r}
+library(jsonlite)
+library(dplyr)
+
+file_paths <- list.files(path = "~/Documents/GitHub/MC_data_cleaning/W23 Rubric Item Data/Exam 2", pattern = "\\.json$", full.names = TRUE)
+
+all_students_list <- list()
+
+for (file_path in file_paths) {
+  json_data <- fromJSON(file_path, flatten = FALSE)
+  students_list <- list()
+  for (question_id in names(json_data)) {
+    question <- json_data[[question_id]]
+    
+    for (variable_name in names(question)) {
+      variable <- question[[variable_name]]
+      
+      if (is.list(variable)) {
+        
+        for (answer_type in names(variable)) {
+          answer_data <- variable[[answer_type]]
+          
+          if (is.list(answer_data) && !is.null(answer_data$students)) {
+            for (student in answer_data$students) {
+              student_df <- data.frame(
+                student = student,
+                question_id = question_id,
+                variable_name = variable_name,
+                answer_type = answer_type,
+                file_name = basename(file_path),  
+                stringsAsFactors = FALSE
+              )
+              students_list[[length(students_list) + 1]] <- student_df
+            }
+          } else if (is.character(answer_data)) {
+            print(paste("String data encountered in", question_id, variable_name, answer_type, ":", answer_data))
+          } else {
+            print(paste("Unexpected data format in", question_id, variable_name, answer_type))
+          }
+        }
+      }
+    }
+  }
+  if (length(students_list) > 0) {
+    all_students_list[[length(all_students_list) + 1]] <- bind_rows(students_list)
+  }
+}
+final_df2 <- bind_rows(all_students_list)
+
+View(final_df2)
+```
+
+```{r}
+write.csv(file = "json_transformation_Exam_2.csv", final_df2)
+```
+
+## Exam 3
+```{r}
+library(jsonlite)
+library(dplyr)
+
+file_paths <- list.files(path = "~/Documents/GitHub/MC_data_cleaning/W23 Rubric Item Data/Exam 3", pattern = "\\.json$", full.names = TRUE)
+
+all_students_list <- list()
+
+for (file_path in file_paths) {
+  json_data <- fromJSON(file_path, flatten = FALSE)
+  students_list <- list()
+  for (question_id in names(json_data)) {
+    question <- json_data[[question_id]]
+    
+    for (variable_name in names(question)) {
+      variable <- question[[variable_name]]
+      
+      if (is.list(variable)) {
+        
+        for (answer_type in names(variable)) {
+          answer_data <- variable[[answer_type]]
+          
+          if (is.list(answer_data) && !is.null(answer_data$students)) {
+            for (student in answer_data$students) {
+              student_df <- data.frame(
+                student = student,
+                question_id = question_id,
+                variable_name = variable_name,
+                answer_type = answer_type,
+                file_name = basename(file_path),  
+                stringsAsFactors = FALSE
+              )
+              students_list[[length(students_list) + 1]] <- student_df
+            }
+          } else if (is.character(answer_data)) {
+            print(paste("String data encountered in", question_id, variable_name, answer_type, ":", answer_data))
+          } else {
+            print(paste("Unexpected data format in", question_id, variable_name, answer_type))
+          }
+        }
+      }
+    }
+  }
+  if (length(students_list) > 0) {
+    all_students_list[[length(all_students_list) + 1]] <- bind_rows(students_list)
+  }
+}
+final_df3 <- bind_rows(all_students_list)
+
+View(final_df3)
+```
+
+```{r}
+write.csv(file = "json_transformation_Exam_3.csv", final_df3)
+```
+
+## Exam 4
+```{r}
+library(jsonlite)
+library(dplyr)
+
+file_paths <- list.files(path = "~/Documents/GitHub/MC_data_cleaning/W23 Rubric Item Data/Exam 4", pattern = "\\.json$", full.names = TRUE)
+
+all_students_list <- list()
+
+for (file_path in file_paths) {
+  json_data <- fromJSON(file_path, flatten = FALSE)
+  students_list <- list()
+  for (question_id in names(json_data)) {
+    question <- json_data[[question_id]]
+    
+    for (variable_name in names(question)) {
+      variable <- question[[variable_name]]
+      
+      if (is.list(variable)) {
+        
+        for (answer_type in names(variable)) {
+          answer_data <- variable[[answer_type]]
+          
+          if (is.list(answer_data) && !is.null(answer_data$students)) {
+            for (student in answer_data$students) {
+              student_df <- data.frame(
+                student = student,
+                question_id = question_id,
+                variable_name = variable_name,
+                answer_type = answer_type,
+                file_name = basename(file_path),  
+                stringsAsFactors = FALSE
+              )
+              students_list[[length(students_list) + 1]] <- student_df
+            }
+          } else if (is.character(answer_data)) {
+            print(paste("String data encountered in", question_id, variable_name, answer_type, ":", answer_data))
+          } else {
+            print(paste("Unexpected data format in", question_id, variable_name, answer_type))
+          }
+        }
+      }
+    }
+  }
+  if (length(students_list) > 0) {
+    all_students_list[[length(all_students_list) + 1]] <- bind_rows(students_list)
+  }
+}
+final_df4 <- bind_rows(all_students_list)
+
+View(final_df4)
+```
+
+```{r}
+write.csv(file = "json_transformation_Exam_4.csv", final_df4)
+```
+
+## Exam 5
+```{r}
+library(jsonlite)
+library(dplyr)
+
+file_paths <- list.files(path = "~/Documents/GitHub/MC_data_cleaning/W23 Rubric Item Data/Exam 5", pattern = "\\.json$", full.names = TRUE)
+
+all_students_list <- list()
+
+for (file_path in file_paths) {
+  json_data <- fromJSON(file_path, flatten = FALSE)
+  students_list <- list()
+  for (question_id in names(json_data)) {
+    question <- json_data[[question_id]]
+    
+    for (variable_name in names(question)) {
+      variable <- question[[variable_name]]
+      
+      if (is.list(variable)) {
+        
+        for (answer_type in names(variable)) {
+          answer_data <- variable[[answer_type]]
+          
+          if (is.list(answer_data) && !is.null(answer_data$students)) {
+            for (student in answer_data$students) {
+              student_df <- data.frame(
+                student = student,
+                question_id = question_id,
+                variable_name = variable_name,
+                answer_type = answer_type,
+                file_name = basename(file_path),  
+                stringsAsFactors = FALSE
+              )
+              students_list[[length(students_list) + 1]] <- student_df
+            }
+          } else if (is.character(answer_data)) {
+            print(paste("String data encountered in", question_id, variable_name, answer_type, ":", answer_data))
+          } else {
+            print(paste("Unexpected data format in", question_id, variable_name, answer_type))
+          }
+        }
+      }
+    }
+  }
+  if (length(students_list) > 0) {
+    all_students_list[[length(all_students_list) + 1]] <- bind_rows(students_list)
+  }
+}
+final_df5 <- bind_rows(all_students_list)
+
+View(final_df5)
+```
+
+```{r}
+write.csv(file = "json_transformation_Exam 5.csv", final_df5)
 ```
 
