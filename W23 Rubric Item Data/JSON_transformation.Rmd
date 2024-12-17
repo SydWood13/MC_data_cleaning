@@ -72,8 +72,6 @@ for (file_path in file_paths) {
 }
 
 final_df1 <- bind_rows(all_students_list)
-
-View(final_df1)
 ```
 
 ```{r}
@@ -305,5 +303,55 @@ View(final_df5)
 
 ```{r}
 write.csv(file = "json_transformation_Exam 5.csv", final_df5)
+```
+
+### seperate the name and email and grader
+## put them into 3 columns
+
+```{r}
+library(dplyr)
+
+final_df1 <- final_df1 %>%
+  filter(student != "Student's name Sections Graded time Last graded by")
+```
+
+```{r}
+library(dplyr)
+library(stringr)
+final1_data <- final_df1 %>%
+  mutate(name = paste(word(student, 1), word(student, 2))) %>%
+  select(name, everything()) 
+```
+
+
+
+
+```{r}
+library(dplyr)
+library(stringr)
+
+grade_data <- final1_data %>%
+  mutate(grader = paste(word(student, -2), word(student, -1))) %>%
+  select(grader, everything()) 
+
+```
+
+```{r}
+grade_data <- grade_data[-1, ]
+```
+
+```{r}
+library(tidyr)
+
+email <- grade_data %>%
+  separate(student, into = c("part1", "email", "part3"), sep = "\\(", extra = "merge") %>%
+  separate(email, into = c("email"), sep = "\\)", extra = "drop") %>%
+  select(email, everything()) 
+
+```
+
+```{r}
+email <- email %>%
+  select(-part1, -part3)
 ```
 
