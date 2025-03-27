@@ -12,6 +12,8 @@ library(jsonlite)
 ```{r}
 setwd("~/Documents/GitHub/MC_data_cleaning/W23 Rubric Item Data")
 json_data <- read_json("~/Documents/GitHub/MC_data_cleaning/W23 Rubric Item Data/Exam 1A-rubric.json", simplifyVector = TRUE)
+
+getwd()
 ```
 
 
@@ -20,7 +22,7 @@ json_data <- read_json("~/Documents/GitHub/MC_data_cleaning/W23 Rubric Item Data
 library(jsonlite)
 library(dplyr)
 
-file_paths <- list.files(path = "~/Documents/GitHub/MC_data_cleaning/W23 Rubric Item Data/Exam 1", pattern = "\\.json$", full.names = TRUE)
+file_paths <- list.files(path = "C:/Users/woods/Documents/GitHub/MC_data_cleaning/W23 Rubric Item Data/Exam 1", pattern = "\\.json$", full.names = TRUE)
 
 
 all_students_list <- list()
