@@ -1,0 +1,527 @@
+---
+title: "Feedback Viewing"
+output: html_notebook
+author: Sydney Wood
+---
+
+## Libraries and Packages
+```{r}
+# Package names
+packages <- c("ggplot2",  "tidyverse", "apaTables", "colourpicker", "swirl", "dplyr", "gridExtra", "knitr", "lme4", "reshape2", "stargazer",  "did", "plm", "sandwich", "coefplot", "afex", "jtools", "glmmTMB")
+
+# Install packages not yet installed
+installed_packages <- packages %in% rownames(installed.packages())
+if (any(installed_packages == FALSE)) {
+  install.packages(packages[!installed_packages])
+}
+
+# Packages loading
+invisible(lapply(packages, library, character.only = TRUE))
+```
+
+
+
+# Data cleaning
+
+## exam files
+
+done for each observation changing file names to correspond with file --- not the most efficient 
+
+
+
+time1data <- read.csv(file = "2_D_Feb15.csv")
+
+time1data <- time1data %>% mutate(writtenScore = rowSums(across(14:31)))
+
+time1data <- time1data %>% mutate(pwritten = writtenScore/120)
+time1data <- time1data %>% filter(!is.na(View.Count))
+
+time1data <- time1data %>% select("SID", "Total.Score", "View.Count", "pwritten")
+time1data <- time1data %>% mutate(time = 2)
+
+write.csv(time1data, file = "time2D.csv", row.names = FALSE)
+
+
+
+## combining exams 
+
+
+data2A <- read.csv(file = "time2A.csv")
+
+data2B <- read.csv(file = "time2B.csv")
+
+data2C <- read.csv(file = "time2C.csv")
+
+data2D <- read.csv(file = "time2D.csv")
+
+
+data2 <- rbind(data2A, data2B, data2C, data2D)
+
+write.csv(data2, file = "FeedbackTime2.csv", row.names = FALSE)
+
+
+
+## combining observations 
+
+
+data1 <- read.csv("FeedbackTime1.csv")
+data2 <- read.csv("FeedbackTime2.csv")
+data3 <- read.csv("FeedbackTime3.csv")
+data4 <- read.csv("FeedbackTime4.csv")
+
+data <- rbind(data1, data2, data3, data4)
+
+write.csv(data, file = "FeedbackFull.csv", row.names = FALSE)
+
+
+
+
+# Analysis 
+
+```{r}
+data <- read.csv("FeedbackFull_deidentified.csv")
+
+data$time <- as.factor(data$time)
+
+
+data <- data %>% mutate(Total.Score= Total.Score/150 *100) %>% mutate(pwritten = pwritten*100) %>% filter(student_id != "#N/A")
+
+data$student_id <- as.factor(data$student_id)
+data$opt_in <- as.factor(data$opt_in)
+
+
+
+```
+
+
+## Descriptives 
+
+### Exam Total Score
+```{r}
+
+
+
+totalTable <- data %>% group_by(time) %>% summarise(variable = "Exam Score", n = n(), 
+                                                    mean = mean(Total.Score, na.rm=T), 
+                                                    sd = sd(Total.Score, na.rm = T), 
+                                                    median = median(Total.Score), 
+                                                    MAD = mad(Total.Score, na.rm = T), 
+                                                    Q1 = quantile(Total.Score, probs = .25),
+                                                    Q3 = quantile(Total.Score, probs = .75),
+                                                    IQR = IQR(Total.Score, na.rm = T),
+                                                    min = min(Total.Score, na.rm = T),
+                                                    max = max(Total.Score, na.rm = T))
+
+totalTable
+
+
+
+total_optin_Table <- data %>% group_by(time) %>% group_by(opt_in, .add = TRUE) %>%  summarise(variable = "Exam Score", 
+                                                                                n = n(), 
+                                                    mean = mean(Total.Score, na.rm=T), 
+                                                    sd = sd(Total.Score, na.rm = T), 
+                                                    median = median(Total.Score), 
+                                                    MAD = mad(Total.Score, na.rm = T), 
+                                                    Q1 = quantile(Total.Score, probs = .25),
+                                                    Q3 = quantile(Total.Score, probs = .75),
+                                                    IQR = IQR(Total.Score, na.rm = T),
+                                                    min = min(Total.Score, na.rm = T),
+                                                    max = max(Total.Score, na.rm = T))
+
+total_optin_Table
+
+
+?group_by
+
+```
+
+### Written Score % Accurate 
+```{r}
+
+
+
+writtenTable <- data %>% group_by(time) %>% summarise(variable = "Written Score", n = n(), 
+                                                    mean = mean(pwritten, na.rm=T), 
+                                                    sd = sd(pwritten, na.rm = T), 
+                                                    median = median(pwritten), 
+                                                    MAD = mad(pwritten, na.rm = T), 
+                                                    Q1 = quantile(pwritten, probs = .25),
+                                                    Q3 = quantile(pwritten, probs = .75),
+                                                    IQR = IQR(pwritten, na.rm = T),
+                                                    min = min(pwritten, na.rm = T),
+                                                    max = max(pwritten, na.rm = T))
+
+writtenTable
+
+
+written_optin_Table <- data %>% group_by(time) %>% group_by(opt_in, .add = TRUE) %>%  summarise(variable = "Written Score", n = n(), 
+                                                    mean = mean(pwritten, na.rm=T), 
+                                                    sd = sd(pwritten, na.rm = T), 
+                                                    median = median(pwritten), 
+                                                    MAD = mad(pwritten, na.rm = T), 
+                                                    Q1 = quantile(pwritten, probs = .25),
+                                                    Q3 = quantile(pwritten, probs = .75),
+                                                    IQR = IQR(pwritten, na.rm = T),
+                                                    min = min(pwritten, na.rm = T),
+                                                    max = max(pwritten, na.rm = T))
+
+written_optin_Table
+
+
+```
+
+
+
+### Feedback Viewing 
+```{r}
+
+
+
+feedbackTable <- data %>% group_by(time) %>% summarise(variable = "Feedback Viewing", n = n(), 
+                                                    mean = mean(View.Count, na.rm=T), 
+                                                    sd = sd(View.Count, na.rm = T), 
+                                                    median = median(View.Count), 
+                                                    MAD = mad(View.Count, na.rm = T), 
+                                                    Q1 = quantile(View.Count, probs = .25),
+                                                    Q3 = quantile(View.Count, probs = .75),
+                                                    IQR = IQR(View.Count, na.rm = T),
+                                                    min = min(View.Count, na.rm = T),
+                                                    max = max(View.Count, na.rm = T))
+
+feedbackTable
+
+
+feedback_optin_Table <- data %>% group_by(time)  %>% group_by(opt_in, .add = TRUE) %>% summarise(variable = "Feedback Viewing", n = n(), 
+                                                    mean = mean(View.Count, na.rm=T), 
+                                                    sd = sd(View.Count, na.rm = T), 
+                                                    median = median(View.Count), 
+                                                    MAD = mad(View.Count, na.rm = T), 
+                                                    Q1 = quantile(View.Count, probs = .25),
+                                                    Q3 = quantile(View.Count, probs = .75),
+                                                    IQR = IQR(View.Count, na.rm = T),
+                                                    min = min(View.Count, na.rm = T),
+                                                    max = max(View.Count, na.rm = T))
+
+feedback_optin_Table
+
+
+
+```
+
+
+### Visualize Feedback Viewing
+
+```{r}
+
+colors <- c("black", "#ACBFE6", "#465573", "#232A3A" )
+
+
+plot <- ggplot(data) +theme (axis.text.x = element_text(face = "bold", color = colors[4], 
+                             size =15),
+  axis.text.y = element_text(face = "bold", color = colors[4], 
+                             size = 15), 
+  legend.text = element_text(color = colors[4], face = "bold", size = 18), 
+  legend.title = element_text(color = colors[4], face = "bold"),
+  axis.title.x = element_text(color = colors[4],face = "bold",size = 20 ), 
+  axis.title.y = element_text(color = colors[4],face = "bold",size = 20 ))
+
+#colourPicker()
+
+
+view_optin <- plot + geom_histogram(aes(x = View.Count, y = after_stat(count/sum(count)), fill = opt_in), position = "dodge") + scale_fill_manual(values = c("#ACBFE6", "#465573"), name = " ", labels = c("Opt-out", "Opt-in")) + labs(x = "View Count", y = "Proportion") 
+
+view_optin
+
+
+ggsave(view_optin, file = "view_optin.png", height = 5, width = 11.5)
+```
+
+
+
+### Model 1: Does Observation time predict Feedback Viewing? 
+
+```{r}
+
+
+model1 <- glmer(View.Count ~  time + (1|student_id),  data, family = poisson, control= glmerControl(optimizer="bobyqa",
+                            optCtrl=list(maxfun=2e5)))
+
+summ(model1)
+
+
+
+view_time <- plot + geom_histogram(aes(x = View.Count, y = after_stat(count/sum(count)), fill =time))
+
+view_time
+
+
+
+```
+Time 1 is between exam 1 & 2 
+Time 2 is Between 2 & 3 
+Time 3 is between 3 & 4 --- intervention time period
+Time 4 is between 4 & 5 -- post intervention lag 1 
+
+Pre-registered alpha of .01: 
+
+marginally significant decrease of feedback viewing between exam 2 & 3 (time2) compared to between Exam 1 & 2(time1). Significant increase in feedback viewing between exam 3 and exam for compared to time 1. No significant difference in feedback viewing between 4 & 5 compared to time1. 
+
+
+### Model 2: Does Intervention predict Feedback Viewing? 
+
+```{r}
+eq2 <- View.Count ~ opt_in + (1|student_id)
+model2 <- glmer(eq2, data = data,  family = poisson, control= glmerControl(optimizer="bobyqa",
+                            optCtrl=list(maxfun=2e5)))
+
+summ(model2)
+
+
+
+```
+
+
+Engaging in the intervervention significantly repedict feedback behavior over all. Not surprising since students are forced to look at feedback to do this intervention 
+
+
+### Model 3: Feedback viewing over time by intervention group 
+```{r}
+
+eq3 <- View.Count ~ opt_in + time + opt_in*time + (1|student_id)
+model3 <- glmer(eq3, data = data,  family = poisson, control= glmerControl(optimizer="bobyqa",
+                            optCtrl=list(maxfun=2e5)))
+
+summ(model3)
+
+```
+
+Correlational results: not a difference in difference 
+Students who opted out f the intervention had a marginally significant decrease in viewing behavior between exam 2 & 3 compared to time1 (between exam 1 & 2), but otherwise their feedback viewing behavior did not change over time. Student's who opted into the intervention only had a significant increase in viewing behavior after the intervention! 
+
+
+
+### Model 4: Difference in Difference on feedback viewing behavior 
+```{r}
+
+pdata <- data
+
+pdata$time <- as.numeric(pdata$time)
+pdata <- pdata %>% complete(nesting(student_id, opt_in), time = full_seq(time, period = 1))
+pdata <- pdata.frame(pdata, index = c("student_id", "time", "opt_in"))
+pdata <- pdata %>% mutate(post = case_when(time == 3 | time == 4 ~1))
+pdata$post[is.na(pdata$post)] <- 0
+pdata <- pdata %>% mutate(w = case_when(opt_in == 0 | post == 0 ~ 0, opt_in == 1 & post == 1 ~ 1))
+
+
+pdata <- pdata %>% mutate(dobs2 = (time==2) * (opt_in == 1), 
+                          dobs3 = (time==3) * (opt_in == 1),
+                          dobs4 = (time==4) * (opt_in == 1),)
+
+mod3 <- glm(View.Count~student_id + time + dobs2 + dobs3 + dobs4, data = pdata, family = poisson)
+
+mod3_cr_se <- sqrt(diag(vcovCL(mod3, cluster = ~ student_id)))
+
+coef_keep = c("time", "dobs2", "dobs3", "dobs4")
+
+stargazer(mod3, keep = coef_keep, type = "text", se= list(mod3_cr_se), digits = 6, notes = "cluster Robust standard errors in parantheses" )
+
+
+
+
+```
+
+```{r}
+diffPlot <- coefplot(mod3, coefficients= coef_keep, innerCI= 0, horizontal =T)
+
+
+ggsave(diffPlot, file = "diffPlot.png")
+```
+
+
+
+The only time that feedback viewing behavior significantly differed by group is between Exam 3 & 4 when the students who did the intervention were required to look at and correct thier feedback. 
+
+
+## Performance Data 
+
+
+
+
+
+### Model 5: Does feedback viewing behavior predict performance 
+
+```{r}
+setwd("~/GitHub/MC-Data")
+exam5_data <- read.csv("Final_Data_deidentified.csv")
+
+
+exam5_data <- exam5_data %>% select("student_id", p_tot2:p_tot5)
+
+exam5_data$student_id <- as.factor(exam5_data$student_id)
+
+wdata <- right_join(data, exam5_data, by = "student_id")
+
+wdata <- wdata %>% mutate(performance = case_when(time == "1" ~ p_tot2, time == "2"~p_tot3, time == "3"~p_tot4, time == "4" ~ p_tot5))
+
+
+wdata <- wdata %>% mutate(viewed = case_when(View.Count == 0 ~ 0))
+
+wdata$viewed[is.na(wdata$viewed)] <- 1
+
+
+```
+
+
+```{r}
+
+
+plot2 <- ggplot(wdata)
+
+
+view_plot <- plot2 + geom_histogram(aes(x=View.Count, y = after_stat(count/sum(count)), fill = opt_in, color = time)) + scale_fill_manual(values = c("lightblue", "black"))
+
+
+view_plot
+
+```
+
+```{r}
+
+
+
+
+```
+
+
+
+
+```{r}
+
+written_plot <- plot2 + geom_histogram(aes(performance, y = after_stat(count/sum(count)), fill = opt_in, color = time)) + scale_fill_manual(values = c("lightblue", "black"))
+
+
+written_plot
+
+
+```
+
+
+
+
+```{r}
+writtenTable <- wdata %>% group_by(time) %>% summarise(variable = "Written Score", n = n(), 
+                                                    mean = mean(performance, na.rm=T), 
+                                                    sd = sd(performance, na.rm = T), 
+                                                    median = median(performance, na.rm = T), 
+                                                    MAD = mad(performance, na.rm = T), 
+                                                    Q1 = quantile(performance, probs = .25, na.rm = T),
+                                                    Q3 = quantile(performance, probs = .75, na.rm = T),
+                                                    IQR = IQR(performance, na.rm = T),
+                                                    min = min(performance, na.rm = T),
+                                                    max = max(performance, na.rm = T))
+
+writtenTable
+
+
+written_optin_Table <- wdata %>% group_by(time) %>% group_by(opt_in, .add = TRUE) %>%  summarise(variable = "Written Score", n = n(), 
+                                                    mean = mean(performance, na.rm=T), 
+                                                    sd = sd(performance, na.rm = T), 
+                                                    median = median(performance, na.rm = T), 
+                                                    MAD = mad(performance, na.rm = T), 
+                                                    Q1 = quantile(performance, probs = .25, na.rm = T),
+                                                    Q3 = quantile(performance, probs = .75, na.rm = T),
+                                                    IQR = IQR(performance, na.rm = T),
+                                                    min = min(performance, na.rm = T),
+                                                    max = max(performance, na.rm = T))
+
+written_optin_Table
+
+```
+
+```{r}
+
+
+written_mean_plot <- ggplot(written_optin_Table, aes(x =time, y = mean, fill = opt_in))+ geom_bar(stat = "identity", position = "dodge") + scale_fill_manual(values = c(colors[2], colors[3]),  name = " ", labels = c("Opt-out", "Opt-in")) + labs(x = "Subsequent Exam", y = "Average Score") + geom_errorbar(aes(ymin = mean - (sd/sqrt(n)), ymax = mean + (sd/sqrt(n))), position = "dodge", color = "black") +theme (axis.text.x = element_text(face = "bold", color = colors[4], 
+                             size =15),
+  axis.text.y = element_text(face = "bold", color = colors[4], 
+                             size = 15), 
+  legend.text = element_text(color = colors[4], face = "bold", size = 18), 
+  legend.title = element_text(color = colors[4], face = "bold"),
+  axis.title.x = element_text(color = colors[4],face = "bold",size = 20 ), 
+  axis.title.y = element_text(color = colors[4],face = "bold",size = 20 ))
+
+
+
+written_mean_plot
+
+ggsave(written_mean_plot, file = "performancePlot.png")
+
+
+```
+
+Only difference in performance seems to be on exam 4 (time for is between exam 4 & 5)
+
+```{r}
+
+
+eq5 <- performance ~ View.Count+ (1|student_id)
+model5 <- lmer(eq5, data = wdata)
+
+
+summ(model5)
+
+```
+Overall, yes feedback viewing predicts performance. 
+
+## Does feedback viewing behavior predict performance on subsequent exam? 
+
+```{r}
+
+eq6 <- performance ~ time + View.Count + View.Count*time +  (1|student_id)
+model6 <- lmer(eq6, data = wdata)
+
+
+summ(model6)
+
+
+```
+
+No interaction! Time predicts performance and Viewcount predicts performance overall, but feedback viewing of previous exam does not predict the performance of the subsequent exam! 
+
+
+#what if we just look at the act of looking once and not amount of times
+```{r}
+eq7 <- performance ~ time + View.Count+ opt_in + View.Count*time*opt_in  +  (1|student_id)
+model7 <- lmer(eq7, data = wdata)
+
+
+summ(model7)
+
+
+```
+Doesn't matter!  Feedback viewing does not predict subsequent exam performance 
+
+
+```{r}
+
+eq8 <- Total.Score ~ time + View.Count+ opt_in + View.Count*time*opt_in +  (1|student_id)
+model8 <- lmer(eq8, data = wdata)
+
+
+summ(model8)
+
+
+```
+
+
+
+```{r}
+eq9 <- View.Count ~  Total.Score*time +  (1|student_id)
+model9 <- glmer(eq9, data = wdata, family = poisson, control= glmerControl(optimizer="bobyqa",
+                            optCtrl=list(maxfun=2e5)))
+
+
+summ(model)
+```
+
+
