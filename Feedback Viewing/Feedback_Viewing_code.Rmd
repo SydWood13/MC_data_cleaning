@@ -83,6 +83,7 @@ data <- read.csv("FeedbackFull_deidentified.csv")
 
 data$time <- as.factor(data$time)
 
+data <- data %>% mutate(viewed = case_when(View.Count == 0 ~ 0, View.Count > 0 ~ 1, .default = View.Count))
 
 data <- data %>% mutate(Total.Score= Total.Score/150 *100) %>% mutate(pwritten = pwritten*100) %>% filter(student_id != "#N/A")
 
@@ -243,14 +244,13 @@ ggsave(view_optin, file = "view_optin.png", height = 5, width = 11.5)
 ```{r}
 
 
-model1 <- glmer(View.Count ~  time + (1|student_id),  data, family = poisson, control= glmerControl(optimizer="bobyqa",
-                            optCtrl=list(maxfun=2e5)))
+model1 <- glmer(viewed ~  time + (1|student_id),  data, family = binomial)
 
 summ(model1)
 
 
 
-view_time <- plot + geom_histogram(aes(x = View.Count, y = after_stat(count/sum(count)), fill =time))
+view_time <- plot + geom_histogram(aes(x = viewed, y = after_stat(count/sum(count)), fill =time))
 
 view_time
 
