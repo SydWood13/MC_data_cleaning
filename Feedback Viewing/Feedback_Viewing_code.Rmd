@@ -9,6 +9,8 @@ author: Sydney Wood
 # Package names
 packages <- c("ggplot2",  "tidyverse", "apaTables", "colourpicker", "swirl", "dplyr", "gridExtra", "knitr", "lme4", "reshape2", "stargazer",  "did", "plm", "sandwich", "coefplot", "afex", "jtools", "glmmTMB")
 
+
+
 # Install packages not yet installed
 installed_packages <- packages %in% rownames(installed.packages())
 if (any(installed_packages == FALSE)) {
@@ -79,16 +81,18 @@ write.csv(data, file = "FeedbackFull.csv", row.names = FALSE)
 # Analysis 
 
 ```{r}
-data <- read.csv("FeedbackFull_deidentified.csv")
+data <- read.csv("FeedbackFull.csv")
 
 data$time <- as.factor(data$time)
 
 data <- data %>% mutate(viewed = case_when(View.Count == 0 ~ 0, View.Count > 0 ~ 1, .default = View.Count))
 
-data <- data %>% mutate(Total.Score= Total.Score/150 *100) %>% mutate(pwritten = pwritten*100) %>% filter(student_id != "#N/A")
+data <- data %>% mutate(Total.Score= Total.Score/150 *100) %>% mutate(pwritten = pwritten*100) %>% filter(opt_in != "#N/A")
 
-data$student_id <- as.factor(data$student_id)
+data$student_id <- as.factor(data$SID)
 data$opt_in <- as.factor(data$opt_in)
+
+
 
 
 
@@ -250,6 +254,7 @@ summ(model1)
 
 
 
+
 view_time <- plot + geom_histogram(aes(x = viewed, y = after_stat(count/sum(count)), fill =time))
 
 view_time
@@ -270,9 +275,8 @@ marginally significant decrease of feedback viewing between exam 2 & 3 (time2) c
 ### Model 2: Does Intervention predict Feedback Viewing? 
 
 ```{r}
-eq2 <- View.Count ~ opt_in + (1|student_id)
-model2 <- glmer(eq2, data = data,  family = poisson, control= glmerControl(optimizer="bobyqa",
-                            optCtrl=list(maxfun=2e5)))
+eq2 <- viewed ~ opt_in + (1|student_id)
+model2 <- glmer(eq2, data = data,  family = binomial)
 
 summ(model2)
 
@@ -287,9 +291,8 @@ Engaging in the intervervention significantly repedict feedback behavior over al
 ### Model 3: Feedback viewing over time by intervention group 
 ```{r}
 
-eq3 <- View.Count ~ opt_in + time + opt_in*time + (1|student_id)
-model3 <- glmer(eq3, data = data,  family = poisson, control= glmerControl(optimizer="bobyqa",
-                            optCtrl=list(maxfun=2e5)))
+eq3 <- viewed ~ opt_in + time + opt_in*time + (1|student_id)
+model3 <- glmer(eq3, data = data,  family = binomial)
 
 summ(model3)
 
@@ -317,7 +320,7 @@ pdata <- pdata %>% mutate(dobs2 = (time==2) * (opt_in == 1),
                           dobs3 = (time==3) * (opt_in == 1),
                           dobs4 = (time==4) * (opt_in == 1),)
 
-mod3 <- glm(View.Count~student_id + time + dobs2 + dobs3 + dobs4, data = pdata, family = poisson)
+mod3 <- glm(viewed~student_id + time + dobs2 + dobs3 + dobs4, data = pdata, family = binomial)
 
 mod3_cr_se <- sqrt(diag(vcovCL(mod3, cluster = ~ student_id)))
 
@@ -460,68 +463,5 @@ ggsave(written_mean_plot, file = "performancePlot.png")
 ```
 
 Only difference in performance seems to be on exam 4 (time for is between exam 4 & 5)
-
-```{r}
-
-
-eq5 <- performance ~ View.Count+ (1|student_id)
-model5 <- lmer(eq5, data = wdata)
-
-
-summ(model5)
-
-```
-Overall, yes feedback viewing predicts performance. 
-
-## Does feedback viewing behavior predict performance on subsequent exam? 
-
-```{r}
-
-eq6 <- performance ~ time + View.Count + View.Count*time +  (1|student_id)
-model6 <- lmer(eq6, data = wdata)
-
-
-summ(model6)
-
-
-```
-
-No interaction! Time predicts performance and Viewcount predicts performance overall, but feedback viewing of previous exam does not predict the performance of the subsequent exam! 
-
-
-#what if we just look at the act of looking once and not amount of times
-```{r}
-eq7 <- performance ~ time + View.Count+ opt_in + View.Count*time*opt_in  +  (1|student_id)
-model7 <- lmer(eq7, data = wdata)
-
-
-summ(model7)
-
-
-```
-Doesn't matter!  Feedback viewing does not predict subsequent exam performance 
-
-
-```{r}
-
-eq8 <- Total.Score ~ time + View.Count+ opt_in + View.Count*time*opt_in +  (1|student_id)
-model8 <- lmer(eq8, data = wdata)
-
-
-summ(model8)
-
-
-```
-
-
-
-```{r}
-eq9 <- View.Count ~  Total.Score*time +  (1|student_id)
-model9 <- glmer(eq9, data = wdata, family = poisson, control= glmerControl(optimizer="bobyqa",
-                            optCtrl=list(maxfun=2e5)))
-
-
-summ(model)
-```
 
 
