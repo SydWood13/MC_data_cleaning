@@ -3,3 +3,46 @@ title: "Cleaning"
 output: html_document
 ---
 
+# TODO Xinhui 
+
+
+
+
+#Ideas on how to match them 
+
+### Variables needed for each student 
+ - # mistakes on each exam 
+ - # mistakes on each question (ie H0 , H1, OPDEF, etc) on each exam
+ - At each time point for each Prompt: # of Unique mistakes or past exams 
+ - # Attempts 
+ - # time point 
+ - For each student for each prompt list of items given --- append after each exam new items given 
+
+
+
+Brainstorming: 
+
+On H0items 
+
+FOR (each Student)
+  FOR ( each H0item on EXAM1)
+    On exam 2? 
+      Yes + 1 =  repH0
+      No + 1 = newH0
+
+H0 = repH0/totalH0
+
+
+
+On H1items 
+
+FOR (each Student)
+  FOR (each H0item on EXAM1)
+    On exam 2? 
+      Yes + 1 repH1 
+      No + 1 = newH1
+
+H1 = repH1/totalH1
+
+
+

@@ -81,16 +81,18 @@ write.csv(data, file = "FeedbackFull.csv", row.names = FALSE)
 # Analysis 
 
 ```{r}
-data <- read.csv("FeedbackFull_deidentified.csv")
+data <- read.csv("FeedbackFull.csv")
 
 data$time <- as.factor(data$time)
 
 data <- data %>% mutate(viewed = case_when(View.Count == 0 ~ 0, View.Count > 0 ~ 1, .default = View.Count))
 
-data <- data %>% mutate(Total.Score= Total.Score/150 *100) %>% mutate(pwritten = pwritten*100) %>% filter(student_id != "#N/A")
+data <- data %>% mutate(Total.Score= Total.Score/150 *100) %>% mutate(pwritten = pwritten*100) %>% filter(opt_in != "#N/A")
 
-data$student_id <- as.factor(data$student_id)
+data$student_id <- as.factor(data$SID)
 data$opt_in <- as.factor(data$opt_in)
+
+
 
 
 
