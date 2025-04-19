@@ -136,7 +136,9 @@ total_optin_Table <- data %>% group_by(time) %>% group_by(opt_in, .add = TRUE) %
 total_optin_Table
 
 
-?group_by
+# Save this data --> send to Tor 
+
+
 
 ```
 
@@ -183,29 +185,29 @@ written_optin_Table
 
 
 feedbackTable <- data %>% group_by(time) %>% summarise(variable = "Feedback Viewing", n = n(), 
-                                                    mean = mean(View.Count, na.rm=T), 
-                                                    sd = sd(View.Count, na.rm = T), 
-                                                    median = median(View.Count), 
-                                                    MAD = mad(View.Count, na.rm = T), 
-                                                    Q1 = quantile(View.Count, probs = .25),
-                                                    Q3 = quantile(View.Count, probs = .75),
-                                                    IQR = IQR(View.Count, na.rm = T),
-                                                    min = min(View.Count, na.rm = T),
-                                                    max = max(View.Count, na.rm = T))
+                                                    mean = mean(viewed, na.rm=T), 
+                                                    sd = sd(viewed, na.rm = T), 
+                                                    median = median(viewed), 
+                                                    MAD = mad(viewed, na.rm = T), 
+                                                    Q1 = quantile(viewed, probs = .25),
+                                                    Q3 = quantile(viewed, probs = .75),
+                                                    IQR = IQR(viewed, na.rm = T),
+                                                    min = min(viewed, na.rm = T),
+                                                    max = max(viewed, na.rm = T))
 
 feedbackTable
 
 
 feedback_optin_Table <- data %>% group_by(time)  %>% group_by(opt_in, .add = TRUE) %>% summarise(variable = "Feedback Viewing", n = n(), 
-                                                    mean = mean(View.Count, na.rm=T), 
-                                                    sd = sd(View.Count, na.rm = T), 
-                                                    median = median(View.Count), 
-                                                    MAD = mad(View.Count, na.rm = T), 
-                                                    Q1 = quantile(View.Count, probs = .25),
-                                                    Q3 = quantile(View.Count, probs = .75),
-                                                    IQR = IQR(View.Count, na.rm = T),
-                                                    min = min(View.Count, na.rm = T),
-                                                    max = max(View.Count, na.rm = T))
+                                                    mean = mean(viewed, na.rm=T), 
+                                                    sd = sd(viewed, na.rm = T), 
+                                                    median = median(viewed), 
+                                                    MAD = mad(viewed, na.rm = T), 
+                                                    Q1 = quantile(viewed, probs = .25),
+                                                    Q3 = quantile(viewed, probs = .75),
+                                                    IQR = IQR(viewed, na.rm = T),
+                                                    min = min(viewed, na.rm = T),
+                                                    max = max(viewed, na.rm = T))
 
 feedback_optin_Table
 
@@ -233,7 +235,7 @@ plot <- ggplot(data) +theme (axis.text.x = element_text(face = "bold", color = c
 #colourPicker()
 
 
-view_optin <- plot + geom_histogram(aes(x = View.Count, y = after_stat(count/sum(count)), fill = opt_in), position = "dodge") + scale_fill_manual(values = c("#ACBFE6", "#465573"), name = " ", labels = c("Opt-out", "Opt-in")) + labs(x = "View Count", y = "Proportion") 
+view_optin <- plot + geom_histogram(aes(x = viewed, y = after_stat(count/sum(count)), fill = opt_in), position = "dodge") + scale_fill_manual(values = c("#ACBFE6", "#465573"), name = " ", labels = c("Opt-out", "Opt-in")) + labs(x = "View Count", y = "Proportion") 
 
 view_optin
 
@@ -367,9 +369,6 @@ wdata <- right_join(data, exam5_data, by = "student_id")
 wdata <- wdata %>% mutate(performance = case_when(time == "1" ~ p_tot2, time == "2"~p_tot3, time == "3"~p_tot4, time == "4" ~ p_tot5))
 
 
-wdata <- wdata %>% mutate(viewed = case_when(View.Count == 0 ~ 0))
-
-wdata$viewed[is.na(wdata$viewed)] <- 1
 
 
 ```
