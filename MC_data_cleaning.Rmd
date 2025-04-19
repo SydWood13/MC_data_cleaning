@@ -136,7 +136,7 @@ Very very messy brute force solution. I recomend finding a better solution-
 ###run for each exam separately 
 
 
-setwd("C:/Users/woods/Desktop/Meta-Cognition Project/DataSets/collected data/Observation Data Files-selected")
+setwd("~/GitHub/MC_data_cleaning/2023 data")
 
 ##version a 
 w_exama <- read.csv("5_A_Mar23.csv") #I manually changed the file name for each exam
