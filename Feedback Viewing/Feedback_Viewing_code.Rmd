@@ -115,7 +115,7 @@ data$opt_in <- as.factor(data$opt_in)
 
 fulldata <- read.csv("~/GitHub/MC_data_cleaning/2023 data/Final_Data.csv")
 
-score_data <- fulldata %>% select(SID = Real_id, anon_id = student_id, opt_in, p_tot1:p_tot5)
+score_data <- fulldata %>% select(SID = Real_id, anon_id = student_id, opt_in, exam1:exam5, p_tot1:p_tot5)
 
 
 
@@ -126,11 +126,11 @@ data <- right_join(data, score_data, by = c("SID", "opt_in"))
 
 data <- data %>% mutate(f_score = case_when(time == "1" ~ p_tot2, time == "2"~p_tot3, time == "3"~p_tot4, time == "4" ~ p_tot5))
 
-data <- data %>% mutate(p_score = case_when(time == "1" ~ p_tot1, time == "2"~p_tot2, time == "3"~p_tot3, time == "4" ~ p_tot4))
+data <- data %>% mutate(p_score = case_when(time == "1" ~ exam1, time == "2"~exam2, time == "3"~exam3, time == "4" ~ exam4))
 
 
 ```
-## RQ 1 & 2 Data
+
 
 
 
@@ -191,6 +191,11 @@ feedback_optin_Table <- data %>% group_by(time)  %>% group_by(opt_in, .add = TRU
 feedback_optin_Table
 
 
+feedback <- data %>% summarise(
+  pViewed = mean(viewed, na.rm = T),
+  sdViewed = sd(viewed, na.rm = T)
+)
+
 write.csv(feedback_optin_Table, file = "feedback_intervention.csv")
 write.csv(feedbackTable, file = "feedback_overall.csv")
 
@@ -215,7 +220,9 @@ score and feedback are on the same exam
 
 ```{r}
 
-rq1data <- data %>% select(p_score, viewed)
+rq1data <- data %>% select(p_score, viewed, time)
+
+
 
 
 ```
@@ -223,76 +230,108 @@ rq1data <- data %>% select(p_score, viewed)
 ## Model 1 
 ```{r}
 
-lin <- "viewed~p_score"
-rq1mod1 <- glm(lin, data, family = "binomial")
+lin <- "viewed~p_score + (1|time) "
+rq1mod1 <- glmer(lin, rq1data, family = "binomial")
 
 ?glm
 
 summ(rq1mod1)
-rq1mod1$df.residual
-
-rq1data$linfit <- predict(rq1mod1, data)
+sum1 <- summary(rq1mod1)
+sum1
+rq1data$linfit <- predict(rq1mod1, rq1data)
 
 rq1data$linprobs <- exp(rq1data$linfit)/(1+exp(rq1data$linfit))
 
 plot(rq1mod1)
 
-exp(.02)
+
 
 ```
-Significant positive linear relationship. Each point increase of written score is a .02 logit increase or a 1.02 percentage point increase in the probability of viewing feedback. 
-
 MODEL FIT:
-χ²(1) = 42.06, p = 0.00
-Pseudo-R² (Cragg-Uhler) = 0.04
-Pseudo-R² (McFadden) = 0.02
-AIC = 1732.56, BIC = 1743.13 
-Df = 1454
+AIC = 1700.23, BIC = 1716.08
+Pseudo-R² (fixed effects) = 0.05
+Pseudo-R² (total) = 0.08 
+DF = 1453
+
+
+```{r}
+exp(sum1$coefficients[2])
+exp(sum1$coefficients[1])/(1+exp(sum1$coefficients[1]))
+
+x = 100
+
+o = sum1$coefficients[1] + (sum1$coefficients[2]*x) 
+
+
+exp(o)/(1+exp(o))
+```
+
+According to the linear model, a person with a hypothetical 0% score on the exam would have a 14.94% probability of viewing their exam feedback. The model also showed a significant positive linear relationship. Each point increase of written score is a .03 logit increase or 1.03 times the probability of viewing feedback. A student with a score of 1% would be expected to have 15.37% probability. A student with the score of 50% would be expected have q 47.86% probability and a student with a score of 100% would be expected to have a 82.75% probability of viewing their feedback. 
+
+Time ICC = .03 - 3% of the variance is due to differences across time quite small suggesting that time varying effects are likely insignificant. 
+
 
 ## Model 2
 ```{r}
 
 rq1data <- rq1data %>% mutate(squared = p_score^2)
 
-sqEq <- "viewed~p_score + squared"
-rq1mod2 <- glm(sqEq, rq1data, family = "binomial")
+sqEq <- "viewed~p_score + squared + (1|time)"
+rq1mod2 <- glmer(sqEq, rq1data, family = "binomial")
 
 summ(rq1mod2)
-rq1mod2$df.residual
-summary(rq1mod2)
+sum2 <- summary(rq1mod2)
+sum2
 rq1data$sqfit <- predict(rq1mod2, rq1data)
 
 rq1data$sqprobs <- exp(rq1data$sqfit)/(1+exp(rq1data$sqfit))
 
 plot(rq1mod2)
 
-exp(1.84)
-exp(-.06)
-exp(0.0006489)
 
 anova(rq1mod1, rq1mod2)
 
 ```
-Significant quadratic relationship -- slope of -.06 log odds which for each unit of perforance increase is  .94 times as likely to view feedback. But there is an acceleration to the change of 0.0006489 log odds which is 1.00065 in odds. This means for each unit increase in performance the rate of change increases by that much. This seems very small increase but it is significant at the .001 level. 
-
-
 MODEL FIT:
-χ²(2) = 58.64, p = 0.00
-Pseudo-R² (Cragg-Uhler) = 0.06
-Pseudo-R² (McFadden) = 0.03
-AIC = 1717.99, BIC = 1733.84 
-Df = 1453
+AIC = 1683.87, BIC = 1705.00
+Pseudo-R² (fixed effects) = 0.08
+Pseudo-R² (total) = 0.11 
+DF = 1452
 
-Fits significantly better difference in X-square 16.577  p < .001 
 
-## Model 3
+```{r}
+
+
+exp(sum2$coefficients[2])
+exp(sum2$coefficients[1])/(1+exp(sum2$coefficients[1]))
+
+x = 98
+
+o = sum2$coefficients[1] + (sum2$coefficients[2]*x) + (sum2$coefficients[3]*x^2)
+
+
+exp(o)/(1+exp(o))
+
+```
+
+
+Significant quadratic relationship --
+According to the model, a person with a hypothetical 0% score on the exam would have a 98.02% probability of viewing their exam feedback. The model also showed a significant positive linear slope of -.13. Each point increase of written score is a .12 logit decrease or .88 times the probability of viewing feedback. But the squared term is also signficant with a logit of 0.0011 or 1.0011 times the likelihood which is small but sugnificant at the .001 level. 
+
+This means that, while accounting for time varying effects, a student with a hypothetical score of 1% would have a 97.76% probability of viewing their exam, but a student with a 50% score would have an expected probability of 56.09 % and a student with 100% on the exam would be expected to have a 89.84% probability of viewing thier feedback. 
+
+
+
+Fits significantly better difference in X-square 18.361  p < .001 
+
+## Model 3 --- failed to converge
 ```{r}
 
 rq1data <- rq1data %>% mutate(cubed = p_score^3)
 
-cubeEq <- "viewed~p_score + squared + cubed"
-rq1mod3 <- glm(cubeEq, rq1data, family = "binomial")
-
+cubeEq <- "viewed~p_score + squared + cubed + (1|time)"
+rq1mod3 <- glmer(cubeEq, rq1data, family = "binomial")
+remove(rq1mod3)
 summ(rq1mod3)
 rq1mod3$df.residual
 rq1data$cubefit <- predict(rq1mod3, rq1data)
@@ -306,15 +345,7 @@ exp(-.01)
 anova(rq1mod2, rq1mod3)
 ```
 
-No significant cubic relationship 
-
-MODEL FIT:
-χ²(3) = 61.07, p = 0.00
-Pseudo-R² (Cragg-Uhler) = 0.06
-Pseudo-R² (McFadden) = 0.03
-AIC = 1717.56, BIC = 1738.69 
-Df = 153
-
+Did not converge 
 
 
 
@@ -322,30 +353,34 @@ Df = 153
 
 ```{r}
 
-plot <-  ggplot(rq1data) +theme (axis.text.x = element_text(face = "bold", color = colors[4], 
-                             size =15),
-  axis.text.y = element_text(face = "bold", color = colors[4], 
-                             size = 15), 
-  legend.text = element_text(color = colors[4], face = "bold", size = 18), 
-  legend.title = element_text(color = colors[4], face = "bold"),
-  axis.title.x = element_text(color = colors[4],face = "bold",size = 20 ), 
-  axis.title.y = element_text(color = colors[4],face = "bold",size = 20 ))
+colors <- c( "#FFFFFF", "#030303", "#A3A3A3", "#F5F5F5", "#191970", "#104E8B", "#00688B", "#00868B","#458B74", "#006400")
 
-rq1Linplot <- plot + geom_point(aes(x = p_score, y = viewed), position = "jitter") + geom_smooth(aes(x = p_score, y = linprobs), method = "glm", 
+colourPicker()
+
+plot <-  ggplot(rq1data) +theme (axis.text.x = element_text(face = "bold", color = colors[2], 
+                             size =15),
+  axis.text.y = element_text(face = "bold", color = colors[2], 
+                             size = 15), 
+  legend.text = element_text(color = colors[2], face = "bold", size = 18), 
+  legend.title = element_text(color = colors[2], face = "bold"),
+  axis.title.x = element_text(color = colors[2],face = "bold",size = 20 ), 
+  axis.title.y = element_text(color = colors[2],face = "bold",size = 20 ))
+
+rq1Linplot <- plot + geom_point(aes(x = p_score, y = viewed), alpha = .05) + geom_smooth(aes(x = p_score, y = linprobs), method = "glm", 
     method.args = list(family = "binomial"), 
     se = FALSE) 
 
 rq1Linplot
 
-rq1Sqplot <- plot + geom_point(aes(x = p_score, y = viewed), position = "jitter") + geom_smooth(aes(x = p_score, y = sqprobs), method = "glm", method.args = list(family = "binomial"),  formula = y~ x + poly(x,2)) + scale_x_continuous(name = "Performance on Exam") + scale_y_continuous(name = "Probability of Viewing Feedback")
+rq1Sqplot <- plot + geom_point(aes(x = p_score, y = viewed), alpha = .05) + geom_smooth(aes(x = p_score, y = sqprobs, color = time), method = "glm", method.args = list(family = "binomial"),  formula = y~ x + poly(x,2), linewidth = 1) + scale_x_continuous(name = "Performance on Exam") + scale_y_continuous(name = "Probability of Viewing Feedback") + scale_color_manual(values = c("#191970" ,"#436EEE", "#8968CD" ,"#4EEE94"))
 rq1Sqplot
-
+?geom_point
 ggsave(rq1Sqplot, file = "Rq1Plot.png")
 
 plot(rq1data$p_score, rq1data$sqprobs)
 
-rq1Cubeplot <- plot + geom_point(aes(x = p_score, y = viewed), position = "jitter") + geom_smooth(aes(x = p_score, y = cubeprobs), method = "glm", method.args = list(family = "binomial"),  formula = y~ x + poly(x, 2) + poly(x,3)) 
-
+rq1Cubeplot <- plot + geom_point(aes(x = p_score, y = viewed), position = "jitter", linewidth = 1) + geom_smooth(aes(x = p_score, y = cubeprobs), method = "glm", method.args = list(family = "binomial"),  formula = y~ x + poly(x, 2) + poly(x,3)) 
+?geom_smooth
 rq1Cubeplot
 
 ```
@@ -365,6 +400,7 @@ grade_viewing
 mod4 <- glm("viewed~grade", erq1, family = "binomial")
 
 summ(mod4)
+
 
 
 ```
@@ -389,7 +425,7 @@ plot <- ggplot(data) +theme (axis.text.x = element_text(face = "bold", color = c
   axis.title.x = element_text(color = colors[4],face = "bold",size = 20 ), 
   axis.title.y = element_text(color = colors[4],face = "bold",size = 20 ))
 
-#colourPicker()
+
 
 
 view_optin <- plot + geom_bar(aes(x = viewed, y = after_stat(count/sum(count)), fill = opt_in), position = "dodge") + scale_fill_manual(values = c("#ACBFE6", "#465573"), name = " ", labels = c("Opt-out", "Opt-in")) + labs(x = "View Count", y = "Proportion") 
@@ -407,9 +443,11 @@ ggsave(view_optin, file = "view_optin.png", height = 5, width = 11.5)
 ```{r}
 
 model1 <- glmer(viewed ~  time + (1|student_id),  data, family = binomial)
+
 summ(model1)
+sum21 <- summary(model1)
 
-
+sum21
 
 
 
@@ -421,6 +459,19 @@ view_time
 
 
 ```
+```{r}
+exp(sum1$coefficients[2])
+exp(sum1$coefficients[1])/(1+exp(sum1$coefficients[1]))
+
+x = 100
+
+o = sum1$coefficients[1] + (sum1$coefficients[2]*x) 
+
+
+exp(o)/(1+exp(o))
+```
+
+
 Time 1 is between exam 1 & 2 
 Time 2 is Between 2 & 3 
 Time 3 is between 3 & 4 --- intervention time period
@@ -472,7 +523,7 @@ The only time that feedback viewing behavior significantly differed by group is 
 
 
 
-# RQ 3 Analysis 
+# RQ 3: Performance 
 
 ## Descriptives 
 
@@ -514,7 +565,7 @@ write.csv(performance_in_feedback, file = "Opt-in Performance over time by feedb
 write.csv(performance_out_feedback, file = "Opt-out Performance over time by feedback viewing.csv")
 
 
-performance_feedback <- opt_out_data %>%  group_by(viewed) %>% summarise(variable = "Subsequent Score", n = n(), 
+performance_feedback <- data %>% group_by(time) %>%  group_by(viewed, .add = T) %>% summarise(variable = "Subsequent Score", n = n(), 
                                                     mean = mean(f_score, na.rm=T), 
                                                     sd = sd(f_score, na.rm = T), 
                                                     median = median(f_score, na.rm = T), 
@@ -526,6 +577,8 @@ performance_feedback <- opt_out_data %>%  group_by(viewed) %>% summarise(variabl
                                                     max = max(f_score, na.rm = T))
   
 performance_feedback
+
+write.csv(performance_feedback, file = "overall feedback viewing over time.csv")
 
 
 ```
@@ -565,9 +618,9 @@ summ(m2)
 Overall, students perform better over time, p < .01. 
 
 
-### Performance over time by viewed  
+### Performance over time by feedback viewing  
 ```{r}
-eq3 <- f_score ~ time + viewed + time*viewed + (1|student_id)
+eq3 <- f_score ~ time + viewed + viewed*time + (1|student_id) 
 
 m3 <- lmer(eq3, data)
 
@@ -576,4 +629,21 @@ summ(m3)
 
 
 
+```
 
+Overall, students who viewed thier feedback did better than those who didn't, but the effect of feedback viewing did change based on time point. 
+
+
+### Performance over time by intervention and feedback viewing 
+```{r}
+eq4 <- f_score ~ time + viewed + opt_in  + time*opt_in + time*viewed + opt_in*viewed + time*viewed*opt_in + (1|student_id)
+
+m4 <- lmer(eq4, data)
+
+summ(m4)  
+
+```
+Even when controlling for group and feedback viewing students tend to better over time. When controlling for group and time, students who view feedback did better than those who did not. Surprisingly, when controlling for time and feedback viewing, students who opted-in did not do better than students who opted out. There were no differences at the two-way and three-way interactions. This is very surprising and does suggest that increased feedback viewing is a plausible explanation for the difference in performance seen in Wood & Cross (2024). 
+
+
+# RQ4 
