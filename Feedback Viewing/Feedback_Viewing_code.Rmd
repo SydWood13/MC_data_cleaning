@@ -233,7 +233,7 @@ rq1data <- data %>% select(p_score, viewed, time)
 lin <- "viewed~p_score + (1|time) "
 rq1mod1 <- glmer(lin, rq1data, family = "binomial")
 
-?glm
+#?glm
 
 summ(rq1mod1)
 sum1 <- summary(rq1mod1)
@@ -253,6 +253,7 @@ Pseudo-R² (fixed effects) = 0.05
 Pseudo-R² (total) = 0.08 
 DF = 1453
 
+Fit with maximum likelihood (Laplace Approximation)
 
 ```{r}
 exp(sum1$coefficients[2])
@@ -274,7 +275,7 @@ Time ICC = .03 - 3% of the variance is due to differences across time quite smal
 ## Model 2
 ```{r}
 
-rq1data <- rq1data %>% mutate(squared = p_score^2)
+rq1data <- rq1data %>% mutate(squared = (p_score^2)/100)
 
 sqEq <- "viewed~p_score + squared + (1|time)"
 rq1mod2 <- glmer(sqEq, rq1data, family = "binomial")
@@ -298,6 +299,7 @@ Pseudo-R² (fixed effects) = 0.08
 Pseudo-R² (total) = 0.11 
 DF = 1452
 
+maximum likelihood (Laplace Approximation) [glmerMod]
 
 ```{r}
 
@@ -305,9 +307,9 @@ DF = 1452
 exp(sum2$coefficients[2])
 exp(sum2$coefficients[1])/(1+exp(sum2$coefficients[1]))
 
-x = 98
+x = 100
 
-o = sum2$coefficients[1] + (sum2$coefficients[2]*x) + (sum2$coefficients[3]*x^2)
+o = sum2$coefficients[1] + (sum2$coefficients[2]*x) + (sum2$coefficients[3]*(x^2/100))
 
 
 exp(o)/(1+exp(o))
@@ -327,12 +329,13 @@ Fits significantly better difference in X-square 18.361  p < .001
 ## Model 3 --- failed to converge
 ```{r}
 
-rq1data <- rq1data %>% mutate(cubed = p_score^3)
+rq1data <- rq1data %>% mutate(cubed = (p_score^3/ 1000))
 
 cubeEq <- "viewed~p_score + squared + cubed + (1|time)"
 rq1mod3 <- glmer(cubeEq, rq1data, family = "binomial")
-remove(rq1mod3)
+#remove(rq1mod3)
 summ(rq1mod3)
+summary(rq1mod3)
 rq1mod3$df.residual
 rq1data$cubefit <- predict(rq1mod3, rq1data)
 
@@ -345,7 +348,9 @@ exp(-.01)
 anova(rq1mod2, rq1mod3)
 ```
 
-Did not converge 
+AIC = 1683.80, BIC = 1710.22
+Pseudo-R² (fixed effects) = 0.08
+Pseudo-R² (total) = 0.11 
 
 
 
@@ -355,7 +360,7 @@ Did not converge
 
 colors <- c( "#FFFFFF", "#030303", "#A3A3A3", "#F5F5F5", "#191970", "#104E8B", "#00688B", "#00868B","#458B74", "#006400")
 
-colourPicker()
+#colourPicker()
 
 plot <-  ggplot(rq1data) +theme (axis.text.x = element_text(face = "bold", color = colors[2], 
                              size =15),
@@ -437,7 +442,11 @@ ggsave(view_optin, file = "view_optin.png", height = 5, width = 11.5)
 ```
 
 
+view = b0i * time1 + b1 * time2 + b2 * time3 + b4 * time4 + e 
 
+b0j = b0 + studenti 
+
+view = 1.81 + -.74 (if time2) + .58 (if time3) + -.76 (if time4)
 ### Model 1: Does Observation time predict Feedback Viewing? 
 
 ```{r}
@@ -461,16 +470,16 @@ view_time
 ```
 ```{r}
 exp(sum1$coefficients[2])
-exp(sum1$coefficients[1])/(1+exp(sum1$coefficients[1]))
+exp(sum21$coefficients[1])/(1+exp(sum21$coefficients[1]))
 
-x = 100
 
-o = sum1$coefficients[1] + (sum1$coefficients[2]*x) 
+
+o = sum21$coefficients[1] + (sum21$coefficients[4])
 
 
 exp(o)/(1+exp(o))
 ```
-
+maximum likelihood (Laplace Approximation) [glmerMod]
 
 Time 1 is between exam 1 & 2 
 Time 2 is Between 2 & 3 
@@ -482,37 +491,57 @@ Pre-registered alpha of .01:
 significant decrease of feedback viewing between exam 2 & 3 (time2) compared to between Exam 1 & 2(time1). Significant increase in feedback viewing between exam 3 and exam 4 compared to time 1. Significant decrease in feedback viewing between 4 & 5 compared to time1. 
 
 
-### Model 2: Does Intervention predict Feedback Viewing? 
 
-```{r}
-eq2 <- viewed ~ opt_in + (1|student_id)
-model2 <- glmer(eq2, data = data,  family = binomial)
-
-summ(model2)
-
-
-
-```
 
 
 Student who opt-in are overall more likely to view their feedback. Not surprising since students are forced to look at feedback to do this intervention. 
 
 
-### Model 3: Feedback viewing over time by intervention group 
+viewed = b0i*time1 + b1*optin + b2*time2 + b3*time3 + b4*time4 + b5*optin*time2 + b6*time3*optin + b7*time4*optin + e 
+
+b0i = b0 + studenti
+
+
+### Model 2: Feedback viewing over time by intervention group 
 ```{r}
 
-eq3 <- viewed ~ opt_in + time + opt_in*time + (1|student_id)
-model3 <- glmer(eq3, data = data,  family = binomial)
+eq2 <- viewed ~ opt_in + time + opt_in*time + (1|student_id)
+model2 <- glmer(eq2, data = data,  family = binomial)
 
-summ(model3)
+summ(model2)
+
+sum22 <- summary(model2)
+sum22
+
+anova(model1, model2)
 
 ```
+
+```{r}
+exp(sum22$coefficients[1])/(1+exp(sum22$coefficients[1]))
+
+exp(sum22$coefficients[2])
+exp( sum22$coefficients[2] + sum22$coefficients[7] )
+
+
+
+o = sum22$coefficients[1] + sum22$coefficients[2] + sum22$coefficients[8]
+
+
+exp(o)/(1+exp(o))
+```
+
+
+
 
 Correlational results: not a difference in difference 
 Students who opted out f the intervention had a marginally significant decrease in viewing behavior between exam 2 & 3 compared to time1 (between exam 1 & 2), but otherwise their feedback viewing behavior did not change over time. Student's who opted into the intervention only had a significant increase in viewing behavior after the intervention! 
 
 
 
+AIC = 1473.51, BIC = 1521.06
+Pseudo-R² (fixed effects) = 0.14
+Pseudo-R² (total) = 0.62 
 
 
 
@@ -565,7 +594,7 @@ write.csv(performance_in_feedback, file = "Opt-in Performance over time by feedb
 write.csv(performance_out_feedback, file = "Opt-out Performance over time by feedback viewing.csv")
 
 
-performance_feedback <- data %>% group_by(time) %>%  group_by(viewed, .add = T) %>% summarise(variable = "Subsequent Score", n = n(), 
+performance_feedback <- data %>% group_by(time)  %>% summarise(variable = "Subsequent Score", n = n(), 
                                                     mean = mean(f_score, na.rm=T), 
                                                     sd = sd(f_score, na.rm = T), 
                                                     median = median(f_score, na.rm = T), 
@@ -578,7 +607,9 @@ performance_feedback <- data %>% group_by(time) %>%  group_by(viewed, .add = T) 
   
 performance_feedback
 
-write.csv(performance_feedback, file = "overall feedback viewing over time.csv")
+write.csv(performance_feedback, file = "overall performance over time by feedback viewing.csv")
+
+data %>% group_by()
 
 
 ```
@@ -588,15 +619,17 @@ write.csv(performance_feedback, file = "overall feedback viewing over time.csv")
 ## Model 1: Does feedback viewing on Exam X predict performance on Exam X+1?
 ```{r}
 
-eq1 <- f_score ~ viewed + (1|student_id)
+eq1 <- f_score ~ viewed + (1|student_id) + (1|time)
 
 m1 <- lmer(eq1, data)
 
-summ(m1)
+summary(m1)
 
 
 ```
-Yes, when accounting for with-in individual variances, students who viewed their feedback scored higher(M= 79.44, SD = 14.55)  than those who did not (M = 70.81, SD = 14.56), t = 4.94 p < .01 
+ REML. t-tests use Satterthwaite's method [lmerModLmerTest]
+
+Yes, when accounting for with-in individual variances and shared variances for each exam, students who viewed their feedback scored higher (M= 79.44, SD = 14.55)  than those who did not (M = 70.81, SD = 14.56), t = 4.94 p < .01 
 
 
 
@@ -640,10 +673,15 @@ eq4 <- f_score ~ time + viewed + opt_in  + time*opt_in + time*viewed + opt_in*vi
 
 m4 <- lmer(eq4, data)
 
-summ(m4)  
+summary(m4)  
 
 ```
+Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+
 Even when controlling for group and feedback viewing students tend to better over time. When controlling for group and time, students who view feedback did better than those who did not. Surprisingly, when controlling for time and feedback viewing, students who opted-in did not do better than students who opted out. There were no differences at the two-way and three-way interactions. This is very surprising and does suggest that increased feedback viewing is a plausible explanation for the difference in performance seen in Wood & Cross (2024). 
+
+
 
 
 # RQ4 
