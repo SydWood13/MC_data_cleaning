@@ -1,7 +1,9 @@
 ---
 title: "Feedback Viewing"
-output: html_notebook
-author: Sydney Wood
+author: "Sydney Wood"
+output:
+  html_document:
+    df_print: paged
 ---
 
 ## Libraries and Packages
@@ -85,12 +87,7 @@ write.csv(data, file = "FeedbackFull.csv", row.names = FALSE)
 # Descriptives 
 
 ## full data 
-```{r}
-setwd("~/GitHub/MC_data_cleaning/2023 data/new version of exams")
 
-desc <- read.csv(file = "2023_cleaned.csv")
-
-```
 
 ```{r}
 data <- read.csv("FeedbackFull.csv")
@@ -139,7 +136,9 @@ data <- data %>% mutate(p_score = case_when(time == "1" ~ exam1, time == "2"~exa
 ```{r}
 
 
-desc_l <- gather(desc, "Exam", "score", p_tot1, p_tot2, p_tot3, p_tot4, p_tot5)
+
+
+
 
 
 
@@ -198,6 +197,14 @@ feedback <- data %>% summarise(
 
 write.csv(feedback_optin_Table, file = "feedback_intervention.csv")
 write.csv(feedbackTable, file = "feedback_overall.csv")
+
+overall <- data %>% summarise(
+  pViewed = mean(viewed, na.rm = T),
+  sdViewed = sd(viewed, na.rm = T), 
+  optin = sum(opt_in), 
+
+)
+
 
 ```
 
@@ -336,7 +343,7 @@ rq1mod3 <- glmer(cubeEq, rq1data, family = "binomial")
 #remove(rq1mod3)
 summ(rq1mod3)
 summary(rq1mod3)
-rq1mod3$df.residual
+
 rq1data$cubefit <- predict(rq1mod3, rq1data)
 
 rq1data$cubeprobs <- exp(rq1data$cubefit)/(1+exp(rq1data$cubefit))
@@ -673,7 +680,7 @@ eq4 <- f_score ~ time + viewed + opt_in  + time*opt_in + time*viewed + opt_in*vi
 
 m4 <- lmer(eq4, data)
 
-summary(m4)  
+sum32 <- summary(m4)  
 
 ```
 Linear mixed model fit by REML. t-tests use Satterthwaite's method [
@@ -681,7 +688,27 @@ lmerModLmerTest]
 
 Even when controlling for group and feedback viewing students tend to better over time. When controlling for group and time, students who view feedback did better than those who did not. Surprisingly, when controlling for time and feedback viewing, students who opted-in did not do better than students who opted out. There were no differences at the two-way and three-way interactions. This is very surprising and does suggest that increased feedback viewing is a plausible explanation for the difference in performance seen in Wood & Cross (2024). 
 
+## Estimated Performance
 
+```{r}
+
+time2 = 0
+time3 = 0
+time4 = 1
+optin = 1
+views = 1 
+
+
+
+
+sum32$coefficients[1] + sum32$coefficients[2]*time2 + sum32$coefficients[3]*time3 + sum32$coefficients[4]*time4 + sum32$coefficients[5]*views + sum32$coefficients[6]*optin + sum32$coefficients[7]*time2*optin + sum32$coefficients[8]*time3*optin + sum32$coefficients[9]*time4*optin + sum32$coefficients[10]*time2*views + sum32$coefficients[11]*time3*views + sum32$coefficients[12]*time4*views + sum32$coefficients[13]*views*optin +  sum32$coefficients[14]*time2*views*optin + sum32$coefficients[15]*time3*views*optin + sum32$coefficients[16]*time4*views*optin
+
+
+
+
+```
 
 
 # RQ4 
+
+
