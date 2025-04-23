@@ -12,7 +12,7 @@ output:
 packages <- c("ggplot2",  "tidyverse", "apaTables", "colourpicker", "swirl", "dplyr", "gridExtra", "knitr", "lme4", "reshape2", "stargazer",  "did", "plm", "sandwich", "coefplot", "afex", "jtools", "glmmTMB")
 
 
-
+?case.when
 # Install packages not yet installed
 installed_packages <- packages %in% rownames(installed.packages())
 if (any(installed_packages == FALSE)) {
