@@ -1,0 +1,594 @@
+"X","question_id","Notation","name","email","anon_id"
+1719,"11: Confound","C01C","Lili Armstrong","catstrong@ucdavis.edu",622456
+1720,"11: Confound","C01C","Neera Bhattacharya","nbhattacharya@ucdavis.edu",581826
+1835,"11: Confound","C02C","Aidan Jacobo","acjacobo@ucdavis.edu",529135
+1836,"11: Confound","C02C","Danny Kuei","dkuei@ucdavis.edu",34034
+1837,"11: Confound"," C02C","Jingxuan Yang","jxnyang@ucdavis.edu",748219
+1839,"11: Confound","C02C","Risitha Bellignur","rbellignur@ucdavis.edu",662362
+1841,"11: Confound","C02B","Aidan Jacobo","acjacobo@ucdavis.edu",529135
+1842,"11: Confound","C02B","Danny Kuei","dkuei@ucdavis.edu",34034
+1843,"11: Confound","C02B","Jingxuan Yang","jxnyang@ucdavis.edu",748219
+1845,"11: Confound","C02B","Risitha Bellignur","rbellignur@ucdavis.edu",662362
+1915,"11: Confound","C03C","Danielle Stubbs","destubbs@ucdavis.edu",407458
+1918,"11: Confound","C03F","Gurneet Randhawa","gkrandhawa@ucdavis.edu",244017
+1920,"11: Confound","C03H","Lili Armstrong","catstrong@ucdavis.edu",622456
+1921,"11: Confound","C03H","Neera Bhattacharya","nbhattacharya@ucdavis.edu",581826
+2003,"12: Internal Threat","IT1B","Ailee Thor","athor@ucdavis.edu",958519
+2004,"12: Internal Threat","IT1B","Anna Gasparyan","agasparyan@ucdavis.edu",476109
+2005,"12: Internal Threat","IT1B","Breana Marin","bbmarin@ucdavis.edu",226831
+2006,"12: Internal Threat","IT1B","Chengshun Jiang","csjiang@ucdavis.edu",228847
+2007,"12: Internal Threat","IT1B","Cheryl Heng","cheheng@ucdavis.edu",59263
+2008,"12: Internal Threat","IT1B","Chongzhen Wei","cwei@ucdavis.edu",853351
+2009,"12: Internal Threat","IT1B","Chris Padilla","cipadilla@ucdavis.edu",871838
+2010,"12: Internal Threat","IT1B","Di Fan","difan@ucdavis.edu",639052
+2012,"12: Internal Threat","IT1B","Emalina Stepanian","estepanian@ucdavis.edu",945105
+2013,"12: Internal Threat","IT1B","Grace Lim","grhlim@ucdavis.edu",452951
+2014,"12: Internal Threat","IT1B","Ian Hardy","ihardy@ucdavis.edu",517410
+2015,"12: Internal Threat","IT1B","Isabel Campos","isacampos@ucdavis.edu",985120
+2016,"12: Internal Threat","IT1B","Jana Lim","jyhlim@ucdavis.edu",259933
+2017,"12: Internal Threat","IT1B","Jessenia Gutierrez-Carreno","jgutierrezc@ucdavis.edu",342612
+2019,"12: Internal Threat","IT1B","Leopold Grava","lgrava@ucdavis.edu",566690
+2020,"12: Internal Threat","IT1B","Maria Pulmano","mpulmano@ucdavis.edu",625832
+2021,"12: Internal Threat","IT1B","Mariane Nicole Goyma","mlgoyma@ucdavis.edu",22605
+2022,"12: Internal Threat","IT1B","Matthew Kissell","makissell@ucdavis.edu",657777
+2023,"12: Internal Threat","IT1B","Mengling Shi","cthshi@ucdavis.edu",577775
+2024,"12: Internal Threat","IT1B","Natasha Leesmann","nmleesmann@ucdavis.edu",135223
+2025,"12: Internal Threat","IT1B","Ngoc Tran","nhotran@ucdavis.edu",341430
+2026,"12: Internal Threat","IT1B","Qingyang Guo","qyguo@ucdavis.edu",195771
+2027,"12: Internal Threat","IT1B","Sinead Archdeacon","scarchdeacon@ucdavis.edu",382346
+2029,"12: Internal Threat","IT1B","Sruthi Ramesh","sruramesh@ucdavis.edu",976611
+2030,"12: Internal Threat","IT1B","Swati Iyer","spiyer@ucdavis.edu",764022
+2032,"12: Internal Threat","IT1B","Valerie Tamayo","vmtamayo@ucdavis.edu",187101
+2033,"12: Internal Threat","IT1B","Will Ramsey","wbramsey@ucdavis.edu",799025
+2034,"12: Internal Threat","IT1B","Yoana Daza Galicia","ydazagalicia@ucdavis.edu",860330
+2035,"12: Internal Threat","IT1B","Yunjia Chen","ayjchen@ucdavis.edu",509583
+2036,"12: Internal Threat","IT1B","Zaira Muro","zmuro@ucdavis.edu",684715
+2038,"12: Internal Threat","IT1C","Kimberly Ochoa","keochoa@ucdavis.edu",984483
+2039,"12: Internal Threat","IT1C","Zhiyuan Cen","yzcen@ucdavis.edu",844766
+2042,"12: Internal Threat","IT1D","Fatima Mousaee Koorabbasloo","fmousaee@ucdavis.edu",325835
+2159,"12: Internal Threat","IT3C","Ailee Thor","athor@ucdavis.edu",958519
+2161,"12: Internal Threat","IT3C","Chris Padilla","cipadilla@ucdavis.edu",871838
+2162,"12: Internal Threat","IT3C","Danielle Stubbs","destubbs@ucdavis.edu",407458
+2163,"12: Internal Threat","IT3C","Di Fan","difan@ucdavis.edu",639052
+2166,"12: Internal Threat","IT3C","Haoyang Song","shysong@ucdavis.edu",427233
+2167,"12: Internal Threat","IT3C","Isabel Campos","isacampos@ucdavis.edu",985120
+2168,"12: Internal Threat","IT3C","Jessica Vargas","jruvargas@ucdavis.edu",207574
+2170,"12: Internal Threat","IT3C","Linh Pham","nglpham@ucdavis.edu",429624
+2172,"12: Internal Threat","IT3C","Maria Pulmano","mpulmano@ucdavis.edu",625832
+2173,"12: Internal Threat","IT3C","Ngoc Tran","nhotran@ucdavis.edu",341430
+2175,"12: Internal Threat","IT3C","Qingyang Guo","qyguo@ucdavis.edu",195771
+2177,"12: Internal Threat","IT3C","Squid Nguyen","squyen@ucdavis.edu",176063
+2179,"12: Internal Threat","IT3C","Tianyuan Shen","stianyuan@ucdavis.edu",416201
+2180,"12: Internal Threat","IT3C","Vanessa Garcia","vmggarcia@ucdavis.edu",259616
+2182,"12: Internal Threat","IT3C","Yimeng Shi","yimshi@ucdavis.edu",800464
+2183,"12: Internal Threat","IT3C","Yunjia Chen","ayjchen@ucdavis.edu",509583
+2186,"12: Internal Threat","IT3F","Desmond Tan","dltan@ucdavis.edu",513625
+2187,"12: Internal Threat","IT3F","Fatima Mousaee Koorabbasloo","fmousaee@ucdavis.edu",325835
+2188,"12: Internal Threat","IT3F","Kimberly Ochoa","keochoa@ucdavis.edu",984483
+2189,"12: Internal Threat","IT3F","Zhiyuan Cen","yzcen@ucdavis.edu",844766
+2288,"12: Internal Threat","IT2C","Kimberly Ochoa","keochoa@ucdavis.edu",984483
+2290,"12: Internal Threat","IT2G","Di Fan","difan@ucdavis.edu",639052
+2291,"12: Internal Threat","IT2G","Jana Lim","jyhlim@ucdavis.edu",259933
+2293,"12: Internal Threat","IT2H","Ailee Thor","athor@ucdavis.edu",958519
+2294,"12: Internal Threat","IT2H","Aman Sharma","arasharma@ucdavis.edu",689115
+2295,"12: Internal Threat","IT2H","Breana Marin","bbmarin@ucdavis.edu",226831
+2297,"12: Internal Threat","IT2H","Cheryl Heng","cheheng@ucdavis.edu",59263
+2298,"12: Internal Threat","IT2H","Chongzhen Wei","cwei@ucdavis.edu",853351
+2299,"12: Internal Threat","IT2H","Chris Padilla","cipadilla@ucdavis.edu",871838
+2301,"12: Internal Threat","IT2H","Fatima Mousaee Koorabbasloo","fmousaee@ucdavis.edu",325835
+2302,"12: Internal Threat","IT2H","Ian Hardy","ihardy@ucdavis.edu",517410
+2303,"12: Internal Threat","IT2H","Lili Armstrong","catstrong@ucdavis.edu",622456
+2304,"12: Internal Threat","IT2H","Mariane Nicole Goyma","mlgoyma@ucdavis.edu",22605
+2305,"12: Internal Threat","IT2H","Mengling Shi","cthshi@ucdavis.edu",577775
+2306,"12: Internal Threat","IT2H","Natasha Leesmann","nmleesmann@ucdavis.edu",135223
+2307,"12: Internal Threat","IT2H","Qingyang Guo","qyguo@ucdavis.edu",195771
+2308,"12: Internal Threat","IT2H","Sinead Archdeacon","scarchdeacon@ucdavis.edu",382346
+2310,"12: Internal Threat","IT2H","Swati Iyer","spiyer@ucdavis.edu",764022
+2311,"12: Internal Threat","IT2H","Valerie Tamayo","vmtamayo@ucdavis.edu",187101
+2312,"12: Internal Threat","IT2H","Vivian Nguyen","vypnguyen@ucdavis.edu",305964
+2313,"12: Internal Threat","IT2H","Will Ramsey","wbramsey@ucdavis.edu",799025
+2314,"12: Internal Threat","IT2H","Zaira Muro","zmuro@ucdavis.edu",684715
+2380,"16: Interpretation","IVTM2","Aman Sharma","arasharma@ucdavis.edu",689115
+2382,"16: Interpretation","IVTM2","Cheryl Heng","cheheng@ucdavis.edu",59263
+2383,"16: Interpretation","IVTM2","Chongzhen Wei","cwei@ucdavis.edu",853351
+2384,"16: Interpretation","IVTM2","Emalina Stepanian","estepanian@ucdavis.edu",945105
+2385,"16: Interpretation","IVTM2","Fatima Mousaee Koorabbasloo","fmousaee@ucdavis.edu",325835
+2386,"16: Interpretation","IVTM2","Gilberto Martinez-Aparicio","gmartinezaparicio@ucdavis.edu",268381
+2387,"16: Interpretation","IVTM2","Ian Hardy","ihardy@ucdavis.edu",517410
+2388,"16: Interpretation","IVTM2","Isabel Campos","isacampos@ucdavis.edu",985120
+2389,"16: Interpretation","IVTM2","Jessenia Gutierrez-Carreno","jgutierrezc@ucdavis.edu",342612
+2390,"16: Interpretation","IVTM2","Jessica Vargas","jruvargas@ucdavis.edu",207574
+2391,"16: Interpretation","IVTM2","Jiayi Dai","jyidai@ucdavis.edu",270914
+2392,"16: Interpretation","IVTM2","Jingxuan Yang","jxnyang@ucdavis.edu",748219
+2395,"16: Interpretation","IVTM2","Kimberly Ochoa","keochoa@ucdavis.edu",984483
+2396,"16: Interpretation","IVTM2","Leopold Grava","lgrava@ucdavis.edu",566690
+2397,"16: Interpretation","IVTM2","Leran Zhou","zlrzhou@ucdavis.edu",558605
+2398,"16: Interpretation","IVTM2","Lili Armstrong","catstrong@ucdavis.edu",622456
+2399,"16: Interpretation","IVTM2","Linette Jun","ljun@ucdavis.edu",587190
+2400,"16: Interpretation","IVTM2","Linh Pham","nglpham@ucdavis.edu",429624
+2401,"16: Interpretation","IVTM2","Lizbeth Vazquez","lgvazquez@ucdavis.edu",799050
+2403,"16: Interpretation","IVTM2","Maria Pulmano","mpulmano@ucdavis.edu",625832
+2404,"16: Interpretation","IVTM2","Matthew Kissell","makissell@ucdavis.edu",657777
+2405,"16: Interpretation","IVTM2","Ngoc Tran","nhotran@ucdavis.edu",341430
+2406,"16: Interpretation","IVTM2","Qingyang Guo","qyguo@ucdavis.edu",195771
+2407,"16: Interpretation","IVTM2","Samantha Williams","slwilliams@ucdavis.edu",690437
+2408,"16: Interpretation","IVTM2","Swati Iyer","spiyer@ucdavis.edu",764022
+2409,"16: Interpretation","IVTM2","Sydney Beasley","sgbeasley@ucdavis.edu",606922
+2410,"16: Interpretation","IVTM2","Vanessa Garcia","vmggarcia@ucdavis.edu",259616
+2411,"16: Interpretation","IVTM2","Will Ramsey","wbramsey@ucdavis.edu",799025
+2412,"16: Interpretation","IVTM2","Yimeng Shi","yimshi@ucdavis.edu",800464
+2413,"16: Interpretation","IVTM2","Yoana Daza Galicia","ydazagalicia@ucdavis.edu",860330
+2414,"16: Interpretation","IVTM2","Yunjia Chen","ayjchen@ucdavis.edu",509583
+2416,"16: Interpretation","IVTM3","Amira Maldonado","ajmaldo@ucdavis.edu",222033
+2417,"16: Interpretation","IVTM3","Florence Zhu","gluzhu@ucdavis.edu",574761
+2418,"16: Interpretation","IVTM3","Lauren Doe","ledoe@ucdavis.edu",124520
+2419,"16: Interpretation","IVTM3","Lauren Schluederberg","leschluederberg@ucdavis.edu",92527
+2422,"16: Interpretation","IVTM3","Natasha Leesmann","nmleesmann@ucdavis.edu",135223
+2423,"16: Interpretation","IVTM3","Neera Bhattacharya","nbhattacharya@ucdavis.edu",581826
+2424,"16: Interpretation","IVTM3","Valerie Tamayo","vmtamayo@ucdavis.edu",187101
+2467,"16: Interpretation","IR2","Cheryl Heng","cheheng@ucdavis.edu",59263
+2468,"16: Interpretation","IR2","Chris Padilla","cipadilla@ucdavis.edu",871838
+2469,"16: Interpretation","IR2","Desmond Tan","dltan@ucdavis.edu",513625
+2470,"16: Interpretation","IR2","Julie Kim","jjukim@ucdavis.edu",225529
+2471,"16: Interpretation","IR2","Linh Pham","nglpham@ucdavis.edu",429624
+2472,"16: Interpretation","IR2","Neera Bhattacharya","nbhattacharya@ucdavis.edu",581826
+2473,"16: Interpretation","IR2","Swati Iyer","spiyer@ucdavis.edu",764022
+2476,"16: Interpretation","IR2","Amira Maldonado","ajmaldo@ucdavis.edu",222033
+2479,"16: Interpretation","IR2","Anhha Ho","ankho@ucdavis.edu",288131
+2481,"16: Interpretation","IR2","Chongzhen Wei","cwei@ucdavis.edu",853351
+2482,"16: Interpretation","IR2","Danielle Stubbs","destubbs@ucdavis.edu",407458
+2483,"16: Interpretation","IR2","Ehlen Kokka","emkokka@ucdavis.edu",755185
+2484,"16: Interpretation","IR2","Emalina Stepanian","estepanian@ucdavis.edu",945105
+2485,"16: Interpretation","IR2","Fatima Mousaee Koorabbasloo","fmousaee@ucdavis.edu",325835
+2486,"16: Interpretation","IR2","Florence Zhu","gluzhu@ucdavis.edu",574761
+2488,"16: Interpretation","IR2","Gilberto Martinez-Aparicio","gmartinezaparicio@ucdavis.edu",268381
+2489,"16: Interpretation","IR2","Grace Nguyen","gdnguyen@ucdavis.edu",590430
+2490,"16: Interpretation","IR2","Haoyang Song","shysong@ucdavis.edu",427233
+2491,"16: Interpretation","IR2","Ian Hardy","ihardy@ucdavis.edu",517410
+2492,"16: Interpretation","IR2","Isabel Campos","isacampos@ucdavis.edu",985120
+2493,"16: Interpretation","IR2","Isabella Kumra","iukumra@ucdavis.edu",648833
+2494,"16: Interpretation","IR2","Jessica Simpson","jmsimpson@ucdavis.edu",978945
+2495,"16: Interpretation","IR2","Jessica Vargas","jruvargas@ucdavis.edu",207574
+2496,"16: Interpretation","IR2","Jiayi Dai","jyidai@ucdavis.edu",270914
+2499,"16: Interpretation","IR2","Katie Schulz","klschulz@ucdavis.edu",43300
+2500,"16: Interpretation","IR2","Kelsey Cox","kscox@ucdavis.edu",869130
+2501,"16: Interpretation","IR2","Kimberly Ochoa","keochoa@ucdavis.edu",984483
+2502,"16: Interpretation","IR2","Lauren Schluederberg","leschluederberg@ucdavis.edu",92527
+2503,"16: Interpretation","IR2","Leopold Grava","lgrava@ucdavis.edu",566690
+2504,"16: Interpretation","IR2","Lili Armstrong","catstrong@ucdavis.edu",622456
+2506,"16: Interpretation","IR2","Lizbeth Vazquez","lgvazquez@ucdavis.edu",799050
+2508,"16: Interpretation","IR2","Maria Pulmano","mpulmano@ucdavis.edu",625832
+2509,"16: Interpretation","IR2","Matthew Kissell","makissell@ucdavis.edu",657777
+2510,"16: Interpretation","IR2","Mehak Riaz","mriaz@ucdavis.edu",819181
+2511,"16: Interpretation","IR2","Moqiao Liu","moqliu@ucdavis.edu",512211
+2513,"16: Interpretation","IR2","Nancy Ung","nung@ucdavis.edu",484404
+2514,"16: Interpretation","IR2","Natasha Leesmann","nmleesmann@ucdavis.edu",135223
+2515,"16: Interpretation","IR2","Ngoc Tran","nhotran@ucdavis.edu",341430
+2516,"16: Interpretation","IR2","Qingyang Guo","qyguo@ucdavis.edu",195771
+2517,"16: Interpretation","IR2","Risitha Bellignur","rbellignur@ucdavis.edu",662362
+2518,"16: Interpretation","IR2","Samantha Williams","slwilliams@ucdavis.edu",690437
+2519,"16: Interpretation","IR2","Setareh Misaghi","setmisaghi@ucdavis.edu",74745
+2520,"16: Interpretation","IR2","Sinead Archdeacon","scarchdeacon@ucdavis.edu",382346
+2521,"16: Interpretation","IR2","Sruthi Ramesh","sruramesh@ucdavis.edu",976611
+2522,"16: Interpretation","IR2","Valerie Tamayo","vmtamayo@ucdavis.edu",187101
+2523,"16: Interpretation","IR2","Vanessa Garcia","vmggarcia@ucdavis.edu",259616
+2524,"16: Interpretation","IR2","Vivian Nguyen","vypnguyen@ucdavis.edu",305964
+2525,"16: Interpretation","IR2","Will Ramsey","wbramsey@ucdavis.edu",799025
+2526,"16: Interpretation","IR2","Yimeng Shi","yimshi@ucdavis.edu",800464
+2527,"16: Interpretation","IR2","Yoana Daza Galicia","ydazagalicia@ucdavis.edu",860330
+2528,"16: Interpretation","IR2","Yunjia Chen","ayjchen@ucdavis.edu",509583
+2530,"16: Interpretation","IR3","Jingxuan Yang","jxnyang@ucdavis.edu",748219
+2531,"16: Interpretation","IR3","Lauren Doe","ledoe@ucdavis.edu",124520
+2532,"16: Interpretation","IR3","Lily Briseno","lmbriseno@ucdavis.edu",926367
+2535,"16: Interpretation","IR3","Tianyuan Shen","stianyuan@ucdavis.edu",416201
+2972,"18: Replication","R01B","Chengshun Jiang","csjiang@ucdavis.edu",228847
+2973,"18: Replication","R01B","Ethan Frank","eefrank@ucdavis.edu",363247
+2975,"18: Replication","R01B","Gilberto Martinez-Aparicio","gmartinezaparicio@ucdavis.edu",268381
+2976,"18: Replication","R01B","Ian Hardy","ihardy@ucdavis.edu",517410
+2977,"18: Replication","R01B","Jessica Vargas","jruvargas@ucdavis.edu",207574
+2978,"18: Replication","R01B","Jiayi Dai","jyidai@ucdavis.edu",270914
+2979,"18: Replication","R01B","Julie Kim","jjukim@ucdavis.edu",225529
+2981,"18: Replication","R01B","Lauren Doe","ledoe@ucdavis.edu",124520
+2982,"18: Replication","R01B","Leopold Grava","lgrava@ucdavis.edu",566690
+2983,"18: Replication","R01B","Mengqi Cao","aricao@ucdavis.edu",299411
+2984,"18: Replication","R01B","Ngoc Tran","nhotran@ucdavis.edu",341430
+2985,"18: Replication","R01B","Risitha Bellignur","rbellignur@ucdavis.edu",662362
+2987,"18: Replication","R01B","Sydney Beasley","sgbeasley@ucdavis.edu",606922
+2989,"18: Replication","R01C","Ailee Thor","athor@ucdavis.edu",958519
+3073,"18: Replication","R02B","Amira Maldonado","ajmaldo@ucdavis.edu",222033
+3074,"18: Replication","R02B","Cassandra Serrano","crserrano@ucdavis.edu",698444
+3075,"18: Replication","R02B","Danny Kuei","dkuei@ucdavis.edu",34034
+3076,"18: Replication","R02B","Fatima Mousaee Koorabbasloo","fmousaee@ucdavis.edu",325835
+3077,"18: Replication","R02B","Florence Zhu","gluzhu@ucdavis.edu",574761
+3079,"18: Replication","R02B","Jessica Vargas","jruvargas@ucdavis.edu",207574
+3081,"18: Replication","R02B","Kimberly Ochoa","keochoa@ucdavis.edu",984483
+3082,"18: Replication","R02B","Leopold Grava","lgrava@ucdavis.edu",566690
+3083,"18: Replication","R02B","Lili Armstrong","catstrong@ucdavis.edu",622456
+3084,"18: Replication","R02B","Linette Jun","ljun@ucdavis.edu",587190
+3085,"18: Replication","R02B","Mengling Shi","cthshi@ucdavis.edu",577775
+3086,"18: Replication","R02B","Neera Bhattacharya","nbhattacharya@ucdavis.edu",581826
+3087,"18: Replication","R02B","Risitha Bellignur","rbellignur@ucdavis.edu",662362
+3088,"18: Replication","R02B","Setareh Misaghi","setmisaghi@ucdavis.edu",74745
+3089,"18: Replication","R02B","Simran Bal","simbal@ucdavis.edu",507212
+3090,"18: Replication","R02B","Zaira Muro","zmuro@ucdavis.edu",684715
+3092,"18: Replication","R02C","Ehlen Kokka","emkokka@ucdavis.edu",755185
+3093,"18: Replication","R02C","Gilberto Martinez-Aparicio","gmartinezaparicio@ucdavis.edu",268381
+3094,"18: Replication","R02C","Yoana Daza Galicia","ydazagalicia@ucdavis.edu",860330
+3096,"18: Replication","R02C","Ethan Frank","eefrank@ucdavis.edu",363247
+3097,"18: Replication","R02C","Haoyang Song","shysong@ucdavis.edu",427233
+3098,"18: Replication","R02C","Sydney Beasley","sgbeasley@ucdavis.edu",606922
+3099,"18: Replication","R02C","Valerie Tamayo","vmtamayo@ucdavis.edu",187101
+3101,"18: Replication","R02E","Ailee Thor","athor@ucdavis.edu",958519
+3102,"18: Replication","R02E","Chengshun Jiang","csjiang@ucdavis.edu",228847
+3103,"18: Replication","R02E","Danielle Stubbs","destubbs@ucdavis.edu",407458
+3104,"18: Replication","R02E","Ian Hardy","ihardy@ucdavis.edu",517410
+3105,"18: Replication","R02E","Jiayi Dai","jyidai@ucdavis.edu",270914
+3106,"18: Replication","R02E","Lauren Doe","ledoe@ucdavis.edu",124520
+3107,"18: Replication","R02E","Ngoc Tran","nhotran@ucdavis.edu",341430
+3110,"18: Replication","R02F","Isabel Campos","isacampos@ucdavis.edu",985120
+3206,"18: Replication","R03C","Ethan Frank","eefrank@ucdavis.edu",363247
+3207,"18: Replication","R03C","Gilberto Martinez-Aparicio","gmartinezaparicio@ucdavis.edu",268381
+3208,"18: Replication","R03C","Ian Hardy","ihardy@ucdavis.edu",517410
+3209,"18: Replication","R03C","Lauren Doe","ledoe@ucdavis.edu",124520
+3210,"18: Replication","R03C","Linette Jun","ljun@ucdavis.edu",587190
+3211,"18: Replication","R03C","Valerie Tamayo","vmtamayo@ucdavis.edu",187101
+3213,"18: Replication","R03D","Chengshun Jiang","csjiang@ucdavis.edu",228847
+3214,"18: Replication","R03D","Fatima Mousaee Koorabbasloo","fmousaee@ucdavis.edu",325835
+3215,"18: Replication","R03D","Ian Hardy","ihardy@ucdavis.edu",517410
+3216,"18: Replication","R03D","Jiayi Dai","jyidai@ucdavis.edu",270914
+3217,"18: Replication","R03D","Lili Armstrong","catstrong@ucdavis.edu",622456
+3218,"18: Replication","R03D","Ngoc Tran","nhotran@ucdavis.edu",341430
+3219,"18: Replication","R03D","Sydney Beasley","sgbeasley@ucdavis.edu",606922
+3243,"18: Replication","R03K","Kelsey Cox","kscox@ucdavis.edu",869130
+3244,"18: Replication","R03K","Mengqi Cao","aricao@ucdavis.edu",299411
+3246,"18: Replication","R03K","Vinh Bui","vinbui@ucdavis.edu",55168
+3248,"18: Replication"," R03F","Mengling Shi","cthshi@ucdavis.edu",577775
+3250,"18: Replication","R03G","Ailee Thor","athor@ucdavis.edu",958519
+3252,"18: Replication","R03G","Mengling Shi","cthshi@ucdavis.edu",577775
+3253,"18: Replication","R03G","Ngoc Tran","nhotran@ucdavis.edu",341430
+3255,"18: Replication","R03I","Ailee Thor","athor@ucdavis.edu",958519
+3257,"18: Replication","R03I","Chengshun Jiang","csjiang@ucdavis.edu",228847
+3258,"18: Replication","R03I","Danielle Stubbs","destubbs@ucdavis.edu",407458
+3259,"18: Replication","R03I","Ethan Frank","eefrank@ucdavis.edu",363247
+3260,"18: Replication","R03I","Haoyang Song","shysong@ucdavis.edu",427233
+3261,"18: Replication","R03I","Isabel Campos","isacampos@ucdavis.edu",985120
+3262,"18: Replication","R03I","Jiayi Dai","jyidai@ucdavis.edu",270914
+3263,"18: Replication","R03I","Lauren Doe","ledoe@ucdavis.edu",124520
+3264,"18: Replication","R03I","Setareh Misaghi","setmisaghi@ucdavis.edu",74745
+3265,"18: Replication","R03I","Simran Bal","simbal@ucdavis.edu",507212
+3266,"18: Replication","R03I","Sydney Beasley","sgbeasley@ucdavis.edu",606922
+3269,"18: Replication","R03K","Danielle Stubbs","destubbs@ucdavis.edu",407458
+3270,"18: Replication","R03K","Ethan Frank","eefrank@ucdavis.edu",363247
+3271,"18: Replication","R03K","Isabel Campos","isacampos@ucdavis.edu",985120
+4637,"11: Confound","C01B","Grace Campaigne","gamcampaigne@ucdavis.edu",190808
+4638,"11: Confound","C01B","Kody Larson","khlarson@ucdavis.edu",739642
+4639,"11: Confound","C01B","Luolin Wang","wrywang@ucdavis.edu",903459
+4640,"11: Confound","C01B","Madeline Shin","msshin@ucdavis.edu",259835
+4642,"11: Confound","C01B","Michelle Truong","mitruong@ucdavis.edu",642891
+4643,"11: Confound","C01B","Tyler Mrkaich","tjmrkaich@ucdavis.edu",140062
+4645,"11: Confound","C01C","Ananya Dutta","aadutta@ucdavis.edu",865209
+4646,"11: Confound","C01C","Angelica Tang","anjtang@ucdavis.edu",296676
+4647,"11: Confound","C01C","Ashton Tran","asttran@ucdavis.edu",499082
+4648,"11: Confound","C01C","Chen Li","lcli@ucdavis.edu",462500
+4649,"11: Confound","C01C","Elizabeth Pardo","epardo@ucdavis.edu",819339
+4650,"11: Confound","C01C","Haiye Liu","hyeliu@ucdavis.edu",593374
+4651,"11: Confound","C01C","Jayden Roberts","jdaroberts@ucdavis.edu",956000
+4652,"11: Confound","C01C","Kasey Baysa","kgbaysa@ucdavis.edu",822100
+4654,"11: Confound","C01C","Michael Ortega","mjuortega@ucdavis.edu",593931
+4655,"11: Confound","C01C","Nada Ali","nadali@ucdavis.edu",850089
+4656,"11: Confound","C01C","Noman Hashimi","nhashimi@ucdavis.edu",218881
+4657,"11: Confound","C01C","Rance Del Mar","radelmar@ucdavis.edu",746481
+4658,"11: Confound","C01C","Yesenia Campos","ycampos@ucdavis.edu",960843
+4660,"11: Confound","C01C","Anoushka Sharma","nousharma@ucdavis.edu",681039
+4661,"11: Confound","C01C","Chris Liao","ccliao@ucdavis.edu",642673
+4662,"11: Confound","C01C","Khalia Reyes","khareyes@ucdavis.edu",68946
+4664,"11: Confound","C01C","Trent Hew","tshew@ucdavis.edu",769729
+4726,"11: Confound",NA,"Abigail Lynch","aalynch@ucdavis.edu",968096
+4727,"11: Confound",NA,"Amelia Engelsgjerd","alengelsgjerd@ucdavis.edu",907418
+4728,"11: Confound",NA,"Amy Nguyen","amhnguye@ucdavis.edu",135939
+4729,"11: Confound",NA,"Andrea Sanchez","anssanchez@ucdavis.edu",853202
+4730,"11: Confound",NA,"Anoushka Sharma","nousharma@ucdavis.edu",681039
+4731,"11: Confound",NA,"Chris Liao","ccliao@ucdavis.edu",642673
+4732,"11: Confound",NA,"Diana Garcia-Lopez","dggarcialopez@ucdavis.edu",431940
+4733,"11: Confound",NA,"Grace Campaigne","gamcampaigne@ucdavis.edu",190808
+4734,"11: Confound",NA,"Itzel Favela Perez","ifavelaperez@ucdavis.edu",884359
+4735,"11: Confound",NA,"Jacob Brandel","jmbrandel@ucdavis.edu",881437
+4736,"11: Confound",NA,"Joey Wong","jjhwong@ucdavis.edu",566484
+4737,"11: Confound",NA,"Khalia Reyes","khareyes@ucdavis.edu",68946
+4738,"11: Confound",NA,"Kody Larson","khlarson@ucdavis.edu",739642
+4739,"11: Confound",NA,"Luolin Wang","wrywang@ucdavis.edu",903459
+4740,"11: Confound",NA,"Maeher Parihar","mkparihar@ucdavis.edu",365616
+4741,"11: Confound",NA,"Maryela Soto Mendoza","msotomendoza@ucdavis.edu",594464
+4742,"11: Confound",NA,"Michelle Truong","mitruong@ucdavis.edu",642891
+4743,"11: Confound",NA,"Nalia Nechayev","nnechayev@ucdavis.edu",779885
+4746,"11: Confound",NA,"Sofia Castro","snjcastro@ucdavis.edu",31769
+4747,"11: Confound",NA,"Solymar Manzano","scmanzano@ucdavis.edu",690944
+4748,"11: Confound",NA,"Tyler Mrkaich","tjmrkaich@ucdavis.edu",140062
+4749,"11: Confound",NA,"Vanessa Sy","vksy@ucdavis.edu",162626
+4750,"11: Confound",NA,"Yi Zhu","yiizhu@ucdavis.edu",506095
+4752,"11: Confound","C02B","Abigail Lynch","aalynch@ucdavis.edu",968096
+4753,"11: Confound","C02B","Amelia Engelsgjerd","alengelsgjerd@ucdavis.edu",907418
+4754,"11: Confound","C02B","Amy Nguyen","amhnguye@ucdavis.edu",135939
+4755,"11: Confound","C02B","Andrea Sanchez","anssanchez@ucdavis.edu",853202
+4756,"11: Confound","C02B","Anoushka Sharma","nousharma@ucdavis.edu",681039
+4757,"11: Confound","C02B","Chris Liao","ccliao@ucdavis.edu",642673
+4758,"11: Confound","C02B","Diana Garcia-Lopez","dggarcialopez@ucdavis.edu",431940
+4759,"11: Confound","C02B","Grace Campaigne","gamcampaigne@ucdavis.edu",190808
+4760,"11: Confound","C02B","Itzel Favela Perez","ifavelaperez@ucdavis.edu",884359
+4761,"11: Confound","C02B","Jacob Brandel","jmbrandel@ucdavis.edu",881437
+4762,"11: Confound","C02B","Joey Wong","jjhwong@ucdavis.edu",566484
+4763,"11: Confound","C02B","Khalia Reyes","khareyes@ucdavis.edu",68946
+4764,"11: Confound","C02B","Kody Larson","khlarson@ucdavis.edu",739642
+4765,"11: Confound","C02B","Luolin Wang","wrywang@ucdavis.edu",903459
+4766,"11: Confound","C02B","Maeher Parihar","mkparihar@ucdavis.edu",365616
+4767,"11: Confound","C02B","Maryela Soto Mendoza","msotomendoza@ucdavis.edu",594464
+4768,"11: Confound","C02B","Michelle Truong","mitruong@ucdavis.edu",642891
+4769,"11: Confound","C02B","Nalia Nechayev","nnechayev@ucdavis.edu",779885
+4772,"11: Confound","C02B","Sofia Castro","snjcastro@ucdavis.edu",31769
+4773,"11: Confound","C02B","Solymar Manzano","scmanzano@ucdavis.edu",690944
+4774,"11: Confound","C02B","Tyler Mrkaich","tjmrkaich@ucdavis.edu",140062
+4775,"11: Confound","C02B","Vanessa Sy","vksy@ucdavis.edu",162626
+4776,"11: Confound","C02B","Yi Zhu","yiizhu@ucdavis.edu",506095
+4778,"11: Confound","C02C","Anoushka Sharma","nousharma@ucdavis.edu",681039
+4779,"11: Confound","C02C","Chris Liao","ccliao@ucdavis.edu",642673
+4780,"11: Confound","C02C","Khalia Reyes","khareyes@ucdavis.edu",68946
+4781,"11: Confound","C02C","Luolin Wang","wrywang@ucdavis.edu",903459
+4783,"11: Confound","C02D","Ananya Dutta","aadutta@ucdavis.edu",865209
+4784,"11: Confound","C02D","Angelica Tang","anjtang@ucdavis.edu",296676
+4785,"11: Confound","C02D","Ashton Tran","asttran@ucdavis.edu",499082
+4786,"11: Confound","C02D","Chen Li","lcli@ucdavis.edu",462500
+4787,"11: Confound","C02D","Elizabeth Pardo","epardo@ucdavis.edu",819339
+4788,"11: Confound","C02D","Haiye Liu","hyeliu@ucdavis.edu",593374
+4789,"11: Confound","C02D","Jayden Roberts","jdaroberts@ucdavis.edu",956000
+4790,"11: Confound","C02D","Kasey Baysa","kgbaysa@ucdavis.edu",822100
+4793,"11: Confound","C02D","Michael Ortega","mjuortega@ucdavis.edu",593931
+4794,"11: Confound","C02D","Nada Ali","nadali@ucdavis.edu",850089
+4795,"11: Confound","C02D","Noman Hashimi","nhashimi@ucdavis.edu",218881
+4796,"11: Confound","C02D","Rance Del Mar","radelmar@ucdavis.edu",746481
+4797,"11: Confound","C02D","Trent Hew","tshew@ucdavis.edu",769729
+4798,"11: Confound","C02D","Yesenia Campos","ycampos@ucdavis.edu",960843
+4901,"11: Confound","C03C","Abigail Lynch","aalynch@ucdavis.edu",968096
+4902,"11: Confound","C03C","Chris Liao","ccliao@ucdavis.edu",642673
+4903,"11: Confound","C03C","Grace Campaigne","gamcampaigne@ucdavis.edu",190808
+4904,"11: Confound","C03C","Kody Larson","khlarson@ucdavis.edu",739642
+4906,"11: Confound","C03G","Amelia Engelsgjerd","alengelsgjerd@ucdavis.edu",907418
+4907,"11: Confound","C03G","Amy Nguyen","amhnguye@ucdavis.edu",135939
+4908,"11: Confound","C03G","Ananya Dutta","aadutta@ucdavis.edu",865209
+4909,"11: Confound","C03G","Andrea Sanchez","anssanchez@ucdavis.edu",853202
+4910,"11: Confound","C03G","Angelica Tang","anjtang@ucdavis.edu",296676
+4911,"11: Confound","C03G","Ashton Tran","asttran@ucdavis.edu",499082
+4912,"11: Confound","C03G","Chen Li","lcli@ucdavis.edu",462500
+4913,"11: Confound","C03G","Diana Garcia-Lopez","dggarcialopez@ucdavis.edu",431940
+4914,"11: Confound","C03G","Elizabeth Pardo","epardo@ucdavis.edu",819339
+4915,"11: Confound","C03G","Haiye Liu","hyeliu@ucdavis.edu",593374
+4916,"11: Confound","C03G","Itzel Favela Perez","ifavelaperez@ucdavis.edu",884359
+4917,"11: Confound","C03G","Jacob Brandel","jmbrandel@ucdavis.edu",881437
+4918,"11: Confound","C03G","Jayden Roberts","jdaroberts@ucdavis.edu",956000
+4919,"11: Confound","C03G","Joey Wong","jjhwong@ucdavis.edu",566484
+4920,"11: Confound","C03G","Kasey Baysa","kgbaysa@ucdavis.edu",822100
+4921,"11: Confound","C03G","Khalia Reyes","khareyes@ucdavis.edu",68946
+4923,"11: Confound","C03G","Maeher Parihar","mkparihar@ucdavis.edu",365616
+4925,"11: Confound","C03G","Maryela Soto Mendoza","msotomendoza@ucdavis.edu",594464
+4926,"11: Confound","C03G","Michael Ortega","mjuortega@ucdavis.edu",593931
+4927,"11: Confound","C03G","Nada Ali","nadali@ucdavis.edu",850089
+4928,"11: Confound","C03G","Nalia Nechayev","nnechayev@ucdavis.edu",779885
+4929,"11: Confound","C03G","Noman Hashimi","nhashimi@ucdavis.edu",218881
+4930,"11: Confound","C03G","Rance Del Mar","radelmar@ucdavis.edu",746481
+4933,"11: Confound","C03G","Sofia Castro","snjcastro@ucdavis.edu",31769
+4934,"11: Confound","C03G","Sydney Ely","slely@ucdavis.edu",861628
+4935,"11: Confound","C03G","Trent Hew","tshew@ucdavis.edu",769729
+4936,"11: Confound","C03G","Vanessa Sy","vksy@ucdavis.edu",162626
+4937,"11: Confound","C03G","Yesenia Campos","ycampos@ucdavis.edu",960843
+4938,"11: Confound","C03G","Yi Zhu","yiizhu@ucdavis.edu",506095
+4940,"11: Confound","C03H","Solymar Manzano","scmanzano@ucdavis.edu",690944
+5221,"12: Internal Threat","IT2G","Jayden Roberts","jdaroberts@ucdavis.edu",956000
+5222,"12: Internal Threat","IT2G","Solymar Manzano","scmanzano@ucdavis.edu",690944
+5223,"12: Internal Threat","IT2G","Sophia Huang","soahuang@ucdavis.edu",444254
+5224,"12: Internal Threat","IT2G","Ty Pon","typon@ucdavis.edu",225644
+5276,"16: Interpretation","IVTM2","Abigail Lynch","aalynch@ucdavis.edu",968096
+5279,"16: Interpretation","IVTM2","Chris Liao","ccliao@ucdavis.edu",642673
+5280,"16: Interpretation","IVTM2","Grace Campaigne","gamcampaigne@ucdavis.edu",190808
+5281,"16: Interpretation","IVTM2","Hanna Zubairi","hzubairi@ucdavis.edu",664495
+5282,"16: Interpretation","IVTM2","Jacob Brandel","jmbrandel@ucdavis.edu",881437
+5283,"16: Interpretation","IVTM2","Jayden Roberts","jdaroberts@ucdavis.edu",956000
+5284,"16: Interpretation","IVTM2","Jeannine Santiago","jisantiago@ucdavis.edu",968101
+5285,"16: Interpretation","IVTM2","Kody Larson","khlarson@ucdavis.edu",739642
+5286,"16: Interpretation","IVTM2","Maria Ordiales","mordiales@ucdavis.edu",505733
+5288,"16: Interpretation","IVTM2","Nalia Nechayev","nnechayev@ucdavis.edu",779885
+5289,"16: Interpretation","IVTM2","Nico Rossi","nsrossi@ucdavis.edu",92945
+5290,"16: Interpretation","IVTM2","Noman Hashimi","nhashimi@ucdavis.edu",218881
+5291,"16: Interpretation","IVTM2","Rachel Tran","rtltran@ucdavis.edu",950540
+5292,"16: Interpretation","IVTM2","Shiloh Colongon","srcolongon@ucdavis.edu",919187
+5293,"16: Interpretation","IVTM2","Sofia Castro","snjcastro@ucdavis.edu",31769
+5294,"16: Interpretation","IVTM2","Sydney Ely","slely@ucdavis.edu",861628
+5295,"16: Interpretation","IVTM2","Tamara Hernandez Salgado","thernandezsalgado@ucdavis.edu",549967
+5296,"16: Interpretation","IVTM2","Yesenia Campos","ycampos@ucdavis.edu",960843
+5298,"16: Interpretation","IVTM3","Ananya Dutta","aadutta@ucdavis.edu",865209
+5299,"16: Interpretation","IVTM3","Andrea Sanchez","anssanchez@ucdavis.edu",853202
+5300,"16: Interpretation","IVTM3","Ashton Tran","asttran@ucdavis.edu",499082
+5301,"16: Interpretation","IVTM3","Bon Il Koo","bikoo@ucdavis.edu",548093
+5302,"16: Interpretation","IVTM3","Diana Garcia-Lopez","dggarcialopez@ucdavis.edu",431940
+5303,"16: Interpretation","IVTM3","Emily Fu","emfu@ucdavis.edu",333796
+5304,"16: Interpretation","IVTM3","Erika Camberos-Monje","egcamberos@ucdavis.edu",528554
+5305,"16: Interpretation","IVTM3","Harman Kaur","hhkkaur@ucdavis.edu",137939
+5306,"16: Interpretation","IVTM3","Itzel Favela Perez","ifavelaperez@ucdavis.edu",884359
+5307,"16: Interpretation","IVTM3","Jingyi Zheng","jyizheng@ucdavis.edu",614963
+5309,"16: Interpretation","IVTM3","Luolin Wang","wrywang@ucdavis.edu",903459
+5310,"16: Interpretation","IVTM3","Madeline Shin","msshin@ucdavis.edu",259835
+5311,"16: Interpretation","IVTM3","Maeher Parihar","mkparihar@ucdavis.edu",365616
+5312,"16: Interpretation","IVTM3","Maryela Soto Mendoza","msotomendoza@ucdavis.edu",594464
+5313,"16: Interpretation","IVTM3","Melody Vangvichit","mvangvichit@ucdavis.edu",888191
+5314,"16: Interpretation","IVTM3","Michael Ortega","mjuortega@ucdavis.edu",593931
+5315,"16: Interpretation","IVTM3","Michelle Truong","mitruong@ucdavis.edu",642891
+5316,"16: Interpretation","IVTM3","Natalie Moghnieh","nmoghnieh@ucdavis.edu",179621
+5317,"16: Interpretation","IVTM3","Prisila Villarreal","pvillarreal@ucdavis.edu",345393
+5318,"16: Interpretation","IVTM3","Ritu Goyal","ritgoyal@ucdavis.edu",968141
+5320,"16: Interpretation","IVTM3","Sophia Huang","soahuang@ucdavis.edu",444254
+5321,"16: Interpretation","IVTM3","Trishna Basnet","tbasnet@ucdavis.edu",480220
+5322,"16: Interpretation","IVTM3","Valliammai Alagappan","valagappan@ucdavis.edu",58745
+5356,"16: Interpretation","IR2","Elina Moreno","esbmoreno@ucdavis.edu",633939
+5357,"16: Interpretation","IR2","Erika Camberos-Monje","egcamberos@ucdavis.edu",528554
+5358,"16: Interpretation","IR2","Valliammai Alagappan","valagappan@ucdavis.edu",58745
+5361,"16: Interpretation","IR2","Amanda Tang","amttang@ucdavis.edu",856041
+5362,"16: Interpretation","IR2","Andrea Sanchez","anssanchez@ucdavis.edu",853202
+5363,"16: Interpretation","IR2","Ashton Tran","asttran@ucdavis.edu",499082
+5366,"16: Interpretation","IR2","Diana Li","disli@ucdavis.edu",974667
+5367,"16: Interpretation","IR2","Elizabeth Zerr","emzerr@ucdavis.edu",248408
+5368,"16: Interpretation","IR2","Emily Tilley","entilley@ucdavis.edu",854187
+5369,"16: Interpretation","IR2","Felicity Kim","fjkim@ucdavis.edu",151635
+5370,"16: Interpretation","IR2","Gaby Lara","gclara@ucdavis.edu",703507
+5371,"16: Interpretation","IR2","Grace Campaigne","gamcampaigne@ucdavis.edu",190808
+5372,"16: Interpretation","IR2","Haiye Liu","hyeliu@ucdavis.edu",593374
+5373,"16: Interpretation","IR2","Hanna Zubairi","hzubairi@ucdavis.edu",664495
+5374,"16: Interpretation","IR2","Harman Kaur","hhkkaur@ucdavis.edu",137939
+5375,"16: Interpretation","IR2","Jacob Brandel","jmbrandel@ucdavis.edu",881437
+5376,"16: Interpretation","IR2","Jayden Roberts","jdaroberts@ucdavis.edu",956000
+5377,"16: Interpretation","IR2","Jeannine Santiago","jisantiago@ucdavis.edu",968101
+5378,"16: Interpretation","IR2","Jiawei Bao","jwbao@ucdavis.edu",466883
+5379,"16: Interpretation","IR2","Jingyi Zheng","jyizheng@ucdavis.edu",614963
+5380,"16: Interpretation","IR2","Julissa Diaz Garcia","jdiazgarcia@ucdavis.edu",486673
+5381,"16: Interpretation","IR2","Kasey Baysa","kgbaysa@ucdavis.edu",822100
+5382,"16: Interpretation","IR2","Kody Larson","khlarson@ucdavis.edu",739642
+5384,"16: Interpretation","IR2","Luolin Wang","wrywang@ucdavis.edu",903459
+5385,"16: Interpretation","IR2","Madeline Shin","msshin@ucdavis.edu",259835
+5388,"16: Interpretation","IR2","Meha Krishnareddigari","mrkrishna@ucdavis.edu",125319
+5389,"16: Interpretation","IR2","Melody Vangvichit","mvangvichit@ucdavis.edu",888191
+5390,"16: Interpretation","IR2","Michael Hayden","mjhayden@ucdavis.edu",239176
+5391,"16: Interpretation","IR2","Michelle Truong","mitruong@ucdavis.edu",642891
+5392,"16: Interpretation","IR2","Nada Ali","nadali@ucdavis.edu",850089
+5393,"16: Interpretation","IR2","Nalia Nechayev","nnechayev@ucdavis.edu",779885
+5394,"16: Interpretation","IR2","Natalie Moghnieh","nmoghnieh@ucdavis.edu",179621
+5395,"16: Interpretation","IR2","Nico Rossi","nsrossi@ucdavis.edu",92945
+5396,"16: Interpretation","IR2","Noman Hashimi","nhashimi@ucdavis.edu",218881
+5397,"16: Interpretation","IR2","Reena Wong","reewong@ucdavis.edu",836326
+5398,"16: Interpretation","IR2","Ritu Goyal","ritgoyal@ucdavis.edu",968141
+5399,"16: Interpretation","IR2","Rohan Potu","rrpotu@ucdavis.edu",146064
+5401,"16: Interpretation","IR2","Shiloh Colongon","srcolongon@ucdavis.edu",919187
+5402,"16: Interpretation","IR2","Sophia Huang","soahuang@ucdavis.edu",444254
+5403,"16: Interpretation","IR2","Sydney Ely","slely@ucdavis.edu",861628
+5404,"16: Interpretation","IR2","Tamara Hernandez Salgado","thernandezsalgado@ucdavis.edu",549967
+5405,"16: Interpretation","IR2","Ty Pon","typon@ucdavis.edu",225644
+5406,"16: Interpretation","IR2","Tyler Mrkaich","tjmrkaich@ucdavis.edu",140062
+5407,"16: Interpretation","IR2","Wen Min","wenmin@ucdavis.edu",711147
+5408,"16: Interpretation","IR2","Yesenia Campos","ycampos@ucdavis.edu",960843
+5410,"16: Interpretation","IR3","Bon Il Koo","bikoo@ucdavis.edu",548093
+5411,"16: Interpretation","IR3","Chen Li","lcli@ucdavis.edu",462500
+5412,"16: Interpretation","IR3","Chris Liao","ccliao@ucdavis.edu",642673
+5413,"16: Interpretation","IR3","Fatima Hernandez Brambila","fmhernandezbram@ucdavis.edu",288140
+5414,"16: Interpretation","IR3","Iman Shafaie","ishafaie@ucdavis.edu",876894
+5415,"16: Interpretation","IR3","Maria Ordiales","mordiales@ucdavis.edu",505733
+5416,"16: Interpretation","IR3","Rachel Tran","rtltran@ucdavis.edu",950540
+5417,"16: Interpretation","IR3","Sofia Castro","snjcastro@ucdavis.edu",31769
+5418,"16: Interpretation","IR3","Trishna Basnet","tbasnet@ucdavis.edu",480220
+5420,"16: Interpretation","IR2","Emily Fu","emfu@ucdavis.edu",333796
+5815,"18: Replication","R01B","Ananya Dutta","aadutta@ucdavis.edu",865209
+5816,"18: Replication","R01B","Andrea Sanchez","anssanchez@ucdavis.edu",853202
+5817,"18: Replication","R01B","Ashton Tran","asttran@ucdavis.edu",499082
+5818,"18: Replication","R01B","Bon Il Koo","bikoo@ucdavis.edu",548093
+5819,"18: Replication","R01B","Elizabeth Pardo","epardo@ucdavis.edu",819339
+5820,"18: Replication","R01B","Erika Camberos-Monje","egcamberos@ucdavis.edu",528554
+5821,"18: Replication","R01B","Fatima Hernandez Brambila","fmhernandezbram@ucdavis.edu",288140
+5822,"18: Replication","R01B","Haiye Liu","hyeliu@ucdavis.edu",593374
+5823,"18: Replication","R01B","Jayden Roberts","jdaroberts@ucdavis.edu",956000
+5824,"18: Replication","R01B","Jeannine Santiago","jisantiago@ucdavis.edu",968101
+5826,"18: Replication","R01B","Madeline Shin","msshin@ucdavis.edu",259835
+5827,"18: Replication","R01B","Maryela Soto Mendoza","msotomendoza@ucdavis.edu",594464
+5828,"18: Replication","R01B","Nada Ali","nadali@ucdavis.edu",850089
+5829,"18: Replication","R01B","Reena Wong","reewong@ucdavis.edu",836326
+5830,"18: Replication","R01B","Ritu Goyal","ritgoyal@ucdavis.edu",968141
+5831,"18: Replication","R01B","Shiloh Colongon","srcolongon@ucdavis.edu",919187
+5832,"18: Replication","R01B","Valliammai Alagappan","valagappan@ucdavis.edu",58745
+5833,"18: Replication","R01B","Vanessa Sy","vksy@ucdavis.edu",162626
+5834,"18: Replication","R01B","Wen Min","wenmin@ucdavis.edu",711147
+5836,"18: Replication","R01C","Diana Li","disli@ucdavis.edu",974667
+5837,"18: Replication","R01C","Kody Larson","khlarson@ucdavis.edu",739642
+5838,"18: Replication","R01C","Luolin Wang","wrywang@ucdavis.edu",903459
+5839,"18: Replication","R01C","Michelle Truong","mitruong@ucdavis.edu",642891
+5840,"18: Replication","R01C","Tyler Mrkaich","tjmrkaich@ucdavis.edu",140062
+5886,"18: Replication","R02B","Elizabeth Pardo","epardo@ucdavis.edu",819339
+5887,"18: Replication","R02B","Madeline Shin","msshin@ucdavis.edu",259835
+5888,"18: Replication","R02B","Valliammai Alagappan","valagappan@ucdavis.edu",58745
+5890,"18: Replication","R02C","Hanna Zubairi","hzubairi@ucdavis.edu",664495
+5891,"18: Replication","R02C","Tyler Mrkaich","tjmrkaich@ucdavis.edu",140062
+5894,"18: Replication","R02D","Amelia Engelsgjerd","alengelsgjerd@ucdavis.edu",907418
+5895,"18: Replication","R02D","Ananya Dutta","aadutta@ucdavis.edu",865209
+5896,"18: Replication","R02D","Angelica Tang","anjtang@ucdavis.edu",296676
+5897,"18: Replication","R02D","Cathleen Chan","ctmchan@ucdavis.edu",243506
+5898,"18: Replication","R02D","Chen Li","lcli@ucdavis.edu",462500
+5899,"18: Replication","R02D","Elizabeth Zerr","emzerr@ucdavis.edu",248408
+5900,"18: Replication","R02D","Erika Camberos-Monje","egcamberos@ucdavis.edu",528554
+5901,"18: Replication","R02D","Felicity Kim","fjkim@ucdavis.edu",151635
+5902,"18: Replication","R02D","Hyunjin Lim","hjjlim@ucdavis.edu",481746
+5903,"18: Replication","R02D","Iman Shafaie","ishafaie@ucdavis.edu",876894
+5904,"18: Replication","R02D","Jeannine Santiago","jisantiago@ucdavis.edu",968101
+5905,"18: Replication","R02D","Julissa Diaz Garcia","jdiazgarcia@ucdavis.edu",486673
+5906,"18: Replication","R02D","Maeher Parihar","mkparihar@ucdavis.edu",365616
+5907,"18: Replication","R02D","Meha Krishnareddigari","mrkrishna@ucdavis.edu",125319
+5908,"18: Replication","R02D","Melody Vangvichit","mvangvichit@ucdavis.edu",888191
+5909,"18: Replication","R02D","Michael Ortega","mjuortega@ucdavis.edu",593931
+5910,"18: Replication","R02D","Nada Ali","nadali@ucdavis.edu",850089
+5911,"18: Replication","R02D","Nico Rossi","nsrossi@ucdavis.edu",92945
+5912,"18: Replication","R02D","Reena Wong","reewong@ucdavis.edu",836326
+5913,"18: Replication","R02D","Seo Nguyen","seonguyen@ucdavis.edu",614108
+5914,"18: Replication","R02D","Shiloh Colongon","srcolongon@ucdavis.edu",919187
+5916,"18: Replication","R02D","Solymar Manzano","scmanzano@ucdavis.edu",690944
+5917,"18: Replication","R02D","Tamara Hernandez Salgado","thernandezsalgado@ucdavis.edu",549967
+5919,"18: Replication","R02E","Alyssa Cana","atcana@ucdavis.edu",765041
+5920,"18: Replication","R02E","Anoushka Sharma","nousharma@ucdavis.edu",681039
+5921,"18: Replication","R02E","Ashton Tran","asttran@ucdavis.edu",499082
+5922,"18: Replication","R02E","Bon Il Koo","bikoo@ucdavis.edu",548093
+5923,"18: Replication","R02E","Haiye Liu","hyeliu@ucdavis.edu",593374
+5924,"18: Replication","R02E","Harman Kaur","hhkkaur@ucdavis.edu",137939
+5925,"18: Replication","R02E","Jacob Brandel","jmbrandel@ucdavis.edu",881437
+5926,"18: Replication","R02E","Jayden Roberts","jdaroberts@ucdavis.edu",956000
+5927,"18: Replication","R02E","Joey Wong","jjhwong@ucdavis.edu",566484
+5928,"18: Replication","R02E","Khalia Reyes","khareyes@ucdavis.edu",68946
+5929,"18: Replication","R02E","Kody Larson","khlarson@ucdavis.edu",739642
+5932,"18: Replication","R02E","Maryela Soto Mendoza","msotomendoza@ucdavis.edu",594464
+5933,"18: Replication","R02E","Noman Hashimi","nhashimi@ucdavis.edu",218881
+5934,"18: Replication","R02E","Ritu Goyal","ritgoyal@ucdavis.edu",968141
+5935,"18: Replication","R02E","Sydney Ely","slely@ucdavis.edu",861628
+5936,"18: Replication","R02E","Vanessa Sy","vksy@ucdavis.edu",162626
+5937,"18: Replication","R02E","Yi Zhu","yiizhu@ucdavis.edu",506095
+5939,"18: Replication","R02F","Andrea Sanchez","anssanchez@ucdavis.edu",853202
+5940,"18: Replication","R02F","Diana Li","disli@ucdavis.edu",974667
+5941,"18: Replication","R02F","Fatima Hernandez Brambila","fmhernandezbram@ucdavis.edu",288140
+5942,"18: Replication","R02F","Jingyi Zheng","jyizheng@ucdavis.edu",614963
+5943,"18: Replication","R02F","Luolin Wang","wrywang@ucdavis.edu",903459
+5944,"18: Replication","R02F","Michelle Truong","mitruong@ucdavis.edu",642891
+5946,"18: Replication","R02F","Wen Min","wenmin@ucdavis.edu",711147
+6008,"18: Replication","R03C","Andrea Sanchez","anssanchez@ucdavis.edu",853202
+6043,"18: Replication","R03K","Ananya Dutta","aadutta@ucdavis.edu",865209
+6044,"18: Replication","R03K","Erika Camberos-Monje","egcamberos@ucdavis.edu",528554
+6045,"18: Replication","R03K","Jeannine Santiago","jisantiago@ucdavis.edu",968101
+6046,"18: Replication","R03K","Jingyi Zheng","jyizheng@ucdavis.edu",614963
+6047,"18: Replication","R03K","Kody Larson","khlarson@ucdavis.edu",739642
+6048,"18: Replication","R03K","Maryela Soto Mendoza","msotomendoza@ucdavis.edu",594464
+6049,"18: Replication","R03K","Michelle Truong","mitruong@ucdavis.edu",642891
+6050,"18: Replication","R03K","Nada Ali","nadali@ucdavis.edu",850089
+6051,"18: Replication","R03K","Ritu Goyal","ritgoyal@ucdavis.edu",968141
+6053,"18: Replication","R03F","Haiye Liu","hyeliu@ucdavis.edu",593374
+6055,"18: Replication","R03F","Amelia Engelsgjerd","alengelsgjerd@ucdavis.edu",907418
+6056,"18: Replication","R03F","Angelica Tang","anjtang@ucdavis.edu",296676
+6057,"18: Replication","R03F","Haiye Liu","hyeliu@ucdavis.edu",593374
+6059,"18: Replication","R03F","Seo Nguyen","seonguyen@ucdavis.edu",614108
+6060,"18: Replication","R03F","Wen Min","wenmin@ucdavis.edu",711147
+6062,"18: Replication","R03E","Angelica Tang","anjtang@ucdavis.edu",296676
+6063,"18: Replication","R03E","Bon Il Koo","bikoo@ucdavis.edu",548093
+6064,"18: Replication","R03E","Diana Li","disli@ucdavis.edu",974667
+6065,"18: Replication","R03E","Harman Kaur","hhkkaur@ucdavis.edu",137939
+6066,"18: Replication","R03E","Iman Shafaie","ishafaie@ucdavis.edu",876894
+6067,"18: Replication","R03E","Luolin Wang","wrywang@ucdavis.edu",903459
+6068,"18: Replication","R03E","Melody Vangvichit","mvangvichit@ucdavis.edu",888191
+6070,"18: Replication","R03E","Vanessa Sy","vksy@ucdavis.edu",162626
+6072,"18: Replication","R03I","Ashton Tran","asttran@ucdavis.edu",499082
+6073,"18: Replication","R03I","Diana Garcia-Lopez","dggarcialopez@ucdavis.edu",431940
+6074,"18: Replication","R03I","Elizabeth Pardo","epardo@ucdavis.edu",819339
+6075,"18: Replication","R03I","Fatima Hernandez Brambila","fmhernandezbram@ucdavis.edu",288140
+6076,"18: Replication","R03I","Hanna Zubairi","hzubairi@ucdavis.edu",664495
+6077,"18: Replication","R03I","Jayden Roberts","jdaroberts@ucdavis.edu",956000
+6078,"18: Replication","R03I","Joey Wong","jjhwong@ucdavis.edu",566484
+6082,"18: Replication","R03I","Melody Vangvichit","mvangvichit@ucdavis.edu",888191
+6083,"18: Replication","R03I","Reena Wong","reewong@ucdavis.edu",836326
+6084,"18: Replication","R03I","Tyler Mrkaich","tjmrkaich@ucdavis.edu",140062
+6085,"18: Replication","R03I","Yi Zhu","yiizhu@ucdavis.edu",506095
