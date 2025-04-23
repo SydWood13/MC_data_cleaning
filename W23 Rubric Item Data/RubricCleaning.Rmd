@@ -1,0 +1,437 @@
+---
+title: "Exam1Clean"
+author: "Xinhui Zhang"
+date: "2025-04-21"
+output: html_document
+---
+
+
+# Exam 1
+
+```{r}
+library(dplyr)
+library(stringr)
+library(tidyverse)
+```
+
+```{r}
+setwd("~/Documents/GitHub/MC_data_cleaning/W23 Rubric Item Data")
+df <- read.csv("json_transformation_Exam_1.csv")
+```
+
+```{r}
+df_clean <- df %>%
+  filter(student != "Student's name Sections Graded time Last graded by")
+
+df_clean <- df_clean %>%
+  select(-variable_name, -answer_type, -file_name)
+
+head(df_clean)
+```
+
+```{r}
+df_1 <- df_clean %>%
+  mutate(name = str_extract(student, "^[^\\(]+"),
+         email = str_extract(student, "(?<=\\().+?(?=\\))")) %>%
+  select(-student) 
+```
+
+```{r}
+write.csv(df_1, "cleaned_with_name_email.csv", row.names = FALSE)
+```
+
+```{r}
+df_filtered <- df_1 %>%
+  filter(
+    grepl("1: H0", question_id, ignore.case = TRUE) |
+    grepl("H1: Directional", question_id, ignore.case = TRUE) |
+    grepl("PV OP-Def", question_id, ignore.case = TRUE)|
+    grepl("OV OP-Def", question_id, ignore.case = TRUE)
+  ) %>% mutate(question_id = case_when(question_id = grepl("H0", question_id)~ "H0", grepl("OP", question_id)~"OPDEF", grepl("H1", question_id)~"H1", .default = question_id))
+                                      
+
+```
+
+
+```{r}
+
+setwd("~/Documents/GitHub/MC_data_cleaning/DataCleaning")
+roster <- read.csv("df1_with_anonid.csv")
+
+
+
+roster <- roster %>%
+  rename(name = Full.NAME) %>%
+  mutate(name = str_trim(name))
+
+df_filtered <- df_filtered %>%
+  mutate(name = str_trim(name))
+
+exam_with_anon <- df_filtered %>%
+  left_join(roster %>% select(name, anon_id), by = "name")
+
+
+head(exam_with_anon)
+```
+
+```{r}
+exam_with_anon_clean <- exam_with_anon %>%
+  filter(!is.na(anon_id))
+```
+
+#get rid of the specific answer columns
+
+
+```{r}
+exam_with_anon_clean1 <- exam_with_anon_clean %>%
+  filter(!toupper(str_trim(Notation)) %in% c(
+    "CH01A", "CH02A", "CH03A", "VDH11", "VDH13", "CH11", "DH11",
+    "OPM1", "OP1", "OPMS1", "OPD1", "OPD2",
+    "OVPV1A", "OVPV1D", "OVPV1E", "OVPV2A", "OVPV2B",
+    "OVPV3A", "OVPV3B", "IVTM1", "IR1",
+    "CCV1A", "CCV1B", "CCV2A", "CCV2B", "CCV3A", "CCV3B",
+    "C01A", "C02A", "C03A", "C03B",
+    "IT1A", "IT2A", "IT2B", "IT3A", "IT3B",
+    "R01A", "R02A", "R03A", "R03B"
+  ))
+```
+
+
+```{r}
+write.csv(exam_with_anon_clean1, "Exam1_FinalCleaned.csv", row.names = FALSE)
+```
+
+
+#Exam 2
+
+```{r}
+setwd("~/Documents/GitHub/MC_data_cleaning/W23 Rubric Item Data")
+df2 <- read.csv("json_transformation_Exam_2.csv")
+```
+
+```{r}
+df_clean2 <- df2 %>%
+  filter(student != "Student's name Sections Graded time Last graded by")
+
+df_clean2 <- df_clean2 %>%
+  select(-variable_name, -answer_type, -file_name)
+
+head(df_clean2)
+```
+
+```{r}
+df_2 <- df_clean2 %>%
+  mutate(name = str_extract(student, "^[^\\(]+"),
+         email = str_extract(student, "(?<=\\().+?(?=\\))")) %>%
+  select(-student) 
+```
+
+```{r}
+df_filtered2 <- df_2 %>%
+  filter(
+    grepl("1: H0", question_id, ignore.case = TRUE) |
+    grepl("H1 Directional", question_id, ignore.case = TRUE) |
+    grepl("PV OP-Def", question_id, ignore.case = TRUE)|
+    grepl("OV OP-Def", question_id, ignore.case = TRUE)|
+    grepl("OV Construct Validity", question_id) |
+    grepl("PV Construct Validity", question_id) |
+    grepl("Interpretation", question_id)
+  ) %>% mutate(question_id = case_when(question_id = grepl("H0", question_id)~ "H0", grepl("OP", question_id)~"OPDEF", grepl("H1", question_id)~"H1", grepl("Construct", question_id) ~ "CV", grepl("Interpret", question_id)~"Interpret", .default = question_id))
+```
+
+```{r}
+library(dplyr)
+library(stringr)
+
+setwd("~/Documents/GitHub/MC_data_cleaning/DataCleaning")
+roster <- read.csv("df1_with_anonid.csv")
+
+
+
+roster <- roster %>%
+  rename(name = Full.NAME) %>%
+  mutate(name = str_trim(name))
+
+df_filtered2 <- df_filtered2 %>%
+  mutate(name = str_trim(name))
+
+exam_with_anon2 <- df_filtered2 %>%
+  left_join(roster %>% select(name, anon_id), by = "name")
+
+
+head(exam_with_anon2)
+```
+```{r}
+exam_with_anon_clean2a <- exam_with_anon2 %>%
+  filter(!is.na(anon_id))
+```
+
+```{r}
+exam_with_anon_clean2a <- exam_with_anon_clean2a %>%
+  filter(!toupper(str_trim(Notation)) %in% c(
+    "CH01A", "CH02A", "CH03A", "VDH11", "VDH13", "CH11", "DH11",
+    "OPM1", "OP1", "OPMS1", "OPD1", "OPD2",
+    "OVPV1A", "OVPV1D", "OVPV1E", "OVPV2A", "OVPV2B",
+    "OVPV3A", "OVPV3B", "IVTM1", "IR1",
+    "CCV1A", "CCV1B", "CCV2A", "CCV2B", "CCV3A", "CCV3B",
+    "C01A", "C02A", "C03A", "C03B",
+    "IT1A", "IT2A", "IT2B", "IT3A", "IT3B",
+    "R01A", "R02A", "R03A", "R03B"
+  ))
+```
+
+
+```{r}
+write.csv(exam_with_anon_clean2a, "Exam2_FinalCleaned.csv", row.names = FALSE)
+```
+
+
+#Exam 3
+
+```{r}
+setwd("~/Documents/GitHub/MC_data_cleaning/W23 Rubric Item Data")
+df3 <- read.csv("json_transformation_Exam_3.csv")
+```
+
+```{r}
+df_clean3 <- df3 %>%
+  filter(student != "Student's name Sections Graded time Last graded by")
+
+df_clean3 <- df_clean3 %>%
+  select(-variable_name, -answer_type, -file_name)
+
+head(df_clean3)
+```
+
+```{r}
+df_3 <- df_clean3 %>%
+  mutate(name = str_extract(student, "^[^\\(]+"),
+         email = str_extract(student, "(?<=\\().+?(?=\\))")) %>%
+  select(-student) 
+```
+
+
+```{r}
+df_filtered3 <- df_3 %>%
+  filter(
+     grepl("Operational", question_id, ignore.case = TRUE)|
+    grepl("Construct Validity", question_id) |
+    grepl("Interpretation", question_id) |
+    grepl("Confound", question_id)
+  )
+```
+
+```{r}
+library(dplyr)
+library(stringr)
+
+setwd("~/Documents/GitHub/MC_data_cleaning/DataCleaning")
+roster <- read.csv("df1_with_anonid.csv")
+
+
+
+roster <- roster %>%
+  rename(name = Full.NAME) %>%
+  mutate(name = str_trim(name))
+
+df_filtered3 <- df_filtered3 %>%
+  mutate(name = str_trim(name))
+
+exam_with_anon3 <- df_filtered3 %>%
+  left_join(roster %>% select(name, anon_id), by = "name")
+
+
+head(exam_with_anon3)
+```
+
+```{r}
+exam_with_anon_clean3a <- exam_with_anon3 %>%
+  filter(!is.na(anon_id))
+```
+
+```{r}
+exam_with_anon_clean3a <- exam_with_anon_clean3a %>%
+  filter(!toupper(str_trim(Notation)) %in% c(
+    "CH01A", "CH02A", "CH03A", "VDH11", "VDH13", "CH11", "DH11",
+    "OPM1", "OP1", "OPMS1", "OPD1", "OPD2",
+    "OVPV1A", "OVPV1D", "OVPV1E", "OVPV2A", "OVPV2B",
+    "OVPV3A", "OVPV3B", "IVTM1", "IR1",
+    "CCV1A", "CCV1B", "CCV2A", "CCV2B", "CCV3A", "CCV3B",
+    "C01A", "C02A", "C03A", "C03B",
+    "IT1A", "IT2A", "IT2B", "IT3A", "IT3B",
+    "R01A", "R02A", "R03A", "R03B"
+  ))
+```
+
+
+```{r}
+write.csv(exam_with_anon_clean3a, "Exam3_FinalCleaned.csv", row.names = FALSE)
+```
+
+
+#Exam 4
+```{r}
+setwd("~/Documents/GitHub/MC_data_cleaning/W23 Rubric Item Data")
+df4 <- read.csv("json_transformation_Exam_4.csv")
+```
+
+```{r}
+df_clean4 <- df4 %>%
+  filter(student != "Student's name Sections Graded time Last graded by")
+
+df_clean4 <- df_clean4 %>%
+  select(-variable_name, -answer_type, -file_name)
+
+head(df_clean4)
+```
+
+```{r}
+df_4 <- df_clean4 %>%
+  mutate(name = str_extract(student, "^[^\\(]+"),
+         email = str_extract(student, "(?<=\\().+?(?=\\))")) %>%
+  select(-student) 
+```
+
+
+```{r}
+df_filtered4 <- df_4 %>%
+  filter(
+    grepl("OP Def", question_id) |
+    grepl("CV", question_id) |
+    grepl("12: Confound", question_id) |
+    grepl("Internal Threat", question_id) |
+    grepl("Replication", question_id)
+  )
+```
+
+```{r}
+library(dplyr)
+library(stringr)
+
+setwd("~/Documents/GitHub/MC_data_cleaning/DataCleaning")
+roster <- read.csv("df1_with_anonid.csv")
+
+
+
+roster <- roster %>%
+  rename(name = Full.NAME) %>%
+  mutate(name = str_trim(name))
+
+df_filtered4 <- df_filtered4 %>%
+  mutate(name = str_trim(name))
+
+exam_with_anon4 <- df_filtered4 %>%
+  left_join(roster %>% select(name, anon_id), by = "name")
+
+
+head(exam_with_anon4)
+```
+
+```{r}
+exam_with_anon_clean4a <- exam_with_anon4 %>%
+  filter(!is.na(anon_id))
+```
+
+```{r}
+exam_with_anon_clean4a <- exam_with_anon_clean4a %>%
+  filter(!toupper(str_trim(Notation)) %in% c(
+    "CH01A", "CH02A", "CH03A", "VDH11", "VDH13", "CH11", "DH11",
+    "OPM1", "OP1", "OPMS1", "OPD1", "OPD2",
+    "OVPV1A", "OVPV1D", "OVPV1E", "OVPV2A", "OVPV2B",
+    "OVPV3A", "OVPV3B", "IVTM1", "IR1",
+    "CCV1A", "CCV1B", "CCV2A", "CCV2B", "CCV3A", "CCV3B",
+    "C01A", "C02A", "C03A", "C03B",
+    "IT1A", "IT2A", "IT2B", "IT3A", "IT3B",
+    "R01A", "R02A", "R03A", "R03B"
+  ))
+```
+
+
+```{r}
+write.csv(exam_with_anon_clean4a, "Exam4_FinalCleaned.csv", row.names = FALSE)
+```
+
+#Exam 5
+
+```{r}
+setwd("~/Documents/GitHub/MC_data_cleaning/W23 Rubric Item Data")
+df5 <- read.csv("json_transformation_Exam_5.csv")
+```
+
+```{r}
+df_clean5 <- df5 %>%
+  filter(student != "Student's name Sections Graded time Last graded by")
+
+df_clean5 <- df_clean5 %>%
+  select(-variable_name, -answer_type, -file_name)
+
+head(df_clean5)
+```
+
+```{r}
+df_5 <- df_clean5 %>%
+  mutate(name = str_extract(student, "^[^\\(]+"),
+         email = str_extract(student, "(?<=\\().+?(?=\\))")) %>%
+  select(-student) 
+```
+
+
+```{r}
+df_filtered5 <- df_5 %>%
+  filter(
+    grepl("OP Def", question_id) |
+    grepl("CV", question_id) |
+    grepl("Confound", question_id) |
+    grepl("Internal Threat", question_id) |
+    grepl("Replication", question_id)|
+    grepl("Interpretation", question_id)
+  )
+
+```
+
+```{r}
+library(dplyr)
+library(stringr)
+
+setwd("~/Documents/GitHub/MC_data_cleaning/DataCleaning")
+roster <- read.csv("df1_with_anonid.csv")
+
+
+
+roster <- roster %>%
+  rename(name = Full.NAME) %>%
+  mutate(name = str_trim(name))
+
+df_filtered5 <- df_filtered5 %>%
+  mutate(name = str_trim(name))
+
+exam_with_anon5 <- df_filtered5 %>%
+  left_join(roster %>% select(name, anon_id), by = "name")
+
+
+head(exam_with_anon5)
+```
+
+```{r}
+exam_with_anon_clean5a <- exam_with_anon5 %>%
+  filter(!is.na(anon_id))
+```
+
+```{r}
+exam_with_anon_clean5a <- exam_with_anon_clean5a %>%
+  filter(!toupper(str_trim(Notation)) %in% c(
+    "CH01A", "CH02A", "CH03A", "VDH11", "VDH13", "CH11", "DH11",
+    "OPM1", "OP1", "OPMS1", "OPD1", "OPD2",
+    "OVPV1A", "OVPV1D", "OVPV1E", "OVPV2A", "OVPV2B",
+    "OVPV3A", "OVPV3B", "IVTM1", "IR1",
+    "CCV1A", "CCV1B", "CCV2A", "CCV2B", "CCV3A", "CCV3B",
+    "C01A", "C02A", "C03A", "C03B",
+    "IT1A", "IT2A", "IT2B", "IT3A", "IT3B",
+    "R01A", "R02A", "R03A", "R03B"
+  ))
+```
+
+
+```{r}
+write.csv(exam_with_anon_clean5a, "Exam5_FinalCleaned.csv", row.names = FALSE)
+```
