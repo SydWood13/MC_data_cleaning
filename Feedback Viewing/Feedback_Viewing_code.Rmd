@@ -712,3 +712,21 @@ sum32$coefficients[1] + sum32$coefficients[2]*time2 + sum32$coefficients[3]*time
 # RQ4 
 
 
+
+# Model 1 
+ need to filter out all rows with attmept = 0 
+ 
+
+% rep = b0 + attempt 
+
+
+
+#Model 2 
+
+pRep ~ time + viewed + time\*viewed + optin + optin\*viewed + optin\*time + optin\*viewed\*time
+
+%rep = b0*time1 + b1*time2 + b2*time3 + b3*time4 + b4*Viewed*time1 + b5*Viewed*time2 + b6*Viewed*time3 + b7*Viewed*time4 + b8*Time1*optin + b9*Time2*optin + b10*Time3*optin + b11*Time4*optin   + b12*Time1*optin*Viewed  + b13*Time2*optin*Viewed  + b14*Time3*optin*Viewed  + b15*Time4*optin*Viewed 
+
+
+
+

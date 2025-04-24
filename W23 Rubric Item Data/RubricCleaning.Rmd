@@ -458,6 +458,8 @@ write.csv(exam_with_anon_clean5a, "Exam5_FinalCleaned.csv", row.names = FALSE)
 
 rubric_data <- rbind(exam_with_anon_clean1, exam_with_anon_clean2a, exam_with_anon_clean3a, exam_with_anon_clean4a, exam_with_anon_clean5a)
 
+write.csv2(rubric_data, file = "full_rubric_data.csv", sep = ",")
+
 
 ```
 
@@ -467,11 +469,122 @@ rubric_data <- rbind(exam_with_anon_clean1, exam_with_anon_clean2a, exam_with_an
 
 ```{r}
 
+
+
+
+#Raw value of # of mistakes 
 mistakes <- rubric_data %>% group_by(student_id, exam, question_id, Notation) %>% summarise(
   count = n()
-) #%>% mutate(count = case_when(count > 1 ~ 1, .default = count))
+) %>% mutate(count = case_when(count > 1 ~ 1, .default = count))
+
+
+#write.csv(mistakes, file = "test.csv")
+
 
 view(mistakes)
 
+ExamMistakes <- mistakes %>% group_by(student_id, exam) %>% summarise(
+  numMistakes = sum(count)
+)
+view(ExamMistakes)
+
+QMistakes <- mistakes %>% group_by(student_id, exam, question_id) %>% summarise(
+  numMistakes = sum(count)
+)
+view(QMistakes)
+
+#write.csv(QMistakes, file = "test.csv")
+
+
+
+view(time1data)
 ```
+
+#Data
+
+```{r}
+time0data <- mistakes %>% filter(exam == 1)
+
+time1data <- mistakes %>% filter(exam < 3)
+
+time2data <- mistakes %>% filter(exam < 4)
+
+time3data <- mistakes %>% filter(exam < 5)
+
+time4data <- mistakes
+
+```
+
+
+#Time 1  
+```{r}
+# time 1 repeated mistakes by Notation 
+
+repMistakes1 <- time1data %>% group_by(student_id, question_id, Notation) %>% summarise(
+  rep = n()-1, 
+  tot = n() #total number of times each rubric item is given 
+) %>% mutate(rep = case_when(rep>1~1, .default = rep))
+
+view(repMistakes1)
+
+
+#Rep Mistakes per question
+QRepMistakes1 <- repMistakes1 %>% group_by(student_id, question_id) %>% summarise(
+  numRep = sum(rep),
+  numTot = sum(tot)# total number of rubric items given across both exams (including repeated items) 
+)
+
+QRepMistakes1 <- QRepMistakes1 %>% mutate(uniqueTot = numTot - numRep) # total unique items given on this question 
+
+
+view(QRepMistakes1)
+
+
+
+
+
+
+
+
+
+
+```
+
+
+
+#Time 2 Data 
+```{r}
+
+time1data <- mistakes %>% filter(exam < 4)
+
+# time 2 repeated mistakes by Notation 
+repMistakes2 <- time1data %>% group_by(student_id, question_id, Notation) %>% summarise(
+   = n() -1
+)
+
+view(repMistakes1)
+
+
+#Rep Mistakes per question
+QRepMistakes1 <- repMistakes1 %>% group_by(student_id, question_id) %>% summarise(
+  rep = sum(rep)
+)
+
+view(QRepMistakes1)
+
+
+
+
+
+
+
+
+
+
+
+```
+
+
+
+
 
