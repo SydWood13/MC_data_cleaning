@@ -710,14 +710,95 @@ sum32$coefficients[1] + sum32$coefficients[2]*time2 + sum32$coefficients[3]*time
 
 
 # RQ4 
+```{r}
+mdata <- read.csv("~/GitHub/MC_data_cleaning/W23 Rubric Item Data/finalMistakesData.csv")
+```
 
+
+### Possible items
+
+H0 = 9 --- only 3 effectively since some are mutually exclusive  
+H1 = 7 --- only 5 effectively since some are mutually exclusive
+OPDEF = 27 --- only 15 effectively since some are mutually exclusive  
+Interpret = 6 --- only 3 effectively since some are mutually exclusive
+COMPCV = 17 --- only 9 effectively since some are mutually exclusive
+CV = 31 --- only 15 effectively since some are mutually exclusive
+CONFOUND = 14 --- only 4 effectively since some are mutually exclusive
+IVTHREAT = 13 --- only 5 effectively since some are mutually exclusive
+
+
+## Descriptives
+```{r}
+
+length(unique(mstudent$student_id))
+
+mstudent <- mdata %>% filter(!is.na(pRep)) %>% 
+  group_by(student_id, time, attempt ) %>% 
+  summarise(
+    n = sum(numRep, na.rm = T),
+    d = sum(pastMistakes, na.rm = T),
+    pRep = n/d + 100
+  ) 
+
+
+
+nstudent <- mstudent %>% group_by(student_id) %>% summarise(
+  n = sum(n), 
+  d = sum(d)
+) %>% mutate(mean = n/d)
+
+(sum(nstudent$n)/sum(nstudent$d))/369
+
+nmstudent <- nstudent%>% filter(n>0)
+
+(sum(nmstudent$n)/sum(nmstudent$d))/314
+
+314/369
+
+mTime <- mstudent %>% group_by(time) %>% 
+  summarise( attempt = "none",
+             n = n(),
+    num = sum(n), 
+    d = sum(d),
+    mean = num/d
+  )
+
+mAttempt <- mstudent %>% group_by(attempt) %>% 
+  summarise( time = "none",
+     n = n(),
+    num = sum(n), 
+    d = sum(d),
+    mean = num/d
+  ) %>% select(time, attempt, n,num, d, mean)
+
+mQ <- mstudent %>% group_by(time, attempt) %>% 
+  summarise(
+    n = n(),
+    num = sum(n), 
+    d = sum(d),
+    mean = num/d
+  )
+
+mdesc <- rbind(mTime, mAttempt, mQ)
+
+write.csv(mdesc, "mistakeDescriptives.csv")
+```
 
 
 # Model 1 
- need to filter out all rows with attmept = 0 
- 
 
-% rep = b0 + attempt 
+
+```{r}
+
+rq4eq1 <- "pRep~attempt + (1|student_id) + (1|attempt)"
+
+
+rq4m <- glmer(rq4eq1, mstudent, family = "poisson")
+
+?glm
+
+```
+
 
 
 

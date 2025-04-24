@@ -35,6 +35,10 @@ df_1 <- df_clean %>%
   mutate(name = str_extract(student, "^[^\\(]+"),
          email = str_extract(student, "(?<=\\().+?(?=\\))")) %>%
   select(-student) 
+
+length(unique(df_1$name))
+
+
 ```
 
 ```{r}
@@ -71,7 +75,7 @@ df_filtered <- df_filtered %>%
 exam_with_anon <- df_filtered %>%
   left_join(roster %>% select(name, student_id, anon_id), by = "name")
 
-
+length(unique(exam_with_anon$anon_id))
 head(exam_with_anon)
 ```
 
@@ -160,7 +164,7 @@ df_filtered2 <- df_filtered2 %>%
 exam_with_anon2 <- df_filtered2 %>%
   left_join(roster %>% select(name,student_id, anon_id), by = "name") 
 
-
+length(unique(exam_with_anon2$anon_id))
 head(exam_with_anon2)
 ```
 ```{r}
@@ -213,6 +217,9 @@ df_3 <- df_clean3 %>%
   mutate(name = str_extract(student, "^[^\\(]+"),
          email = str_extract(student, "(?<=\\().+?(?=\\))")) %>%
   select(-student) 
+
+length(unique(df_3$name))
+
 ```
 
 
@@ -246,6 +253,7 @@ df_filtered3 <- df_filtered3 %>%
 exam_with_anon3 <- df_filtered3 %>%
   left_join(roster %>% select(name, student_id, anon_id), by = "name")
 
+length(unique(exam_with_anon3$name))
 
 head(exam_with_anon3)
 ```
@@ -299,6 +307,7 @@ df_4 <- df_clean4 %>%
   mutate(name = str_extract(student, "^[^\\(]+"),
          email = str_extract(student, "(?<=\\().+?(?=\\))")) %>%
   select(-student) 
+length(unique(df_4$name))
 ```
 
 
@@ -333,8 +342,8 @@ df_filtered4 <- df_filtered4 %>%
 exam_with_anon4 <- df_filtered4 %>%
   left_join(roster %>% select(name, student_id, anon_id), by = "name")
 
-
-head(exam_with_anon4)
+length(unique(exam_with_anon4$name))
+#head(exam_with_anon4)
 ```
 
 ```{r}
@@ -378,7 +387,7 @@ df_clean5 <- df5 %>%
 df_clean5 <- df_clean5 %>%
   select(-variable_name, -answer_type)
 
-head(df_clean5)
+#head(df_clean5)
 ```
 
 ```{r}
@@ -458,21 +467,23 @@ write.csv(exam_with_anon_clean5a, "Exam5_FinalCleaned.csv", row.names = FALSE)
 
 rubric_data <- rbind(exam_with_anon_clean1, exam_with_anon_clean2a, exam_with_anon_clean3a, exam_with_anon_clean4a, exam_with_anon_clean5a)
 
-write.csv2(rubric_data, file = "full_rubric_data.csv", sep = ",")
+write.csv(rubric_data, file = "full_rubric_data.csv", row.names = F)
 
 
 ```
 
+# calculating variables 
 
-# Mistakes Per Exam Per Question Per Student 
+
+## Mistakes Per Exam Per Question Per Student 
 
 
 ```{r}
 
 
+rubric_data <- read.csv(file = "full_rubric_data.csv")
 
-
-#Raw value of # of mistakes 
+#Raw value of # of mistakes does not account for repeated items across exams 
 mistakes <- rubric_data %>% group_by(student_id, exam, question_id, Notation) %>% summarise(
   count = n()
 ) %>% mutate(count = case_when(count > 1 ~ 1, .default = count))
@@ -484,12 +495,12 @@ mistakes <- rubric_data %>% group_by(student_id, exam, question_id, Notation) %>
 view(mistakes)
 
 ExamMistakes <- mistakes %>% group_by(student_id, exam) %>% summarise(
-  numMistakes = sum(count)
+  numMistakes = sum(count) # unique rubric items given on that exam 
 )
 view(ExamMistakes)
 
 QMistakes <- mistakes %>% group_by(student_id, exam, question_id) %>% summarise(
-  numMistakes = sum(count)
+  numMistakes = sum(count) # number of unique items given on that question on each exam 
 )
 view(QMistakes)
 
@@ -497,51 +508,343 @@ view(QMistakes)
 
 
 
-view(time1data)
+
 ```
+
+
+
+
 
 #Data
 
 ```{r}
-time0data <- mistakes %>% filter(exam == 1)
 
-time1data <- mistakes %>% filter(exam < 3)
+agdata <- read.csv("agdata.csv")
 
-time2data <- mistakes %>% filter(exam < 4)
 
-time3data <- mistakes %>% filter(exam < 5)
+#agdata <- agdata %>% mutate(attempt = case_when(question_id == "COMPCV"  ~ 1, .default = attempt ))
+#write.csv(agdata, "agdata.csv", row.names = F)
 
-time4data <- mistakes
+Exam1data <- mistakes %>% filter(exam == 1)
+Exam2data <- mistakes %>% filter(exam == 2) 
+Exam3data <- mistakes %>% filter(exam == 3) 
+Exam4data <- mistakes %>% filter(exam == 4) 
+Exam5data <- mistakes %>% filter(exam == 5) 
+
+```
+
+# repeated mistakes!! 
+```{r}
+# Time 1 
+
+time1shared <- full_join(Exam1data, Exam2data, by = c("student_id", "Notation"), suffix = c("1" , "2"))%>% select( -exam1, -exam2) %>% mutate(question_id = case_when(is.na(question_id1) ~ question_id2, .default = question_id1)) %>% select(-question_id1, -question_id2)
+
+time1data <- time1shared %>% mutate(rep = count1 + count2 - 1) %>% filter(!is.na(rep)) 
+
+time1mis <- time1data %>% group_by(student_id,question_id) %>% summarise(
+  numRep = sum(rep)
+) %>% mutate(time = 1) 
+
+
+
+# Time 2 
+
+time2shared <- full_join(time1shared, Exam3data, by = c("student_id", "Notation"), suffix = c("1" , "2")) %>% select( -exam) %>% mutate(question_id = case_when(is.na(question_id1) ~ question_id2, .default = question_id1)) %>% mutate(count3 = count) %>% select(-question_id1, -question_id2, -count)
+
+time2data <- time2shared %>% mutate(RepExam1 = count1 + count3 - 1) %>%  mutate(RepExam2 = count2 + count3 - 1) %>%  mutate(rep = case_when(!is.na(RepExam1) ~ 1, !is.na(RepExam2)~1, .default = NA )) %>% filter(!is.na(rep)) #%>% select(-question_id2)
+
+time2mis <- time2data %>% group_by(student_id,question_id) %>% summarise(
+  numRep = sum(rep)
+) %>% mutate(time = 2)
+
+
+
+# Time 3 
+
+time3shared <- full_join(time2shared, Exam4data, by = c("student_id", "Notation"), suffix = c("1" , "2")) %>% select( -exam) %>% mutate(question_id = case_when(is.na(question_id1) ~ question_id2, .default = question_id1))%>% mutate(count4 = count) %>% select(-question_id1, -question_id2, -count)
+
+time3data <- time3shared %>% mutate(RepExam1 = count1 + count4 - 1) %>%  mutate(RepExam2 = count2 + count4 - 1) %>%  mutate(RepExam3 = count3 + count4 - 1)%>%  mutate(rep = case_when(!is.na(RepExam1) ~ 1, !is.na(RepExam2)~1, !is.na(RepExam3)~1, .default = NA )) %>% filter(!is.na(rep)) #%>% select(-question_id2)
+
+time3mis <- time3data %>% group_by(student_id,question_id) %>% summarise(
+  numRep = sum(rep)
+) %>% mutate(time = 3)
+
+# Time 4 
+
+time4shared <- full_join(time3shared, Exam5data, by = c("student_id", "Notation"), suffix = c("1" , "2")) %>% select( -exam) %>% mutate(question_id = case_when(is.na(question_id1) ~ question_id2, .default = question_id1))%>% mutate(count5 = count) %>% select(-question_id1, -question_id2, -count)
+
+time4data <- time4shared %>% mutate(RepExam1 = count1 + count5 - 1) %>%  mutate(RepExam2 = count2 + count5 - 1) %>%  mutate(RepExam3 = count3 + count5 - 1)%>%  mutate(RepExam4 = count4 + count5 - 1)%>% mutate(rep = case_when(!is.na(RepExam1) ~ 1, !is.na(RepExam2)~1, !is.na(RepExam3)~1, !is.na(RepExam4)~1,.default = NA )) %>% filter(!is.na(rep)) #%>% select(-question_id2)
+
+time4mis <- time4data %>% group_by(student_id,question_id) %>% summarise(
+  numRep = sum(rep)
+) %>% mutate(time = 4)
+
+
+fullmis <- rbind(time1mis, time2mis, time3mis, time4mis)
+
+#write.csv(fullmis, "test.csv", row.names = F)
+```
+
+
+# Add Repeated mistakes to dataset 
+```{r}
+agdata_ <- left_join(agdata, fullmis, by = c("student_id", "question_id", "time")) 
+
+agdata1 <- agdata_ %>% filter(time == 1) %>% mutate(numRep = case_when(is.na(numRep)~0, .default = numRep))
+
+agdata2 <- agdata_ %>% filter(time == 2) %>% mutate(numRep = case_when(is.na(numRep)~0, .default = numRep))
+
+agdata3 <- agdata_ %>% filter(time == 3) %>% mutate(numRep = case_when(is.na(numRep)~0, .default = numRep))
+
+agdata4 <- agdata_ %>% filter(time == 4) %>% mutate(numRep = case_when(is.na(numRep)~0, .default = numRep))
+
+
+agdata_temp <- rbind(agdata1, agdata2, agdata3, agdata4)
+
+
+agdata <- left_join(agdata, agdata_temp, by = c("student_id", "question_id", "time", "attempt"))
+
+```
+
+# 
+```{r}
+
+
+QMistakes <- QMistakes %>% mutate(time = exam -1)
+
+currMis <- QMistakes %>% filter(time>0) %>% mutate(currentMistakes = numMistakes) %>% select(-numMistakes)
+
+agdata<- left_join(agdata, currMis, by = c("student_id", "question_id", "time")) %>% select(-exam) %>% mutate(currentMistakes = case_when(is.na(currentMistakes)~0, .default = currentMistakes))
+
+a1 <- agdata %>% filter(attempt ==1)
+
+
+
+
+agdata1 <- agdata %>% filter(time == 1)
+
+agdata2 <- agdata %>% filter(time == 2) %>% filter(question_id == "CV" | question_id == "Interpret")
+
+
+agdata3 <- agdata %>% filter(time == 3) %>% filter(question_id == "CONFOUND")
+
+agdata4 <- agdata %>% filter(time == 4) %>% filter(question_id == "COMPCV"| question_id == "Interpret"| question_id == "IVTHREAT" | question_id == "REP")
+
+
+
+
+pMistakes1 <-  QMistakes %>% filter(exam<2) %>% mutate(time = time + 1) %>% mutate(pastMistakes = numMistakes) %>% select(-numMistakes)
+
+agdata_1 <- left_join(agdata1, pMistakes1, by = c("student_id", "question_id", "time")) %>% select(-exam)%>%  mutate(pastMistakes = case_when(is.na(pastMistakes)~0, .default = pastMistakes)) %>% select(-attempt, -currentMistakes, -numRep)
+
+pMistakes2 <- QMistakes %>% filter(exam == 2) %>% filter(question_id == "CV" | question_id == "Interpret") %>% mutate(time = time + 1) %>% mutate(pastMistakes = numMistakes) %>% select(-numMistakes)
+
+agdata_2 <- left_join(agdata2, pMistakes2, by = c("student_id", "question_id", "time")) %>% select(-exam)%>%  mutate(pastMistakes = case_when(is.na(pastMistakes)~0, .default = pastMistakes)) %>% select(-attempt, -currentMistakes, -numRep)
+
+pMistakes5_ <- QMistakes %>% filter(exam == 3) %>% filter(question_id == "COMPCV" | question_id == "Interpret" ) %>% mutate(time = time + 2) %>% mutate(pastMistakes = numMistakes) %>% select(-numMistakes)
+
+
+
+pMistakes3 <- QMistakes %>% filter(exam == 3) %>% filter(question_id == "CONFOUND") %>% mutate(time = time + 1) %>% mutate(pastMistakes = numMistakes) %>% select(-numMistakes)
+
+agdata_3 <- left_join(agdata3, pMistakes3, by = c("student_id", "question_id", "time")) %>% select(-exam)%>%  mutate(pastMistakes = case_when(is.na(pastMistakes)~0, .default = pastMistakes)) %>% select(-attempt, -currentMistakes, -numRep)
+
+pMistakes4 <- QMistakes %>% filter(exam == 4) %>% filter(question_id == "IVTHREAT" | question_id == "REP" ) %>% mutate(time = time + 1) %>% mutate(pastMistakes = numMistakes) %>% select(-numMistakes)
+
+pMistakes4 <- rbind(pMistakes4, pMistakes5_)
+
+agdata_4 <- left_join(agdata4, pMistakes4, by = c("student_id", "question_id", "time")) %>% select(-exam)%>%  mutate(pastMistakes = case_when(is.na(pastMistakes)~0, .default = pastMistakes)) %>% select( -currentMistakes, -numRep, -attempt)
+
+
+
+
+agdata_attempt1 <- rbind(agdata_1, agdata_2, agdata_3, agdata_4) %>% mutate(attempt = 1) %>% select(-time)
+
+agdata <- agdata %>% mutate(newMistakes = currentMistakes - numRep)
+
+agdata_temp1 <- left_join(agdata, agdata_attempt1, by = c("student_id", "question_id", "attempt")) # append attempt1 to full data 
+
+
+
+
+
+
+
+
+agdata_a1 <- agdata_temp1 %>% filter(attempt == 1) %>% mutate(attempt = attempt + 1) %>% select(-currentMistakes, -time, -numRep) %>% filter(question_id == "OPDEF" | question_id == "CV" | question_id == "Interpret" | question_id == "COMPCV" | question_id == "CONFOUND" ) #pull out only questions that are repeated again and just grab the new and past mistakes for the next attempt 
+
+
+agdata_temp2 <- left_join(agdata_temp1, agdata_a1, by = c("student_id", "question_id", "attempt"), suffix = c("", "-1")) # add lagged to the attempt 2 rows 
+
+agdata_attempt2 <- agdata_temp2 %>% filter(attempt ==2) %>% mutate(pastMistakes = `newMistakes-1`+`pastMistakes-1`) %>% select(-`newMistakes-1`, -`pastMistakes-1`, -newMistakes, -currentMistakes, -numRep) %>% select(student_id, question_id, pastMistakes, attempt) # pullout only attempt 2 rows and calculated the past mistakes on "attempt 1' 
+
+
+
+
+agdata_temp3 <- left_join(agdata, agdata_attempt2, by = c("student_id", "question_id", "attempt"), suffix = c("", "-1")) # append attempt2 to full data 
+
+
+#########STUCK HERE!!!!!! 
+
+a3test <- agdata %>% filter(attempt == 3)
+
+
+agdata_a2 <- agdata_temp3 %>% filter(attempt == 2) %>% mutate(attempt = attempt + 1) %>% select(-currentMistakes, -time, -numRep) %>% filter(question_id == "OPDEF" | question_id == "CV" ) #pull out only questions that are repeated again and just grab the new and past mistakes for the next attempt 
+
+
+agdata_temp4 <- left_join(agdata_temp3, agdata_a2, by = c("student_id", "question_id", "attempt"), suffix = c("", "-1")) # add lagged to the attempt 3 rows 
+
+agdata_attempt3 <- agdata_temp4 %>% filter(attempt ==3) %>% mutate(pastMistakes = `newMistakes-1`+`pastMistakes-1`) %>% select(-`newMistakes-1`, -`pastMistakes-1`, -newMistakes, -currentMistakes, -numRep) %>% select(student_id, question_id, pastMistakes, attempt) # pullout only attempt 3 rows and calculated the past mistakes on "attempt 2' 
+
+test <- rbind(agdata_attempt1, agdata_attempt2, agdata_attempt3)
+
+
+agdata_temp5 <- left_join(agdata, agdata_attempt3, by = c("student_id", "question_id", "attempt"), suffix = c("", "-1")) # append attempt3 to full data
+
+
+agdata_a3 <- agdata_temp5 %>% filter(attempt == 3) %>% mutate(attempt = attempt + 1) %>% select(-currentMistakes, -time, -numRep) %>% filter(question_id == "OPDEF") #pull out only questions that are repeated again and just grab the new and past mistakes for the next attempt 
+
+
+agdata_temp6 <- left_join(agdata_temp5, agdata_a3, by = c("student_id", "question_id", "attempt"), suffix = c("", "-1")) # add lagged to the attempt 4 rows
+
+agdata_attempt4 <- agdata_temp6 %>% filter(attempt ==4) %>% mutate(pastMistakes = `newMistakes-1`+`pastMistakes-1`) %>% select(-`newMistakes-1`, -`pastMistakes-1`, -newMistakes, -currentMistakes, -numRep) %>% select(student_id, question_id, pastMistakes, attempt)  # pullout only attempt 4 rows and calculated the past mistakes on "attempt 3' 
+
+all_attempts <- rbind(agdata_attempt1, agdata_attempt2, agdata_attempt3, agdata_attempt4)
+
+agdata<- left_join(agdata, all_attempts, by = c("student_id", "question_id", "attempt"), suffix = c("1", "2"))
+
+
+agdata <- agdata %>% mutate(pRep = case_when(pastMistakes == 0 ~ NA, .default = numRep/pastMistakes) )
+
+
+write.csv(agdata, "finalMistakesData.csv", row.names = F)
+
 
 ```
 
 
+
+
+DID NOT WORK 
+____________________________________________________________
 #Time 1  
 ```{r}
 # time 1 repeated mistakes by Notation 
 
 repMistakes1 <- time1data %>% group_by(student_id, question_id, Notation) %>% summarise(
-  rep = n()-1, 
+  timesRep = n()-1, #number of repeats
   tot = n() #total number of times each rubric item is given 
-) %>% mutate(rep = case_when(rep>1~1, .default = rep))
+) %>% mutate(isRep = case_when(timesRep > 1 ~ 1, .default = timesRep)) #is repeated at least on at least 1 exam 
 
 view(repMistakes1)
 
 
 #Rep Mistakes per question
 QRepMistakes1 <- repMistakes1 %>% group_by(student_id, question_id) %>% summarise(
-  numRep = sum(rep),
-  numTot = sum(tot)# total number of rubric items given across both exams (including repeated items) 
+  numRep = sum(isRep), #number of mistakes that were previously given feedback on 
+  totRep = sum(timesRep), #number of repeated items across the exams 
+  numTot = sum(tot)# total number of mistakes made across both exams (including repeated items) 
 )
 
-QRepMistakes1 <- QRepMistakes1 %>% mutate(uniqueTot = numTot - numRep) # total unique items given on this question 
+QRepMistakes1 <- QRepMistakes1 %>% mutate(uniqueTot = numTot - totRep)
 
+
+QRepMistakes1 <- QRepMistakes1 %>% mutate(exam = 2)
 
 view(QRepMistakes1)
 
+```
 
 
 
+#Time 2  
+```{r}
+# time 2 repeated mistakes by Notation 
+
+repMistakes2 <- time2data %>% group_by(student_id, question_id, Notation) %>% summarise(
+  timesRep = n()-1, #number of repeats
+  tot = n() #total number of times each rubric item is given 
+) %>% mutate(isRep = case_when(timesRep > 1 ~ 1, .default = timesRep)) #is repeated at least on at least 1 exam 
+
+view(repMistakes2)
+
+
+#Rep Mistakes per question
+QRepMistakes2 <- repMistakes2 %>% group_by(student_id, question_id) %>% summarise(
+  numRep = sum(isRep), #number of mistakes that were previously given feedback on 
+  totRep = sum(timesRep), #number of repeated items across the exams 
+  numTot = sum(tot)# total number of mistakes made across both exams (including repeated items) 
+)
+
+QRepMistakes2 <- QRepMistakes2 %>% mutate(uniqueTot = numTot - totRep)
+
+
+QRepMistakes2 <- QRepMistakes2 %>% mutate(exam = 3) 
+
+
+view(QRepMistakes2)
+
+
+
+
+
+```
+
+
+#Time 3  
+```{r}
+# time 3 repeated mistakes by Notation 
+
+repMistakes3 <- time3data %>% group_by(student_id, question_id, Notation) %>% summarise(
+  timesRep = n()-1, #number of repeats
+  tot = n() #total number of times each rubric item is given 
+) %>% mutate(isRep = case_when(timesRep > 1 ~ 1, .default = timesRep)) #is repeated at least on at least 1 exam 
+
+view(repMistakes3)
+
+
+#Rep Mistakes per question
+QRepMistakes3 <- repMistakes3 %>% group_by(student_id, question_id) %>% summarise(
+  numRep = sum(isRep), #number of mistakes that were previously given feedback on 
+  totRep = sum(timesRep), #number of repeated items across the exams 
+  numTot = sum(tot)# total number of mistakes made across both exams (including repeated items) 
+)
+
+QRepMistakes3 <- QRepMistakes3 %>% mutate(uniqueTot = numTot - totRep)
+
+
+QRepMistakes3 <- QRepMistakes3 %>% mutate(exam = 4)
+
+
+view(QRepMistakes3)
+
+```
+
+
+#Time 4  
+```{r}
+# time 3 repeated mistakes by Notation 
+
+repMistakes4 <- time4data %>% group_by(student_id, question_id, Notation) %>% summarise(
+  timesRep = n()-1, #number of repeats
+  tot = n() #total number of times each rubric item is given 
+) %>% mutate(isRep = case_when(timesRep > 1 ~ 1, .default = timesRep))
+
+view(repMistakes4)
+
+
+#Rep Mistakes per question
+QRepMistakes4 <- repMistakes4 %>% group_by(student_id, question_id) %>% summarise(
+  numRep = sum(isRep), #number of mistakes that were previously given feedback on 
+  totRep = sum(timesRep), #number of repeated items across the exams 
+  numTot = sum(tot)# total number of mistakes made across both exams (including repeated items) 
+)
+
+QRepMistakes4 <- QRepMistakes4 %>% mutate(uniqueTot = numTot - totRep)
+
+QRepMistakes4 <- QRepMistakes4 %>% mutate(exam = 5)
+
+view(QRepMistakes4)
 
 
 
@@ -552,39 +855,16 @@ view(QRepMistakes1)
 
 
 
-#Time 2 Data 
+##Combine the Data 
+
 ```{r}
 
-time1data <- mistakes %>% filter(exam < 4)
-
-# time 2 repeated mistakes by Notation 
-repMistakes2 <- time1data %>% group_by(student_id, question_id, Notation) %>% summarise(
-   = n() -1
-)
-
-view(repMistakes1)
-
-
-#Rep Mistakes per question
-QRepMistakes1 <- repMistakes1 %>% group_by(student_id, question_id) %>% summarise(
-  rep = sum(rep)
-)
-
-view(QRepMistakes1)
+fullRepMistakes <- full_join(QRepMistakes1, QRepMistakes2, by = c("student_id", "question_id"), suffix = c("1", "2")) #%>% mutate(numRep2 = numRep2-numRep1)
 
 
 
-
-
-
-
-
-
+aggregatedData <- QMistakes
 
 
 ```
-
-
-
-
 
