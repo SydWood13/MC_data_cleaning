@@ -475,7 +475,7 @@ write.csv(rubric_data, file = "full_rubric_data.csv", row.names = F)
 # calculating variables 
 
 
-## Mistakes Per Exam Per Question Per Student 
+# Mistakes Per Exam Per Question Per Student 
 
 
 ```{r}
@@ -504,7 +504,7 @@ QMistakes <- mistakes %>% group_by(student_id, exam, question_id) %>% summarise(
 )
 view(QMistakes)
 
-#write.csv(QMistakes, file = "test.csv")
+write.csv(QMistakes, file = "mistakes.csv")
 
 
 
@@ -714,7 +714,7 @@ all_attempts <- rbind(agdata_attempt1, agdata_attempt2, agdata_attempt3, agdata_
 agdata<- left_join(agdata, all_attempts, by = c("student_id", "question_id", "attempt"), suffix = c("1", "2"))
 
 
-agdata <- agdata %>% mutate(pRep = case_when(pastMistakes == 0 ~ NA, .default = numRep/pastMistakes) )
+agdata <- agdata %>% mutate(pRep = case_when(pastMistakes == 0 ~ NA, .default = numRep/pastMistakes) ) %>% mutate(numRep = case_when(pastMistakes == 0 ~ NA, .default = numRep) )
 
 
 write.csv(agdata, "finalMistakesData.csv", row.names = F)

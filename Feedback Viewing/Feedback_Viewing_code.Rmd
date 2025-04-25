@@ -9,7 +9,7 @@ output:
 ## Libraries and Packages
 ```{r}
 # Package names
-packages <- c("ggplot2",  "tidyverse", "apaTables", "colourpicker", "swirl", "dplyr", "gridExtra", "knitr", "lme4", "reshape2", "stargazer",  "did", "plm", "sandwich", "coefplot", "afex", "jtools", "glmmTMB")
+packages <- c("ggplot2",  "tidyverse", "apaTables", "colourpicker", "swirl", "dplyr", "gridExtra", "knitr", "lme4", "reshape2", "stargazer",  "did", "plm", "sandwich", "coefplot", "afex", "jtools", "glmmTMB", "psych", "gtsummary", "broom", "optimx")
 
 
 ?case.when
@@ -712,6 +712,9 @@ sum32$coefficients[1] + sum32$coefficients[2]*time2 + sum32$coefficients[3]*time
 # RQ4 
 ```{r}
 mdata <- read.csv("~/GitHub/MC_data_cleaning/W23 Rubric Item Data/finalMistakesData.csv")
+
+mistakes <- read.csv("~/GitHub/MC_data_cleaning/W23 Rubric Item Data/mistakes.csv") %>% select(-X) %>% mutate(time = exam -1 )
+
 ```
 
 
@@ -730,84 +733,199 @@ IVTHREAT = 13 --- only 5 effectively since some are mutually exclusive
 ## Descriptives
 ```{r}
 
-length(unique(mstudent$student_id))
+
 
 mstudent <- mdata %>% filter(!is.na(pRep)) %>% 
-  group_by(student_id, time, attempt ) %>% 
+  group_by(student_id, time, attempt, question_id ) %>% 
   summarise(
-    n = sum(numRep, na.rm = T),
-    d = sum(pastMistakes, na.rm = T),
-    pRep = n/d + 100
+    nRep = sum(numRep, na.rm = T)
   ) 
 
+mstudent <- left_join(mstudent, mistakes, by = c("student_id", "question_id", "time") ) %>% mutate(numMistakes = case_when(is.na(numMistakes)~0,.default = numMistakes)) %>% select(-exam)
 
+
+length(unique(mstudent$student_id))
 
 nstudent <- mstudent %>% group_by(student_id) %>% summarise(
-  n = sum(n), 
-  d = sum(d)
-) %>% mutate(mean = n/d)
+  numRep = sum(nRep),
+  numMis = sum(numMistakes)
+) 
 
-(sum(nstudent$n)/sum(nstudent$d))/369
+length(unique(mstudent$student_id))
 
-nmstudent <- nstudent%>% filter(n>0)
+(sum(nstudent$numRep))/369
+(sum(nstudent$numMis))/369
 
-(sum(nmstudent$n)/sum(nmstudent$d))/314
+nmstudent <- nstudent%>% filter(numRep>0)
+
+(sum(nmstudent$numRep))/314
 
 314/369
 
-mTime <- mstudent %>% group_by(time) %>% 
+mboth <- mstudent %>% group_by(student_id, time, attempt) %>% summarise(
+    numRep = sum(nRep),
+  numMis = sum(numMistakes)
+)
+mtime <- mstudent %>% group_by(student_id, time) %>% summarise(
+    numRep = sum(nRep),
+  numMis = sum(numMistakes)
+)
+mattempt <- mstudent %>% group_by(student_id, attempt) %>% summarise(
+    numRep = sum(nRep),
+  numMis = sum(numMistakes)
+)
+hist(nstudent$numRep)
+nonzero <- mstudent %>% filter(nRep != 0)
+
+mTime <- mtime %>% group_by(time) %>% 
   summarise( attempt = "none",
-             n = n(),
-    num = sum(n), 
-    d = sum(d),
-    mean = num/d
+             n = n(), 
+             totalRep = sum(numRep),
+             mean = mean(numRep, na.rm = T),
+             sd = sd(numRep, na.rm = T),
+             median = median(numRep, na.rm = T),
+             MAD = mad(numRep, na.rm = T)
   )
 
-mAttempt <- mstudent %>% group_by(attempt) %>% 
+mAttempt <- mattempt %>% group_by(attempt) %>% 
   summarise( time = "none",
-     n = n(),
-    num = sum(n), 
-    d = sum(d),
-    mean = num/d
-  ) %>% select(time, attempt, n,num, d, mean)
+             n = n(), 
+             totalRep = sum(numRep),
+             mean = mean(numRep, na.rm = T),
+             sd = sd(numRep, na.rm = T),
+             median = median(numRep, na.rm = T),
+             MAD = mad(numRep, na.rm = T)
+  ) %>% select(time, attempt, n, totalRep, mean, sd, median, MAD)
 
-mQ <- mstudent %>% group_by(time, attempt) %>% 
+mQ <- mboth %>% group_by(time, attempt) %>% 
   summarise(
-    n = n(),
-    num = sum(n), 
-    d = sum(d),
-    mean = num/d
+            n = n(), 
+             totalRep = sum(numRep, na.rm = T),
+             mean = mean(numRep, na.rm = T),
+             sd = sd(numRep, na.rm = T),
+             median = median(numRep, na.rm = T),
+             MAD = mad(numRep, na.rm = T)
   )
 
 mdesc <- rbind(mTime, mAttempt, mQ)
 
-write.csv(mdesc, "mistakeDescriptives.csv")
+write.csv(mdesc, "mistakeDescriptives.csv", row.names = F)
+
+
+nzTime <- nonzero %>% group_by(time) %>% 
+  summarise( attempt = "none",
+             n = n(), 
+             totalRep = sum(nRep),
+             mean = mean(nRep, na.rm = T),
+             sd = sd(nRep, na.rm = T),
+             median = median(nRep, na.rm = T),
+             MAD = mad(nRep, na.rm = T)
+  )
+
+nzAttempt <- nonzero %>% group_by(attempt) %>% 
+  summarise( time = "none",
+             n = n(), 
+             totalRep = sum(nRep),
+             mean = mean(nRep, na.rm = T),
+             sd = sd(nRep, na.rm = T),
+             median = median(nRep, na.rm = T),
+             MAD = mad(nRep, na.rm = T)
+  ) %>% select(time, attempt, n, totalRep, mean, sd, median, MAD)
+
+nzQ <- nonzero %>% group_by(time, attempt) %>% 
+  summarise(
+            n = n(), 
+             totalRep = sum(nRep),
+             mean = mean(nRep, na.rm = T),
+             sd = sd(nRep, na.rm = T),
+             median = median(nRep, na.rm = T),
+             MAD = mad(nRep, na.rm = T)
+  )
+
+nzdesc <- rbind(nzTime, nzAttempt, mQ)
+
+write.csv(mdesc, "non_zero_mistakeDescriptives.csv", row.names = F)
+
 ```
 
 
 # Model 1 
 
-
+### Poisson 
 ```{r}
 
-rq4eq1 <- "pRep~attempt + (1|student_id) + (1|attempt)"
+mstudent$time <- as.factor(mstudent$time)
+mstudent$attempt <- as.factor(mstudent$attempt)
+mstudent$student_id <- as.factor(mstudent$student_id)
 
+rq4eq1 <- "nRep ~ attempt + (1|question_id) +  (1|student_id) "
 
 rq4m <- glmer(rq4eq1, mstudent, family = "poisson")
 
-?glm
+summ(rq4m)
+sum41 <- summary(rq4m)
+
+
+
+```
+
+MODEL INFO:
+Observations: 3634
+Dependent Variable: nRep
+Type: Mixed effects generalized linear regression
+Error Distribution: poisson
+Link function: log 
+
+
+
+
+```{r}
+
+
+tbl_regression(rq4m, exponentiate = T)
+
+exp(sum41$coefficients[1])/(1+exp(sum41$coefficients[1]))
+
+
+```
+Students odds of making a repeated mistake on their 3rd time responding to the prompt, however for the questionsthat were attempt 3 or 4 times prior they were significantly less likely to repeat thier mistakes. 
+
+#Model 2 
+
+```{r}
+
+
+
+grouping <- data %>% select(student_id, time, opt_in, viewed)
+
+dat <- left_join(mstudent, grouping, by = c("student_id", "time"))
+dat$viewed <- as.factor(dat$viewed)
+
+rq4eq2 <- "nRep ~ time + opt_in + viewed + time*opt_in * time*viewed + viewed*opt_in + time*opt_in*viewed + (1|student_id) + (1|question_id) + (1|attempt)"
+
+rq4m2 <- glmer(rq4eq2, dat, family = "poisson",  control = glmerControl(
+                           optimizer="bobyqa",
+                                 optCtrl=list(maxfun=2e5)))
+
+summ(rq4m2)
+sum42 <- summary(rq4m2)
+
+sum42
 
 ```
 
 
-
-
-#Model 2 
-
-pRep ~ time + viewed + time\*viewed + optin + optin\*viewed + optin\*time + optin\*viewed\*time
-
-%rep = b0*time1 + b1*time2 + b2*time3 + b3*time4 + b4*Viewed*time1 + b5*Viewed*time2 + b6*Viewed*time3 + b7*Viewed*time4 + b8*Time1*optin + b9*Time2*optin + b10*Time3*optin + b11*Time4*optin   + b12*Time1*optin*Viewed  + b13*Time2*optin*Viewed  + b14*Time3*optin*Viewed  + b15*Time4*optin*Viewed 
+Overall students make fewer repeated mistakes over time, but this effect is not different for the different groups nor is it different base on feedback viewing. 
 
 
 
+
+```{r}
+
+tbl_regression(rq4m2, exponentiate = T)
+
+
+
+
+```
 
