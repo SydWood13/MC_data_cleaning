@@ -1053,21 +1053,3 @@ sum42p
 ```
 
 
-
-### Inflated zero Model 
-```{r}
-
-
-
-rq4eq2 <- "pRep ~ time + opt_in + viewed + time*opt_in * time*viewed + viewed*opt_in + time*opt_in*viewed + (1|student_id) + (1|question_id) + (1|attempt)"
-
-rq4m2 <- lmer(rq4eq2, dat,  control = lmerControl(
-                           optimizer="bobyqa",
-                                 optCtrl=list(maxfun=2e5)))
-
-summ(rq4m2)
-sum42 <- summary(rq4m2)
-
-sum42
-
-```
