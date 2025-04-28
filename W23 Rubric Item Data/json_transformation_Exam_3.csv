@@ -1,5 +1,5 @@
 ,student,question_id,variable_name,Notation,answer_type,file_name
-1,Student's name Sections Graded time Last graded by,1: PV Operational Definition,Method,,Correct: Included **what method is used** to measure variable (i.e. stated or implied manipulation),Exam 3A-rubric.json
+1,Student's name Sections Graded time Last graded by,1: PV Operational Definition,Method,Notation,Correct: Included **what method is used** to measure variable (i.e. stated or implied manipulation),Exam 3A-rubric.json
 2,"Aleena Zaheer (aazaheer@ucdavis.edu)
 psc-041-002-wq-2023
 Feb 19 at 1:01PM (PST) Karli Chudeau",1: PV Operational Definition,Method,OPM1,Correct: Included **what method is used** to measure variable (i.e. stated or implied manipulation),Exam 3A-rubric.json
@@ -2288,7 +2288,7 @@ psc-041-001-wq-2023
 Feb 22 at 4:40AM (PST) Karli Chudeau",5: PV Construct Validity,Reasoning,OVPV2E,Deduction: Included inaccurate information (e.g. _the distractor tasks aren't the same and those in the language condition won't pay attention_),Exam 3A-rubric.json
 786,"Trent Hew (tshew@ucdavis.edu)
 psc-041-002-wq-2023
-Feb 22 at 5:21AM (PST) Karli Chudeau",5: PV Construct Validity,Reasoning,,Deduction: Included inaccurate information (e.g. _the distractor tasks aren't the same and those in the language condition won't pay attention_),Exam 3A-rubric.json
+Feb 22 at 5:21AM (PST) Karli Chudeau",5: PV Construct Validity,Reasoning,OVPV3G,Deduction: Included inaccurate information (e.g. _the distractor tasks aren't the same and those in the language condition won't pay attention_),Exam 3A-rubric.json
 787,Student's name Sections Graded time Last graded by,5: PV Construct Validity,Details,,Deduction: Only used irrelevant or inaccurate details to support the evaluation.,Exam 3A-rubric.json
 788,"Chongzhen Wei (cwei@ucdavis.edu)
 psc-041-001-wq-2023
@@ -5840,7 +5840,7 @@ Feb 20 at 6:45PM (PST) Savannah Maw",11: Internal Validity 2,Conclusion,IV1A,Cor
 2007,Student's name Sections Graded time Last graded by,11: Internal Validity 2,Conclusion,,Incorrect: Did not draw a conclusion,Exam 3A-rubric.json
 2008,"Jeannine Santiago (jisantiago@ucdavis.edu)
 psc-041-001-wq-2023
-Feb 20 at 5:09PM (PST) Savannah Maw",11: Internal Validity 2,Conclusion,,Incorrect: Did not draw a conclusion,Exam 3A-rubric.json
+Feb 20 at 5:09PM (PST) Savannah Maw",11: Internal Validity 2,Conclusion,IV1C,Incorrect: Did not draw a conclusion,Exam 3A-rubric.json
 2009,"Yunjia Chen (ayjchen@ucdavis.edu)
 psc-041-001-wq-2023
 Feb 20 at 7:40PM (PST) Savannah Maw",11: Internal Validity 2,Conclusion,IV1C,Incorrect: Did not draw a conclusion,Exam 3A-rubric.json
@@ -10814,7 +10814,7 @@ Feb 21 at 6:19PM (PST) Karli Chudeau",5: PV Construct Validity,Clarity,OVPV1F,De
 3709,Student's name Sections Graded time Last graded by,5: PV Construct Validity,Clarity,OVPV1F,Deduction: confusing or hard to follow language,Exam 3B-rubric.json
 3710,"Amy Sun (amesun@ucdavis.edu)
 psc-041-001-wq-2023
-Feb 21 at 5:12PM (PST) Karli Chudeau",5: PV Construct Validity,Clarity,,Deduction: confusing or hard to follow language,Exam 3B-rubric.json
+Feb 21 at 5:12PM (PST) Karli Chudeau",5: PV Construct Validity,Clarity,OVPV1H,Deduction: confusing or hard to follow language,Exam 3B-rubric.json
 3711,"Jennifer Le (jnnle@ucdavis.edu)
 psc-041-002-wq-2023
 Feb 21 at 12:51PM (PST) Karli Chudeau",5: PV Construct Validity,Clarity,OVPV1H,Deduction: confusing or hard to follow language,Exam 3B-rubric.json
