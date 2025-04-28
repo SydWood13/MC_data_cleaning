@@ -185,7 +185,7 @@ exam_with_anon_clean2a <- exam_with_anon_clean2a %>%
     "R01A", "R02A", "R03A", "R03B"
   )) %>% select(-name, -email, -X) %>% mutate(exam = 2)
 
-View(exam_with_anon_clean2a)
+#View(exam_with_anon_clean2a)
 ```
 
 
@@ -276,7 +276,7 @@ exam_with_anon_clean3a <- exam_with_anon_clean3a %>%
     "R01A", "R02A", "R03A", "R03B"
   ))%>% select(-name, -email, -X)%>% mutate(exam = 3)
 
-View(exam_with_anon_clean3a)
+#View(exam_with_anon_clean3a)
 ```
 
 
@@ -364,7 +364,7 @@ exam_with_anon_clean4a <- exam_with_anon_clean4a %>%
     "R01A", "R02A", "R03A", "R03B"
   ))%>% select(-name, -email, -X) %>% mutate(exam = 4)
 
-View(exam_with_anon_clean4a)
+#View(exam_with_anon_clean4a)
 ```
 
 
@@ -453,7 +453,7 @@ exam_with_anon_clean5a <- exam_with_anon_clean5a %>%
     "R01A", "R02A", "R03A", "R03B"
   ))%>% select(-name, -email, -X) %>% mutate(exam = 5)
 
-View(exam_with_anon_clean5a)
+#View(exam_with_anon_clean5a)
 ```
 
 
@@ -488,7 +488,7 @@ rubric_data <- rubric_data %>% mutate(question_id = as.factor(str_trim(question_
 rubric_data <- rubric_data %>% mutate(student_id = as.factor(str_trim(student_id)))
 
 rubric_data <- rubric_data %>% mutate(Notation = as.factor(str_trim(Notation)))
-rubric_data <- rubric_data %>% mutate(exam = as.factor(exam))
+rubric_data <- rubric_data %>% mutate(exam = as.factor(exam)) %>% filter(!is.na(Notation))
 
 
 test <- unique(rubric_data)
@@ -505,17 +505,17 @@ mistakes <- rubric_data %>% group_by(student_id, exam, question_id, Notation) %>
 #write.csv(mistakes, file = "test.csv")
 
 
-view(mistakes)
+#view(mistakes)
 
 ExamMistakes <- mistakes %>% group_by(student_id, exam) %>% summarise(
   numMistakes = sum(count) # unique rubric items given on that exam 
 )
-view(ExamMistakes)
+#view(ExamMistakes)
 
 QMistakes <- mistakes %>% group_by(student_id, exam, question_id) %>% summarise(
   numMistakes = sum(count) # number of unique items given on that question on each exam 
 )
-view(QMistakes)
+#view(QMistakes)
 
 write.csv(QMistakes, file = "Qmistakes.csv")
 
@@ -764,7 +764,7 @@ all_attempts <- rbind(agdata_attempt1, agdata_attempt2, agdata_attempt3, agdata_
 agdata<- left_join(agdata, all_attempts, by = c("student_id", "question_id", "attempt"), suffix = c("1", "2"))
 
 
-agdata <- agdata %>% mutate(pRep = case_when(pastMistakes == 0 ~ NA, .default = numRep/pastMistakes) ) %>% mutate(numRep = case_when(pastMistakes == 0 ~ NA, .default = numRep) )
+agdata <- agdata %>% mutate(pRep = case_when(pastMistakes == 0 ~ NA, .default = numRep/pastMistakes*100) ) %>% mutate(numRep = case_when(pastMistakes == 0 ~ NA, .default = numRep) )
 
 
 write.csv(agdata, "finalMistakesData.csv", row.names = F)

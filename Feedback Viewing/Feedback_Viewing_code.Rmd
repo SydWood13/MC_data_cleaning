@@ -736,27 +736,35 @@ IVTHREAT = 13 --- only 5 effectively since some are mutually exclusive
 
 
 mstudent <- mdata %>% filter(!is.na(pRep)) %>% 
-  group_by(student_id, time, attempt, question_id ) %>% 
+  group_by(student_id, time, attempt, question_id) %>% 
   summarise(
-    nRep = sum(numRep, na.rm = T)
+    nRep = sum(numRep, na.rm = T), 
+    nPast = sum(pastMistakes, na.rm = T),
+    numMistakes = sum(currentMistakes, na.rm = T),
+    pRep = mean(pRep)
   ) 
 
-mstudent <- left_join(mstudent, mistakes, by = c("student_id", "question_id", "time") ) %>% mutate(numMistakes = case_when(is.na(numMistakes)~0,.default = numMistakes)) %>% select(-exam)
+
 
 
 length(unique(mstudent$student_id))
 
 nstudent <- mstudent %>% group_by(student_id) %>% summarise(
-  numRep = sum(nRep),
-  numMis = sum(numMistakes)
+  nRep = sum(nRep), 
+  nPast = sum(nPast), 
+  avgRep = mean(pRep),
+  sdRep = sd(pRep), 
+  pRep = nRep/nPast*100
 ) 
 
 length(unique(mstudent$student_id))
 
 (sum(nstudent$numRep))/369
-(sum(nstudent$numMis))/369
+(sum(nstudent$numCurrent))/369
 
 nmstudent <- nstudent%>% filter(numRep>0)
+
+
 
 (sum(nmstudent$numRep))/314
 
@@ -774,7 +782,8 @@ mattempt <- mstudent %>% group_by(student_id, attempt) %>% summarise(
     numRep = sum(nRep),
   numMis = sum(numMistakes)
 )
-hist(nstudent$numRep)
+
+
 nonzero <- mstudent %>% filter(nRep != 0)
 
 mTime <- mtime %>% group_by(time) %>% 
@@ -848,6 +857,32 @@ write.csv(mdesc, "non_zero_mistakeDescriptives.csv", row.names = F)
 
 ```
 
+```{r}
+colors <- c("black", "#ACBFE6", "#465573", "#232A3A" )
+
+#colourpicker::colourPicker()
+plot <- ggplot(nstudent) +theme(axis.text.x = element_text(face = "bold", color = colors[4], 
+                             size =15),
+   plot.title = element_text(face = "bold", color = colors[4], 
+                             size = 25),                          
+  axis.text.y = element_text(face = "bold", color = colors[4], 
+                             size = 15),
+  legend.text = element_text(color = colors[4], face = "bold", size = 18), 
+  legend.title = element_text(color = colors[4], face = "bold"),
+  axis.title.x = element_text(color = colors[4],face = "bold",size = 20 ), 
+  axis.title.y = element_text(color = colors[4],face = "bold",size = 20 ))
+
+
+
+
+plot1 <- plot + geom_histogram(aes(x = pRep), fill = colors[3]) +labs(title = "Distribution of % Mistakes Repeated" ) +xlab("% Repeated") #+ ylab()
+
+
+ggsave(plot1, file = "repDist.png")
+?ggsave
+
+
+```
 
 # Model 1 
 
@@ -877,8 +912,6 @@ Error Distribution: poisson
 Link function: log 
 
 
-
-
 ```{r}
 
 
@@ -888,10 +921,51 @@ exp(sum41$coefficients[1])/(1+exp(sum41$coefficients[1]))
 
 
 ```
-Students odds of making a repeated mistake on their 3rd time responding to the prompt, however for the questionsthat were attempt 3 or 4 times prior they were significantly less likely to repeat thier mistakes. 
+INTERPRETATION: Students odds of making a repeated mistake on their 3rd time responding to the prompt, however for the questionsthat were attempt 3 or 4 times prior they were significantly less likely to repeat thier mistakes. 
+
+
+### Percents 
+```{r}
+
+mstudent$time <- as.factor(mstudent$time)
+mstudent$attempt <- as.factor(mstudent$attempt)
+mstudent$student_id <- as.factor(mstudent$student_id)
+
+rq4eq1 <- "pRep ~ attempt + (1|question_id) +  (1|student_id) "
+
+rq4m <- lmer(rq4eq1, mstudent)
+
+summ(rq4m)
+sum41 <- summary(rq4m)
+
+
+
+```
+### Inflated zero Model NOT DONE 
+```{r}
+
+mstudent$time <- as.factor(mstudent$time)
+mstudent$attempt <- as.factor(mstudent$attempt)
+mstudent$student_id <- as.factor(mstudent$student_id)
+
+rq4eq1 <- "nRep ~ attempt + (1|question_id) +  (1|student_id) "
+
+rq4m <- glmer(rq4eq1, mstudent, family = "poisson")
+
+summ(rq4m)
+sum41 <- summary(rq4m)
+
+
+
+```
+
+
+
 
 #Model 2 
 
+
+### Poisson 
 ```{r}
 
 
@@ -914,7 +988,7 @@ sum42
 
 ```
 
-
+#### Interpreatation
 Overall students make fewer repeated mistakes over time, but this effect is not different for the different groups nor is it different base on feedback viewing. 
 
 
@@ -929,3 +1003,26 @@ tbl_regression(rq4m2, exponentiate = T)
 
 ```
 
+
+
+### Poisson 
+```{r}
+
+
+grouping <- data %>% select(student_id, time, opt_in, viewed)
+
+dat <- left_join(mstudent, grouping, by = c("student_id", "time"))
+dat$viewed <- as.factor(dat$viewed)
+
+rq4eq2 <- "nRep ~ time + opt_in + viewed + time*opt_in * time*viewed + viewed*opt_in + time*opt_in*viewed + (1|student_id) + (1|question_id) + (1|attempt)"
+
+rq4m2 <- glmer(rq4eq2, dat, family = "poisson",  control = glmerControl(
+                           optimizer="bobyqa",
+                                 optCtrl=list(maxfun=2e5)))
+
+summ(rq4m2)
+sum42 <- summary(rq4m2)
+
+sum42
+
+```
