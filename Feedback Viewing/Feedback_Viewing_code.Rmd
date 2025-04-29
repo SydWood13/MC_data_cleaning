@@ -9,10 +9,10 @@ output:
 ## Libraries and Packages
 ```{r}
 # Package names
-packages <- c("ggplot2",  "tidyverse", "apaTables", "colourpicker", "swirl", "dplyr", "gridExtra", "knitr", "lme4", "reshape2", "stargazer",  "did", "plm", "sandwich", "coefplot", "afex", "jtools", "glmmTMB", "psych", "gtsummary", "broom", "optimx", "GLMMadaptive", "brms")
+packages <- c("ggplot2",  "tidyverse", "apaTables", "colourpicker", "swirl", "dplyr", "gridExtra", "knitr", "lme4", "reshape2", "stargazer",  "did", "plm", "sandwich", "coefplot", "afex", "jtools", "glmmTMB", "psych", "gtsummary", "broom", "optimx", "simr")
 
 
-?case.when
+
 # Install packages not yet installed
 installed_packages <- packages %in% rownames(installed.packages())
 if (any(installed_packages == FALSE)) {
@@ -103,7 +103,7 @@ data$SID <- as.factor(data$SID)
 data$opt_in <- as.factor(data$opt_in)
 
 
-
+length(unique(data$student_id))
 
 
 ```
@@ -113,7 +113,14 @@ data$opt_in <- as.factor(data$opt_in)
 
 fulldata <- read.csv("~/GitHub/MC_data_cleaning/2023 data/Final_Data.csv")
 
+
 score_data <- fulldata %>% select(SID = Real_id, anon_id = student_id, opt_in, exam1:exam5, p_tot1:p_tot5)
+
+
+
+score_data_l <- gather(score_data, key = "exam", value = score, p_tot1:p_tot5)
+
+shapiro.test(score_data_l$score)
 
 
 
@@ -136,25 +143,28 @@ data <- data %>% mutate(p_score = case_when(time == "1" ~ exam1, time == "2"~exa
 
 ```{r}
 
+optin_table <- score_data_l %>% group_by(opt_in) %>% summarise(
+  n = n(),
+  mean = mean(score, na.rm = T),
+  sd = sd(score, na.rm = T),
+  median = median(score, na.rm = T),
+  MAD = mad(score, na.rm = T),
+)
+optin_table
 
 
+scoreTable <- data %>% group_by(time) %>% summarise(variable = "Exam Scores", n = n(), 
+                                                    mean = mean(p_score, na.rm=T), 
+                                                    sd = sd(p_score, na.rm = T), 
+                                                    median = median(p_score, na.rm = T), 
+                                                    MAD = mad(p_score, na.rm = T), 
+                                                    Q1 = quantile(p_score, probs = .25, na.rm = T),
+                                                    Q3 = quantile(p_score, probs = .75, na.rm = T),
+                                                    IQR = IQR(p_score, na.rm = T),
+                                                    min = min(p_score, na.rm = T),
+                                                    max = max(p_score, na.rm = T))
 
-
-
-
-
-writtenTable <- desc_l %>% group_by(Exam) %>% summarise(variable = "Performance", n = n(), 
-                                                    mean = mean(score, na.rm=T), 
-                                                    sd = sd(score, na.rm = T), 
-                                                    median = median(score, na.rm = T), 
-                                                    MAD = mad(score, na.rm = T), 
-                                                    Q1 = quantile(score, probs = .25, na.rm = T),
-                                                    Q3 = quantile(score, probs = .75, na.rm = T),
-                                                    IQR = IQR(score, na.rm = T),
-                                                    min = min(score, na.rm = T),
-                                                    max = max(score, na.rm = T))
-
-writtenTable
+scoreTable
 
 
 written_optin_Table <- desc_l %>% group_by(Exam) %>% group_by(opt_in, .add = TRUE) %>%  summarise(variable = "Written Score", n = n(), 
@@ -251,6 +261,8 @@ rq1data$linfit <- predict(rq1mod1, rq1data)
 rq1data$linprobs <- exp(rq1data$linfit)/(1+exp(rq1data$linfit))
 
 plot(rq1mod1)
+
+
 
 
 
@@ -526,14 +538,17 @@ anova(model1, model2)
 ```
 
 ```{r}
-exp(sum22$coefficients[1])/(1+exp(sum22$coefficients[1]))
+#exp(sum22$coefficients[1])/(1+exp(sum22$coefficients[1]))
 
-exp(sum22$coefficients[2])
-exp( sum22$coefficients[2] + sum22$coefficients[7] )
+#exp(sum22$coefficients[2])
+#exp( sum22$coefficients[2] + sum22$coefficients[7] )
 
+time2 = 0
+time3 = 1
+time4 = 0
+optin = 1
 
-
-o = sum22$coefficients[1] + sum22$coefficients[2] + sum22$coefficients[8]
+o = sum22$coefficients[1] + sum22$coefficients[3]*time2 + sum22$coefficients[4]*time3 + sum22$coefficients[5]*time4  + sum22$coefficients[2]*optin + sum22$coefficients[6]*optin*time2 + sum22$coefficients[7]*optin*time3 + sum22$coefficients[8]*optin*time4
 
 
 exp(o)/(1+exp(o))
@@ -745,6 +760,7 @@ mstudent <- mdata %>% filter(!is.na(pRep)) %>%
     pRep = mean(pRep)
   ) 
 
+mean(mstudent$numMistakes)
 
 
 
@@ -753,6 +769,7 @@ length(unique(mstudent$student_id))
 nstudent <- mstudent %>% group_by(student_id) %>% summarise(
   nRep = sum(nRep), 
   nPast = sum(nPast), 
+  nCurrent= sum(numMistakes),
   avgRep = mean(pRep),
   sdRep = sd(pRep), 
   pRep = nRep/nPast*100
@@ -760,14 +777,19 @@ nstudent <- mstudent %>% group_by(student_id) %>% summarise(
 
 length(unique(mstudent$student_id))
 
-(sum(nstudent$numRep))/369
-(sum(nstudent$numCurrent))/369
+(sum(nstudent$nRep))/369
+(sum(nstudent$nCurrent))/369
+
+sd(nstudent$nCurrent)
+sd(nstudent$nRep)
 
 nmstudent <- nstudent%>% filter(nRep>0)
 
 
 
 (sum(nmstudent$nRep))/314
+
+m
 
 314/369
 
@@ -859,6 +881,10 @@ mQp <- mboth %>% group_by(time, attempt) %>%
   )
 
 mdescP <- rbind(mTimeP, mAttemptP, mQp)
+
+write.csv(mdescP, "%mistakeDescriptives.csv", row.names = F)
+
+shapiro.test(nonzero$pRep)
 
 
 nzTime <- nonzero %>% group_by(time) %>% 
