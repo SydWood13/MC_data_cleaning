@@ -922,31 +922,31 @@ nzdesc <- rbind(nzTime, nzAttempt, nzQ)
 write.csv(mdesc, "non_zero_mistakeDescriptives.csv", row.names = F)
 
 ```
-
+### Plot 
 ```{r}
-colors <- c("black", "#ACBFE6", "#465573", "#232A3A" )
+colors <- c("black", "#ACBFE6", "#465573", "#232A3A","#8AC1FF")
 
 #colourpicker::colourPicker()
 plot <- ggplot(nstudent) +theme(axis.text.x = element_text(face = "bold", color = colors[4], 
-                             size =15),
+                             size =20),
    plot.title = element_text(face = "bold", color = colors[4], 
-                             size = 25),                          
+                             size = 35),                          
   axis.text.y = element_text(face = "bold", color = colors[4], 
-                             size = 15),
-  legend.text = element_text(color = colors[4], face = "bold", size = 18), 
+                             size = 20),
+  legend.text = element_text(color = colors[4], face = "bold", size = 20), 
   legend.title = element_text(color = colors[4], face = "bold"),
-  axis.title.x = element_text(color = colors[4],face = "bold",size = 20 ), 
-  axis.title.y = element_text(color = colors[4],face = "bold",size = 20 ))
+  axis.title.x = element_text(color = colors[4],face = "bold",size = 25 ), 
+  axis.title.y = element_text(color = colors[4],face = "bold",size = 25 ))
 
 
 
 
-plot1 <- plot + geom_histogram(aes(x = pRep), fill = colors[3]) +labs(title = "Distribution of % Mistakes Repeated" ) +xlab("% Repeated") #+ ylab()
+plot1 <- plot + geom_histogram(aes(x = pRep), fill = colors[5]) +labs(title = "Distribution of % Mistakes Repeated" ) +xlab("% Repeated") + ylab("Frequency")
 
 plot1
 
-ggsave(plot1, file = "repDist.png")
-?ggsave
+ggsave(plot1, file = "repDist.png", height = 8.2, width = 13.6)
+
 
 
 ```
