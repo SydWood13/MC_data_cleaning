@@ -941,7 +941,7 @@ plot <- ggplot(nstudent) +theme(axis.text.x = element_text(face = "bold", color 
 
 
 
-plot1 <- plot + geom_histogram(aes(x = pRep), fill = colors[5]) +labs(title = "Distribution of % Mistakes Repeated" ) +xlab("% Repeated") + ylab("Frequency")
+plot1 <- plot + geom_histogram(aes(x = pRep), fill = colors[5]) +labs(title = "Distribution of Percentage of Mistakes Repeated" ) +xlab("Percent Repeated") + ylab("Frequency")
 
 plot1
 
