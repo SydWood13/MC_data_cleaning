@@ -751,6 +751,7 @@ IVTHREAT = 13 --- only 5 effectively since some are mutually exclusive
 
 
 
+
 mstudent <- mdata %>% filter(!is.na(pRep)) %>% 
   group_by(student_id, time, attempt, question_id) %>% 
   summarise(
@@ -789,7 +790,7 @@ nmstudent <- nstudent%>% filter(nRep>0)
 
 (sum(nmstudent$nRep))/314
 
-m
+
 
 314/369
 
@@ -928,9 +929,9 @@ colors <- c("black", "#ACBFE6", "#465573", "#232A3A","#8AC1FF")
 
 #colourpicker::colourPicker()
 plot <- ggplot(nstudent) +theme(axis.text.x = element_text(face = "bold", color = colors[4], 
-                             size =20),
+                             size =20, family = "serif"),
    plot.title = element_text(face = "bold", color = colors[4], 
-                             size = 35),                          
+                             size = 35, family = "serif"),                          
   axis.text.y = element_text(face = "bold", color = colors[4], 
                              size = 20),
   legend.text = element_text(color = colors[4], face = "bold", size = 20), 
