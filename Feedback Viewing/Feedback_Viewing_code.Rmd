@@ -248,6 +248,10 @@ rq1data <- data %>% select(p_score, viewed, time)
 ## Model 1 
 ```{r}
 
+below50 <- rq1data %>% filter(p_score < 50)
+
+59/14556
+
 lin <- "viewed~p_score + (1|time) "
 rq1mod1 <- glmer(lin, rq1data, family = "binomial")
 
@@ -763,6 +767,10 @@ mstudent <- mdata %>% filter(!is.na(pRep)) %>%
 
 mean(mstudent$numMistakes)
 
+mobs <- mstudent %>% filter(nRep > 0)
+
+717/3547
+
 
 
 length(unique(mstudent$student_id))
@@ -792,7 +800,7 @@ nmstudent <- nstudent%>% filter(nRep>0)
 
 
 
-314/369
+314/369 - 1
 
 mboth <- mstudent %>% group_by(student_id, time, attempt) %>% summarise(
     numRep = sum(nRep),
@@ -888,6 +896,8 @@ write.csv(mdescP, "%mistakeDescriptives.csv", row.names = F)
 shapiro.test(nonzero$pRep)
 
 
+
+
 nzTime <- nonzero %>% group_by(time) %>% 
   summarise( attempt = "none",
              n = n(), 
@@ -928,7 +938,7 @@ write.csv(mdesc, "non_zero_mistakeDescriptives.csv", row.names = F)
 colors <- c("black", "#ACBFE6", "#465573", "#232A3A","#8AC1FF")
 
 #colourpicker::colourPicker()
-plot <- ggplot(nstudent) +theme(axis.text.x = element_text(face = "bold", color = colors[4], 
+plot1 <- ggplot(nstudent) +theme(axis.text.x = element_text(face = "bold", color = colors[4], 
                              size =20, family = "serif"),
    plot.title = element_text(face = "bold", color = colors[4], 
                              size = 35, family = "serif"),                          
@@ -941,13 +951,29 @@ plot <- ggplot(nstudent) +theme(axis.text.x = element_text(face = "bold", color 
 
 
 
+plotStudents <- plot1 + geom_histogram(aes(x = pRep, y = ((..count..)/sum(..count..))), fill = colors[5]) +labs(title = "Distribution of Percentage of Mistakes Repeated" ) +xlab("Percent Repeated") + ylab("Proportion of Students")
 
-plot1 <- plot + geom_histogram(aes(x = pRep), fill = colors[5]) +labs(title = "Distribution of Percentage of Mistakes Repeated" ) +xlab("Percent Repeated") + ylab("Frequency")
+plotStudents
 
-plot1
+ggsave(plotStudents, file = "repDist.png", height = 8.2, width = 13.6)
 
-ggsave(plot1, file = "repDist.png", height = 8.2, width = 13.6)
 
+plot2 <- ggplot(mstudent) +theme(axis.text.x = element_text(face = "bold", color = colors[4], 
+                             size =20, family = "serif"),
+   plot.title = element_text(face = "bold", color = colors[4], 
+                             size = 35, family = "serif"),                          
+  axis.text.y = element_text(face = "bold", color = colors[4], 
+                             size = 20),
+  legend.text = element_text(color = colors[4], face = "bold", size = 20), 
+  legend.title = element_text(color = colors[4], face = "bold"),
+  axis.title.x = element_text(color = colors[4],face = "bold",size = 25 ), 
+  axis.title.y = element_text(color = colors[4],face = "bold",size = 25 ))
+
+plotObservations <- plot2 + geom_histogram(aes(x = pRep, y = ((..count..)/sum(..count..)), fill = question_id)) +labs(title = "Distribution of Percentage of Mistakes Repeated" ) +xlab("Percent Repeated") + ylab("Proportion of Observations")
+
+plotObservations
+
+ggsave(plotObservations, file = "ObSrepDist.png", height = 8.2, width = 13.6)
 
 
 ```
@@ -1008,6 +1034,8 @@ sum41p <- summary(rq4mp)
 
 
 ```
+### Interpretation
+
 The percentage of repeated mistakes significantly decrease after each attempt. 
 
 On Exam 2, the expected average of repeated mistakes was 7.93%. due to inflated zeros in the data the expect decrease in the % of repeated mistakes actually goes negative for attempt 3 & 4. This suggests an ill fitting model due to distribution of % repeated mistakes.  
